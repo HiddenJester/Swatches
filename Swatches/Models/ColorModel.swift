@@ -15,8 +15,6 @@ struct ColorModel {
     let color: Color
     
     let name: String
-    
-    let invertBackground: Bool
 }
 
 extension ColorModel: Identifiable {}
