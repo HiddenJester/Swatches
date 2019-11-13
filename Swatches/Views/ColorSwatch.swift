@@ -50,14 +50,14 @@ struct ColorSwatch_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             HStack {
-                ColorSwatch(model: ColorModel(color: .blue, name: "Normal", invertBackground: false))
-                ColorSwatch(model: ColorModel(color: .secondary, name: "Inverted", invertBackground: true))
+                ColorSwatch(model: ColorModel(color: .blue, name: "Normal"))
+                ColorSwatch(model: ColorModel(color: .secondary, name: "Inverted"))
                 ColorSwatch(model: nil)
             }.previewDevice("iPhone SE")
 
             HStack {
-                ColorSwatch(model: ColorModel(color: .blue, name: "Normal", invertBackground: false))
-                ColorSwatch(model: ColorModel(color: .black, name: "Inverted", invertBackground: true))
+                ColorSwatch(model: ColorModel(color: .blue, name: "Normal"))
+                ColorSwatch(model: ColorModel(color: .black, name: "Inverted"))
             }.previewDevice("iPhone SE")
                 .environment(\.colorScheme, .dark)
         }
