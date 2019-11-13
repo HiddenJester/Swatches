@@ -13,34 +13,41 @@ struct ColorSwatch: View {
     
     var body: some View {
         VStack() {
-            ColorChip(color: model?.color ?? .clear)
-                .padding()
+            if model != nil {
+                ColorChip(color: model!.color, keyline: true)
+                    .padding()
+            } else {
+                ColorChip(color: .clear, keyline: false)
+                    .padding()
+            }
             
             Text(model?.name ?? " ")
-                .padding(.bottom)
-                .foregroundColor(Color(UIColor.label))
-            
-        }.background(backgroundColor())
+                .foregroundColor(Color.black)
+                .font(.headline)
+                .padding(5)
+                .background(textPlateColor().cornerRadius(10))
+
+        }.background(background())
             .cornerRadius(20)
             .overlay(RoundedRectangle(cornerRadius: 20)
                 .stroke(strokeColor(), lineWidth: 2))
-            .padding()
     }
     
-    func backgroundColor() -> Color {
-        guard let model = model else {
-            return .clear
+    func background() -> some View {
+        guard self.model != nil else {
+            return AnyView(EmptyView())
         }
         
-        if model.invertBackground {
-            return Color(UIColor.secondarySystemGroupedBackground)
-        } else {
-            return Color(UIColor.systemGroupedBackground)
-        }
+        return AnyView(Image("Checkerboard")
+            .resizable(resizingMode: .tile))
     }
     
     func strokeColor() -> Color {
         model != nil ? .primary : .clear
+    }
+    
+    func textPlateColor() -> Color {
+        model != nil ? .gray : .clear
     }
 }
 
@@ -48,14 +55,14 @@ struct ColorSwatch_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             HStack {
-                ColorSwatch(model: ColorModel(color: .blue, name: "Normal", invertBackground: false))
-                ColorSwatch(model: ColorModel(color: .secondary, name: "Inverted", invertBackground: true))
+                ColorSwatch(model: ColorModel(color: .blue, name: "Normal"))
+                ColorSwatch(model: ColorModel(color: .secondary, name: "Inverted"))
                 ColorSwatch(model: nil)
             }.previewDevice("iPhone SE")
 
             HStack {
-                ColorSwatch(model: ColorModel(color: .blue, name: "Normal", invertBackground: false))
-                ColorSwatch(model: ColorModel(color: .black, name: "Inverted", invertBackground: true))
+                ColorSwatch(model: ColorModel(color: .blue, name: "Normal"))
+                ColorSwatch(model: ColorModel(color: .black, name: "Inverted"))
             }.previewDevice("iPhone SE")
                 .environment(\.colorScheme, .dark)
         }

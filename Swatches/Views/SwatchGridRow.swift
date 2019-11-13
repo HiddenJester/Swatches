@@ -27,9 +27,9 @@ struct SwatchGridRow_Previews: PreviewProvider {
     
     static var previews: some View {
         Group {
-            // Skip models[0] which is .clear and doesn't render correctly yet.
-            SwatchGridRow(first: models[1], second: models[2])
-            SwatchGridRow(first: models[3], second: nil)
+            SwatchGridRow(first: models[0], second: models[1])
+            SwatchGridRow(first: models[2], second: nil)
+            SwatchGridRow(first: nil, second: models[3])
         }
     }
 }
