@@ -18,7 +18,7 @@ struct ColorSwatch: View {
             
             Text(model?.name ?? " ")
                 .padding(.bottom)
-                .foregroundColor(model?.color ?? .clear)
+                .foregroundColor(Color(UIColor.label))
             
         }.background(backgroundColor())
             .cornerRadius(20)
