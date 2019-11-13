@@ -10,7 +10,6 @@ import SwiftUI
 
 struct ColorSwatch: View {
     let model: ColorModel
-    @Environment(\.colorScheme) var scheme
     
     var body: some View {
         VStack() {
@@ -21,15 +20,11 @@ struct ColorSwatch: View {
                 .padding(.bottom)
                 .foregroundColor(model.color)
             
-        }.background(backgroundColor())
+        }.background(model.invertBackground ? Color.primary : Color.secondary)
             .cornerRadius(20)
             .overlay(RoundedRectangle(cornerRadius: 20)
                 .stroke(Color.primary, lineWidth: 2))
             .padding()
-    }
-    
-    func backgroundColor() -> Color {
-        model.invertBackground  ? Color.primary : Color.secondary
     }
 }
 
