@@ -25,6 +25,8 @@ extension ColorModel {
             ColorModel(color: .purple, name: "Purple", invertBackground: false),
             ColorModel(color: .primary, name: "Primary", invertBackground: false),
             ColorModel(color: .secondary, name: "Secondary", invertBackground: false),
+
+            ColorModel(color: .accentColor, name: "Accent", invertBackground: false)
         ]
     }
 }
