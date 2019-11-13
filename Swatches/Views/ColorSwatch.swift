@@ -32,7 +32,11 @@ struct ColorSwatch: View {
             return .clear
         }
         
-        return model.invertBackground ? Color.primary : Color.secondary
+        if model.invertBackground {
+            return Color(UIColor.secondarySystemGroupedBackground)
+        } else {
+            return Color(UIColor.systemGroupedBackground)
+        }
     }
     
     func strokeColor() -> Color {
@@ -44,14 +48,14 @@ struct ColorSwatch_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             HStack {
-                ColorSwatch(model: ColorModel(color: .blue, name: "Blue", invertBackground: false))
-                ColorSwatch(model: ColorModel(color: .green, name: "Green", invertBackground: true))
+                ColorSwatch(model: ColorModel(color: .blue, name: "Normal", invertBackground: false))
+                ColorSwatch(model: ColorModel(color: .secondary, name: "Inverted", invertBackground: true))
                 ColorSwatch(model: nil)
             }.previewDevice("iPhone SE")
 
             HStack {
-                ColorSwatch(model: ColorModel(color: .blue, name: "Blue", invertBackground: false))
-                ColorSwatch(model: ColorModel(color: .green, name: "Green", invertBackground: true))
+                ColorSwatch(model: ColorModel(color: .blue, name: "Normal", invertBackground: false))
+                ColorSwatch(model: ColorModel(color: .black, name: "Inverted", invertBackground: true))
             }.previewDevice("iPhone SE")
                 .environment(\.colorScheme, .dark)
         }
