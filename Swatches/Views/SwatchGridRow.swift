@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct SwatchGridRow: View {
-    let first: ColorModel
+    let first: ColorModel?
     
     let second: ColorModel?
     
@@ -17,12 +17,7 @@ struct SwatchGridRow: View {
         HStack {
             ColorSwatch(model: first)
 
-            if second != nil {
-                ColorSwatch(model: second!)
-            }
-            else {
-                Spacer().padding()
-            }
+            ColorSwatch(model: second)
         }
     }
 }

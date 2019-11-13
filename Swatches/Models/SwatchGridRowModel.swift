@@ -11,7 +11,7 @@ import Foundation
 struct SwatchGridRowModel {
     let id = UUID()
     
-    let first: ColorModel
+    let first: ColorModel?
     
     let second: ColorModel?
 }
