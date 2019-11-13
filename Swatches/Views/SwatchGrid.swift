@@ -8,14 +8,6 @@
 
 import SwiftUI
 
-struct GridRow: Identifiable {
-    let id =  UUID()
-    
-    let first: ColorModel
-    
-    let second: ColorModel?
-}
-
 struct SwatchGrid: View {
     let title: String
     let models: [ColorModel]
@@ -24,32 +16,23 @@ struct SwatchGrid: View {
         VStack {
             Text(title)
                 .font(.title)
-         
-            ForEach(pairRows(models: models)) { row in
-                HStack {
-                    ColorSwatch(model: row.first)
-
-                    if row.second != nil {
-                        ColorSwatch(model: row.second!)
-                    }
-                    else {
-                        Spacer().padding()
-                    }
-                }
-            }
+            
+            ForEach(pairRows(models: models)) { SwatchGridRow(first: $0.first, second: $0.second) }
+            
         }.padding()
     }
     
-    func pairRows(models: [ColorModel]) -> [GridRow] {
-        let midpoint = models.count / 2
-        let first = models[0 ..< midpoint]
-        let second = models[midpoint ..< models.count]
-
-        let tuples = Array(zip(first, second))
-        var rows: [GridRow] = tuples.map { GridRow(first: $0, second: $1) }
+    func pairRows(models: [ColorModel]) -> [SwatchGridRowModel] {
+        var rows = [SwatchGridRowModel]()
+        
+        (0 ..< models.count / 2).forEach { rowIndex in
+            let firstIndex = rowIndex * 2
+            rows.append(SwatchGridRowModel(first: models[firstIndex], second: models[firstIndex + 1]))
+        }
+        
         // Catch the odd one out
         if !models.count.isMultiple(of: 2) {
-            rows.append(GridRow(first: second.last!, second: nil))
+            rows.append(SwatchGridRowModel(first: models.last!, second: nil))
         }
         
         return rows
