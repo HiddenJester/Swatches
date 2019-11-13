@@ -42,7 +42,7 @@ struct SwatchGrid: View {
 struct SwatchGrid_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            SwatchGrid(title: "Previews", models: ColorModel.previewModels())
+            SwatchGrid(title: "SwiftUI", models: ColorModel.swiftUIColors())
         }
     }
 }

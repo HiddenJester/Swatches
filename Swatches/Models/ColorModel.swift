@@ -20,15 +20,3 @@ struct ColorModel {
 }
 
 extension ColorModel: Identifiable {}
-
-extension ColorModel {
-    static func previewModels() -> [ColorModel] {
-        return [
-            ColorModel(color: .blue, name: "Blue", invertBackground: false),
-            ColorModel(color: .green, name: "Green", invertBackground: false),
-            ColorModel(color: .black, name: "Black", invertBackground: false),
-            ColorModel(color: .accentColor, name: "Accent", invertBackground: false),
-            ColorModel(color: .orange, name: "Orange", invertBackground: false),
-        ]
-    }
-}
