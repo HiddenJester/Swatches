@@ -13,8 +13,13 @@ struct ColorSwatch: View {
     
     var body: some View {
         VStack() {
-            ColorChip(color: model?.color ?? .clear)
-                .padding()
+            if model != nil {
+                ColorChip(color: model!.color, keyline: true)
+                    .padding()
+            } else {
+                ColorChip(color: .clear, keyline: false)
+                    .padding()
+            }
             
             Text(model?.name ?? " ")
                 .padding(.bottom)

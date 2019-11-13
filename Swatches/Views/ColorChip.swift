@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ColorChip: View {
     let color: Color
+    let keyline: Bool
     
     @Environment(\.colorScheme) var scheme
     
@@ -25,7 +26,7 @@ struct ColorChip: View {
             .aspectRatio(1.0, contentMode: .fit)
             .foregroundColor(color)
             .scaledToFit()
-            .overlay(RoundedRectangle(cornerRadius: 20.0).stroke(strokeColor()))
+            .overlay(RoundedRectangle(cornerRadius: 20.0).stroke(keyline ? Color.black : Color.clear))
     }
     
     func strokeColor() -> Color {
@@ -40,11 +41,11 @@ struct ColorChip: View {
 struct ColorChip_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ColorChip(color: .green)
-            ColorChip(color: .green)
+            ColorChip(color: .green, keyline: true)
+            ColorChip(color: .green, keyline: true)
                 .previewDevice("iPhone SE")
                 .environment(\.colorScheme, .dark)
-            ColorChip(color: .clear)
+            ColorChip(color: .clear, keyline: false)
         }
     }
 }
