@@ -21,7 +21,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Create the SwiftUI view that provides the window contents.
         let grids = [
-            GridModel(name: "Previews", models: ColorModel.previewModels()),
             GridModel(name: "SwiftUI", models: ColorModel.swiftUIColors()),
         ]
         let contentView = GridList(grids: grids)

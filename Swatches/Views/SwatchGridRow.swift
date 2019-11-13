@@ -23,12 +23,13 @@ struct SwatchGridRow: View {
 }
 
 struct SwatchGridRow_Previews: PreviewProvider {
-    @State static var models = ColorModel.previewModels()
+    @State static var models = ColorModel.swiftUIColors()
     
     static var previews: some View {
         Group {
-            SwatchGridRow(first: models[0], second: models[1])
-            SwatchGridRow(first: models[2], second: nil)
+            // Skip models[0] which is .clear and doesn't render correctly yet.
+            SwatchGridRow(first: models[1], second: models[2])
+            SwatchGridRow(first: models[3], second: nil)
         }
     }
 }
