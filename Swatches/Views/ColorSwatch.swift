@@ -25,23 +25,20 @@ struct ColorSwatch: View {
                 .padding(.bottom)
                 .foregroundColor(Color(UIColor.label))
             
-        }.background(backgroundColor())
+        }.background(background())
             .cornerRadius(20)
             .overlay(RoundedRectangle(cornerRadius: 20)
                 .stroke(strokeColor(), lineWidth: 2))
             .padding()
     }
     
-    func backgroundColor() -> Color {
-        guard let model = model else {
-            return .clear
+    func background() -> some View {
+        guard self.model != nil else {
+            return AnyView(EmptyView())
         }
         
-        if model.invertBackground {
-            return Color(UIColor.secondarySystemGroupedBackground)
-        } else {
-            return Color(UIColor.systemGroupedBackground)
-        }
+        return AnyView(Image("Checkerboard")
+            .resizable(resizingMode: .tile))
     }
     
     func strokeColor() -> Color {
