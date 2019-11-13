@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B189383237B624400B097E2 /* SwiftUIColorModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B189382237B624400B097E2 /* SwiftUIColorModels.swift */; };
+		3B189385237B62B600B097E2 /* SwatchGridRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B189384237B62B600B097E2 /* SwatchGridRow.swift */; };
+		3B189387237B77B100B097E2 /* SwatchGridRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B189386237B77B100B097E2 /* SwatchGridRowModel.swift */; };
 		3B76A62523765179007292F5 /* GridList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B76A62423765179007292F5 /* GridList.swift */; };
 		3B76A627237651C0007292F5 /* GridModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B76A626237651C0007292F5 /* GridModel.swift */; };
 		3BB3D5DB2376135B009CE90F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB3D5DA2376135B009CE90F /* AppDelegate.swift */; };
@@ -21,6 +24,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B189382237B624400B097E2 /* SwiftUIColorModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIColorModels.swift; sourceTree = "<group>"; };
+		3B189384237B62B600B097E2 /* SwatchGridRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwatchGridRow.swift; sourceTree = "<group>"; };
+		3B189386237B77B100B097E2 /* SwatchGridRowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwatchGridRowModel.swift; sourceTree = "<group>"; };
 		3B76A62423765179007292F5 /* GridList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridList.swift; sourceTree = "<group>"; };
 		3B76A626237651C0007292F5 /* GridModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridModel.swift; sourceTree = "<group>"; };
 		3BB3D5D72376135B009CE90F /* Swatches.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swatches.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				3BB3D5DE2376135B009CE90F /* SwatchGrid.swift */,
+				3B189384237B62B600B097E2 /* SwatchGridRow.swift */,
 				3BB3D5F02376175A009CE90F /* ColorSwatch.swift */,
 				3BB3D5EE237613CB009CE90F /* ColorChip.swift */,
 				3B76A62423765179007292F5 /* GridList.swift */,
@@ -101,7 +108,9 @@
 			isa = PBXGroup;
 			children = (
 				3BB3D5F4237617EB009CE90F /* ColorModel.swift */,
+				3B189382237B624400B097E2 /* SwiftUIColorModels.swift */,
 				3B76A626237651C0007292F5 /* GridModel.swift */,
+				3B189386237B77B100B097E2 /* SwatchGridRowModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -178,13 +187,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B76A62523765179007292F5 /* GridList.swift in Sources */,
+				3B189387237B77B100B097E2 /* SwatchGridRowModel.swift in Sources */,
 				3B76A627237651C0007292F5 /* GridModel.swift in Sources */,
 				3BB3D5EF237613CB009CE90F /* ColorChip.swift in Sources */,
 				3BB3D5DB2376135B009CE90F /* AppDelegate.swift in Sources */,
 				3BB3D5DD2376135B009CE90F /* SceneDelegate.swift in Sources */,
 				3BB3D5DF2376135B009CE90F /* SwatchGrid.swift in Sources */,
+				3B189385237B62B600B097E2 /* SwatchGridRow.swift in Sources */,
 				3BB3D5F12376175A009CE90F /* ColorSwatch.swift in Sources */,
 				3BB3D5F5237617EB009CE90F /* ColorModel.swift in Sources */,
+				3B189383237B624400B097E2 /* SwiftUIColorModels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,6 +336,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Swatches/Preview Content\"";
 				DEVELOPMENT_TEAM = 6LMYPJV5KV;
 				ENABLE_PREVIEWS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = Swatches/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -331,6 +344,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hiddenjester.Swatches;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -344,6 +358,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Swatches/Preview Content\"";
 				DEVELOPMENT_TEAM = 6LMYPJV5KV;
 				ENABLE_PREVIEWS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = Swatches/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -351,6 +366,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hiddenjester.Swatches;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
