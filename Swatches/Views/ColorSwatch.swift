@@ -22,14 +22,15 @@ struct ColorSwatch: View {
             }
             
             Text(model?.name ?? " ")
-                .padding(.bottom)
-                .foregroundColor(Color(UIColor.label))
-            
+                .foregroundColor(Color.black)
+                .font(.headline)
+                .padding(5)
+                .background(textPlateColor().cornerRadius(10))
+
         }.background(background())
             .cornerRadius(20)
             .overlay(RoundedRectangle(cornerRadius: 20)
                 .stroke(strokeColor(), lineWidth: 2))
-            .padding()
     }
     
     func background() -> some View {
@@ -43,6 +44,10 @@ struct ColorSwatch: View {
     
     func strokeColor() -> Color {
         model != nil ? .primary : .clear
+    }
+    
+    func textPlateColor() -> Color {
+        model != nil ? .gray : .clear
     }
 }
 
