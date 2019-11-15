@@ -24,6 +24,7 @@ struct GridList: View {
 
 struct GridList_Previews: PreviewProvider {
     static var previews: some View {
-        GridList(grids: [GridModel(name: "SwiftUI", models: ColorModel.swiftUIColors())])
+        GridList(gridModels: [GridModel(name: "SwiftUI", models: ColorModel.swiftUIColors()),
+                         GridModel(name: "Semantic", models: ColorModel.semanticColors())])
     }
 }
