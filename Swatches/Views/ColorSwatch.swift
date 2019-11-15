@@ -15,6 +15,7 @@ struct ColorSwatch: View {
         VStack() {
             if model != nil {
                 ColorChip(color: model!.color, keyline: true)
+                    .background(Image("Checkerboard").resizable(resizingMode: .tile).cornerRadius(20))
                     .padding()
             } else {
                 ColorChip(color: .clear, keyline: false)
@@ -22,32 +23,15 @@ struct ColorSwatch: View {
             }
             
             Text(model?.name ?? " ")
-                .foregroundColor(Color.black)
+                .foregroundColor(Color(UIColor.label))
                 .font(.headline)
+                .minimumScaleFactor(0.75)
                 .padding(5)
-                .background(textPlateColor().cornerRadius(10))
 
-        }.background(background())
+        }.background(model != nil ? Color(UIColor.systemFill) : Color.clear)
             .cornerRadius(20)
             .overlay(RoundedRectangle(cornerRadius: 20)
-                .stroke(strokeColor(), lineWidth: 2))
-    }
-    
-    func background() -> some View {
-        guard self.model != nil else {
-            return AnyView(EmptyView())
-        }
-        
-        return AnyView(Image("Checkerboard")
-            .resizable(resizingMode: .tile))
-    }
-    
-    func strokeColor() -> Color {
-        model != nil ? .primary : .clear
-    }
-    
-    func textPlateColor() -> Color {
-        model != nil ? .gray : .clear
+                .stroke(model != nil ? Color.primary : Color.clear, lineWidth: 2))
     }
 }
 
