@@ -10,7 +10,7 @@ import Combine
 
 import SwiftUI
 
-struct GridList: View {
+struct MainView: View {
     @Environment(\.colorScheme) var envScheme: ColorScheme
 
     let gridModels: [GridModel]
@@ -31,9 +31,9 @@ struct GridList: View {
     }
 }
 
-struct GridList_Previews: PreviewProvider {
+struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        GridList(gridModels: [GridModel(name: "SwiftUI", models: ColorModel.swiftUIColors()),
+        MainView(gridModels: [GridModel(name: "SwiftUI", models: ColorModel.swiftUIColors()),
                          GridModel(name: "Semantic", models: ColorModel.semanticColors())])
     }
 }
