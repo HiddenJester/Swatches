@@ -6,19 +6,28 @@
 //  Copyright © 2019 HiddenJester Software. All rights reserved.
 //
 
+import Combine
+
 import SwiftUI
 
 struct GridList: View {
-    let grids: [GridModel]
+    @Environment(\.colorScheme) var envScheme: ColorScheme
+
+    let gridModels: [GridModel]
+    
+    @State private var selectedGridIndex = 0
+        
+    @State private var darkModeSelected = false
     
     var body: some View {
-        ScrollView {
-            ForEach(grids) { grid in
-                Divider()
-                
-                SwatchGrid(title: grid.name, models: grid.models)
-            }
-        }
+        VStack {
+            GridHeader(darkModeSelected: $darkModeSelected, gridIndex: $selectedGridIndex, gridModels: gridModels)
+
+            SwatchGrid(models: self.gridModels[selectedGridIndex].models)
+        }.background(Color(UIColor.systemBackground))
+            .onAppear { self.darkModeSelected = (self.envScheme == .dark) }
+            .colorScheme(darkModeSelected ? .dark : .light)
+            .animation(.default) // Animate the color scheme toggling.
     }
 }
 

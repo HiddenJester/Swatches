@@ -9,16 +9,11 @@
 import SwiftUI
 
 struct SwatchGrid: View {
-    let title: String
     let models: [ColorModel]
     
     var body: some View {
-        VStack {
-            Text(title)
-                .font(.title)
-            
+        ScrollView {
             ForEach(pairRows(models: models)) { SwatchGridRow(first: $0.first, second: $0.second) }
-            
         }.padding()
     }
     
@@ -42,7 +37,7 @@ struct SwatchGrid: View {
 struct SwatchGrid_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            SwatchGrid(title: "SwiftUI", models: ColorModel.swiftUIColors())
+            SwatchGrid(models: ColorModel.swiftUIColors())
         }
     }
 }
