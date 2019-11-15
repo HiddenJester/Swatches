@@ -27,7 +27,7 @@ struct MainView: View {
         }.background(Color(UIColor.systemBackground))
             .onAppear { self.darkModeSelected = (self.envScheme == .dark) }
             .colorScheme(darkModeSelected ? .dark : .light)
-            .animation(.default) // Animate the color scheme toggling.
+            .animation(.default, value: darkModeSelected) // Animate the color scheme toggling.
     }
 }
 
