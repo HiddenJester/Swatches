@@ -12,15 +12,15 @@ import SwiftUI
 extension ColorModel {
     static func semanticColors() -> [ColorModel] {
         return [
-            ColorModel(color: Color(UIColor.systemRed), name: "System Red"),
-            ColorModel(color: Color(UIColor.systemGreen), name: "System Green"),
-            ColorModel(color: Color(UIColor.systemBlue), name: "System Blue"),
-            ColorModel(color: Color(UIColor.systemOrange), name: "System Orange"),
-            ColorModel(color: Color(UIColor.systemYellow), name: "System Yellow"),
-            ColorModel(color: Color(UIColor.systemPink), name: "System Pink"),
-            ColorModel(color: Color(UIColor.systemPurple), name: "System Purple"),
-            ColorModel(color: Color(UIColor.systemTeal), name: "System Teal"),
-            ColorModel(color: Color(UIColor.systemIndigo), name: "System Indigo"),
+            ColorModel(color: .systemRed, name: "System Red"),
+            ColorModel(color: .systemGreen, name: "System Green"),
+            ColorModel(color: .systemBlue, name: "System Blue"),
+            ColorModel(color: .systemOrange, name: "System Orange"),
+            ColorModel(color: .systemYellow, name: "System Yellow"),
+            ColorModel(color: .systemPink, name: "System Pink"),
+            ColorModel(color: .systemPurple, name: "System Purple"),
+            ColorModel(color: .systemTeal, name: "System Teal"),
+            ColorModel(color: .systemIndigo, name: "System Indigo"),
         ]
     }
 }

@@ -23,6 +23,7 @@
 		3BB3D5EF237613CB009CE90F /* ColorChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB3D5EE237613CB009CE90F /* ColorChip.swift */; };
 		3BB3D5F12376175A009CE90F /* ColorSwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB3D5F02376175A009CE90F /* ColorSwatch.swift */; };
 		3BB3D5F5237617EB009CE90F /* ColorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB3D5F4237617EB009CE90F /* ColorModel.swift */; };
+		3BDC325E237F3A2900632A08 /* Color+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BDC325D237F3A2900632A08 /* Color+UIColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		3BB3D5EE237613CB009CE90F /* ColorChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorChip.swift; sourceTree = "<group>"; };
 		3BB3D5F02376175A009CE90F /* ColorSwatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSwatch.swift; sourceTree = "<group>"; };
 		3BB3D5F4237617EB009CE90F /* ColorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorModel.swift; sourceTree = "<group>"; };
+		3BDC325D237F3A2900632A08 /* Color+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+UIColor.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 		3BB3D5D92376135B009CE90F /* Swatches */ = {
 			isa = PBXGroup;
 			children = (
+				3BDC325C237F39E300632A08 /* OSExtensions */,
 				3BB3D5F3237617D4009CE90F /* Models */,
 				3BB3D5F2237617C7009CE90F /* Views */,
 				3BB3D5DA2376135B009CE90F /* AppDelegate.swift */,
@@ -119,6 +122,14 @@
 				3B15EDA6237E4275008C54AF /* SemanticColorModels.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		3BDC325C237F39E300632A08 /* OSExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				3BDC325D237F3A2900632A08 /* Color+UIColor.swift */,
+			);
+			path = OSExtensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,6 +208,7 @@
 				3B76A627237651C0007292F5 /* GridModel.swift in Sources */,
 				3BB3D5EF237613CB009CE90F /* ColorChip.swift in Sources */,
 				3BB3D5DB2376135B009CE90F /* AppDelegate.swift in Sources */,
+				3BDC325E237F3A2900632A08 /* Color+UIColor.swift in Sources */,
 				3BB3D5DD2376135B009CE90F /* SceneDelegate.swift in Sources */,
 				3BB3D5DF2376135B009CE90F /* SwatchGrid.swift in Sources */,
 				3B15EDA7237E4275008C54AF /* SemanticColorModels.swift in Sources */,
