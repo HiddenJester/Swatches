@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             GridModel(name: "SwiftUI", models: ColorModel.swiftUIColors()),
             GridModel(name: "Semantic", models: ColorModel.semanticColors()),
         ]
-        let contentView = GridList(gridModels: grids)
+        let contentView = MainView(gridModels: grids)
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
