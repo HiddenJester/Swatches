@@ -28,14 +28,6 @@ struct ColorChip: View {
             .scaledToFit()
             .overlay(RoundedRectangle(cornerRadius: 20.0).stroke(keyline ? Color.black : Color.clear))
     }
-    
-    func strokeColor() -> Color {
-        guard color != .clear else {
-            return .clear
-        }
-        
-        return scheme == .dark ? Color(UIColor.label) : .black
-    }
 }
 
 struct ColorChip_Previews: PreviewProvider {
