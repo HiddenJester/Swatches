@@ -18,6 +18,7 @@ struct GridHeader: View {
     var body: some View {
         VStack {
             Toggle("Dark Mode", isOn: $darkModeSelected)
+                .padding(.horizontal)
 
             Picker("Colors:", selection: $gridIndex) {
                 ForEach(0 ..< gridModels.count) { index in
