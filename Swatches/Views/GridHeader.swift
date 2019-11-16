@@ -13,7 +13,7 @@ struct GridHeader: View {
     
     @Binding var gridIndex: Int
     
-    @State var gridModels: [GridModel]
+    let gridModels: [GridModel]
     
     var body: some View {
         VStack {
@@ -24,7 +24,7 @@ struct GridHeader: View {
                     Text(self.gridModels[index].name).tag(index)
                 }
             }.pickerStyle(SegmentedPickerStyle())
-
+            
             Divider()
 
         }.padding()

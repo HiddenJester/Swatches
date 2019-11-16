@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  SwatchGrid.swift
 //  Swatches
 //
 //  Created by Timothy Sanders on 2019-11-08.
