@@ -27,7 +27,7 @@ struct GridHeader: View {
             
             Divider()
 
-        }.padding()
+        }
     }
 }
 

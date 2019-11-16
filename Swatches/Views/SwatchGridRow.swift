@@ -18,7 +18,7 @@ struct SwatchGridRow: View {
             ColorSwatch(model: first)
 
             ColorSwatch(model: second)
-        }.padding()
+        }
     }
 }
 
