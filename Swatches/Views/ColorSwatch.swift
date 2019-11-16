@@ -15,7 +15,6 @@ struct ColorSwatch: View {
         VStack() {
             if model != nil {
                 ColorChip(color: model!.color, keyline: true)
-                    .background(Image("Checkerboard").resizable(resizingMode: .tile).cornerRadius(20))
                     .padding()
             } else {
                 ColorChip(color: .clear, keyline: false)
