@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B15EDA5237E035A008C54AF /* GridHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B15EDA4237E035A008C54AF /* GridHeader.swift */; };
+		3B15EDA7237E4275008C54AF /* SemanticColorModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B15EDA6237E4275008C54AF /* SemanticColorModels.swift */; };
 		3B189383237B624400B097E2 /* SwiftUIColorModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B189382237B624400B097E2 /* SwiftUIColorModels.swift */; };
 		3B189385237B62B600B097E2 /* SwatchGridRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B189384237B62B600B097E2 /* SwatchGridRow.swift */; };
 		3B189387237B77B100B097E2 /* SwatchGridRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B189386237B77B100B097E2 /* SwatchGridRowModel.swift */; };
-		3B76A62523765179007292F5 /* GridList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B76A62423765179007292F5 /* GridList.swift */; };
+		3B76A62523765179007292F5 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B76A62423765179007292F5 /* MainView.swift */; };
 		3B76A627237651C0007292F5 /* GridModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B76A626237651C0007292F5 /* GridModel.swift */; };
 		3BB3D5DB2376135B009CE90F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB3D5DA2376135B009CE90F /* AppDelegate.swift */; };
 		3BB3D5DD2376135B009CE90F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB3D5DC2376135B009CE90F /* SceneDelegate.swift */; };
@@ -21,13 +23,16 @@
 		3BB3D5EF237613CB009CE90F /* ColorChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB3D5EE237613CB009CE90F /* ColorChip.swift */; };
 		3BB3D5F12376175A009CE90F /* ColorSwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB3D5F02376175A009CE90F /* ColorSwatch.swift */; };
 		3BB3D5F5237617EB009CE90F /* ColorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB3D5F4237617EB009CE90F /* ColorModel.swift */; };
+		3BDC325E237F3A2900632A08 /* Color+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BDC325D237F3A2900632A08 /* Color+UIColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B15EDA4237E035A008C54AF /* GridHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridHeader.swift; sourceTree = "<group>"; };
+		3B15EDA6237E4275008C54AF /* SemanticColorModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticColorModels.swift; sourceTree = "<group>"; };
 		3B189382237B624400B097E2 /* SwiftUIColorModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIColorModels.swift; sourceTree = "<group>"; };
 		3B189384237B62B600B097E2 /* SwatchGridRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwatchGridRow.swift; sourceTree = "<group>"; };
 		3B189386237B77B100B097E2 /* SwatchGridRowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwatchGridRowModel.swift; sourceTree = "<group>"; };
-		3B76A62423765179007292F5 /* GridList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridList.swift; sourceTree = "<group>"; };
+		3B76A62423765179007292F5 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		3B76A626237651C0007292F5 /* GridModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridModel.swift; sourceTree = "<group>"; };
 		3BB3D5D72376135B009CE90F /* Swatches.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swatches.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BB3D5DA2376135B009CE90F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -40,6 +45,7 @@
 		3BB3D5EE237613CB009CE90F /* ColorChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorChip.swift; sourceTree = "<group>"; };
 		3BB3D5F02376175A009CE90F /* ColorSwatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSwatch.swift; sourceTree = "<group>"; };
 		3BB3D5F4237617EB009CE90F /* ColorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorModel.swift; sourceTree = "<group>"; };
+		3BDC325D237F3A2900632A08 /* Color+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+UIColor.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +78,7 @@
 		3BB3D5D92376135B009CE90F /* Swatches */ = {
 			isa = PBXGroup;
 			children = (
+				3BDC325C237F39E300632A08 /* OSExtensions */,
 				3BB3D5F3237617D4009CE90F /* Models */,
 				3BB3D5F2237617C7009CE90F /* Views */,
 				3BB3D5DA2376135B009CE90F /* AppDelegate.swift */,
@@ -98,8 +105,9 @@
 				3BB3D5DE2376135B009CE90F /* SwatchGrid.swift */,
 				3B189384237B62B600B097E2 /* SwatchGridRow.swift */,
 				3BB3D5F02376175A009CE90F /* ColorSwatch.swift */,
+				3B15EDA4237E035A008C54AF /* GridHeader.swift */,
 				3BB3D5EE237613CB009CE90F /* ColorChip.swift */,
-				3B76A62423765179007292F5 /* GridList.swift */,
+				3B76A62423765179007292F5 /* MainView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -111,8 +119,17 @@
 				3B189382237B624400B097E2 /* SwiftUIColorModels.swift */,
 				3B76A626237651C0007292F5 /* GridModel.swift */,
 				3B189386237B77B100B097E2 /* SwatchGridRowModel.swift */,
+				3B15EDA6237E4275008C54AF /* SemanticColorModels.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		3BDC325C237F39E300632A08 /* OSExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				3BDC325D237F3A2900632A08 /* Color+UIColor.swift */,
+			);
+			path = OSExtensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,16 +203,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3B76A62523765179007292F5 /* GridList.swift in Sources */,
+				3B76A62523765179007292F5 /* MainView.swift in Sources */,
 				3B189387237B77B100B097E2 /* SwatchGridRowModel.swift in Sources */,
 				3B76A627237651C0007292F5 /* GridModel.swift in Sources */,
 				3BB3D5EF237613CB009CE90F /* ColorChip.swift in Sources */,
 				3BB3D5DB2376135B009CE90F /* AppDelegate.swift in Sources */,
+				3BDC325E237F3A2900632A08 /* Color+UIColor.swift in Sources */,
 				3BB3D5DD2376135B009CE90F /* SceneDelegate.swift in Sources */,
 				3BB3D5DF2376135B009CE90F /* SwatchGrid.swift in Sources */,
+				3B15EDA7237E4275008C54AF /* SemanticColorModels.swift in Sources */,
 				3B189385237B62B600B097E2 /* SwatchGridRow.swift in Sources */,
 				3BB3D5F12376175A009CE90F /* ColorSwatch.swift in Sources */,
 				3BB3D5F5237617EB009CE90F /* ColorModel.swift in Sources */,
+				3B15EDA5237E035A008C54AF /* GridHeader.swift in Sources */,
 				3B189383237B624400B097E2 /* SwiftUIColorModels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
