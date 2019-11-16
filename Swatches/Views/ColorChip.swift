@@ -10,31 +10,45 @@ import SwiftUI
 
 struct ColorChip: View {
     let color: Color
+    
     let keyline: Bool
     
     @Environment(\.colorScheme) var scheme
     
-    private let minSwatchSize = CGFloat(50)
-    private let maxSwatchSize = CGFloat(300)
+    private let minChipEdge = CGFloat(50)
+    
+    private let maxChipEdge = CGFloat(300)
+    
+    private let cornerRadius = CGFloat(20.0)
     
     var body: some View {
-        RoundedRectangle(cornerRadius: 20.0)
-            .frame(minWidth: minSwatchSize,
-                   maxWidth: maxSwatchSize,
-                   minHeight: minSwatchSize,
-                   maxHeight: maxSwatchSize)
+        RoundedRectangle(cornerRadius: cornerRadius)
+            .frame(minWidth: minChipEdge,
+                   maxWidth: maxChipEdge,
+                   minHeight: minChipEdge,
+                   maxHeight: maxChipEdge)
             .aspectRatio(1.0, contentMode: .fit)
             .foregroundColor(color)
             .scaledToFit()
-            .overlay(RoundedRectangle(cornerRadius: 20.0).stroke(keyline ? Color.black : Color.clear))
+            .background(backgroundView())
+            .overlay(RoundedRectangle(cornerRadius: cornerRadius).stroke(keyline ? Color.black : Color.clear))
     }
-    
-    func strokeColor() -> Color {
-        guard color != .clear else {
-            return .clear
+}
+
+private extension ColorChip {
+    func backgroundView() -> some View {
+        let final: AnyView
+        
+        if keyline {
+            let image = Image("Checkerboard")
+                .resizable(resizingMode: .tile)
+                .cornerRadius(cornerRadius)
+            final = AnyView(image)
+        } else {
+            final = AnyView(Color.clear)
         }
         
-        return scheme == .dark ? Color(UIColor.label) : .black
+        return final
     }
 }
 

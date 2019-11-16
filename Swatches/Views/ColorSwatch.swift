@@ -11,43 +11,31 @@ import SwiftUI
 struct ColorSwatch: View {
     let model: ColorModel?
     
+    /// Padding edges for the ColorChip. It's only three edges because the label pads the bottom edge of the chip.
+    private let chipPadding: Edge.Set = [.top, .leading, .trailing]
+    
+    private let cornerRadius = CGFloat(20.0)
+
     var body: some View {
         VStack() {
             if model != nil {
                 ColorChip(color: model!.color, keyline: true)
-                    .padding()
+                    .padding(chipPadding)
             } else {
                 ColorChip(color: .clear, keyline: false)
-                    .padding()
+                    .padding(chipPadding)
             }
             
             Text(model?.name ?? " ")
-                .foregroundColor(Color.black)
-                .font(.headline)
-                .padding(5)
-                .background(textPlateColor().cornerRadius(10))
+                .foregroundColor(Color(UIColor.label))
+                .truncationMode(.middle)
+                .lineLimit(1)
+                .padding(.vertical)
 
-        }.background(background())
-            .cornerRadius(20)
-            .overlay(RoundedRectangle(cornerRadius: 20)
-                .stroke(strokeColor(), lineWidth: 2))
-    }
-    
-    func background() -> some View {
-        guard self.model != nil else {
-            return AnyView(EmptyView())
-        }
-        
-        return AnyView(Image("Checkerboard")
-            .resizable(resizingMode: .tile))
-    }
-    
-    func strokeColor() -> Color {
-        model != nil ? .primary : .clear
-    }
-    
-    func textPlateColor() -> Color {
-        model != nil ? .gray : .clear
+        }.background(model != nil ? Color(UIColor.systemFill) : Color.clear)
+            .cornerRadius(cornerRadius)
+            .overlay(RoundedRectangle(cornerRadius: cornerRadius)
+                .stroke(model != nil ? Color.primary : Color.clear, lineWidth: 2))
     }
 }
 
@@ -55,7 +43,7 @@ struct ColorSwatch_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             HStack {
-                ColorSwatch(model: ColorModel(color: .blue, name: "Normal"))
+                ColorSwatch(model: ColorModel(color: .blue, name: "Wordy But Normal"))
                 ColorSwatch(model: ColorModel(color: .secondary, name: "Inverted"))
                 ColorSwatch(model: nil)
             }.previewDevice("iPhone SE")
