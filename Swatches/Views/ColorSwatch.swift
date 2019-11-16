@@ -28,8 +28,8 @@ struct ColorSwatch: View {
             
             Text(model?.name ?? " ")
                 .foregroundColor(Color(UIColor.label))
-                .font(.headline)
-                .minimumScaleFactor(0.75)
+                .truncationMode(.middle)
+                .lineLimit(1)
                 .padding(.vertical)
 
         }.background(model != nil ? Color(UIColor.systemFill) : Color.clear)
@@ -43,7 +43,7 @@ struct ColorSwatch_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             HStack {
-                ColorSwatch(model: ColorModel(color: .blue, name: "Normal"))
+                ColorSwatch(model: ColorModel(color: .blue, name: "Wordy But Normal"))
                 ColorSwatch(model: ColorModel(color: .secondary, name: "Inverted"))
                 ColorSwatch(model: nil)
             }.previewDevice("iPhone SE")
