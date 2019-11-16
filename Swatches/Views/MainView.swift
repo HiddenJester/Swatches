@@ -23,7 +23,8 @@ struct MainView: View {
         VStack {
             GridHeader(darkModeSelected: $darkModeSelected, gridIndex: $selectedGridIndex, gridModels: gridModels)
 
-            SwatchGrid(models: self.gridModels[selectedGridIndex].models)
+            SwatchGrid(rowModels: SwatchGrid.mapColorsToRows(colorModels: self.gridModels[selectedGridIndex].models))
+            
         }.background(Color(UIColor.systemBackground))
             .onAppear { self.darkModeSelected = (self.envScheme == .dark) }
             .colorScheme(darkModeSelected ? .dark : .light)
