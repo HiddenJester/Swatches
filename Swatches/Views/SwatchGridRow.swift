@@ -23,7 +23,7 @@ struct SwatchGridRow: View {
 }
 
 struct SwatchGridRow_Previews: PreviewProvider {
-    @State static var models = ColorModel.swiftUIColors()
+    static var models = ColorModel.swiftUIColors()
     
     static var previews: some View {
         Group {
