@@ -9,35 +9,38 @@
 import SwiftUI
 
 struct SwatchGrid: View {
-    let models: [ColorModel]
+    let rowModels: [SwatchGridRowModel]
     
     var body: some View {
         ScrollView {
-            ForEach(pairRows(models: models)) { SwatchGridRow(first: $0.first, second: $0.second) }
-        }.padding()
+            ForEach(rowModels) { SwatchGridRow(first: $0.first, second: $0.second) }
+            
+        }
     }
-    
-    func pairRows(models: [ColorModel]) -> [SwatchGridRowModel] {
+}
+
+extension SwatchGrid {
+    static func mapColorsToRows(colorModels: [ColorModel]) -> [SwatchGridRowModel] {
         var rows = [SwatchGridRowModel]()
-        
-        (0 ..< models.count / 2).forEach { rowIndex in
+
+        (0 ..< colorModels.count / 2).forEach { rowIndex in
             let firstIndex = rowIndex * 2
-            rows.append(SwatchGridRowModel(first: models[firstIndex], second: models[firstIndex + 1]))
+            rows.append(SwatchGridRowModel(first: colorModels[firstIndex], second: colorModels[firstIndex + 1]))
         }
-        
+
         // Catch the odd one out
-        if !models.count.isMultiple(of: 2) {
-            rows.append(SwatchGridRowModel(first: models.last!, second: nil))
+        if !colorModels.count.isMultiple(of: 2) {
+            rows.append(SwatchGridRowModel(first: colorModels.last!, second: nil))
         }
-        
+
         return rows
-     }
+    }
 }
 
 struct SwatchGrid_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            SwatchGrid(models: ColorModel.swiftUIColors())
+            SwatchGrid(rowModels: SwatchGrid.mapColorsToRows(colorModels: ColorModel.swiftUIColors()))
         }
     }
 }
