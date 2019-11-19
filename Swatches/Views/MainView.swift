@@ -25,7 +25,7 @@ struct MainView: View {
 
             SwatchGrid(rowModels: SwatchGrid.mapColorsToRows(colorModels: self.gridModels[selectedGridIndex].models))
             
-        }.background(Color(UIColor.systemBackground))
+        }.background(Color.systemBackground)
             .onAppear { self.darkModeSelected = (self.envScheme == .dark) }
             .colorScheme(darkModeSelected ? .dark : .light)
             .animation(.default, value: darkModeSelected) // Animate the color scheme toggling.
