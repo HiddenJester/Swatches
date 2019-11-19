@@ -27,12 +27,12 @@ struct ColorSwatch: View {
             }
             
             Text(model?.name ?? " ")
-                .foregroundColor(Color(UIColor.label))
+                .foregroundColor(.label)
                 .truncationMode(.middle)
                 .lineLimit(1)
                 .padding(.vertical)
 
-        }.background(model != nil ? Color(UIColor.systemFill) : Color.clear)
+        }.background(model != nil ? Color.systemFill : Color.clear)
             .cornerRadius(cornerRadius)
             .overlay(RoundedRectangle(cornerRadius: cornerRadius)
                 .stroke(model != nil ? Color.primary : Color.clear, lineWidth: 2))
