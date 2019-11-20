@@ -12,6 +12,9 @@
 		3B189383237B624400B097E2 /* SwiftUIColorModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B189382237B624400B097E2 /* SwiftUIColorModels.swift */; };
 		3B189385237B62B600B097E2 /* ColorGridRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B189384237B62B600B097E2 /* ColorGridRow.swift */; };
 		3B189387237B77B100B097E2 /* GridRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B189386237B77B100B097E2 /* GridRowModel.swift */; };
+		3B549E722385DCF4004C16DE /* TextSwatchGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B549E712385DCF4004C16DE /* TextSwatchGrid.swift */; };
+		3B549E742385DD3C004C16DE /* TextModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B549E732385DD3C004C16DE /* TextModel.swift */; };
+		3B549E762385DE22004C16DE /* TextModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B549E752385DE22004C16DE /* TextModels.swift */; };
 		3B76A62523765179007292F5 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B76A62423765179007292F5 /* MainView.swift */; };
 		3B76A627237651C0007292F5 /* GridModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B76A626237651C0007292F5 /* GridModel.swift */; };
 		3BB3D5DB2376135B009CE90F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB3D5DA2376135B009CE90F /* AppDelegate.swift */; };
@@ -32,6 +35,9 @@
 		3B189382237B624400B097E2 /* SwiftUIColorModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIColorModels.swift; sourceTree = "<group>"; };
 		3B189384237B62B600B097E2 /* ColorGridRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorGridRow.swift; sourceTree = "<group>"; };
 		3B189386237B77B100B097E2 /* GridRowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridRowModel.swift; sourceTree = "<group>"; };
+		3B549E712385DCF4004C16DE /* TextSwatchGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSwatchGrid.swift; sourceTree = "<group>"; };
+		3B549E732385DD3C004C16DE /* TextModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextModel.swift; sourceTree = "<group>"; };
+		3B549E752385DE22004C16DE /* TextModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextModels.swift; sourceTree = "<group>"; };
 		3B76A62423765179007292F5 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		3B76A626237651C0007292F5 /* GridModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridModel.swift; sourceTree = "<group>"; };
 		3BB3D5D72376135B009CE90F /* Swatches.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swatches.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,6 +114,7 @@
 				3B15EDA4237E035A008C54AF /* GridHeader.swift */,
 				3BB3D5EE237613CB009CE90F /* ColorChip.swift */,
 				3B76A62423765179007292F5 /* MainView.swift */,
+				3B549E712385DCF4004C16DE /* TextSwatchGrid.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -116,10 +123,12 @@
 			isa = PBXGroup;
 			children = (
 				3BB3D5F4237617EB009CE90F /* ColorModel.swift */,
+				3B549E732385DD3C004C16DE /* TextModel.swift */,
 				3B189382237B624400B097E2 /* SwiftUIColorModels.swift */,
 				3B76A626237651C0007292F5 /* GridModel.swift */,
 				3B189386237B77B100B097E2 /* GridRowModel.swift */,
 				3B15EDA6237E4275008C54AF /* SemanticColorModels.swift */,
+				3B549E752385DE22004C16DE /* TextModels.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -203,15 +212,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B549E742385DD3C004C16DE /* TextModel.swift in Sources */,
 				3B76A62523765179007292F5 /* MainView.swift in Sources */,
 				3B189387237B77B100B097E2 /* GridRowModel.swift in Sources */,
 				3B76A627237651C0007292F5 /* GridModel.swift in Sources */,
+				3B549E722385DCF4004C16DE /* TextSwatchGrid.swift in Sources */,
 				3BB3D5EF237613CB009CE90F /* ColorChip.swift in Sources */,
 				3BB3D5DB2376135B009CE90F /* AppDelegate.swift in Sources */,
 				3BDC325E237F3A2900632A08 /* Color+UIColor.swift in Sources */,
 				3BB3D5DD2376135B009CE90F /* SceneDelegate.swift in Sources */,
 				3BB3D5DF2376135B009CE90F /* ColorSwatchGrid.swift in Sources */,
 				3B15EDA7237E4275008C54AF /* SemanticColorModels.swift in Sources */,
+				3B549E762385DE22004C16DE /* TextModels.swift in Sources */,
 				3B189385237B62B600B097E2 /* ColorGridRow.swift in Sources */,
 				3BB3D5F12376175A009CE90F /* ColorSwatch.swift in Sources */,
 				3BB3D5F5237617EB009CE90F /* ColorModel.swift in Sources */,
