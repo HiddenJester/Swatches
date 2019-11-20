@@ -9,11 +9,7 @@
 import Foundation
 
 struct GridModel {
-    let id = UUID()
-
     let name: String
     
     let models: [ColorModel]
 }
-
-extension GridModel: Identifiable {}
