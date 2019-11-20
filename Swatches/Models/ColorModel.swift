@@ -16,5 +16,3 @@ struct ColorModel {
     
     let name: String
 }
-
-extension ColorModel: Identifiable {}
