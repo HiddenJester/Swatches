@@ -1,5 +1,5 @@
 //
-//  SwatchGrid.swift
+//  ColorSwatchGrid.swift
 //  Swatches
 //
 //  Created by Timothy Sanders on 2019-11-08.
@@ -9,7 +9,9 @@
 import SwiftUI
 
 struct ColorSwatchGrid: View {
-    let rowModels: [GridRowModel<ColorModel>]
+    typealias RowModel = GridRowModel<ColorModel>
+    
+    let rowModels: [RowModel]
     
     var body: some View {
         ScrollView {
@@ -20,8 +22,8 @@ struct ColorSwatchGrid: View {
 }
 
 extension ColorSwatchGrid {
-    static func mapColorsToRows(colorModels: [ColorModel]) -> [GridRowModel<ColorModel>] {
-        var rows = [GridRowModel<ColorModel>]()
+    static func mapColorsToRows(colorModels: [ColorModel]) -> [RowModel] {
+        var rows = [RowModel]()
 
         (0 ..< colorModels.count / 2).forEach { rowIndex in
             let firstIndex = rowIndex * 2
