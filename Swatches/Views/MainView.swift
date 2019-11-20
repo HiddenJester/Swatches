@@ -24,13 +24,30 @@ struct MainView: View {
             GridHeader(darkModeSelected: $darkModeSelected,
                        gridIndex: $selectedGridIndex,
                        gridNames: gridModels.map { $0.name })
-
-            SwatchGrid(rowModels: SwatchGrid.mapColorsToRows(colorModels: self.gridModels[selectedGridIndex].models))
+            
+            gridView()
             
         }.background(Color.systemBackground)
             .onAppear { self.darkModeSelected = (self.envScheme == .dark) }
             .colorScheme(darkModeSelected ? .dark : .light)
             .animation(.default, value: darkModeSelected) // Animate the color scheme toggling.
+    }
+    
+    
+}
+
+private extension MainView {
+    func gridView() -> some View {
+        let view: AnyView
+        
+        if let colorModels = self.gridModels[selectedGridIndex].models as? [ColorModel] {
+            let grid = ColorSwatchGrid(rowModels: ColorSwatchGrid.mapColorsToRows(colorModels: colorModels))
+            view = AnyView(grid)
+        } else {
+            view = AnyView(Text("Missing Grid Type!"))
+        }
+        
+        return view
     }
 }
 

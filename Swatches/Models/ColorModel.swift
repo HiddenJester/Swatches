@@ -9,7 +9,7 @@
 import Foundation
 import SwiftUI
 
-struct ColorModel {
+struct ColorModel: SwatchModel {
     let id = UUID()
     
     let color: Color

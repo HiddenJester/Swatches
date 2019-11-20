@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct SwatchGridRowModel {
+struct GridRowModel<Model: SwatchModel> {
     let id = UUID()
     
-    let first: ColorModel?
+    let first: Model?
     
-    let second: ColorModel?
+    let second: Model?
 }
 
-extension SwatchGridRowModel: Identifiable {}
+extension GridRowModel: Identifiable {}
