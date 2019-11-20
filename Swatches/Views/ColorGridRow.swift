@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct SwatchGridRow: View {
+struct ColorGridRow: View {
     let first: ColorModel?
     
     let second: ColorModel?
@@ -22,14 +22,14 @@ struct SwatchGridRow: View {
     }
 }
 
-struct SwatchGridRow_Previews: PreviewProvider {
+struct ColorGridRow_Previews: PreviewProvider {
     static var models = ColorModel.swiftUIColors()
     
     static var previews: some View {
         Group {
-            SwatchGridRow(first: models[0], second: models[1])
-            SwatchGridRow(first: models[2], second: nil)
-            SwatchGridRow(first: nil, second: models[3])
+            ColorGridRow(first: models[0], second: models[1])
+            ColorGridRow(first: models[2], second: nil)
+            ColorGridRow(first: nil, second: models[3])
         }
     }
 }

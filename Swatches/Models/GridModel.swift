@@ -8,8 +8,10 @@
 
 import Foundation
 
+protocol SwatchModel {}
+
 struct GridModel {
     let name: String
     
-    let models: [ColorModel]
+    let models: [SwatchModel]
 }
