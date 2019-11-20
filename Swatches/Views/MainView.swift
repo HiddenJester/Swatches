@@ -21,7 +21,9 @@ struct MainView: View {
     
     var body: some View {
         VStack {
-            GridHeader(darkModeSelected: $darkModeSelected, gridIndex: $selectedGridIndex, gridModels: gridModels)
+            GridHeader(darkModeSelected: $darkModeSelected,
+                       gridIndex: $selectedGridIndex,
+                       gridNames: gridModels.map { $0.name })
 
             SwatchGrid(rowModels: SwatchGrid.mapColorsToRows(colorModels: self.gridModels[selectedGridIndex].models))
             
