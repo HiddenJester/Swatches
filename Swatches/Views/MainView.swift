@@ -43,6 +43,9 @@ private extension MainView {
         if let colorModels = self.gridModels[selectedGridIndex].models as? [ColorModel] {
             let grid = ColorSwatchGrid(rowModels: ColorSwatchGrid.mapColorsToRows(colorModels: colorModels))
             view = AnyView(grid)
+        } else if let textModels = self.gridModels[selectedGridIndex].models as? [TextModel] {
+            let grid = TextSwatchGrid(rowModels: TextSwatchGrid.mapTextsToRows(textModels: textModels))
+            view = AnyView(grid)
         } else {
             view = AnyView(Text("Missing Grid Type!"))
         }
@@ -54,6 +57,6 @@ private extension MainView {
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView(gridModels: [GridModel(name: "SwiftUI", models: ColorModel.swiftUIColors()),
-                         GridModel(name: "Semantic", models: ColorModel.semanticColors())])
+                         GridModel(name: "Text", models: TextModel.textModels())])
     }
 }
