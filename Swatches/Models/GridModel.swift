@@ -8,12 +8,10 @@
 
 import Foundation
 
-struct GridModel {
-    let id = UUID()
+protocol SwatchModel {}
 
+struct GridModel {
     let name: String
     
-    let models: [ColorModel]
+    let models: [SwatchModel]
 }
-
-extension GridModel: Identifiable {}

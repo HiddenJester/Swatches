@@ -21,20 +21,42 @@ struct MainView: View {
     
     var body: some View {
         VStack {
-            GridHeader(darkModeSelected: $darkModeSelected, gridIndex: $selectedGridIndex, gridModels: gridModels)
-
-            SwatchGrid(rowModels: SwatchGrid.mapColorsToRows(colorModels: self.gridModels[selectedGridIndex].models))
+            GridHeader(darkModeSelected: $darkModeSelected,
+                       gridIndex: $selectedGridIndex,
+                       gridNames: gridModels.map { $0.name })
+            
+            gridView()
             
         }.background(Color.systemBackground)
             .onAppear { self.darkModeSelected = (self.envScheme == .dark) }
             .colorScheme(darkModeSelected ? .dark : .light)
             .animation(.default, value: darkModeSelected) // Animate the color scheme toggling.
     }
+    
+    
+}
+
+private extension MainView {
+    func gridView() -> some View {
+        let view: AnyView
+        
+        if let colorModels = self.gridModels[selectedGridIndex].models as? [ColorModel] {
+            let grid = ColorSwatchGrid(rowModels: ColorSwatchGrid.mapColorsToRows(colorModels: colorModels))
+            view = AnyView(grid)
+        } else if let textModels = self.gridModels[selectedGridIndex].models as? [TextModel] {
+            let grid = TextSwatchGrid(rowModels: TextSwatchGrid.mapTextsToRows(textModels: textModels))
+            view = AnyView(grid)
+        } else {
+            view = AnyView(Text("Missing Grid Type!"))
+        }
+        
+        return view
+    }
 }
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView(gridModels: [GridModel(name: "SwiftUI", models: ColorModel.swiftUIColors()),
-                         GridModel(name: "Semantic", models: ColorModel.semanticColors())])
+                         GridModel(name: "Text", models: TextModel.textModels())])
     }
 }
