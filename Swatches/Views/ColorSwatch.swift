@@ -11,31 +11,15 @@ import SwiftUI
 struct ColorSwatch: View {
     let model: ColorModel?
     
-    /// Padding edges for the ColorChip. It's only three edges because the label pads the bottom edge of the chip.
-    private let chipPadding: Edge.Set = [.top, .leading, .trailing]
     
-    private let cornerRadius = CGFloat(20.0)
-
     var body: some View {
-        VStack() {
-            if model != nil {
-                ColorChip(color: model!.color, keyline: true)
-                    .padding(chipPadding)
+        Swatch(drawBackground: model != nil, label: model?.name ?? " ") {
+            if self.model != nil {
+                ColorChip(color: self.model!.color, drawBackground: true)
             } else {
-                ColorChip(color: .clear, keyline: false)
-                    .padding(chipPadding)
+                ColorChip(color: .clear, drawBackground: false)
             }
-            
-            Text(model?.name ?? " ")
-                .foregroundColor(.label)
-                .truncationMode(.middle)
-                .lineLimit(1)
-                .padding(.vertical)
-
-        }.background(model != nil ? Color.systemFill : Color.clear)
-            .cornerRadius(cornerRadius)
-            .overlay(RoundedRectangle(cornerRadius: cornerRadius)
-                .stroke(model != nil ? Color.primary : Color.clear, lineWidth: 2))
+        }
     }
 }
 
