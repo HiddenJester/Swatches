@@ -23,6 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let grids = [
             GridModel(name: "SwiftUI", models: ColorModel.swiftUIColors()),
             GridModel(name: "Semantic", models: ColorModel.semanticColors()),
+            GridModel(name: "Text", models: TextModel.textModels()),
         ]
         let contentView = MainView(gridModels: grids)
 

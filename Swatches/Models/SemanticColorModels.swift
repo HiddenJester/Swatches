@@ -11,7 +11,7 @@ import SwiftUI
 
 extension ColorModel {
     static func semanticColors() -> [ColorModel] {
-        return [
+        [
             ColorModel(color: .systemRed, name: "Sys.Red"),
             ColorModel(color: .systemGreen, name: "Sys.Green"),
             ColorModel(color: .systemBlue, name: "Sys.Blue"),
@@ -29,28 +29,21 @@ extension ColorModel {
             ColorModel(color: .systemGray5, name: "Sys.Gray5"),
             ColorModel(color: .systemGray6, name: "Sys.Gray6"),
             
-            // TODO: Move these into a TextModel object
-//            public static let label = Color(UIColor.label)
-//            public static let secondaryLabel = Color(UIColor.secondaryLabel)
-//            public static let tertiaryLabel = Color(UIColor.tertiaryLabel)
-//            public static let quaternaryLabel = Color(UIColor.quaternaryLabel)
-//            public static let link = Color(UIColor.link)
-//            public static let placeholderText = Color(UIColor.placeholderText)
             
             // Separators
             ColorModel(color: .separator, name: "Separator"),
             ColorModel(color: .opaqueSeparator, name: "Opaque Sep."),
-
+            
             // Backgrounds
             ColorModel(color: .systemBackground, name: "Sys.Background"),
             ColorModel(color: .secondarySystemBackground, name: "Sec.Sys.Background"),
             ColorModel(color: .tertiarySystemBackground, name: "Tert.Sys.Background"),
-
+            
             // Grouped backgrounds
             ColorModel(color: .systemGroupedBackground, name: "Sys.Group.Background"),
             ColorModel(color: .secondarySystemGroupedBackground, name: "Sec.Sys.Group.Background"),
             ColorModel(color: .tertiarySystemGroupedBackground, name: "Tert.Sys.Group.Background"),
-
+            
             // System fills
             ColorModel(color: .systemFill, name: "Sys.Fill"),
             ColorModel(color: .secondarySystemFill, name: "Sec.Sys.Fill"),

@@ -13,7 +13,7 @@ struct GridHeader: View {
     
     @Binding var gridIndex: Int
     
-    let gridModels: [GridModel]
+    let gridNames: [String]
     
     var body: some View {
         VStack {
@@ -21,8 +21,8 @@ struct GridHeader: View {
                 .padding(.horizontal)
 
             Picker("Colors:", selection: $gridIndex) {
-                ForEach(0 ..< gridModels.count) { index in
-                    Text(self.gridModels[index].name).tag(index)
+                ForEach(0 ..< gridNames.count) { index in
+                    Text(self.gridNames[index]).tag(index)
                 }
             }.pickerStyle(SegmentedPickerStyle())
             
@@ -36,6 +36,6 @@ struct GridHeader_Previews: PreviewProvider {
     static var previews: some View {
         GridHeader(darkModeSelected: .constant(false),
                    gridIndex: .constant(0),
-                   gridModels: [GridModel(name: "SwiftUI", models: ColorModel.swiftUIColors())])
+                   gridNames: ["SwiftUI"])
     }
 }
