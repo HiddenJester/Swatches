@@ -13,10 +13,25 @@ struct TextSwatchGrid: View {
     
     let rowModels: [RowModel]
     
+    @State private var sample = "The quick brown fox jumps over the lazy dog."
+    
     var body: some View {
-        ScrollView {
-            ForEach(rowModels) { Text($0.first!.name) }
+        VStack {
+            VStack(spacing: 0) {
+                Text("Sample:")
+                    .font(.title)
+
+                TextField("Sample Text:", text: $sample)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .disableAutocorrection(true)
+                    .padding()
+
+            }.overlay(RoundedRectangle.init(cornerRadius: 20.0).stroke())
             
+            ScrollView {
+                ForEach(rowModels) { TextGridRow(model: $0.first, sample: self.sample) }
+                
+            }.padding(.vertical)
         }
     }
 }

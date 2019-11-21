@@ -28,7 +28,9 @@ struct ColorGridRow_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ColorGridRow(first: models[0], second: models[1])
+            
             ColorGridRow(first: models[2], second: nil)
+            
             ColorGridRow(first: nil, second: models[3])
         }
     }

@@ -13,11 +13,11 @@ extension TextModel {
     static func textModels() -> [TextModel] {
         [
             TextModel(color: .label, name: "Label"),
-            TextModel(color: .label, name: "Sec.Label"),
-            TextModel(color: .label, name: "Tert.Label"),
-            TextModel(color: .label, name: "Quat.Label"),
-            TextModel(color: .label, name: "Link"),
-            TextModel(color: .label, name: "PlaceholderText"),
+            TextModel(color: .secondaryLabel, name: "Sec.Label"),
+            TextModel(color: .tertiaryLabel, name: "Tert.Label"),
+            TextModel(color: .quaternaryLabel, name: "Quat.Label"),
+            TextModel(color: .link, name: "Link"),
+            TextModel(color: .placeholderText, name: "PlaceholderText"),
         ]
     }
 }

@@ -11,9 +11,7 @@ import SwiftUI
 struct ColorChip: View {
     let color: Color
     
-    let keyline: Bool
-    
-    @Environment(\.colorScheme) var scheme
+    let drawBackground: Bool
     
     private let minChipEdge = CGFloat(50)
     
@@ -30,36 +28,18 @@ struct ColorChip: View {
             .aspectRatio(1.0, contentMode: .fit)
             .foregroundColor(color)
             .scaledToFit()
-            .background(backgroundView())
-            .overlay(RoundedRectangle(cornerRadius: cornerRadius).stroke(keyline ? Color.black : Color.clear))
-    }
-}
-
-private extension ColorChip {
-    func backgroundView() -> some View {
-        let final: AnyView
-        
-        if keyline {
-            let image = Image("Checkerboard")
-                .resizable(resizingMode: .tile)
-                .cornerRadius(cornerRadius)
-            final = AnyView(image)
-        } else {
-            final = AnyView(Color.clear)
-        }
-        
-        return final
+            .background(ChipBackground(drawCheckerboard: drawBackground, cornerRadius: cornerRadius))
     }
 }
 
 struct ColorChip_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ColorChip(color: .green, keyline: true)
-            ColorChip(color: .green, keyline: true)
+            ColorChip(color: .green, drawBackground: true)
+            ColorChip(color: .green, drawBackground: true)
                 .previewDevice("iPhone SE")
                 .environment(\.colorScheme, .dark)
-            ColorChip(color: .clear, keyline: false)
+            ColorChip(color: .clear, drawBackground: false)
         }
     }
 }
