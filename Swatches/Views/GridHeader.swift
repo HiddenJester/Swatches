@@ -23,6 +23,7 @@ struct GridHeader: View {
             Picker("Colors:", selection: $gridIndex) {
                 ForEach(0 ..< gridNames.count) { index in
                     Text(self.gridNames[index]).tag(index)
+                        .minimumScaleFactor(0.75)
                 }
             }.pickerStyle(SegmentedPickerStyle())
             

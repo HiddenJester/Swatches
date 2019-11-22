@@ -22,8 +22,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Create the SwiftUI view that provides the window contents.
         let grids = [
             GridModel(name: "SwiftUI", models: ColorModel.swiftUIColors()),
-            GridModel(name: "Semantic", models: ColorModel.semanticColors()),
+            GridModel(name: "Adaptable", models: ColorModel.adaptableColors()),
             GridModel(name: "Text", models: TextModel.textModels()),
+            GridModel(name: "Fixed", models: ColorModel.fixedColors()),
         ]
         let contentView = MainView(gridModels: grids)
 
