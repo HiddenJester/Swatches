@@ -11,7 +11,7 @@ import SwiftUI
 
 extension ColorModel {
     static func swiftUIColors() -> [ColorModel] {
-        return [
+        [
             ColorModel(color: .clear, name: "Clear"),
             ColorModel(color: .black, name: "Black"),
             ColorModel(color: .white, name: "White"),
@@ -25,8 +25,9 @@ extension ColorModel {
             ColorModel(color: .purple, name: "Purple"),
             ColorModel(color: .primary, name: "Primary"),
             ColorModel(color: .secondary, name: "Secondary"),
-
+            
             ColorModel(color: .accentColor, name: "Accent"),
         ]
     }
+    
 }

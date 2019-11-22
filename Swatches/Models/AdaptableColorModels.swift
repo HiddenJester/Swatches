@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 
 extension ColorModel {
-    static func semanticColors() -> [ColorModel] {
+    static func adaptableColors() -> [ColorModel] {
         [
             ColorModel(color: .systemRed, name: "Sys.Red"),
             ColorModel(color: .systemGreen, name: "Sys.Green"),
