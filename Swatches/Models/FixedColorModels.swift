@@ -10,6 +10,9 @@ import Foundation
 import SwiftUI
 
 extension ColorModel {
+    /// All of the "fixed" colurs provided by UIKit. These do not update when the color scheme is changed from light to dark. Note that these models rely
+    /// on the mapping from `UIColor` to `Color`provided by Color+UIColor.swift
+    /// - Returns: An array of `ColorModel` that represents all of the fixed colors.
     static func fixedColors() -> [ColorModel] {
         [
             ColorModel(color: .fixedBlack, name: "Black"),
