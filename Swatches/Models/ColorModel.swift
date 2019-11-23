@@ -9,8 +9,11 @@
 import Foundation
 import SwiftUI
 
+/// The data needed to render a `ColorSwatch`.
 struct ColorModel: SwatchModel {
+    /// The `Color` to draw in the `ColorChip`.
     let color: Color
     
+    /// The name to display in the `SwatchLabel`.
     let name: String
 }
