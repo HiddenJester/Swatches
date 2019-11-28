@@ -122,19 +122,19 @@
 		3BB3D5F2237617C7009CE90F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				3BB3D5DE2376135B009CE90F /* ColorSwatchGrid.swift */,
+				3B549E8123860264004C16DE /* ChipBackground.swift */,
+				3BB3D5EE237613CB009CE90F /* ColorChip.swift */,
 				3B189384237B62B600B097E2 /* ColorGridRow.swift */,
 				3BB3D5F02376175A009CE90F /* ColorSwatch.swift */,
-				3B549E792385E511004C16DE /* TextSwatch.swift */,
-				3B549E7B2385E8EE004C16DE /* SwatchLabel.swift */,
-				3B549E7D2385FDF6004C16DE /* Swatch.swift */,
-				3B549E7F2386020B004C16DE /* TextChip.swift */,
-				3B549E8123860264004C16DE /* ChipBackground.swift */,
+				3BB3D5DE2376135B009CE90F /* ColorSwatchGrid.swift */,
 				3B15EDA4237E035A008C54AF /* GridHeader.swift */,
-				3BB3D5EE237613CB009CE90F /* ColorChip.swift */,
 				3B76A62423765179007292F5 /* MainView.swift */,
-				3B549E712385DCF4004C16DE /* TextSwatchGrid.swift */,
+				3B549E7D2385FDF6004C16DE /* Swatch.swift */,
+				3B549E7B2385E8EE004C16DE /* SwatchLabel.swift */,
+				3B549E7F2386020B004C16DE /* TextChip.swift */,
 				3B549E772385E3B1004C16DE /* TextGridRow.swift */,
+				3B549E792385E511004C16DE /* TextSwatch.swift */,
+				3B549E712385DCF4004C16DE /* TextSwatchGrid.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -142,13 +142,13 @@
 		3BB3D5F3237617D4009CE90F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3B15EDA6237E4275008C54AF /* AdaptableColorModels.swift */,
 				3BB3D5F4237617EB009CE90F /* ColorModel.swift */,
-				3B549E732385DD3C004C16DE /* TextModel.swift */,
-				3B189382237B624400B097E2 /* SwiftUIColorModels.swift */,
+				3BF94AB72387517800223BFE /* FixedColorModels.swift */,
 				3B76A626237651C0007292F5 /* GridModel.swift */,
 				3B189386237B77B100B097E2 /* GridRowModel.swift */,
-				3B15EDA6237E4275008C54AF /* AdaptableColorModels.swift */,
-				3BF94AB72387517800223BFE /* FixedColorModels.swift */,
+				3B189382237B624400B097E2 /* SwiftUIColorModels.swift */,
+				3B549E732385DD3C004C16DE /* TextModel.swift */,
 				3B549E752385DE22004C16DE /* TextModels.swift */,
 			);
 			path = Models;

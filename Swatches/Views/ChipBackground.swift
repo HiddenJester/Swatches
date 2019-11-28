@@ -8,9 +8,13 @@
 
 import SwiftUI
 
+/// A view that optionally draws either A ) nothing (well. It draws `Color.clear`) or B ) draws a tiled checkerboard pattern suitable for displaying behind
+/// translucent content. If the checkerboard is drawn it is outlined in black and it has rounded corners of the specified radius.
 struct ChipBackground: View {
+    /// The flag that determines whether the checkerboard & outline should be drawn.
     let drawCheckerboard: Bool
 
+    /// When the checkerboard is drawn, this is the `cornerRadius` used by the image.
     let cornerRadius: CGFloat
 
     var body: some View {
@@ -20,11 +24,14 @@ struct ChipBackground: View {
 }
 
 private extension ChipBackground {
+    /// Helper function that checks `drawCheckerboard` and returns a single view. This makes appying the `overlay` modifier for the outline cleaner.
+    /// - Returns: If `drawCheckerboard` is true it returns a tiled checkerboard `Image` with rounded corners. If it is false then it returns just
+    ///     `Color.clear`.
     func view() -> some View {
         if drawCheckerboard {
             let image = Image("Checkerboard")
                 .resizable(resizingMode: .tile)
-                .cornerRadius(self.cornerRadius)
+                .cornerRadius(cornerRadius)
             
             return AnyView(image)
         } else {

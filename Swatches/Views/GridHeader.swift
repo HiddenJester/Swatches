@@ -8,11 +8,19 @@
 
 import SwiftUI
 
+/// The header view to draw at the top of the screen. This displays a switch that that controls whether the app is in dark mode and a picker that lists
+/// the grid names.
+/// - Parameter darkModeSelected: Binding to a Bool that controls whether the app is displaying in dark mode.
+/// - Parameter gridIndex: Binding to an Int that controls which grid is displayed.
+/// - Parameter gridNames: The strings to display in the grid picker. When a grid is selected `gridIndex` is updated.
 struct GridHeader: View {
+    /// A bool that controls whether the app is displaying in dark mode or not.
     @Binding var darkModeSelected: Bool
     
+    /// The selected grid.
     @Binding var gridIndex: Int
     
+    /// The strings to use in the grid picker.
     let gridNames: [String]
     
     var body: some View {

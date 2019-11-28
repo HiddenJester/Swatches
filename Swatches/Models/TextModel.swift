@@ -9,8 +9,11 @@
 import Foundation
 import SwiftUI
 
+/// The data needed to render a `TextSwatch`.
 struct TextModel: SwatchModel {
+    /// The `Color` the `TextChip` needs to use for the text color.
     let color: Color
     
+    /// The name to display in the `SwatchLabel` view.
     let name: String
 }
