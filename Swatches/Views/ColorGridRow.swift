@@ -8,9 +8,15 @@
 
 import SwiftUI
 
+/// A view that displays `ColorSwatch` views. Since SwiftUI doesn't have a collection controller and Swatches is a lightweight application I simply created a
+/// forced 2-column grid by displaying a `ForEach` over a series of `ColorGridRow` objects. This view simply takes two optional `ColorModel` objects,
+/// which correspond to the left and right `ColorSwatch` objects in the row. If a nil `ColorModel` is passed in a transparent `ColorSwatch` is created
+/// for that position. This ensures that a row with a single model will draw the `ColorSwatch` the same size as the other rows, and aligned in the proper column.
 struct ColorGridRow: View {
+    /// The color model to draw in the left position of this row. If nil is passed a transparent `ColorSwatch` will be drawn.
     let first: ColorModel?
     
+    /// The color model to draw in the right position of this row. If nil is passed a transparent `ColorSwatch` will be drawn.
     let second: ColorModel?
     
     var body: some View {

@@ -8,12 +8,16 @@
 
 import SwiftUI
 
+/// A view that displays a simple text swatch. It takes a `String` to display and a `TextModel` and draws a proper swatch. If the model is nil then the
+/// swatch will still occupy space but will be completely transparent.
+/// - Parameter sample: The string to display in the displayed text.
+/// - Parameter model: The optional `TextModel` that provides the swatch label text and the color to display the text in.
 struct TextSwatch: View {
+    /// The string to display in the swatch.
     let sample: String
     
+    /// The text model to render in this swatch.
     let model: TextModel?
-
-    private let cornerRadius = CGFloat(20.0)
 
     var body: some View {
         Swatch(drawBackground: model != nil, label: model?.name ?? " ") {

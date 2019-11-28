@@ -10,6 +10,8 @@ import Foundation
 import SwiftUI
 
 extension ColorModel {
+    /// All of the Color definitions provided by Swift UI.
+    /// - Returns: An array of `ColorModel` that represents all of the available colors.
     static func swiftUIColors() -> [ColorModel] {
         [
             ColorModel(color: .clear, name: "Clear"),

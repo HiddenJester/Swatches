@@ -8,9 +8,14 @@
 
 import SwiftUI
 
+/// A view that displays a `TextSwatch`. Unlike the `ColorGridRow`, the `TextGridRow` only displays a single column of swatches.
+/// - Parameter model: The `TextModel` that will be drawn in this row's swatch.
+/// - Parameter sample: The string to draw in the swatch.
 struct TextGridRow: View {
+    /// The TextModel that lists the color and label to use for the swatch.
     let model: TextModel?
 
+    /// The string that should be displayed in the swatch.
     let sample: String
     
     var body: some View {

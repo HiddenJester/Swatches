@@ -10,6 +10,10 @@ import Foundation
 import SwiftUI
 
 extension ColorModel {
+    /// The "adaptable" colors provided by UIKit. These all change when the color scheme is changed from light to dark. Note that these models rely
+    /// on the mapping from `UIColor` to `Color`provided by Color+UIColor.swift. Also note that these are just the "pure" colors. The text colors like
+    /// `.label` and so on are placed in `textModels()` so they can be rendered in text swatches, not color ones.
+    /// - Returns: An array of `ColorModel` that represents all of the adaptable colors.
     static func adaptableColors() -> [ColorModel] {
         [
             ColorModel(color: .systemRed, name: "Sys.Red"),
