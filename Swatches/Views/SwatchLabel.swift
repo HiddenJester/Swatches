@@ -8,7 +8,10 @@
 
 import SwiftUI
 
+/// A view that displays a single line of text in the `.label` Color, limited to one line, with truncation set for the middle, and has vertical padding.
+/// - Parameter text: The text to display in the label.
 struct SwatchLabel: View {
+    /// The text to display.
     let text: String
     
     var body: some View {
