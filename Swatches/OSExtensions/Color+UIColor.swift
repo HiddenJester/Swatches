@@ -3,8 +3,6 @@
 //  Swatches
 //
 //  Created by Timothy Sanders on 2019-11-15.
-//  Copyright © 2019 HiddenJester Software. All rights reserved.
-//
 
 import Foundation
 import SwiftUI
@@ -63,7 +61,7 @@ extension Color {
     // "Fixed" colors
     // Some of these clash with existing Color names: compare Color.blue (0.22, 0.57, 0.97) in the light theme to
     // UIColor.blue (0.01, 0.19, 0.97) to see two very different shades of blue. For that matter the adaptable
-    // UIColor.systemBlue in the light them (0.25, 0.56, 0.97) isn't *quite* the same blue as Color.blue either.
+    // UIColor.systemBlue in the light theme (0.25, 0.56, 0.97) isn't *quite* the same blue as Color.blue either.
     
     //So all of the UIColor "fixed" colors are here with "fixed" prepended to the color name.
     public static let fixedBlack = Color(UIColor.black)
