@@ -34,13 +34,11 @@ struct MainView: View {
             
             gridView()
             
-        }.background(Color.systemBackground) // Need an adaptive background or dark mode looks bad.
+        }.background(backgroundColor()) // Need an adaptive background or dark mode looks bad.
             .onAppear { self.darkModeSelected = (self.envScheme == .dark) } // Copy the environment value.
             .colorScheme(darkModeSelected ? .dark : .light) // Set the color scheme to the toggle value.
             .animation(.default, value: darkModeSelected) // Animate the color scheme toggling.
     }
-    
-    
 }
 
 private extension MainView {
@@ -55,19 +53,43 @@ private extension MainView {
             let grid = ColorSwatchGrid(rowModels: ColorSwatchGrid.mapColorsToRows(colorModels: colorModels))
             view = AnyView(grid)
         } else if let textModels = self.gridModels[selectedGridIndex].models as? [TextModel] {
+            #if os(iOS)
             let grid = TextSwatchGrid(rowModels: TextSwatchGrid.mapTextsToRows(textModels: textModels))
             view = AnyView(grid)
+            #else
+            view = AnyView(Text("Watch doesn't support TextGrid"))
+            #endif
         } else {
             view = AnyView(Text("Missing Grid Type!"))
         }
         
         return view
     }
+    
+    /// Returns a `Color` suitable for the background color of the `MainView`.
+    /// - Returns: A `Color` for the background. On iOS or macOS this will always be `.systemBackground`. watchOS doesn't support adaptive
+    ///     colors, so on watchOS this is always `.black`. tvOS supports adaptive colors, but not the system background 🤷‍♂️, so it returns `.white`.
+    func backgroundColor() -> Color {
+        #if os(watchOS)
+        return .black
+        #elseif os(tvOS)
+        return .white // Haven't implemented the tvOS target yet, so this is placeholder.
+        #else
+        return .systemBackground
+        #endif
+    }
 }
 
 struct MainView_Previews: PreviewProvider {
+    #if os(iOS)
     static var previews: some View {
         MainView(gridModels: [GridModel(name: "SwiftUI", models: ColorModel.swiftUIColors()),
-                         GridModel(name: "Text", models: TextModel.textModels())])
+                              GridModel(name: "Text", models: TextModel.textModels())
+        ])
     }
+    #elseif os(watchOS)
+    static var previews: some View {
+        MainView(gridModels: [GridModel(name: "SwiftUI", models: ColorModel.swiftUIColors()),
+        ])
+    }        #endif
 }
