@@ -58,8 +58,10 @@ private extension Swatch {
             return .clear
         }
         
-        #if os(watchOS) || os(tvOS)
-        return .secondary
+        #if os(watchOS)
+        return .gray
+        #elseif os(tvOS)
+        return .systemGray
         #else
         return .systemFill
         #endif

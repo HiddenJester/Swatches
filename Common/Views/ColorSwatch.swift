@@ -31,15 +31,16 @@ struct ColorSwatch_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             HStack {
-                ColorSwatch(model: ColorModel(color: .blue, name: "Wordy But Normal"))
-                ColorSwatch(model: ColorModel(color: .secondary, name: "Inverted"))
+                ColorSwatch(model: ColorModel(color: .blue, name: "Wordy Blue Label"))
+                ColorSwatch(model: ColorModel(color: .secondary, name: "Secondary"))
                 ColorSwatch(model: nil)
             }
 
             HStack {
-                ColorSwatch(model: ColorModel(color: .blue, name: "Normal"))
-                ColorSwatch(model: ColorModel(color: .black, name: "Inverted"))
+                ColorSwatch(model: ColorModel(color: .blue, name: "Blue"))
+                ColorSwatch(model: ColorModel(color: .black, name: "Black"))
             }.environment(\.colorScheme, .dark)
+                .previewDisplayName("Dark Mode")
         }
     }
 }
