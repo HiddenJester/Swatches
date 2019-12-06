@@ -10,7 +10,7 @@ import UIKit
 import SwiftUI
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class TVAppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 

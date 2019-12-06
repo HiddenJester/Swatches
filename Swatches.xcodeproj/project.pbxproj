@@ -12,7 +12,7 @@
 		3B189383237B624400B097E2 /* SwiftUIColorModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B189382237B624400B097E2 /* SwiftUIColorModels.swift */; };
 		3B189385237B62B600B097E2 /* ColorGridRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B189384237B62B600B097E2 /* ColorGridRow.swift */; };
 		3B189387237B77B100B097E2 /* GridRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B189386237B77B100B097E2 /* GridRowModel.swift */; };
-		3B2C7EAA239AD66700F23ED0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2C7EA9239AD66700F23ED0 /* AppDelegate.swift */; };
+		3B2C7EAA239AD66700F23ED0 /* TVAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2C7EA9239AD66700F23ED0 /* TVAppDelegate.swift */; };
 		3B2C7EAC239AD66700F23ED0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2C7EAB239AD66700F23ED0 /* ContentView.swift */; };
 		3B2C7EB4239AD66800F23ED0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B2C7EB2239AD66800F23ED0 /* LaunchScreen.storyboard */; };
 		3B2C7EB9239AD81E00F23ED0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BB3D5E02376135C009CE90F /* Assets.xcassets */; };
@@ -110,7 +110,7 @@
 		3B189384237B62B600B097E2 /* ColorGridRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorGridRow.swift; sourceTree = "<group>"; };
 		3B189386237B77B100B097E2 /* GridRowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridRowModel.swift; sourceTree = "<group>"; };
 		3B2C7EA7239AD66700F23ED0 /* Swatches.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swatches.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3B2C7EA9239AD66700F23ED0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3B2C7EA9239AD66700F23ED0 /* TVAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVAppDelegate.swift; sourceTree = "<group>"; };
 		3B2C7EAB239AD66700F23ED0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3B2C7EB3239AD66800F23ED0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3B2C7EB5239AD66800F23ED0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -186,7 +186,7 @@
 		3B2C7EA8239AD66700F23ED0 /* tvOS */ = {
 			isa = PBXGroup;
 			children = (
-				3B2C7EA9239AD66700F23ED0 /* AppDelegate.swift */,
+				3B2C7EA9239AD66700F23ED0 /* TVAppDelegate.swift */,
 				3B2C7EAB239AD66700F23ED0 /* ContentView.swift */,
 				3B2C7EB2239AD66800F23ED0 /* LaunchScreen.storyboard */,
 				3B2C7EB5239AD66800F23ED0 /* Info.plist */,
@@ -478,7 +478,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B2C7EAC239AD66700F23ED0 /* ContentView.swift in Sources */,
-				3B2C7EAA239AD66700F23ED0 /* AppDelegate.swift in Sources */,
+				3B2C7EAA239AD66700F23ED0 /* TVAppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
