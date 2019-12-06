@@ -17,8 +17,10 @@ struct Swatch<Content>: View where Content: View {
     /// The text to draw in the `SwatchLabel`
     let label: String
     
-    let content: Content
+    /// The content of ths swatch, passed in as a `@ViewBuilder`.
+    private let content: Content
 
+    /// The corner radius to use on the backgruond and outline.
     private let cornerRadius = CGFloat(20.0)
 
     /// Padding edges for the content. It's only three edges because the label pads the bottom edge of the content.
