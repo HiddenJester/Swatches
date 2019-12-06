@@ -31,7 +31,7 @@ struct Swatch<Content>: View where Content: View {
             
             SwatchLabel(text: label)
             
-        }.background(drawBackground ? Color.systemFill : Color.clear)
+        }.background(backgroundColor())
             .cornerRadius(cornerRadius)
             .overlay(RoundedRectangle(cornerRadius: cornerRadius)
                 .stroke(drawBackground ? Color.primary : Color.clear, lineWidth: 2))
@@ -49,6 +49,23 @@ struct Swatch<Content>: View where Content: View {
     }
 }
 
+private extension Swatch {
+    /// Returns a `Color` suitable for the swatch background.
+    /// - Returns: A `Color` for the background. For iOS and macOS this will be `systemFill`. watchOS and tvOS don't support that fill so this
+    ///     returns `secondary` on those platforms.
+    func backgroundColor() -> Color {
+        guard drawBackground else {
+            return .clear
+        }
+        
+        #if os(watchOS) || os(tvOS)
+        return .secondary
+        #else
+        return .systemFill
+        #endif
+    }
+}
+
 struct Swatch_Previews: PreviewProvider {
     static var previews: some View {
         Group {
@@ -56,7 +73,7 @@ struct Swatch_Previews: PreviewProvider {
                 Text("Testing").padding()
             }
             
-        Swatch(drawBackground: false, label: "Clear Test") {
+            Swatch(drawBackground: false, label: "Clear Test") {
                 Text("Clear").padding()
             }
         }
