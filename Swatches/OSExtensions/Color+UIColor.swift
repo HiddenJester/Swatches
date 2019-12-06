@@ -11,6 +11,7 @@ import UIKit
 /// Color definitions of the UIColor constant colors.
 @available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
 extension Color {
+    #if !os(watchOS) // watchOS doesn't support adaptable colors.
     // Adaptable colors
     public static let systemRed = Color(UIColor.systemRed)
     public static let systemGreen = Color(UIColor.systemGreen)
@@ -29,7 +30,6 @@ extension Color {
     public static let systemGray4 = Color(UIColor.systemGray4)
     public static let systemGray5 = Color(UIColor.systemGray5)
     public static let systemGray6 = Color(UIColor.systemGray6)
-
     // Adaptable text colors
     public static let label = Color(UIColor.label)
     public static let secondaryLabel = Color(UIColor.secondaryLabel)
@@ -37,27 +37,31 @@ extension Color {
     public static let quaternaryLabel = Color(UIColor.quaternaryLabel)
     public static let link = Color(UIColor.link)
     public static let placeholderText = Color(UIColor.placeholderText)
-
+    
     // Adaptable separators
     public static let separator = Color(UIColor.separator)
     public static let opaqueSeparator = Color(UIColor.opaqueSeparator)
-
+    
+    #if !os(tvOS) // tvOS supports the above adaptable colors, but not these. 🤷‍♂️
     // Adaptable backgrounds
     public static let systemBackground = Color(UIColor.systemBackground)
     public static let secondarySystemBackground = Color(UIColor.secondarySystemBackground)
     public static let tertiarySystemBackground = Color(UIColor.tertiarySystemBackground)
     
+    
     // Adaptable grouped backgrounds
     public static let systemGroupedBackground = Color(UIColor.systemGroupedBackground)
     public static let secondarySystemGroupedBackground = Color(UIColor.secondarySystemGroupedBackground)
     public static let tertiarySystemGroupedBackground = Color(UIColor.tertiarySystemGroupedBackground)
-
+    
     // Adaptable system fills
     public static let systemFill = Color(UIColor.systemFill)
     public static let secondarySystemFill = Color(UIColor.secondarySystemFill)
     public static let tertiarySystemFill = Color(UIColor.tertiarySystemFill)
     public static let quaternarySystemFill = Color(UIColor.quaternarySystemFill)
-
+    #endif // !tvOS
+    #endif // !watchOS
+    
     // "Fixed" colors
     // Some of these clash with existing Color names: compare Color.blue (0.22, 0.57, 0.97) in the light theme to
     // UIColor.blue (0.01, 0.19, 0.97) to see two very different shades of blue. For that matter the adaptable

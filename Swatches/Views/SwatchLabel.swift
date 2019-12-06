@@ -16,10 +16,23 @@ struct SwatchLabel: View {
     
     var body: some View {
         Text(text)
-            .foregroundColor(.label)
+            .foregroundColor(color())
             .truncationMode(.middle)
             .lineLimit(1)
             .padding(.vertical)
+    }
+}
+
+private extension SwatchLabel {
+    /// Provides a `Color` suitable for the foreground color of a `SwatchLabel`.
+    /// - Returns: A `Color` that can be used for the foreground color on the platform. watchOS doesn't support `.label` so on that plaform it
+    ///     simply returns `.white`. On platforms that support `.label` that color is returned.
+    func color() -> Color {
+        #if os(watchOS)
+        return .white
+        #else
+        return .label
+        #endif
     }
 }
 
