@@ -14,9 +14,8 @@
 		3B189387237B77B100B097E2 /* GridRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B189386237B77B100B097E2 /* GridRowModel.swift */; };
 		3B2C7EAA239AD66700F23ED0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2C7EA9239AD66700F23ED0 /* AppDelegate.swift */; };
 		3B2C7EAC239AD66700F23ED0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2C7EAB239AD66700F23ED0 /* ContentView.swift */; };
-		3B2C7EAE239AD66800F23ED0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B2C7EAD239AD66800F23ED0 /* Assets.xcassets */; };
-		3B2C7EB1239AD66800F23ED0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B2C7EB0239AD66800F23ED0 /* Preview Assets.xcassets */; };
 		3B2C7EB4239AD66800F23ED0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B2C7EB2239AD66800F23ED0 /* LaunchScreen.storyboard */; };
+		3B2C7EB9239AD81E00F23ED0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BB3D5E02376135C009CE90F /* Assets.xcassets */; };
 		3B53C1132397002E0047B8EE /* Swatches.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 3B53C1122397002E0047B8EE /* Swatches.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3B53C1192397002E0047B8EE /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B53C1172397002E0047B8EE /* Interface.storyboard */; };
 		3B53C1222397002F0047B8EE /* Swatches-watchOS WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3B53C1212397002F0047B8EE /* Swatches-watchOS WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -110,11 +109,9 @@
 		3B189382237B624400B097E2 /* SwiftUIColorModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIColorModels.swift; sourceTree = "<group>"; };
 		3B189384237B62B600B097E2 /* ColorGridRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorGridRow.swift; sourceTree = "<group>"; };
 		3B189386237B77B100B097E2 /* GridRowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridRowModel.swift; sourceTree = "<group>"; };
-		3B2C7EA7239AD66700F23ED0 /* Swatches-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swatches-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B2C7EA7239AD66700F23ED0 /* Swatches.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swatches.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B2C7EA9239AD66700F23ED0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B2C7EAB239AD66700F23ED0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		3B2C7EAD239AD66800F23ED0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3B2C7EB0239AD66800F23ED0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3B2C7EB3239AD66800F23ED0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3B2C7EB5239AD66800F23ED0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3B53C10F2397002E0047B8EE /* Swatches.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swatches.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -186,25 +183,15 @@
 			path = iOS;
 			sourceTree = "<group>";
 		};
-		3B2C7EA8239AD66700F23ED0 /* Swatches-tvOS */ = {
+		3B2C7EA8239AD66700F23ED0 /* tvOS */ = {
 			isa = PBXGroup;
 			children = (
 				3B2C7EA9239AD66700F23ED0 /* AppDelegate.swift */,
 				3B2C7EAB239AD66700F23ED0 /* ContentView.swift */,
-				3B2C7EAD239AD66800F23ED0 /* Assets.xcassets */,
 				3B2C7EB2239AD66800F23ED0 /* LaunchScreen.storyboard */,
 				3B2C7EB5239AD66800F23ED0 /* Info.plist */,
-				3B2C7EAF239AD66800F23ED0 /* Preview Content */,
 			);
-			path = "Swatches-tvOS";
-			sourceTree = "<group>";
-		};
-		3B2C7EAF239AD66800F23ED0 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				3B2C7EB0239AD66800F23ED0 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
+			path = tvOS;
 			sourceTree = "<group>";
 		};
 		3B53C1162397002E0047B8EE /* watchOS App */ = {
@@ -233,7 +220,7 @@
 				3B1543A52399DEB000856A7C /* iOS */,
 				3B53C1162397002E0047B8EE /* watchOS App */,
 				3B53C1252397002F0047B8EE /* watchOS Extension */,
-				3B2C7EA8239AD66700F23ED0 /* Swatches-tvOS */,
+				3B2C7EA8239AD66700F23ED0 /* tvOS */,
 				3BB3D5D82376135B009CE90F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -245,7 +232,7 @@
 				3B53C10F2397002E0047B8EE /* Swatches.app */,
 				3B53C1122397002E0047B8EE /* Swatches.app */,
 				3B53C1212397002F0047B8EE /* Swatches-watchOS WatchKit Extension.appex */,
-				3B2C7EA7239AD66700F23ED0 /* Swatches-tvOS.app */,
+				3B2C7EA7239AD66700F23ED0 /* Swatches.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -321,7 +308,7 @@
 			);
 			name = "Swatches-tvOS";
 			productName = "Swatches-tvOS";
-			productReference = 3B2C7EA7239AD66700F23ED0 /* Swatches-tvOS.app */;
+			productReference = 3B2C7EA7239AD66700F23ED0 /* Swatches.app */;
 			productType = "com.apple.product-type.application";
 		};
 		3B53C10E2397002E0047B8EE /* Swatches-watchOS */ = {
@@ -446,9 +433,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B2C7EB9239AD81E00F23ED0 /* Assets.xcassets in Resources */,
 				3B2C7EB4239AD66800F23ED0 /* LaunchScreen.storyboard in Resources */,
-				3B2C7EB1239AD66800F23ED0 /* Preview Assets.xcassets in Resources */,
-				3B2C7EAE239AD66800F23ED0 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -598,18 +584,17 @@
 		3B2C7EB6239AD66800F23ED0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"Swatches-tvOS/Preview Content\"";
 				DEVELOPMENT_TEAM = 6LMYPJV5KV;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Swatches-tvOS/Info.plist";
+				INFOPLIST_FILE = tvOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hiddenjester.Swatches-tvOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Swatches;
 				SDKROOT = appletvos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -620,18 +605,17 @@
 		3B2C7EB7239AD66800F23ED0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"Swatches-tvOS/Preview Content\"";
 				DEVELOPMENT_TEAM = 6LMYPJV5KV;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Swatches-tvOS/Info.plist";
+				INFOPLIST_FILE = tvOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hiddenjester.Swatches-tvOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Swatches;
 				SDKROOT = appletvos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
