@@ -73,7 +73,7 @@ private extension MainView {
         #if os(watchOS)
         return .black
         #elseif os(tvOS)
-        return .secondary
+        return .secondary // This still isn't right but it's closer. It will do until I can scroll.
         #else
         return .systemBackground
         #endif
