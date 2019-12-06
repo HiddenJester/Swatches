@@ -13,9 +13,26 @@
 		3B189385237B62B600B097E2 /* ColorGridRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B189384237B62B600B097E2 /* ColorGridRow.swift */; };
 		3B189387237B77B100B097E2 /* GridRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B189386237B77B100B097E2 /* GridRowModel.swift */; };
 		3B2C7EAA239AD66700F23ED0 /* TVAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2C7EA9239AD66700F23ED0 /* TVAppDelegate.swift */; };
-		3B2C7EAC239AD66700F23ED0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2C7EAB239AD66700F23ED0 /* ContentView.swift */; };
 		3B2C7EB4239AD66800F23ED0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B2C7EB2239AD66800F23ED0 /* LaunchScreen.storyboard */; };
 		3B2C7EB9239AD81E00F23ED0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BB3D5E02376135C009CE90F /* Assets.xcassets */; };
+		3B2C7EBA239AD91D00F23ED0 /* Color+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BDC325D237F3A2900632A08 /* Color+UIColor.swift */; };
+		3B2C7EBB239AD97A00F23ED0 /* SwatchLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B549E7B2385E8EE004C16DE /* SwatchLabel.swift */; };
+		3B2C7EBC239AD99100F23ED0 /* Swatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B549E7D2385FDF6004C16DE /* Swatch.swift */; };
+		3B2C7EBD239AD9B400F23ED0 /* AdaptableColorModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B15EDA6237E4275008C54AF /* AdaptableColorModels.swift */; };
+		3B2C7EBE239AD9B400F23ED0 /* ColorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB3D5F4237617EB009CE90F /* ColorModel.swift */; };
+		3B2C7EBF239AD9B400F23ED0 /* FixedColorModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF94AB72387517800223BFE /* FixedColorModels.swift */; };
+		3B2C7EC0239AD9B400F23ED0 /* GridModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B76A626237651C0007292F5 /* GridModel.swift */; };
+		3B2C7EC1239AD9B400F23ED0 /* GridRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B189386237B77B100B097E2 /* GridRowModel.swift */; };
+		3B2C7EC2239AD9B400F23ED0 /* SwiftUIColorModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B189382237B624400B097E2 /* SwiftUIColorModels.swift */; };
+		3B2C7EC3239AD9B400F23ED0 /* TextModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B549E732385DD3C004C16DE /* TextModel.swift */; };
+		3B2C7EC4239AD9B400F23ED0 /* TextModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B549E752385DE22004C16DE /* TextModels.swift */; };
+		3B2C7EC5239ADA7F00F23ED0 /* ColorSwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB3D5F02376175A009CE90F /* ColorSwatch.swift */; };
+		3B2C7EC6239ADA8A00F23ED0 /* ColorChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB3D5EE237613CB009CE90F /* ColorChip.swift */; };
+		3B2C7EC7239ADA9100F23ED0 /* ChipBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B549E8123860264004C16DE /* ChipBackground.swift */; };
+		3B2C7EC8239ADB1500F23ED0 /* ColorSwatchGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB3D5DE2376135B009CE90F /* ColorSwatchGrid.swift */; };
+		3B2C7EC9239ADB2000F23ED0 /* ColorGridRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B189384237B62B600B097E2 /* ColorGridRow.swift */; };
+		3B2C7ECA239ADB3B00F23ED0 /* GridHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B15EDA4237E035A008C54AF /* GridHeader.swift */; };
+		3B2C7ECB239ADB4F00F23ED0 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B76A62423765179007292F5 /* MainView.swift */; };
 		3B53C1132397002E0047B8EE /* Swatches.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 3B53C1122397002E0047B8EE /* Swatches.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3B53C1192397002E0047B8EE /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B53C1172397002E0047B8EE /* Interface.storyboard */; };
 		3B53C1222397002F0047B8EE /* Swatches-watchOS WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3B53C1212397002F0047B8EE /* Swatches-watchOS WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -111,7 +128,6 @@
 		3B189386237B77B100B097E2 /* GridRowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridRowModel.swift; sourceTree = "<group>"; };
 		3B2C7EA7239AD66700F23ED0 /* Swatches.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swatches.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B2C7EA9239AD66700F23ED0 /* TVAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVAppDelegate.swift; sourceTree = "<group>"; };
-		3B2C7EAB239AD66700F23ED0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3B2C7EB3239AD66800F23ED0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3B2C7EB5239AD66800F23ED0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3B53C10F2397002E0047B8EE /* Swatches.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swatches.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -187,7 +203,6 @@
 			isa = PBXGroup;
 			children = (
 				3B2C7EA9239AD66700F23ED0 /* TVAppDelegate.swift */,
-				3B2C7EAB239AD66700F23ED0 /* ContentView.swift */,
 				3B2C7EB2239AD66800F23ED0 /* LaunchScreen.storyboard */,
 				3B2C7EB5239AD66800F23ED0 /* Info.plist */,
 			);
@@ -477,8 +492,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3B2C7EAC239AD66700F23ED0 /* ContentView.swift in Sources */,
+				3B2C7EC3239AD9B400F23ED0 /* TextModel.swift in Sources */,
+				3B2C7EBE239AD9B400F23ED0 /* ColorModel.swift in Sources */,
+				3B2C7EC7239ADA9100F23ED0 /* ChipBackground.swift in Sources */,
+				3B2C7EC5239ADA7F00F23ED0 /* ColorSwatch.swift in Sources */,
 				3B2C7EAA239AD66700F23ED0 /* TVAppDelegate.swift in Sources */,
+				3B2C7EBB239AD97A00F23ED0 /* SwatchLabel.swift in Sources */,
+				3B2C7EBF239AD9B400F23ED0 /* FixedColorModels.swift in Sources */,
+				3B2C7EC4239AD9B400F23ED0 /* TextModels.swift in Sources */,
+				3B2C7EBA239AD91D00F23ED0 /* Color+UIColor.swift in Sources */,
+				3B2C7EBD239AD9B400F23ED0 /* AdaptableColorModels.swift in Sources */,
+				3B2C7EBC239AD99100F23ED0 /* Swatch.swift in Sources */,
+				3B2C7ECA239ADB3B00F23ED0 /* GridHeader.swift in Sources */,
+				3B2C7ECB239ADB4F00F23ED0 /* MainView.swift in Sources */,
+				3B2C7EC6239ADA8A00F23ED0 /* ColorChip.swift in Sources */,
+				3B2C7EC1239AD9B400F23ED0 /* GridRowModel.swift in Sources */,
+				3B2C7EC2239AD9B400F23ED0 /* SwiftUIColorModels.swift in Sources */,
+				3B2C7EC8239ADB1500F23ED0 /* ColorSwatchGrid.swift in Sources */,
+				3B2C7EC9239ADB2000F23ED0 /* ColorGridRow.swift in Sources */,
+				3B2C7EC0239AD9B400F23ED0 /* GridModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
