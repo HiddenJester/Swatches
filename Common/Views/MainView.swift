@@ -53,7 +53,7 @@ private extension MainView {
             let grid = ColorSwatchGrid(rowModels: ColorSwatchGrid.mapColorsToRows(colorModels: colorModels))
             view = AnyView(grid)
         } else if let textModels = self.gridModels[selectedGridIndex].models as? [TextModel] {
-            #if os(iOS)
+            #if !os(watchOS)
             let grid = TextSwatchGrid(rowModels: TextSwatchGrid.mapTextsToRows(textModels: textModels))
             view = AnyView(grid)
             #else
@@ -73,7 +73,7 @@ private extension MainView {
         #if os(watchOS)
         return .black
         #elseif os(tvOS)
-        return .white // Haven't implemented the tvOS target yet, so this is placeholder.
+        return .secondary
         #else
         return .systemBackground
         #endif
@@ -81,13 +81,20 @@ private extension MainView {
 }
 
 struct MainView_Previews: PreviewProvider {
-    #if os(iOS)
+    #if os(iOS) || os(tvOS)
     static var previews: some View {
-        MainView(gridModels: [GridModel(name: "SwiftUI", models: ColorModel.swiftUIColors()),
-                              GridModel(name: "Text", models: TextModel.textModels())
-        ])
+        Group {
+            MainView(gridModels: [GridModel(name: "SwiftUI", models: ColorModel.swiftUIColors()),
+                                  GridModel(name: "Text", models: TextModel.textModels())
+            ])
+            
+            MainView(gridModels: [GridModel(name: "SwiftUI", models: ColorModel.swiftUIColors()),
+                                  GridModel(name: "Text", models: TextModel.textModels())
+            ]).environment(\.colorScheme, .dark)
+            .previewDisplayName("Dark Mode")
+        }
     }
-    #elseif os(watchOS) || os(tvOS)
+    #elseif os(watchOS)
     static var previews: some View {
         MainView(gridModels: [GridModel(name: "SwiftUI", models: ColorModel.swiftUIColors()),
         ])

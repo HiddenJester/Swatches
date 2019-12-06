@@ -33,6 +33,10 @@
 		3B2C7EC9239ADB2000F23ED0 /* ColorGridRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B189384237B62B600B097E2 /* ColorGridRow.swift */; };
 		3B2C7ECA239ADB3B00F23ED0 /* GridHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B15EDA4237E035A008C54AF /* GridHeader.swift */; };
 		3B2C7ECB239ADB4F00F23ED0 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B76A62423765179007292F5 /* MainView.swift */; };
+		3B2C7ECC239B07F400F23ED0 /* TextChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B549E7F2386020B004C16DE /* TextChip.swift */; };
+		3B2C7ECD239B08F000F23ED0 /* TextSwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B549E792385E511004C16DE /* TextSwatch.swift */; };
+		3B2C7ECE239B090400F23ED0 /* TextGridRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B549E772385E3B1004C16DE /* TextGridRow.swift */; };
+		3B2C7ECF239B094000F23ED0 /* TextSwatchGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B549E712385DCF4004C16DE /* TextSwatchGrid.swift */; };
 		3B53C1132397002E0047B8EE /* Swatches.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 3B53C1122397002E0047B8EE /* Swatches.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3B53C1192397002E0047B8EE /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B53C1172397002E0047B8EE /* Interface.storyboard */; };
 		3B53C1222397002F0047B8EE /* Swatches-watchOS WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3B53C1212397002F0047B8EE /* Swatches-watchOS WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -506,10 +510,14 @@
 				3B2C7ECA239ADB3B00F23ED0 /* GridHeader.swift in Sources */,
 				3B2C7ECB239ADB4F00F23ED0 /* MainView.swift in Sources */,
 				3B2C7EC6239ADA8A00F23ED0 /* ColorChip.swift in Sources */,
+				3B2C7ECD239B08F000F23ED0 /* TextSwatch.swift in Sources */,
+				3B2C7ECF239B094000F23ED0 /* TextSwatchGrid.swift in Sources */,
 				3B2C7EC1239AD9B400F23ED0 /* GridRowModel.swift in Sources */,
 				3B2C7EC2239AD9B400F23ED0 /* SwiftUIColorModels.swift in Sources */,
 				3B2C7EC8239ADB1500F23ED0 /* ColorSwatchGrid.swift in Sources */,
 				3B2C7EC9239ADB2000F23ED0 /* ColorGridRow.swift in Sources */,
+				3B2C7ECE239B090400F23ED0 /* TextGridRow.swift in Sources */,
+				3B2C7ECC239B07F400F23ED0 /* TextChip.swift in Sources */,
 				3B2C7EC0239AD9B400F23ED0 /* GridModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

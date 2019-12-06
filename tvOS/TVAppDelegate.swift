@@ -21,7 +21,7 @@ class TVAppDelegate: UIResponder, UIApplicationDelegate {
         let grids = [
             GridModel(name: "SwiftUI", models: ColorModel.swiftUIColors()),
             GridModel(name: "Adaptable", models: ColorModel.adaptableColors()),
-//            GridModel(name: "Text", models: TextModel.textModels()),
+            GridModel(name: "Text", models: TextModel.textModels()),
             GridModel(name: "Fixed", models: ColorModel.fixedColors()),
         ]
         // Create the `MainView` that renders the grids.
