@@ -24,12 +24,12 @@ struct TextSwatchGrid: View {
     
     var body: some View {
         VStack {
-            VStack(spacing: 0) {
+            VStack(spacing: CGFloat(0)) {
                 Text("Sample:")
                     .font(.title)
 
                 TextField("Sample Text:", text: $sample)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .textFieldStyle(fieldStyle())
                     .disableAutocorrection(true)
                     .padding()
 
@@ -56,6 +56,18 @@ extension TextSwatchGrid {
     }
 }
 
+private extension TextSwatchGrid {
+    /// Creates a platform specific `TextFieldStyle` suitable for the sample text field.
+    /// - Returns: On iOS or macOS this will return `RoundedBorderTestFieldStyle`. Since other platforms don't support this style
+    ///     on other platforms this returns `DefaultTextFieldStyle`.
+    func fieldStyle() -> some TextFieldStyle {
+        #if os(iOS) || os(macOS)
+        return RoundedBorderTextFieldStyle()
+        #else
+        return DefaultTextFieldStyle()
+        #endif
+    }
+}
 struct TextSwatchGrid_Previews: PreviewProvider {
     static var previews: some View {
         TextSwatchGrid(rowModels: TextSwatchGrid.mapTextsToRows(textModels: TextModel.textModels()))
