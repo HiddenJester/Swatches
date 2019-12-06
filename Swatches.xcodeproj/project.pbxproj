@@ -156,31 +156,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3B53C1162397002E0047B8EE /* Swatches-watchOS WatchKit App */ = {
+		3B1543A52399DEB000856A7C /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				3BB3D5E52376135C009CE90F /* LaunchScreen.storyboard */,
+				3BB3D5E82376135C009CE90F /* Info.plist */,
+				3BB3D5DA2376135B009CE90F /* AppDelegate.swift */,
+				3BB3D5DC2376135B009CE90F /* SceneDelegate.swift */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		3B53C1162397002E0047B8EE /* watchOS App */ = {
 			isa = PBXGroup;
 			children = (
 				3B53C1172397002E0047B8EE /* Interface.storyboard */,
 				3B53C11C2397002F0047B8EE /* Info.plist */,
 			);
-			path = "Swatches-watchOS WatchKit App";
+			path = "watchOS App";
 			sourceTree = "<group>";
 		};
-		3B53C1252397002F0047B8EE /* Swatches-watchOS WatchKit Extension */ = {
+		3B53C1252397002F0047B8EE /* watchOS Extension */ = {
 			isa = PBXGroup;
 			children = (
 				3B53C1282397002F0047B8EE /* HostingController.swift */,
 				3B53C12A2397002F0047B8EE /* ExtensionDelegate.swift */,
 				3B53C1312397002F0047B8EE /* Info.plist */,
 			);
-			path = "Swatches-watchOS WatchKit Extension";
+			path = "watchOS Extension";
 			sourceTree = "<group>";
 		};
 		3BB3D5CE2376135B009CE90F = {
 			isa = PBXGroup;
 			children = (
-				3BB3D5D92376135B009CE90F /* Swatches */,
-				3B53C1162397002E0047B8EE /* Swatches-watchOS WatchKit App */,
-				3B53C1252397002F0047B8EE /* Swatches-watchOS WatchKit Extension */,
+				3BB3D5D92376135B009CE90F /* Common */,
+				3B1543A52399DEB000856A7C /* iOS */,
+				3B53C1162397002E0047B8EE /* watchOS App */,
+				3B53C1252397002F0047B8EE /* watchOS Extension */,
 				3BB3D5D82376135B009CE90F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -196,19 +208,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3BB3D5D92376135B009CE90F /* Swatches */ = {
+		3BB3D5D92376135B009CE90F /* Common */ = {
 			isa = PBXGroup;
 			children = (
 				3BDC325C237F39E300632A08 /* OSExtensions */,
 				3BB3D5F3237617D4009CE90F /* Models */,
 				3BB3D5F2237617C7009CE90F /* Views */,
-				3BB3D5DA2376135B009CE90F /* AppDelegate.swift */,
-				3BB3D5DC2376135B009CE90F /* SceneDelegate.swift */,
 				3BB3D5E02376135C009CE90F /* Assets.xcassets */,
-				3BB3D5E52376135C009CE90F /* LaunchScreen.storyboard */,
-				3BB3D5E82376135C009CE90F /* Info.plist */,
 			);
-			path = Swatches;
+			path = Common;
 			sourceTree = "<group>";
 		};
 		3BB3D5F2237617C7009CE90F /* Views */ = {
@@ -503,6 +511,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6LMYPJV5KV;
+				INFOPLIST_FILE = "watchOS App/Info.plist";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hiddenjester.Swatches-watchOS";
 				PRODUCT_NAME = Swatches;
@@ -516,6 +525,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6LMYPJV5KV;
+				INFOPLIST_FILE = "watchOS App/Info.plist";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hiddenjester.Swatches-watchOS";
 				PRODUCT_NAME = Swatches;
@@ -531,7 +541,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6LMYPJV5KV;
 				IBSC_MODULE = Swatches_watchOS_WatchKit_Extension;
-				INFOPLIST_FILE = "Swatches-watchOS WatchKit App/Info.plist";
+				INFOPLIST_FILE = "watchOS App/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hiddenjester.Swatches-watchOS.watchkitapp";
 				PRODUCT_NAME = Swatches;
 				SDKROOT = watchos;
@@ -550,7 +560,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6LMYPJV5KV;
 				IBSC_MODULE = Swatches_watchOS_WatchKit_Extension;
-				INFOPLIST_FILE = "Swatches-watchOS WatchKit App/Info.plist";
+				INFOPLIST_FILE = "watchOS App/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hiddenjester.Swatches-watchOS.watchkitapp";
 				PRODUCT_NAME = Swatches;
 				SDKROOT = watchos;
@@ -567,7 +577,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6LMYPJV5KV;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Swatches-watchOS WatchKit Extension/Info.plist";
+				INFOPLIST_FILE = "watchOS Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -589,7 +599,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6LMYPJV5KV;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Swatches-watchOS WatchKit Extension/Info.plist";
+				INFOPLIST_FILE = "watchOS Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -727,7 +737,7 @@
 				DEVELOPMENT_TEAM = 6LMYPJV5KV;
 				ENABLE_PREVIEWS = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
-				INFOPLIST_FILE = Swatches/Info.plist;
+				INFOPLIST_FILE = iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -748,7 +758,7 @@
 				DEVELOPMENT_TEAM = 6LMYPJV5KV;
 				ENABLE_PREVIEWS = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
-				INFOPLIST_FILE = Swatches/Info.plist;
+				INFOPLIST_FILE = iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
