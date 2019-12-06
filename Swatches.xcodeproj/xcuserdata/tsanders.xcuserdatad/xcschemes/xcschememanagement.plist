@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Swatches-tvOS.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>Swatches-watchOS WatchKit App.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
