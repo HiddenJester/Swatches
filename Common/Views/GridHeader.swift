@@ -25,15 +25,17 @@ struct GridHeader: View {
     
     var body: some View {
         VStack {
+            #if !os(watchOS) // watchOS doesn't support dark/light mode.
             Toggle("Dark Mode", isOn: $darkModeSelected)
                 .padding(.horizontal)
-
+            #endif
+            
             Picker("Colors:", selection: $gridIndex) {
                 ForEach(0 ..< gridNames.count) { index in
                     Text(self.gridNames[index]).tag(index)
                         .minimumScaleFactor(0.75)
                 }
-            }.pickerStyle(SegmentedPickerStyle())
+            }.pickerStyle(pickerStyle())
             
             Divider()
 
@@ -41,10 +43,23 @@ struct GridHeader: View {
     }
 }
 
+private extension GridHeader {
+    /// Returns a `PickerStyle` suitable for styling the grid picker. watchOS doesn't suport `SegmentedPickerStyle` so we need a different style
+    /// on that platform.
+    /// - Returns: A `PickerStyle` that is correct for the the grid picker and the target platform.
+    func pickerStyle() -> some PickerStyle {
+        #if os(watchOS)
+        return DefaultPickerStyle()
+        #else
+        return SegmentedPickerStyle()
+        #endif
+    }
+}
+
 struct GridHeader_Previews: PreviewProvider {
     static var previews: some View {
         GridHeader(darkModeSelected: .constant(false),
                    gridIndex: .constant(0),
-                   gridNames: ["SwiftUI"])
+                   gridNames: ["SwiftUI", "Fixed"])
     }
 }
