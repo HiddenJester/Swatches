@@ -87,9 +87,10 @@ struct MainView_Previews: PreviewProvider {
                               GridModel(name: "Text", models: TextModel.textModels())
         ])
     }
-    #elseif os(watchOS)
+    #elseif os(watchOS) || os(tvOS)
     static var previews: some View {
         MainView(gridModels: [GridModel(name: "SwiftUI", models: ColorModel.swiftUIColors()),
         ])
-    }        #endif
+    }
+    #endif
 }

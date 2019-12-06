@@ -34,13 +34,12 @@ struct ColorSwatch_Previews: PreviewProvider {
                 ColorSwatch(model: ColorModel(color: .blue, name: "Wordy But Normal"))
                 ColorSwatch(model: ColorModel(color: .secondary, name: "Inverted"))
                 ColorSwatch(model: nil)
-            }.previewDevice("iPhone SE")
+            }
 
             HStack {
                 ColorSwatch(model: ColorModel(color: .blue, name: "Normal"))
                 ColorSwatch(model: ColorModel(color: .black, name: "Inverted"))
-            }.previewDevice("iPhone SE")
-                .environment(\.colorScheme, .dark)
+            }.environment(\.colorScheme, .dark)
         }
     }
 }

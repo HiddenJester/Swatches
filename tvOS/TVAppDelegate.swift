@@ -17,8 +17,15 @@ class TVAppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        // Create the SwiftUI view that provides the window contents.
-        let contentView = ContentView()
+        // Create the GridModels we want to render.
+        let grids = [
+            GridModel(name: "SwiftUI", models: ColorModel.swiftUIColors()),
+            GridModel(name: "Adaptable", models: ColorModel.adaptableColors()),
+//            GridModel(name: "Text", models: TextModel.textModels()),
+            GridModel(name: "Fixed", models: ColorModel.fixedColors()),
+        ]
+        // Create the `MainView` that renders the grids.
+        let contentView = MainView(gridModels: grids)
 
         // Use a UIHostingController as window root view controller.
         let window = UIWindow(frame: UIScreen.main.bounds)
