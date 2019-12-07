@@ -36,7 +36,12 @@ struct TextSwatchGrid: View {
             }.overlay(RoundedRectangle.init(cornerRadius: 20.0).stroke())
             
             ScrollView {
-                ForEach(rowModels) { TextGridRow(model: $0.first, sample: self.sample) }
+                ForEach(rowModels) { model in
+                    FocusableGridRow {
+                        TextGridRow(model: model.first, sample: self.sample)
+                    }
+
+                }
                 
             }.padding(.vertical)
         }

@@ -24,6 +24,7 @@ struct ColorGridRow: View {
             ColorSwatch(model: first)
 
             ColorSwatch(model: second)
+
         }.padding()
     }
 }
