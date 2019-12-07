@@ -21,8 +21,14 @@ struct ColorSwatchGrid: View {
     
     var body: some View {
         ScrollView {
-            ForEach(rowModels) { ColorGridRow(first: $0.first, second: $0.second) }
-            
+            ForEach(rowModels) { model in
+                FocusableGridRow {
+                    ColorGridRow(first: model.first, second: model.second)
+                    
+                }
+                
+            }
+
         }
     }
 }
