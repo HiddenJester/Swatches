@@ -12,7 +12,7 @@ import SwiftUI
 /// swatch will still occupy space but will be completely transparent.
 /// - Parameter sample: The string to display in the displayed text.
 /// - Parameter model: The optional `TextModel` that provides the swatch label text and the color to display the text in.
-struct TextSwatch: View {
+struct TextSwatchView: View {
     /// The string to display in the swatch.
     let sample: String
     
@@ -20,11 +20,11 @@ struct TextSwatch: View {
     let model: TextModel?
 
     var body: some View {
-        Swatch(drawBackground: model != nil, label: model?.name ?? " ") {
+        SwatchView(drawBackground: model != nil, label: model?.name ?? " ") {
             HStack {
                 Spacer()
 
-                TextChip(text: self.sample, color: self.model?.color ?? .clear)
+                TextChipView(text: self.sample, color: self.model?.color ?? .clear)
                 
                 Spacer()
             }
@@ -34,7 +34,7 @@ struct TextSwatch: View {
 
 struct TextSwatch_Previews: PreviewProvider {
     static var previews: some View {
-        TextSwatch(sample: "The quick brown fox jumps over the lazy dog",
+        TextSwatchView(sample: "The quick brown fox jumps over the lazy dog",
                    model: TextModel(color: .link, name: "Link"))
     }
 }

@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct FocusableGridRow<Content>: View where Content: View {
+struct FocusableGridRowView<Content>: View where Content: View {
     /// Content passed in to render.
     private let content: Content
 
@@ -25,7 +25,7 @@ struct FocusableGridRow<Content>: View where Content: View {
     }
 }
 
-private extension FocusableGridRow {
+private extension FocusableGridRowView {
     /// Create the platform-specific view. Although everything but iOS *supports* focusable, we only want to use it on tvOS. On all other platforms this
     /// just returns `self.content`. On tvOS `self.content` is centered in a `HStack`, then padded and scaled up by `self.scale`. A
     /// `focusable` modifier is added to adjust `self.scale`.
@@ -51,8 +51,8 @@ struct FocusableGridRow_Previews: PreviewProvider {
     static var models = ColorModel.swiftUIColors()
 
     static var previews: some View {
-        FocusableGridRow() {
-            ColorGridRow(first: models[0], second: models[1])
+        FocusableGridRowView() {
+            ColorGridRowView(first: models[0], second: models[1])
         }
     }
 }

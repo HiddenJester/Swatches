@@ -13,7 +13,7 @@ import SwiftUI
 /// - Parameter darkModeSelected: Binding to a Bool that controls whether the app is displaying in dark mode.
 /// - Parameter gridIndex: Binding to an Int that controls which grid is displayed.
 /// - Parameter gridNames: The strings to display in the grid picker. When a grid is selected `gridIndex` is updated.
-struct GridHeader: View {
+struct GridHeaderView: View {
     /// A bool that controls whether the app is displaying in dark mode or not.
     @Binding var darkModeSelected: Bool
     
@@ -43,7 +43,7 @@ struct GridHeader: View {
     }
 }
 
-private extension GridHeader {
+private extension GridHeaderView {
     /// Returns a `PickerStyle` suitable for styling the grid picker. watchOS doesn't suport `SegmentedPickerStyle` so we need a different style
     /// on that platform.
     /// - Returns: A `PickerStyle` that is correct for the the grid picker and the target platform.
@@ -58,7 +58,7 @@ private extension GridHeader {
 
 struct GridHeader_Previews: PreviewProvider {
     static var previews: some View {
-        GridHeader(darkModeSelected: .constant(false),
+        GridHeaderView(darkModeSelected: .constant(false),
                    gridIndex: .constant(0),
                    gridNames: ["SwiftUI", "Fixed"])
     }

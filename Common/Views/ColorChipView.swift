@@ -13,7 +13,7 @@ import SwiftUI
 /// and outline are drawn or not. The color chip is drawn with rounded corners.
 /// - Note: `ColorChip(color: .clear, drawBackground: false)` creates a transparent chip (*not* an `EmptyView()`) that is sized as
 ///     described above.
-struct ColorChip: View {
+struct ColorChipView: View {
     /// The color to draw in the chip.
     let color: Color
     
@@ -38,20 +38,20 @@ struct ColorChip: View {
             .aspectRatio(1.0, contentMode: .fit)
             .foregroundColor(color)
             .scaledToFit()
-            .background(ChipBackground(drawCheckerboard: drawBackground, cornerRadius: cornerRadius))
+            .background(ChipBackgroundView(drawCheckerboard: drawBackground, cornerRadius: cornerRadius))
     }
 }
 
 struct ColorChip_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ColorChip(color: .green, drawBackground: true)
+            ColorChipView(color: .green, drawBackground: true)
             #if os(iOS)
             ColorChip(color: .green, drawBackground: true)
                 .previewDevice("iPhone SE")
                 .environment(\.colorScheme, .dark)
             #endif
-            ColorChip(color: .clear, drawBackground: false)
+            ColorChipView(color: .clear, drawBackground: false)
         }
     }
 }
