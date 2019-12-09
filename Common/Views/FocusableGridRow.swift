@@ -24,10 +24,16 @@ struct FocusableGridRow<Content>: View where Content: View {
     
     func platformSpecificView() -> some View {
         #if os(tvOS)
-        return content
-            .padding(.horizontal, 25) // Need extra horizontal padding for the scale to grow into.
-            .scaleEffect(scale)
-            .focusable(true) { focus in withAnimation { self.scale = focus ? 1.1 : 1 } }
+        return HStack {
+            Spacer()
+            
+            self.content
+                .padding()
+                .scaleEffect(self.scale)
+                .focusable(true) { focus in withAnimation { self.scale = focus ? 1.1 : 1 } }
+            
+            Spacer()
+        }
         #else
         return content
         #endif
