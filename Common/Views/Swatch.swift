@@ -54,7 +54,7 @@ struct Swatch<Content>: View where Content: View {
 private extension Swatch {
     /// Returns a `Color` suitable for the swatch background.
     /// - Returns: A `Color` for the background. For iOS and macOS this will be `systemFill`. watchOS and tvOS don't support that fill so this
-    ///     returns `secondary` on those platforms.
+    ///     returns `gray` on `watchOS` and `secondary` on tvOS.
     func backgroundColor() -> Color {
         guard drawBackground else {
             return .clear
@@ -63,7 +63,7 @@ private extension Swatch {
         #if os(watchOS)
         return .gray
         #elseif os(tvOS)
-        return .systemGray
+        return .secondary
         #else
         return .systemFill
         #endif

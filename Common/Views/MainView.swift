@@ -68,12 +68,12 @@ private extension MainView {
     
     /// Returns a `Color` suitable for the background color of the `MainView`.
     /// - Returns: A `Color` for the background. On iOS or macOS this will always be `.systemBackground`. watchOS doesn't support adaptive
-    ///     colors, so on watchOS this is always `.black`. tvOS supports adaptive colors, but not the system background 🤷‍♂️, so it returns `.white`.
+    ///     colors, so on watchOS this is always `.black`. tvOS supports adaptive colors, but not the system background 🤷‍♂️, so it returns `.clear`.
     func backgroundColor() -> Color {
         #if os(watchOS)
         return .black
         #elseif os(tvOS)
-        return .secondary // This still isn't right but it's closer. It will do until I can scroll.
+        return .clear
         #else
         return .systemBackground
         #endif
