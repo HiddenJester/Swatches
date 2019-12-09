@@ -19,7 +19,8 @@ struct ChipBackground: View {
 
     var body: some View {
         view()
-            .overlay(RoundedRectangle(cornerRadius: cornerRadius).stroke(drawCheckerboard ? Color.black : Color.clear))
+            .overlay(RoundedRectangle(cornerRadius: cornerRadius)
+                .stroke(drawCheckerboard ? Color.black : Color.clear, lineWidth: 2))
     }
 }
 
