@@ -28,7 +28,7 @@ struct MainView: View {
     
     var body: some View {
         VStack {
-            GridHeader(darkModeSelected: $darkModeSelected,
+            GridHeaderView(darkModeSelected: $darkModeSelected,
                        gridIndex: $selectedGridIndex,
                        gridNames: gridModels.map { $0.name })
             
@@ -50,11 +50,11 @@ private extension MainView {
         let view: AnyView
         
         if let colorModels = self.gridModels[selectedGridIndex].models as? [ColorModel] {
-            let grid = ColorSwatchGrid(rowModels: ColorSwatchGrid.mapColorsToRows(colorModels: colorModels))
+            let grid = ColorSwatchGridView(rowModels: ColorSwatchGridView.mapColorsToRows(colorModels: colorModels))
             view = AnyView(grid)
         } else if let textModels = self.gridModels[selectedGridIndex].models as? [TextModel] {
             #if !os(watchOS)
-            let grid = TextSwatchGrid(rowModels: TextSwatchGrid.mapTextsToRows(textModels: textModels))
+            let grid = TextSwatchGridView(rowModels: TextSwatchGridView.mapTextsToRows(textModels: textModels))
             view = AnyView(grid)
             #else
             view = AnyView(Text("Watch doesn't support TextGrid"))

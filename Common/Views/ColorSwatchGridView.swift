@@ -12,7 +12,7 @@ import SwiftUI
 /// and drawing a `ColorGridRow` for each row model. Since a `ColorGridRow` will draw 2 columns of swatches, this has the effect of presenting a
 /// two-column faux "grid". Look at `ColorSwatchGrid.mapColorsToRows(colorModels:)` as a useful helper function that can turn an array
 /// of `ColorModel` objects into `GridRowModel` objects suitable for rendering.
-struct ColorSwatchGrid: View {
+struct ColorSwatchGridView: View {
     /// A useful alias that lets us specialize the GridRowModel objects used throughout the grid.
     typealias RowModel = GridRowModel<ColorModel>
     
@@ -22,8 +22,8 @@ struct ColorSwatchGrid: View {
     var body: some View {
         ScrollView {
             ForEach(rowModels) { model in
-                FocusableGridRow {
-                    ColorGridRow(first: model.first, second: model.second)
+                FocusableGridRowView {
+                    ColorGridRowView(first: model.first, second: model.second)
                     
                 }
                 
@@ -33,7 +33,7 @@ struct ColorSwatchGrid: View {
     }
 }
 
-extension ColorSwatchGrid {
+extension ColorSwatchGridView {
     /// A static function that conceptually maps an array of `ColorModel` into an array of `RowModel` objects.
     /// - Parameter colorModels: The array of `ColorModel` objects used to create the `RowModel` output.
     /// - Returns: An array of `RowModel` objects.
@@ -61,7 +61,7 @@ extension ColorSwatchGrid {
 struct ColorSwatchGrid_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            ColorSwatchGrid(rowModels: ColorSwatchGrid.mapColorsToRows(colorModels: ColorModel.swiftUIColors()))
+            ColorSwatchGridView(rowModels: ColorSwatchGridView.mapColorsToRows(colorModels: ColorModel.swiftUIColors()))
         }
     }
 }

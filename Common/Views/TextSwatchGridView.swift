@@ -14,7 +14,7 @@ import SwiftUI
 /// `TextSwatchGrid.mapTextsToRow(textModels)` is a useful helper function that encapsulates knowing how many models are presented per
 /// "grid" row.
 /// - Parameter rowModels: The raw `GridRowModel<TextModel>` objects that need to be rendered.
-struct TextSwatchGrid: View {
+struct TextSwatchGridView: View {
     /// A useful alias that lets us specialize the GridRowModel objects used throughout the grid.
     typealias RowModel = GridRowModel<TextModel>
     
@@ -37,8 +37,8 @@ struct TextSwatchGrid: View {
             
             ScrollView {
                 ForEach(rowModels) { model in
-                    FocusableGridRow {
-                        TextGridRow(model: model.first, sample: self.sample)
+                    FocusableGridRowView {
+                        TextGridRowView(model: model.first, sample: self.sample)
                     }
 
                 }
@@ -48,7 +48,7 @@ struct TextSwatchGrid: View {
     }
 }
 
-extension TextSwatchGrid {
+extension TextSwatchGridView {
     /// A static function that conceptually maps an array of `TextModel` into an array of `RowModel` objects.
     /// - Parameter textModels: The array of `TextModel` objects used to create the `RowModel` output.
     /// - Returns: An array of `RowModel` objects.
@@ -61,7 +61,7 @@ extension TextSwatchGrid {
     }
 }
 
-private extension TextSwatchGrid {
+private extension TextSwatchGridView {
     /// Creates a platform specific `TextFieldStyle` suitable for the sample text field.
     /// - Returns: On iOS or macOS this will return `RoundedBorderTestFieldStyle`. Since other platforms don't support this style
     ///     on other platforms this returns `DefaultTextFieldStyle`.
@@ -75,6 +75,6 @@ private extension TextSwatchGrid {
 }
 struct TextSwatchGrid_Previews: PreviewProvider {
     static var previews: some View {
-        TextSwatchGrid(rowModels: TextSwatchGrid.mapTextsToRows(textModels: TextModel.textModels()))
+        TextSwatchGridView(rowModels: TextSwatchGridView.mapTextsToRows(textModels: TextModel.textModels()))
     }
 }
