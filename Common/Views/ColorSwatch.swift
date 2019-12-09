@@ -15,7 +15,6 @@ struct ColorSwatch: View {
     /// The `ColorModel` that will be rendered in this swatch.
     let model: ColorModel?
     
-    
     var body: some View {
         Swatch(drawBackground: model != nil, label: model?.name ?? " ") {
             if self.model != nil {
