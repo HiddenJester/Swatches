@@ -28,7 +28,7 @@ struct MainView: View {
     
     var body: some View {
         VStack {
-            GridHeader(darkModeSelected: $darkModeSelected,
+            GridHeaderView(darkModeSelected: $darkModeSelected,
                        gridIndex: $selectedGridIndex,
                        gridNames: gridModels.map { $0.name })
             
@@ -50,11 +50,11 @@ private extension MainView {
         let view: AnyView
         
         if let colorModels = self.gridModels[selectedGridIndex].models as? [ColorModel] {
-            let grid = ColorSwatchGrid(rowModels: ColorSwatchGrid.mapColorsToRows(colorModels: colorModels))
+            let grid = ColorSwatchGridView(rowModels: ColorSwatchGridView.mapColorsToRows(colorModels: colorModels))
             view = AnyView(grid)
         } else if let textModels = self.gridModels[selectedGridIndex].models as? [TextModel] {
-            #if os(iOS)
-            let grid = TextSwatchGrid(rowModels: TextSwatchGrid.mapTextsToRows(textModels: textModels))
+            #if !os(watchOS)
+            let grid = TextSwatchGridView(rowModels: TextSwatchGridView.mapTextsToRows(textModels: textModels))
             view = AnyView(grid)
             #else
             view = AnyView(Text("Watch doesn't support TextGrid"))
@@ -68,12 +68,12 @@ private extension MainView {
     
     /// Returns a `Color` suitable for the background color of the `MainView`.
     /// - Returns: A `Color` for the background. On iOS or macOS this will always be `.systemBackground`. watchOS doesn't support adaptive
-    ///     colors, so on watchOS this is always `.black`. tvOS supports adaptive colors, but not the system background 🤷‍♂️, so it returns `.white`.
+    ///     colors, so on watchOS this is always `.black`. tvOS supports adaptive colors, but not the system background 🤷‍♂️, so it returns `.clear`.
     func backgroundColor() -> Color {
         #if os(watchOS)
         return .black
         #elseif os(tvOS)
-        return .white // Haven't implemented the tvOS target yet, so this is placeholder.
+        return .clear
         #else
         return .systemBackground
         #endif
@@ -81,15 +81,23 @@ private extension MainView {
 }
 
 struct MainView_Previews: PreviewProvider {
-    #if os(iOS)
+    #if os(iOS) || os(tvOS)
     static var previews: some View {
-        MainView(gridModels: [GridModel(name: "SwiftUI", models: ColorModel.swiftUIColors()),
-                              GridModel(name: "Text", models: TextModel.textModels())
-        ])
+        Group {
+            MainView(gridModels: [GridModel(name: "SwiftUI", models: ColorModel.swiftUIColors()),
+                                  GridModel(name: "Text", models: TextModel.textModels())
+            ])
+            
+            MainView(gridModels: [GridModel(name: "SwiftUI", models: ColorModel.swiftUIColors()),
+                                  GridModel(name: "Text", models: TextModel.textModels())
+            ]).environment(\.colorScheme, .dark)
+            .previewDisplayName("Dark Mode")
+        }
     }
     #elseif os(watchOS)
     static var previews: some View {
         MainView(gridModels: [GridModel(name: "SwiftUI", models: ColorModel.swiftUIColors()),
         ])
-    }        #endif
+    }
+    #endif
 }

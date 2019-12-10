@@ -14,7 +14,7 @@ import SwiftUI
 /// `TextSwatchGrid.mapTextsToRow(textModels)` is a useful helper function that encapsulates knowing how many models are presented per
 /// "grid" row.
 /// - Parameter rowModels: The raw `GridRowModel<TextModel>` objects that need to be rendered.
-struct TextSwatchGrid: View {
+struct TextSwatchGridView: View {
     /// A useful alias that lets us specialize the GridRowModel objects used throughout the grid.
     typealias RowModel = GridRowModel<TextModel>
     
@@ -24,26 +24,31 @@ struct TextSwatchGrid: View {
     
     var body: some View {
         VStack {
-            VStack(spacing: 0) {
+            VStack(spacing: CGFloat(0)) {
                 Text("Sample:")
                     .font(.title)
 
                 TextField("Sample Text:", text: $sample)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .textFieldStyle(fieldStyle())
                     .disableAutocorrection(true)
                     .padding()
 
             }.overlay(RoundedRectangle.init(cornerRadius: 20.0).stroke())
             
             ScrollView {
-                ForEach(rowModels) { TextGridRow(model: $0.first, sample: self.sample) }
+                ForEach(rowModels) { model in
+                    FocusableGridRowView {
+                        TextGridRowView(model: model.first, sample: self.sample)
+                    }
+
+                }
                 
             }.padding(.vertical)
         }
     }
 }
 
-extension TextSwatchGrid {
+extension TextSwatchGridView {
     /// A static function that conceptually maps an array of `TextModel` into an array of `RowModel` objects.
     /// - Parameter textModels: The array of `TextModel` objects used to create the `RowModel` output.
     /// - Returns: An array of `RowModel` objects.
@@ -56,8 +61,20 @@ extension TextSwatchGrid {
     }
 }
 
+private extension TextSwatchGridView {
+    /// Creates a platform specific `TextFieldStyle` suitable for the sample text field.
+    /// - Returns: On iOS or macOS this will return `RoundedBorderTestFieldStyle`. Since other platforms don't support this style
+    ///     on other platforms this returns `DefaultTextFieldStyle`.
+    func fieldStyle() -> some TextFieldStyle {
+        #if os(iOS) || os(macOS)
+        return RoundedBorderTextFieldStyle()
+        #else
+        return DefaultTextFieldStyle()
+        #endif
+    }
+}
 struct TextSwatchGrid_Previews: PreviewProvider {
     static var previews: some View {
-        TextSwatchGrid(rowModels: TextSwatchGrid.mapTextsToRows(textModels: TextModel.textModels()))
+        TextSwatchGridView(rowModels: TextSwatchGridView.mapTextsToRows(textModels: TextModel.textModels()))
     }
 }

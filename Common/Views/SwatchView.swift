@@ -10,15 +10,17 @@ import SwiftUI
 
 /// A specialized view that draws the generic framing for a swatch. A background and outline can be drawn or omitted (both are drawn in adaptive colors). A
 /// `SwatchLabel` will be provided and drawn with the provided string. The background (and outline) are drawn with rounded corners.
-struct Swatch<Content>: View where Content: View {
+struct SwatchView<Content>: View where Content: View {
     /// Should we draw the background and outline?
     let drawBackground: Bool
     
     /// The text to draw in the `SwatchLabel`
     let label: String
     
-    let content: Content
+    /// The content of ths swatch, passed in as a `@ViewBuilder`.
+    private let content: Content
 
+    /// The corner radius to use on the backgruond and outline.
     private let cornerRadius = CGFloat(20.0)
 
     /// Padding edges for the content. It's only three edges because the label pads the bottom edge of the content.
@@ -29,7 +31,7 @@ struct Swatch<Content>: View where Content: View {
             content
                 .padding(contentPadding)
             
-            SwatchLabel(text: label)
+            SwatchLabelView(text: label)
             
         }.background(backgroundColor())
             .cornerRadius(cornerRadius)
@@ -49,16 +51,18 @@ struct Swatch<Content>: View where Content: View {
     }
 }
 
-private extension Swatch {
+private extension SwatchView {
     /// Returns a `Color` suitable for the swatch background.
     /// - Returns: A `Color` for the background. For iOS and macOS this will be `systemFill`. watchOS and tvOS don't support that fill so this
-    ///     returns `secondary` on those platforms.
+    ///     returns `gray` on `watchOS` and `secondary` on tvOS.
     func backgroundColor() -> Color {
         guard drawBackground else {
             return .clear
         }
         
-        #if os(watchOS) || os(tvOS)
+        #if os(watchOS)
+        return .gray
+        #elseif os(tvOS)
         return .secondary
         #else
         return .systemFill
@@ -69,11 +73,11 @@ private extension Swatch {
 struct Swatch_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            Swatch(drawBackground: true, label: "Background Test") {
+            SwatchView(drawBackground: true, label: "Background Test") {
                 Text("Testing").padding()
             }
             
-            Swatch(drawBackground: false, label: "Clear Test") {
+            SwatchView(drawBackground: false, label: "Clear Test") {
                 Text("Clear").padding()
             }
         }
