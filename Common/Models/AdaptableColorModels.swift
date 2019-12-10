@@ -15,7 +15,26 @@ extension ColorModel {
     /// `.label` and so on are placed in `textModels()` so they can be rendered in text swatches, not color ones.
     /// - Returns: An array of `ColorModel` that represents all of the adaptable colors.
     static func adaptableColors() -> [ColorModel] {
-        [
+        #if os(tvOS) // tvOS only supports a subset of the adaptable colors.
+        return [
+            ColorModel(color: .systemRed, name: "Sys.Red"),
+            ColorModel(color: .systemGreen, name: "Sys.Green"),
+            ColorModel(color: .systemBlue, name: "Sys.Blue"),
+            ColorModel(color: .systemOrange, name: "Sys.Orange"),
+            ColorModel(color: .systemYellow, name: "Sys.Yellow"),
+            ColorModel(color: .systemPink, name: "Sys.Pink"),
+            ColorModel(color: .systemPurple, name: "Sys.Purple"),
+            ColorModel(color: .systemTeal, name: "Sys.Teal"),
+            ColorModel(color: .systemIndigo, name: "Sys.Indigo"),
+            
+            ColorModel(color: .systemGray, name: "Sys.Gray"),
+            
+            // Separators
+            ColorModel(color: .separator, name: "Separator"),
+            ColorModel(color: .opaqueSeparator, name: "Opaque Sep."),
+        ]
+        #else
+        return [
             ColorModel(color: .systemRed, name: "Sys.Red"),
             ColorModel(color: .systemGreen, name: "Sys.Green"),
             ColorModel(color: .systemBlue, name: "Sys.Blue"),
@@ -32,7 +51,6 @@ extension ColorModel {
             ColorModel(color: .systemGray4, name: "Sys.Gray4"),
             ColorModel(color: .systemGray5, name: "Sys.Gray5"),
             ColorModel(color: .systemGray6, name: "Sys.Gray6"),
-            
             
             // Separators
             ColorModel(color: .separator, name: "Separator"),
@@ -54,5 +72,6 @@ extension ColorModel {
             ColorModel(color: .tertiarySystemFill, name: "Tert.Sys.Fill"),
             ColorModel(color: .quaternarySystemFill, name: "Quat.Sys.Fill"),
         ]
+        #endif
     }
 }

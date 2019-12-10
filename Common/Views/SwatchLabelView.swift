@@ -10,7 +10,7 @@ import SwiftUI
 
 /// A view that displays a single line of text in the `.label` Color, limited to one line, with truncation set for the middle, and has vertical padding.
 /// - Parameter text: The text to display in the label.
-struct SwatchLabel: View {
+struct SwatchLabelView: View {
     /// The text to display.
     let text: String
     
@@ -23,7 +23,7 @@ struct SwatchLabel: View {
     }
 }
 
-private extension SwatchLabel {
+private extension SwatchLabelView {
     /// Provides a `Color` suitable for the foreground color of a `SwatchLabel`.
     /// - Returns: A `Color` that can be used for the foreground color on the platform. watchOS doesn't support `.label` so on that plaform it
     ///     simply returns `.white`. On platforms that support `.label` that color is returned.
@@ -38,6 +38,6 @@ private extension SwatchLabel {
 
 struct SwatchLabel_Previews: PreviewProvider {
     static var previews: some View {
-        SwatchLabel(text: "Testing Label")
+        SwatchLabelView(text: "Testing Label")
     }
 }

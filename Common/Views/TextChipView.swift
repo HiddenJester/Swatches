@@ -11,7 +11,7 @@ import SwiftUI
 /// A view that takes a string and a color and draws the text above a `ChipBackground` view.
 /// - Parameter text: The string to display.
 /// - Parameter color: the Color to draw the text in. If this is set to `.clear` then no background is drawn.
-struct TextChip: View {
+struct TextChipView: View {
     /// The string to display for the chip.
     let text: String
     
@@ -26,12 +26,12 @@ struct TextChip: View {
             .font(.largeTitle)
             .padding()
             .foregroundColor(color)
-            .background(ChipBackground(drawCheckerboard: color != .clear, cornerRadius: cornerRadius))
+            .background(ChipBackgroundView(drawCheckerboard: color != .clear, cornerRadius: cornerRadius))
     }
 }
 
 struct TextChip_Previews: PreviewProvider {
     static var previews: some View {
-        TextChip(text: "Testing", color: .link)
+        TextChipView(text: "Testing", color: .link)
     }
 }

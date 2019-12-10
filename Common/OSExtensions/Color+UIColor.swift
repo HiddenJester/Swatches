@@ -25,11 +25,14 @@ extension Color {
     
     // Adaptable grayscales
     public static let systemGray = Color(UIColor.systemGray)
+    #if !os(tvOS) // tvOS doesn't have the adaptable gray shades, just the primary color.
     public static let systemGray2 = Color(UIColor.systemGray2)
     public static let systemGray3 = Color(UIColor.systemGray3)
     public static let systemGray4 = Color(UIColor.systemGray4)
     public static let systemGray5 = Color(UIColor.systemGray5)
     public static let systemGray6 = Color(UIColor.systemGray6)
+    #endif //!tvOS
+    
     // Adaptable text colors
     public static let label = Color(UIColor.label)
     public static let secondaryLabel = Color(UIColor.secondaryLabel)

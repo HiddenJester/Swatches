@@ -11,7 +11,7 @@ import SwiftUI
 /// A view that displays a `TextSwatch`. Unlike the `ColorGridRow`, the `TextGridRow` only displays a single column of swatches.
 /// - Parameter model: The `TextModel` that will be drawn in this row's swatch.
 /// - Parameter sample: The string to draw in the swatch.
-struct TextGridRow: View {
+struct TextGridRowView: View {
     /// The TextModel that lists the color and label to use for the swatch.
     let model: TextModel?
 
@@ -19,7 +19,7 @@ struct TextGridRow: View {
     let sample: String
     
     var body: some View {
-        TextSwatch(sample: sample, model: model)
+        TextSwatchView(sample: sample, model: model)
             .padding()
     }
 }
@@ -30,9 +30,9 @@ struct TextGridRow_Previews: PreviewProvider {
     
     static var previews: some View {
         Group {
-            TextGridRow(model: models[0], sample: sample)
+            TextGridRowView(model: models[0], sample: sample)
 
-            TextGridRow(model: models[4], sample: sample)
+            TextGridRowView(model: models[4], sample: sample)
         }
     }
 }
