@@ -138,6 +138,7 @@
 		3B2C7EB3239AD66800F23ED0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3B2C7EB5239AD66800F23ED0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3B2C7ED0239B1D1A00F23ED0 /* FocusableGridRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusableGridRowView.swift; sourceTree = "<group>"; };
+		3B5018B523A18F2200035A56 /* Swatches.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Swatches.entitlements; sourceTree = "<group>"; };
 		3B53C10F2397002E0047B8EE /* Swatches.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swatches.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B53C1122397002E0047B8EE /* Swatches.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swatches.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B53C1182397002E0047B8EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -199,6 +200,7 @@
 		3B1543A52399DEB000856A7C /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				3B5018B523A18F2200035A56 /* Swatches.entitlements */,
 				3BB3D5E52376135C009CE90F /* LaunchScreen.storyboard */,
 				3BB3D5E82376135C009CE90F /* Info.plist */,
 				3BB3D5DA2376135B009CE90F /* AppDelegate.swift */,
@@ -899,7 +901,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = iOS/Swatches.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 6LMYPJV5KV;
 				ENABLE_PREVIEWS = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
@@ -910,6 +914,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hiddenjester.Swatches;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -920,7 +925,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = iOS/Swatches.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 6LMYPJV5KV;
 				ENABLE_PREVIEWS = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
@@ -931,6 +938,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hiddenjester.Swatches;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
