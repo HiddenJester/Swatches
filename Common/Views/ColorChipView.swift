@@ -46,11 +46,6 @@ struct ColorChip_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ColorChipView(color: .green, drawBackground: true)
-            #if os(iOS)
-            ColorChip(color: .green, drawBackground: true)
-                .previewDevice("iPhone SE")
-                .environment(\.colorScheme, .dark)
-            #endif
             ColorChipView(color: .clear, drawBackground: false)
         }
     }
