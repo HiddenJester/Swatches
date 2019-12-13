@@ -29,14 +29,14 @@ private extension ChipBackgroundView {
     /// - Returns: If `drawCheckerboard` is true it returns a tiled checkerboard `Image` with rounded corners. If it is false then it returns just
     ///     `Color.clear`.
     func view() -> some View {
-        if drawCheckerboard {
-            let image = Image("Checkerboard")
-                .resizable(resizingMode: .tile)
-                .cornerRadius(cornerRadius)
-            
-            return AnyView(image)
-        } else {
-            return AnyView(Color.clear)
+        Group {
+            if drawCheckerboard {
+                Image("Checkerboard")
+                    .resizable(resizingMode: .tile)
+                    .cornerRadius(cornerRadius)
+            } else {
+                Color.clear
+            }
         }
     }
 }
