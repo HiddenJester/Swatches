@@ -54,7 +54,7 @@ extension TextSwatchGridView {
     /// - Returns: An array of `RowModel` objects.
     /// - Note: This is "conceptual" map, not a literal map. In this *specific* case right now it is in fact a literal map, but using this function means we
     ///     could later change the number of columns presented in the grid just by adjusting this function.
-    static func mapTextsToRows(textModels: [TextModel]) -> [RowModel] {
+    static func mapModelsToRows(_ textModels: [TextModel]) -> [RowModel] {
         let rows: [RowModel] = textModels.map { RowModel(first: $0, second: nil) }
         
         return rows
@@ -75,6 +75,6 @@ private extension TextSwatchGridView {
 }
 struct TextSwatchGrid_Previews: PreviewProvider {
     static var previews: some View {
-        TextSwatchGridView(rowModels: TextSwatchGridView.mapTextsToRows(textModels: TextModel.textModels()))
+        TextSwatchGridView(rowModels: TextSwatchGridView.mapModelsToRows(TextModel.textModels()))
     }
 }
