@@ -41,7 +41,7 @@ extension ColorSwatchGridView {
     ///     `colorModels` order will be preserved, such that the first row in the output will be the first and second object in `colorModels`, and the
     ///     second row will be the third and fourth subscript and so forth. If `colorModels.count` is odd then the final row will have a blank, transparent
     ///     swatch rendered in the right column.
-    static func mapColorsToRows(colorModels: [ColorModel]) -> [RowModel] {
+    static func mapModelsToRows(_ colorModels: [ColorModel]) -> [RowModel] {
         var rows = [RowModel]()
 
         (0 ..< colorModels.count / 2).forEach { rowIndex in
@@ -61,7 +61,7 @@ extension ColorSwatchGridView {
 struct ColorSwatchGrid_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            ColorSwatchGridView(rowModels: ColorSwatchGridView.mapColorsToRows(colorModels: ColorModel.swiftUIColors()))
+            ColorSwatchGridView(rowModels: ColorSwatchGridView.mapModelsToRows(ColorModel.swiftUIColors()))
         }
     }
 }

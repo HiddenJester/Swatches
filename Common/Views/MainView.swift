@@ -43,27 +43,32 @@ struct MainView: View {
 
 private extension MainView {
     /// Returns the properly typed grid for the selected grid model. this checks the type of SwatchModel stored in the selected grid model. Once it knows
-    /// what type of grid to create it uses that grid's `mapFooToRows` function to convert the `SwatchModels` into the proper specialization of row models.
-    /// Those row models are then used to construct the final grid.
+    /// what type of grid to create it uses that grid's `mapModelsToRows` function to convert the `SwatchModels` into the proper specialization of row
+    /// models. Those row models are then used to construct the final grid.
     /// - Returns: A grid view containing the models for the selected grid. If there's some sort of error it returns a simple `Text` describing the error.
     func gridView() -> some View {
-        let view: AnyView
+        let models = self.gridModels[selectedGridIndex].models
+        let modelType = models.count > 0 ? type(of: models[0]) : nil
         
-        if let colorModels = self.gridModels[selectedGridIndex].models as? [ColorModel] {
-            let grid = ColorSwatchGridView(rowModels: ColorSwatchGridView.mapColorsToRows(colorModels: colorModels))
-            view = AnyView(grid)
-        } else if let textModels = self.gridModels[selectedGridIndex].models as? [TextModel] {
-            #if !os(watchOS)
-            let grid = TextSwatchGridView(rowModels: TextSwatchGridView.mapTextsToRows(textModels: textModels))
-            view = AnyView(grid)
-            #else
-            view = AnyView(Text("Watch doesn't support TextGrid"))
-            #endif
-        } else {
-            view = AnyView(Text("Missing Grid Type!"))
+        return Group {
+            if modelType == ColorModel.self {
+                // Forced unwrap is fine here, we just checked the type above.
+                ColorSwatchGridView(rowModels: ColorSwatchGridView.mapModelsToRows(models as! [ColorModel]))
+                
+            } else if modelType == TextModel.self {
+                #if !os(watchOS)
+                // Forced unwrap is fine here, we just checked the type above.
+                TextSwatchGridView(rowModels: TextSwatchGridView.mapModelsToRows(models as! [TextModel]))
+                #else
+                Text("Watch doesn't support TextGrid")
+                #endif
+                
+            } else {
+                Text("Missing Grid Type!")
+                
+            }
+
         }
-        
-        return view
     }
     
     /// Returns a `Color` suitable for the background color of the `MainView`.
