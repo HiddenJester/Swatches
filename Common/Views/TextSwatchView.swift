@@ -34,7 +34,14 @@ struct TextSwatchView: View {
 
 struct TextSwatch_Previews: PreviewProvider {
     static var previews: some View {
-        TextSwatchView(sample: "The quick brown fox jumps over the lazy dog",
-                   model: TextModel(color: .link, name: "Link"))
+        Group {
+            TextSwatchView(sample: "The quick brown fox jumps over the lazy dog",
+                       model: TextModel(color: .link, name: "Link"))
+
+            TextSwatchView(sample: "The quick brown fox jumps over the lazy dog",
+                       model: TextModel(color: .label, name: "Link"))
+                .environment(\.colorScheme, .dark)
+                .previewDisplayName("Dark Mode")
+        }
     }
 }

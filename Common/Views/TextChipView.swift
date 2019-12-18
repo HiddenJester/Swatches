@@ -17,21 +17,44 @@ struct TextChipView: View {
     
     /// The color to display the text in. If this is `.clear` then no background is drawn.
     let color: Color
-
-    /// The corner radius to use on the `ChipBackground`.
-    private let cornerRadius = CGFloat(20.0)
-
+    
     var body: some View {
-        Text(text)
-            .font(.largeTitle)
-            .padding()
-            .foregroundColor(color)
-            .background(ChipBackgroundView(drawCheckerboard: color != .clear, cornerRadius: cornerRadius))
+        VStack {
+            Text(text)
+                .padding()
+                .background(ChipBackgroundView(fillColor: chipFillColor()))
+
+            Text(text)
+                .padding()
+                .background(ChipBackgroundView())
+
+        }.foregroundColor(color)
+            .font(Font.largeTitle.bold())
+        
     }
+    
 }
 
+private extension TextChipView {
+    func chipFillColor() -> Color {
+        #if os(macOS) || os(iOS)
+        return .tertiarySystemBackground
+        #else
+        return .systemGray
+        #endif
+    }
+}
 struct TextChip_Previews: PreviewProvider {
+    static let text = "The quick brown fox jumps over the lazy dog."
+    
     static var previews: some View {
-        TextChipView(text: "Testing", color: .link)
+        Group {
+            TextChipView(text: text, color: .quaternaryLabel)
+            
+            TextChipView(text: text, color: .quaternaryLabel)
+                .environment(\.colorScheme, .dark)
+                .previewDisplayName("Dark Mode")
+        }
+        
     }
 }
