@@ -8,19 +8,22 @@
 
 import SwiftUI
 
-/// A view that optionally draws either A ) nothing (well. It draws `Color.clear`) or B ) draws a tiled checkerboard pattern suitable for displaying behind
-/// translucent content. If the checkerboard is drawn it is outlined in black and it has rounded corners of the specified radius.
+/// A view that optionally draws a rounded rectangle of either A ) a specified color; or B) a tiled  checkerboard pattern suitable for displaying behind
+/// translucent content. If anything is drawn other than `.clear` then a black outline is drawn as well.
 struct ChipBackgroundView: View {
-    /// The flag that determines whether the checkerboard & outline should be drawn.
-    let drawCheckerboard: Bool
-
+    /// The color to fill the background with. If left at the default value of `nil` it will draw a checkerboard pattern instead. If it is set to `.clear` then
+    /// there is no stroke outline drawn. If it is `nil` or any other color then then the outline is drawn.
+    /// - Note: The stroke outline is drawn *unless the color is specifically `.clear`*. `.fixedClear` will still draw the outline, as will any other color
+    ///     with an alpha component of zero. AFAICT, there's no way to extract an alpha value from a `Color` so you can't check the transparency.
+    var fillColor: Color? = nil
+    
     /// When the checkerboard is drawn, this is the `cornerRadius` used by the image.
-    let cornerRadius: CGFloat
+    private let cornerRadius = CGFloat(20)
 
     var body: some View {
         view()
             .overlay(RoundedRectangle(cornerRadius: cornerRadius)
-                .stroke(drawCheckerboard ? Color.black : Color.clear, lineWidth: 2))
+                .stroke(fillColor != .clear ? Color.black : Color.clear, lineWidth: 2))
     }
 }
 
@@ -30,12 +33,13 @@ private extension ChipBackgroundView {
     ///     `Color.clear`.
     func view() -> some View {
         Group {
-            if drawCheckerboard {
+            if fillColor == nil {
                 Image("Checkerboard")
                     .resizable(resizingMode: .tile)
                     .cornerRadius(cornerRadius)
             } else {
-                Color.clear
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .foregroundColor(fillColor)
             }
         }
     }
@@ -44,9 +48,11 @@ private extension ChipBackgroundView {
 struct ChipBackground_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ChipBackgroundView(drawCheckerboard: true, cornerRadius: 20.0)
-            
-            ChipBackgroundView(drawCheckerboard: false, cornerRadius: 20.0)
+            ChipBackgroundView()
+
+            ChipBackgroundView(fillColor: .gray)
+
+            ChipBackgroundView(fillColor: .clear)
         }
     }
 }
