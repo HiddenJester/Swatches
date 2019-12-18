@@ -34,6 +34,7 @@ struct TextSwatchGridView: View {
                     .padding()
 
             }.overlay(RoundedRectangle.init(cornerRadius: 20.0).stroke())
+            .padding()
             
             ScrollView {
                 ForEach(rowModels) { model in
