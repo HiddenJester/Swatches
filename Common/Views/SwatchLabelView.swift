@@ -19,7 +19,7 @@ struct SwatchLabelView: View {
             .foregroundColor(color())
             .truncationMode(.middle)
             .lineLimit(1)
-            .padding(.vertical)
+            .padding(.horizontal)
     }
 }
 

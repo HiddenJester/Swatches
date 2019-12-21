@@ -15,21 +15,21 @@ extension ColorModel {
     /// - Returns: An array of `ColorModel` that represents all of the fixed colors.
     static func fixedColors() -> [ColorModel] {
         [
-            ColorModel(color: .fixedBlack, name: "Black"),
-            ColorModel(color: .fixedDarkGray, name: "Dark Gray"),
-            ColorModel(color: .fixedLightGray, name: "Light Gray"),
-            ColorModel(color: .fixedWhite, name: "White"),
-            ColorModel(color: .fixedGray, name: "Gray"),
-            ColorModel(color: .fixedRed, name: "Red"),
-            ColorModel(color: .fixedGreen, name: "Green"),
-            ColorModel(color: .fixedBlue, name: "Blue"),
-            ColorModel(color: .fixedCyan, name: "Cyan"),
-            ColorModel(color: .fixedYellow, name: "Yellow"),
-            ColorModel(color: .fixedMagenta, name: "Magenta"),
-            ColorModel(color: .fixedOrange, name: "Orange"),
-            ColorModel(color: .fixedPurple, name: "Purple"),
-            ColorModel(color: .fixedBrown, name: "Brown"),
-            ColorModel(color: .fixedClear, name: "Clear"),
+            ColorModel(color: .fixedBlack, name: "Black", supportedOS: .all),
+            ColorModel(color: .fixedDarkGray, name: "Dark Gray", supportedOS: .all),
+            ColorModel(color: .fixedLightGray, name: "Light Gray", supportedOS: .all),
+            ColorModel(color: .fixedWhite, name: "White", supportedOS: .all),
+            ColorModel(color: .fixedGray, name: "Gray", supportedOS: .all),
+            ColorModel(color: .fixedRed, name: "Red", supportedOS: .all),
+            ColorModel(color: .fixedGreen, name: "Green", supportedOS: .all),
+            ColorModel(color: .fixedBlue, name: "Blue", supportedOS: .all),
+            ColorModel(color: .fixedCyan, name: "Cyan", supportedOS: .all),
+            ColorModel(color: .fixedYellow, name: "Yellow", supportedOS: .all),
+            ColorModel(color: .fixedMagenta, name: "Magenta", supportedOS: .all),
+            ColorModel(color: .fixedOrange, name: "Orange", supportedOS: .all),
+            ColorModel(color: .fixedPurple, name: "Purple", supportedOS: .all),
+            ColorModel(color: .fixedBrown, name: "Brown", supportedOS: .all),
+            ColorModel(color: .fixedClear, name: "Clear", supportedOS: .all),
         ]
     }
 

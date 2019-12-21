@@ -34,6 +34,7 @@ struct TextSwatchGridView: View {
                     .padding()
 
             }.overlay(RoundedRectangle.init(cornerRadius: 20.0).stroke())
+            .padding()
             
             ScrollView {
                 ForEach(rowModels) { model in
@@ -66,7 +67,7 @@ private extension TextSwatchGridView {
     /// - Returns: On iOS or macOS this will return `RoundedBorderTestFieldStyle`. Since other platforms don't support this style
     ///     on other platforms this returns `DefaultTextFieldStyle`.
     func fieldStyle() -> some TextFieldStyle {
-        #if os(iOS) || os(macOS)
+        #if os(iOS) || targetEnvironment(macCatalyst)
         return RoundedBorderTextFieldStyle()
         #else
         return DefaultTextFieldStyle()
