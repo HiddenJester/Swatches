@@ -16,4 +16,7 @@ struct ColorModel: SwatchModel {
     
     /// The name to display in the `SwatchLabel`.
     let name: String
+    
+    /// The supported OS information to draw in the Swatch.
+    let supportedOS: SupportedOSOptions
 }

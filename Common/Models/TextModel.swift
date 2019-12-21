@@ -16,4 +16,7 @@ struct TextModel: SwatchModel {
     
     /// The name to display in the `SwatchLabel` view.
     let name: String
+    
+    /// The supported OS information to draw in the Swatch.
+    let supportedOS: SupportedOSOptions
 }
