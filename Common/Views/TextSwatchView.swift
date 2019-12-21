@@ -20,7 +20,9 @@ struct TextSwatchView: View {
     let model: TextModel?
 
     var body: some View {
-        SwatchView(drawBackground: model != nil, label: model?.name ?? " ") {
+        SwatchView(drawBackground: model != nil,
+                   label: model?.name ?? " ",
+                   supportedOS: model?.supportedOS ?? .all) {
             HStack {
                 Spacer()
 
@@ -33,13 +35,13 @@ struct TextSwatchView: View {
 }
 
 struct TextSwatch_Previews: PreviewProvider {
+    static let sample = "The quick brown fox jumps over the lazy dog"
+    static let model = TextModel(color: .link, name: "Link", supportedOS: [.iOS, .macOS, .tvOS])
     static var previews: some View {
         Group {
-            TextSwatchView(sample: "The quick brown fox jumps over the lazy dog",
-                       model: TextModel(color: .link, name: "Link"))
+            TextSwatchView(sample: sample, model: model)
 
-            TextSwatchView(sample: "The quick brown fox jumps over the lazy dog",
-                       model: TextModel(color: .label, name: "Link"))
+            TextSwatchView(sample: sample, model: model)
                 .environment(\.colorScheme, .dark)
                 .previewDisplayName("Dark Mode")
         }

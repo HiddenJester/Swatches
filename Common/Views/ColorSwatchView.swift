@@ -16,7 +16,9 @@ struct ColorSwatchView: View {
     let model: ColorModel?
     
     var body: some View {
-        SwatchView(drawBackground: model != nil, label: model?.name ?? " ") {
+        SwatchView(drawBackground: model != nil,
+                   label: model?.name ?? " ",
+                   supportedOS: model?.supportedOS ?? .all) {
             if self.model != nil {
                 ColorChipView(color: self.model!.color, drawBackground: true)
             } else {
@@ -27,19 +29,28 @@ struct ColorSwatchView: View {
 }
 
 struct ColorSwatch_Previews: PreviewProvider {
+    static let wordy = ColorModel(color: .blue, name: "Wordy Blue Label", supportedOS: .all)
+    static let secondary = ColorModel(color: .secondary, name: "Secondary", supportedOS: .iOSAndMac)
+    
     static var previews: some View {
         Group {
             HStack {
-                ColorSwatchView(model: ColorModel(color: .blue, name: "Wordy Blue Label"))
-                ColorSwatchView(model: ColorModel(color: .secondary, name: "Secondary"))
+                ColorSwatchView(model: wordy)
+
                 ColorSwatchView(model: nil)
+
+                ColorSwatchView(model: secondary)
+
             }
 
             HStack {
-                ColorSwatchView(model: ColorModel(color: .blue, name: "Blue"))
-                ColorSwatchView(model: ColorModel(color: .black, name: "Black"))
+                ColorSwatchView(model: wordy)
+
+                ColorSwatchView(model: secondary)
+
             }.environment(\.colorScheme, .dark)
                 .previewDisplayName("Dark Mode")
+
         }
     }
 }

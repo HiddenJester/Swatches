@@ -20,16 +20,20 @@ struct SwatchView<Content>: View where Content: View {
     /// The content of ths swatch, passed in as a `@ViewBuilder`.
     private let content: Content
 
+    /// The Supported OSes for this swatch to draw.
+    let supportedOS: SupportedOSOptions
+    
     /// The corner radius to use on the backgruond and outline.
     private let cornerRadius = CGFloat(20.0)
-
-    /// Padding edges for the content. It's only three edges because the label pads the bottom edge of the content.
-    private let contentPadding: Edge.Set = [.top, .leading, .trailing]
 
     var body: some View {
         VStack() {
             content
-                .padding(contentPadding)
+                .padding(.horizontal)
+            
+            if drawBackground {
+                SupportedOSTagView(value: supportedOS)
+            }
             
             SwatchLabelView(text: label)
             
@@ -43,10 +47,15 @@ struct SwatchView<Content>: View where Content: View {
     /// - Parameters:
     ///   - drawBackground: A Bool that controls both drawing a background and an outline.
     ///   - label: The text to display as the label for for the Swatch
+    ///   - supportedOS: The SupportedOSOptions to draw.
     ///   - content: The actual content of the Swatch. This is a `@ViewBuilder` closure, so practically any SwiftUI view can be placed in a swatch.
-    init(drawBackground: Bool, label: String, @ViewBuilder _ content: @escaping () -> Content) {
+    init(drawBackground: Bool,
+         label: String,
+         supportedOS: SupportedOSOptions,
+         @ViewBuilder _ content: @escaping () -> Content) {
         self.drawBackground = drawBackground
         self.label = label
+        self.supportedOS = supportedOS
         self.content = content()
     }
 }
@@ -73,11 +82,11 @@ private extension SwatchView {
 struct Swatch_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            SwatchView(drawBackground: true, label: "Background Test") {
+            SwatchView(drawBackground: true, label: "Background Test", supportedOS: .iOSAndMac) {
                 Text("Testing").padding()
             }
             
-            SwatchView(drawBackground: false, label: "Clear Test") {
+            SwatchView(drawBackground: false, label: "Clear Test", supportedOS: .all) {
                 Text("Clear").padding()
             }
         }

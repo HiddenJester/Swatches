@@ -16,12 +16,12 @@ extension TextModel {
     /// - Returns: An array of `TextModel` that represents all of the adaptable colors intended for text rendering..
     static func textModels() -> [TextModel] {
         [
-            TextModel(color: .label, name: "Label"),
-            TextModel(color: .secondaryLabel, name: "Sec.Label"),
-            TextModel(color: .tertiaryLabel, name: "Tert.Label"),
-            TextModel(color: .quaternaryLabel, name: "Quat.Label"),
-            TextModel(color: .link, name: "Link"),
-            TextModel(color: .placeholderText, name: "PlaceholderText"),
+            TextModel(color: .label, name: "Label", supportedOS: .notWatch),
+            TextModel(color: .secondaryLabel, name: "Sec.Label", supportedOS: .notWatch),
+            TextModel(color: .tertiaryLabel, name: "Tert.Label", supportedOS: .notWatch),
+            TextModel(color: .quaternaryLabel, name: "Quat.Label", supportedOS: .notWatch),
+            TextModel(color: .link, name: "Link", supportedOS: .notWatch),
+            TextModel(color: .placeholderText, name: "PlaceholderText", supportedOS: .notWatch),
         ]
     }
 }
