@@ -14,21 +14,21 @@ extension ColorModel {
     /// - Returns: An array of `ColorModel` that represents all of the available colors.
     static func swiftUIColors() -> [ColorModel] {
         [
-            ColorModel(color: .clear, name: "Clear"),
-            ColorModel(color: .black, name: "Black"),
-            ColorModel(color: .white, name: "White"),
-            ColorModel(color: .gray, name: "Gray"),
-            ColorModel(color: .red, name: "Red"),
-            ColorModel(color: .green, name: "Green"),
-            ColorModel(color: .blue, name: "Blue"),
-            ColorModel(color: .orange, name: "Orange"),
-            ColorModel(color: .yellow, name: "Yellow"),
-            ColorModel(color: .pink, name: "Pink"),
-            ColorModel(color: .purple, name: "Purple"),
-            ColorModel(color: .primary, name: "Primary"),
-            ColorModel(color: .secondary, name: "Secondary"),
+            ColorModel(color: .clear, name: "Clear", supportedOS: .all),
+            ColorModel(color: .black, name: "Black", supportedOS: .all),
+            ColorModel(color: .white, name: "White", supportedOS: .all),
+            ColorModel(color: .gray, name: "Gray", supportedOS: .all),
+            ColorModel(color: .red, name: "Red", supportedOS: .all),
+            ColorModel(color: .green, name: "Green", supportedOS: .all),
+            ColorModel(color: .blue, name: "Blue", supportedOS: .all),
+            ColorModel(color: .orange, name: "Orange", supportedOS: .all),
+            ColorModel(color: .yellow, name: "Yellow", supportedOS: .all),
+            ColorModel(color: .pink, name: "Pink", supportedOS: .all),
+            ColorModel(color: .purple, name: "Purple", supportedOS: .all),
+            ColorModel(color: .primary, name: "Primary", supportedOS: .all),
+            ColorModel(color: .secondary, name: "Secondary", supportedOS: .all),
             
-            ColorModel(color: .accentColor, name: "Accent"),
+            ColorModel(color: .accentColor, name: "AccentColor", supportedOS: .all),
         ]
     }
     

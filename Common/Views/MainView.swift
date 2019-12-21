@@ -86,23 +86,27 @@ private extension MainView {
 }
 
 struct MainView_Previews: PreviewProvider {
+    static let swiftUI = GridModel(name: "SwiftUI", models: ColorModel.swiftUIColors())
+    
     #if os(iOS) || os(tvOS)
+    static let textView =  GridModel(name: "Text", models: TextModel.textModels())
+    
     static var previews: some View {
         Group {
-            MainView(gridModels: [GridModel(name: "SwiftUI", models: ColorModel.swiftUIColors()),
-                                  GridModel(name: "Text", models: TextModel.textModels())
-            ])
+            MainView(gridModels: [swiftUI, textView])
+
+            MainView(gridModels: [textView, swiftUI])
+
+            MainView(gridModels: [swiftUI, textView])
+                .environment(\.colorScheme, .dark)
+                .previewDisplayName("Dark Mode")
             
-            MainView(gridModels: [GridModel(name: "SwiftUI", models: ColorModel.swiftUIColors()),
-                                  GridModel(name: "Text", models: TextModel.textModels())
-            ]).environment(\.colorScheme, .dark)
-            .previewDisplayName("Dark Mode")
         }
     }
     #elseif os(watchOS)
     static var previews: some View {
-        MainView(gridModels: [GridModel(name: "SwiftUI", models: ColorModel.swiftUIColors()),
-        ])
+        MainView(gridModels: [swiftUI])
+        
     }
     #endif
 }

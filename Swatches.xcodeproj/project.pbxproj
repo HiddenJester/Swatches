@@ -12,6 +12,8 @@
 		3B189383237B624400B097E2 /* SwiftUIColorModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B189382237B624400B097E2 /* SwiftUIColorModels.swift */; };
 		3B189385237B62B600B097E2 /* ColorGridRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B189384237B62B600B097E2 /* ColorGridRowView.swift */; };
 		3B189387237B77B100B097E2 /* GridRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B189386237B77B100B097E2 /* GridRowModel.swift */; };
+		3B2A482723A9C353004F2C8C /* SupportedOSTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2A482623A9C353004F2C8C /* SupportedOSTagView.swift */; };
+		3B2A482923A9C386004F2C8C /* SupportedOSOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2A482823A9C386004F2C8C /* SupportedOSOptions.swift */; };
 		3B2C7EAA239AD66700F23ED0 /* TVAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2C7EA9239AD66700F23ED0 /* TVAppDelegate.swift */; };
 		3B2C7EB4239AD66800F23ED0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B2C7EB2239AD66800F23ED0 /* LaunchScreen.storyboard */; };
 		3B2C7EB9239AD81E00F23ED0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BB3D5E02376135C009CE90F /* Assets.xcassets */; };
@@ -72,6 +74,10 @@
 		3B549E8223860264004C16DE /* ChipBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B549E8123860264004C16DE /* ChipBackgroundView.swift */; };
 		3B76A62523765179007292F5 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B76A62423765179007292F5 /* MainView.swift */; };
 		3B76A627237651C0007292F5 /* GridModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B76A626237651C0007292F5 /* GridModel.swift */; };
+		3BA9404023AABF5100C9AB43 /* SupportedOSOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2A482823A9C386004F2C8C /* SupportedOSOptions.swift */; };
+		3BA9404123AABF5200C9AB43 /* SupportedOSOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2A482823A9C386004F2C8C /* SupportedOSOptions.swift */; };
+		3BA9404223AABF6E00C9AB43 /* SupportedOSTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2A482623A9C353004F2C8C /* SupportedOSTagView.swift */; };
+		3BA9404323AABF6E00C9AB43 /* SupportedOSTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2A482623A9C353004F2C8C /* SupportedOSTagView.swift */; };
 		3BB3D5DB2376135B009CE90F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB3D5DA2376135B009CE90F /* AppDelegate.swift */; };
 		3BB3D5DD2376135B009CE90F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB3D5DC2376135B009CE90F /* SceneDelegate.swift */; };
 		3BB3D5DF2376135B009CE90F /* ColorSwatchGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB3D5DE2376135B009CE90F /* ColorSwatchGridView.swift */; };
@@ -133,6 +139,8 @@
 		3B189382237B624400B097E2 /* SwiftUIColorModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIColorModels.swift; sourceTree = "<group>"; };
 		3B189384237B62B600B097E2 /* ColorGridRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorGridRowView.swift; sourceTree = "<group>"; };
 		3B189386237B77B100B097E2 /* GridRowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridRowModel.swift; sourceTree = "<group>"; };
+		3B2A482623A9C353004F2C8C /* SupportedOSTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportedOSTagView.swift; sourceTree = "<group>"; };
+		3B2A482823A9C386004F2C8C /* SupportedOSOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportedOSOptions.swift; sourceTree = "<group>"; };
 		3B2C7EA7239AD66700F23ED0 /* Swatches.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swatches.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B2C7EA9239AD66700F23ED0 /* TVAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVAppDelegate.swift; sourceTree = "<group>"; };
 		3B2C7EB3239AD66800F23ED0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -290,6 +298,7 @@
 				3B549E772385E3B1004C16DE /* TextGridRowView.swift */,
 				3B549E792385E511004C16DE /* TextSwatchView.swift */,
 				3B549E712385DCF4004C16DE /* TextSwatchGridView.swift */,
+				3B2A482623A9C353004F2C8C /* SupportedOSTagView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -305,6 +314,7 @@
 				3B189382237B624400B097E2 /* SwiftUIColorModels.swift */,
 				3B549E732385DD3C004C16DE /* TextModel.swift */,
 				3B549E752385DE22004C16DE /* TextModels.swift */,
+				3B2A482823A9C386004F2C8C /* SupportedOSOptions.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -509,6 +519,7 @@
 				3B2C7EC5239ADA7F00F23ED0 /* ColorSwatchView.swift in Sources */,
 				3B2C7EAA239AD66700F23ED0 /* TVAppDelegate.swift in Sources */,
 				3B2C7EBB239AD97A00F23ED0 /* SwatchLabelView.swift in Sources */,
+				3BA9404323AABF6E00C9AB43 /* SupportedOSTagView.swift in Sources */,
 				3B2C7EBF239AD9B400F23ED0 /* FixedColorModels.swift in Sources */,
 				3B2C7EC4239AD9B400F23ED0 /* TextModels.swift in Sources */,
 				3B2C7EBA239AD91D00F23ED0 /* Color+UIColor.swift in Sources */,
@@ -525,6 +536,7 @@
 				3B2C7EC8239ADB1500F23ED0 /* ColorSwatchGridView.swift in Sources */,
 				3B2C7EC9239ADB2000F23ED0 /* ColorGridRowView.swift in Sources */,
 				3B2C7ECE239B090400F23ED0 /* TextGridRowView.swift in Sources */,
+				3BA9404123AABF5200C9AB43 /* SupportedOSOptions.swift in Sources */,
 				3B2C7ECC239B07F400F23ED0 /* TextChipView.swift in Sources */,
 				3B2C7EC0239AD9B400F23ED0 /* GridModel.swift in Sources */,
 			);
@@ -541,11 +553,13 @@
 				3B53C153239703740047B8EE /* Color+UIColor.swift in Sources */,
 				3B53C13F239701270047B8EE /* FixedColorModels.swift in Sources */,
 				3B53C141239701270047B8EE /* GridRowModel.swift in Sources */,
+				3BA9404023AABF5100C9AB43 /* SupportedOSOptions.swift in Sources */,
 				3B53C1462397012D0047B8EE /* ColorChipView.swift in Sources */,
 				3B2C7ED2239B1D2800F23ED0 /* FocusableGridRowView.swift in Sources */,
 				3B53C14A2397012D0047B8EE /* GridHeaderView.swift in Sources */,
 				3B53C12B2397002F0047B8EE /* ExtensionDelegate.swift in Sources */,
 				3B53C1472397012D0047B8EE /* ColorGridRowView.swift in Sources */,
+				3BA9404223AABF6E00C9AB43 /* SupportedOSTagView.swift in Sources */,
 				3B53C14D2397012D0047B8EE /* SwatchLabelView.swift in Sources */,
 				3BB846D92398744000E90EA4 /* TextModel.swift in Sources */,
 				3B53C13E239701270047B8EE /* ColorModel.swift in Sources */,
@@ -566,6 +580,7 @@
 				3B76A627237651C0007292F5 /* GridModel.swift in Sources */,
 				3B549E802386020B004C16DE /* TextChipView.swift in Sources */,
 				3B549E722385DCF4004C16DE /* TextSwatchGridView.swift in Sources */,
+				3B2A482723A9C353004F2C8C /* SupportedOSTagView.swift in Sources */,
 				3BB3D5EF237613CB009CE90F /* ColorChipView.swift in Sources */,
 				3BB3D5DB2376135B009CE90F /* AppDelegate.swift in Sources */,
 				3BDC325E237F3A2900632A08 /* Color+UIColor.swift in Sources */,
@@ -579,6 +594,7 @@
 				3B189385237B62B600B097E2 /* ColorGridRowView.swift in Sources */,
 				3B549E8223860264004C16DE /* ChipBackgroundView.swift in Sources */,
 				3B549E7C2385E8EE004C16DE /* SwatchLabelView.swift in Sources */,
+				3B2A482923A9C386004F2C8C /* SupportedOSOptions.swift in Sources */,
 				3BB3D5F12376175A009CE90F /* ColorSwatchView.swift in Sources */,
 				3BB3D5F5237617EB009CE90F /* ColorModel.swift in Sources */,
 				3BF94AB82387517800223BFE /* FixedColorModels.swift in Sources */,
