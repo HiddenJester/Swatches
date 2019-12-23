@@ -58,7 +58,7 @@ private extension MainView {
             } else if modelType == TextModel.self {
                 #if !os(watchOS)
                 // Forced unwrap is fine here, we just checked the type above.
-                TextSwatchGridView(rowModels: TextSwatchGridView.mapModelsToRows(models as! [TextModel]))
+                TextSwatchSingleColumnGridView(rowModels: models as! [TextModel])
                 #else
                 Text("Watch doesn't support TextGrid")
                 #endif
