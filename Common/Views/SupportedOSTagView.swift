@@ -12,16 +12,8 @@ struct SupportedOSTagView: View {
     /// The value to use to display the tags.
     let value: SupportedOSOptions
     
-    #if os(watchOS)
-    // At the moment we need to have zero horizontal padding on watchOS, so define that here.
-    private let paddingLength: CGFloat? = CGFloat(0)
-    #else
-    // And on non-watch SKUs we wantd default horizontal padding, which this will provided.
-    private let paddingLength: CGFloat? = nil
-    #endif
-
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
+        VStack(alignment: .trailing, spacing: 0) {
             tagView(forOS: .iOS)
 
             tagView(forOS: .macOS)
@@ -30,7 +22,7 @@ struct SupportedOSTagView: View {
             
             tagView(forOS: .watchOS)
 
-        }.padding(.horizontal, paddingLength)
+        }.layoutPriority(1)
     }
 }
 
@@ -50,10 +42,8 @@ private extension SupportedOSTagView {
         let font = Font.caption
         #endif
         
-        return HStack {
+        return HStack(spacing: 0) {
             textView(forOS: forOS)
-            
-            Spacer()
             
             imageView(forOS: forOS)
         }.font(font)
@@ -63,14 +53,6 @@ private extension SupportedOSTagView {
     /// - Parameter forOS: The OS to check. See the note above on `tagView` for a discussion about sending sets to this parameter.
     func textView(forOS: SupportedOSOptions) -> some View {
         let label: String
-        
-        #if os(watchOS)
-        // Watch needs to shrink the text a bit so set a plaform-dependent constant …
-        let scale = CGFloat(0.75)
-        #else
-        // That is just default on non-watch platforms.
-        let scale = CGFloat(1.0)
-        #endif
         
         switch forOS {
         case let x where x.contains(.iOS):
@@ -91,7 +73,6 @@ private extension SupportedOSTagView {
         
         return Text("\(label):")
             .lineLimit(1)
-            .minimumScaleFactor(scale)
     }
     
     /// Returns an erased `Image` with a SFSymbol. If the provided OS is listed in `value` then a green checkmark is returned, otherwise a red X will
