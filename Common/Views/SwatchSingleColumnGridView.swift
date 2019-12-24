@@ -17,15 +17,17 @@ struct SwatchSingleColumnGridView<CellView: View, RowModel: SwatchModel>: View {
     let contentClosure: (RowModel) -> CellView
 
     var body: some View {
-        ForEach(0 ..< rowModels.count) { self.contentClosure(self.rowModels[$0]) }
-
+        ForEach(0 ..< rowModels.count) { (modelID) in
+            FocusableGridRowView {
+                self.contentClosure(self.rowModels[modelID]) }
+            }
     }
 }
 
 struct SwatchSingleColumnGridView_Previews: PreviewProvider {
     static var previews: some View {
-        SwatchSingleColumnGridView(rowModels: TextModel.textModels(),
-                                   contentClosure: { (model: TextModel) in
+        SwatchSingleColumnGridView(rowModels: ColorModel.swiftUIColors(),
+                                   contentClosure: { (model: ColorModel) in
                                     Text(model.name)
         })
     }
