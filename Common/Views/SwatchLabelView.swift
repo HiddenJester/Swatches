@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-/// A view that displays a single line of text in the `.label` Color, limited to one line, with truncation set for the middle, and has vertical padding.
+/// A view that displays a text in the `.label` Color with truncation set for the middle
 /// - Parameter text: The text to display in the label.
 struct SwatchLabelView: View {
     /// The text to display.
@@ -18,8 +18,7 @@ struct SwatchLabelView: View {
         Text(text)
             .foregroundColor(color())
             .truncationMode(.middle)
-            .lineLimit(1)
-            .padding([.horizontal, .bottom])
+            .multilineTextAlignment(.center)
     }
 }
 
