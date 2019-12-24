@@ -17,40 +17,40 @@ extension ColorModel {
     static func adaptableColors() -> [ColorModel] {
         #if os(tvOS) // tvOS only supports a subset of the adaptable colors.
         return [
-            ColorModel(color: .systemRed, name: "Sys.Red", supportedOS: .notWatch),
-            ColorModel(color: .systemGreen, name: "Sys.Green", supportedOS: .notWatch),
-            ColorModel(color: .systemBlue, name: "Sys.Blue", supportedOS: .notWatch),
-            ColorModel(color: .systemOrange, name: "Sys.Orange", supportedOS: .notWatch),
-            ColorModel(color: .systemYellow, name: "Sys.Yellow", supportedOS: .notWatch),
-            ColorModel(color: .systemPink, name: "Sys.Pink", supportedOS: .notWatch),
-            ColorModel(color: .systemPurple, name: "Sys.Purple", supportedOS: .notWatch),
-            ColorModel(color: .systemTeal, name: "Sys.Teal", supportedOS: .notWatch),
-            ColorModel(color: .systemIndigo, name: "Sys.Indigo", supportedOS: .notWatch),
+            ColorModel(color: .systemRed, name: "System Red", supportedOS: .notWatch),
+            ColorModel(color: .systemGreen, name: "System Green", supportedOS: .notWatch),
+            ColorModel(color: .systemBlue, name: "System Blue", supportedOS: .notWatch),
+            ColorModel(color: .systemOrange, name: "System Orange", supportedOS: .notWatch),
+            ColorModel(color: .systemYellow, name: "System Yellow", supportedOS: .notWatch),
+            ColorModel(color: .systemPink, name: "System Pink", supportedOS: .notWatch),
+            ColorModel(color: .systemPurple, name: "System Purple", supportedOS: .notWatch),
+            ColorModel(color: .systemTeal, name: "System Teal", supportedOS: .notWatch),
+            ColorModel(color: .systemIndigo, name: "System Indigo", supportedOS: .notWatch),
             
-            ColorModel(color: .systemGray, name: "Sys.Gray", supportedOS: .notWatch),
+            ColorModel(color: .systemGray, name: "System Gray", supportedOS: .notWatch),
             
             // Separators
             ColorModel(color: .separator, name: "Separator", supportedOS: .notWatch),
-            ColorModel(color: .opaqueSeparator, name: "Opaque Sep.", supportedOS: .notWatch),
+            ColorModel(color: .opaqueSeparator, name: "Opaque Separator", supportedOS: .notWatch),
         ]
         #else
         return [
-            ColorModel(color: .systemRed, name: "Sys.Red", supportedOS: .notWatch),
-            ColorModel(color: .systemGreen, name: "Sys.Green", supportedOS: .notWatch),
-            ColorModel(color: .systemBlue, name: "Sys.Blue", supportedOS: .notWatch),
-            ColorModel(color: .systemOrange, name: "Sys.Orange", supportedOS: .notWatch),
-            ColorModel(color: .systemYellow, name: "Sys.Yellow", supportedOS: .notWatch),
-            ColorModel(color: .systemPink, name: "Sys.Pink", supportedOS: .notWatch),
-            ColorModel(color: .systemPurple, name: "Sys.Purple", supportedOS: .notWatch),
-            ColorModel(color: .systemTeal, name: "Sys.Teal", supportedOS: .notWatch),
-            ColorModel(color: .systemIndigo, name: "Sys.Indigo", supportedOS: .notWatch),
+            ColorModel(color: .systemRed, name: "System Red", supportedOS: .notWatch),
+            ColorModel(color: .systemGreen, name: "System Green", supportedOS: .notWatch),
+            ColorModel(color: .systemBlue, name: "System Blue", supportedOS: .notWatch),
+            ColorModel(color: .systemOrange, name: "System Orange", supportedOS: .notWatch),
+            ColorModel(color: .systemYellow, name: "System Yellow", supportedOS: .notWatch),
+            ColorModel(color: .systemPink, name: "System Pink", supportedOS: .notWatch),
+            ColorModel(color: .systemPurple, name: "System Purple", supportedOS: .notWatch),
+            ColorModel(color: .systemTeal, name: "System Teal", supportedOS: .notWatch),
+            ColorModel(color: .systemIndigo, name: "System Indigo", supportedOS: .notWatch),
             
-            ColorModel(color: .systemGray, name: "Sys.Gray", supportedOS: .notWatch),
-            ColorModel(color: .systemGray2, name: "Sys.Gray2", supportedOS: .iOSAndMac),
-            ColorModel(color: .systemGray3, name: "Sys.Gray3", supportedOS: .iOSAndMac),
-            ColorModel(color: .systemGray4, name: "Sys.Gray4", supportedOS: .iOSAndMac),
-            ColorModel(color: .systemGray5, name: "Sys.Gray5", supportedOS: .iOSAndMac),
-            ColorModel(color: .systemGray6, name: "Sys.Gray6", supportedOS: .iOSAndMac),
+            ColorModel(color: .systemGray, name: "System Gray", supportedOS: .notWatch),
+            ColorModel(color: .systemGray2, name: "System Gray2", supportedOS: .iOSAndMac),
+            ColorModel(color: .systemGray3, name: "System Gray3", supportedOS: .iOSAndMac),
+            ColorModel(color: .systemGray4, name: "System Gray4", supportedOS: .iOSAndMac),
+            ColorModel(color: .systemGray5, name: "System Gray5", supportedOS: .iOSAndMac),
+            ColorModel(color: .systemGray6, name: "System Gray6", supportedOS: .iOSAndMac),
             
             // Worth noting: Apple lists all of the following colors as "UI Element Colors", but they do all
             // adapt to dark mode, and none of them are supported on watchOS, so I put them under the
@@ -58,29 +58,29 @@ extension ColorModel {
             
             // Separators
             ColorModel(color: .separator, name: "Separator", supportedOS: .notWatch),
-            ColorModel(color: .opaqueSeparator, name: "Opaque Sep.", supportedOS: .notWatch),
+            ColorModel(color: .opaqueSeparator, name: "Opaque Separator", supportedOS: .notWatch),
             
             // Backgrounds
-            ColorModel(color: .systemBackground, name: "Sys.Background", supportedOS: .iOSAndMac),
-            ColorModel(color: .secondarySystemBackground, name: "Sec.Sys.Background", supportedOS: .iOSAndMac),
-            ColorModel(color: .tertiarySystemBackground, name: "Tert.Sys.Background", supportedOS: .iOSAndMac),
+            ColorModel(color: .systemBackground, name: "System Background", supportedOS: .iOSAndMac),
+            ColorModel(color: .secondarySystemBackground, name: "Secondary System Background", supportedOS: .iOSAndMac),
+            ColorModel(color: .tertiarySystemBackground, name: "Tertiary System Background", supportedOS: .iOSAndMac),
             
             // Grouped backgrounds
             ColorModel(color: .systemGroupedBackground,
-                       name: "Sys.Group.Background",
+                       name: "System Group Background",
                        supportedOS: .iOSAndMac),
             ColorModel(color: .secondarySystemGroupedBackground,
-                       name: "Sec.Sys.Group.Background",
+                       name: "Secondary System Group Background",
                        supportedOS: .iOSAndMac),
             ColorModel(color: .tertiarySystemGroupedBackground,
-                       name: "Tert.Sys.Group.Background",
+                       name: "Tertiary System Group Background",
                        supportedOS: .iOSAndMac),
             
             // System fills
-            ColorModel(color: .systemFill, name: "Sys.Fill", supportedOS: .iOSAndMac),
-            ColorModel(color: .secondarySystemFill, name: "Sec.Sys.Fill", supportedOS: .iOSAndMac),
-            ColorModel(color: .tertiarySystemFill, name: "Tert.Sys.Fill", supportedOS: .iOSAndMac),
-            ColorModel(color: .quaternarySystemFill, name: "Quat.Sys.Fill", supportedOS: .iOSAndMac),
+            ColorModel(color: .systemFill, name: "System Fill", supportedOS: .iOSAndMac),
+            ColorModel(color: .secondarySystemFill, name: "Secondary System Fill", supportedOS: .iOSAndMac),
+            ColorModel(color: .tertiarySystemFill, name: "Tertiary System Fill", supportedOS: .iOSAndMac),
+            ColorModel(color: .quaternarySystemFill, name: "Quaternary System Fill", supportedOS: .iOSAndMac),
         ]
         #endif
     }
