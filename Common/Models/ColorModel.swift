@@ -20,3 +20,5 @@ struct ColorModel: SwatchModel {
     /// The supported OS information to draw in the Swatch.
     let supportedOS: SupportedOSOptions
 }
+
+extension ColorModel: Hashable {}

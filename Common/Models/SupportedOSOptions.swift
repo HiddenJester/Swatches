@@ -35,3 +35,5 @@ struct SupportedOSOptions: OptionSet {
     /// - Note: Be careful here though. tvOS has a weird sub-set of adaptable colors, so cross-check using this carefully, versus `.iOSAndMac`.
     static let notWatch: SupportedOSOptions = [.iOS, .macOS, .tvOS]
 }
+
+extension SupportedOSOptions: Hashable {}
