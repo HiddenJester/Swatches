@@ -52,13 +52,18 @@ private extension MainView {
         
         return Group {
             if modelType == ColorModel.self {
+                #if os(watchOS)
+                // Use a single column grid for watch. Forced unwrap is fine here, we just checked the type above.
+                ColorSwatchSingleColumnGridView(rowModels: models as! [ColorModel])
+                #else
                 // Forced unwrap is fine here, we just checked the type above.
                 ColorSwatchGridView(rowModels: ColorSwatchGridView.mapModelsToRows(models as! [ColorModel]))
+                #endif
                 
             } else if modelType == TextModel.self {
                 #if !os(watchOS)
                 // Forced unwrap is fine here, we just checked the type above.
-                TextSwatchGridView(rowModels: TextSwatchGridView.mapModelsToRows(models as! [TextModel]))
+                TextSwatchSingleColumnGridView(rowModels: models as! [TextModel])
                 #else
                 Text("Watch doesn't support TextGrid")
                 #endif

@@ -23,17 +23,19 @@ struct SwatchView<Content>: View where Content: View {
     /// The Supported OSes for this swatch to draw.
     let supportedOS: SupportedOSOptions
     
-    /// The corner radius to use on the backgruond and outline.
+    /// The corner radius to use on the background and outline.
     private let cornerRadius = CGFloat(20.0)
 
     var body: some View {
         VStack() {
-            content
-                .padding(.horizontal)
-            
-            if drawBackground {
-                SupportedOSTagView(value: supportedOS)
-            }
+            HStack() {
+                content
+                
+                if drawBackground {
+                    SupportedOSTagView( value: supportedOS)
+                    
+                }
+            }.padding(.horizontal)
             
             SwatchLabelView(text: label)
             
@@ -82,12 +84,12 @@ private extension SwatchView {
 struct Swatch_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            SwatchView(drawBackground: true, label: "Background Test", supportedOS: .iOSAndMac) {
-                Text("Testing").padding()
+            SwatchView(drawBackground: true, label: "Wordy Ass Background Test", supportedOS: .iOSAndMac) {
+                ColorChipView(color: .blue)
             }
             
             SwatchView(drawBackground: false, label: "Clear Test", supportedOS: .all) {
-                Text("Clear").padding()
+                ColorChipView(color: .clear)
             }
         }
     }
