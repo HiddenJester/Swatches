@@ -32,9 +32,9 @@
 		3B2C7ECC239B07F400F23ED0 /* TextChipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B549E7F2386020B004C16DE /* TextChipView.swift */; };
 		3B2C7ECD239B08F000F23ED0 /* TextSwatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B549E792385E511004C16DE /* TextSwatchView.swift */; };
 		3B2C7ECF239B094000F23ED0 /* TextSwatchSingleColumnGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B549E712385DCF4004C16DE /* TextSwatchSingleColumnGridView.swift */; };
-		3B2C7ED1239B1D1A00F23ED0 /* FocusableGridRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2C7ED0239B1D1A00F23ED0 /* FocusableGridRowView.swift */; };
-		3B2C7ED2239B1D2800F23ED0 /* FocusableGridRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2C7ED0239B1D1A00F23ED0 /* FocusableGridRowView.swift */; };
-		3B2C7ED3239B1D2900F23ED0 /* FocusableGridRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2C7ED0239B1D1A00F23ED0 /* FocusableGridRowView.swift */; };
+		3B2C7ED1239B1D1A00F23ED0 /* FocusableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2C7ED0239B1D1A00F23ED0 /* FocusableRowView.swift */; };
+		3B2C7ED2239B1D2800F23ED0 /* FocusableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2C7ED0239B1D1A00F23ED0 /* FocusableRowView.swift */; };
+		3B2C7ED3239B1D2900F23ED0 /* FocusableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2C7ED0239B1D1A00F23ED0 /* FocusableRowView.swift */; };
 		3B53C1132397002E0047B8EE /* Swatches.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 3B53C1122397002E0047B8EE /* Swatches.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3B53C1192397002E0047B8EE /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B53C1172397002E0047B8EE /* Interface.storyboard */; };
 		3B53C1222397002F0047B8EE /* Swatches-watchOS WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3B53C1212397002F0047B8EE /* Swatches-watchOS WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -138,7 +138,7 @@
 		3B2C7EA9239AD66700F23ED0 /* TVAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVAppDelegate.swift; sourceTree = "<group>"; };
 		3B2C7EB3239AD66800F23ED0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3B2C7EB5239AD66800F23ED0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3B2C7ED0239B1D1A00F23ED0 /* FocusableGridRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusableGridRowView.swift; sourceTree = "<group>"; };
+		3B2C7ED0239B1D1A00F23ED0 /* FocusableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusableRowView.swift; sourceTree = "<group>"; };
 		3B5018B523A18F2200035A56 /* Swatches.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Swatches.entitlements; sourceTree = "<group>"; };
 		3B53C10F2397002E0047B8EE /* Swatches.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swatches.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B53C1122397002E0047B8EE /* Swatches.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swatches.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -281,7 +281,7 @@
 				3BB3D5EE237613CB009CE90F /* ColorChipView.swift */,
 				3BB3D5F02376175A009CE90F /* ColorSwatchView.swift */,
 				3BD63F6F23B2AF7F00A7DCC8 /* FlowableContentGridView.swift */,
-				3B2C7ED0239B1D1A00F23ED0 /* FocusableGridRowView.swift */,
+				3B2C7ED0239B1D1A00F23ED0 /* FocusableRowView.swift */,
 				3B15EDA4237E035A008C54AF /* GridHeaderView.swift */,
 				3B76A62423765179007292F5 /* MainView.swift */,
 				3B2A482623A9C353004F2C8C /* SupportedOSTagView.swift */,
@@ -518,7 +518,7 @@
 				3B2C7EBD239AD9B400F23ED0 /* AdaptableColorModels.swift in Sources */,
 				3BFE6A1523B183BA0040DE53 /* SwatchSingleColumnGridView.swift in Sources */,
 				3B2C7EBC239AD99100F23ED0 /* SwatchView.swift in Sources */,
-				3B2C7ED3239B1D2900F23ED0 /* FocusableGridRowView.swift in Sources */,
+				3B2C7ED3239B1D2900F23ED0 /* FocusableRowView.swift in Sources */,
 				3B2C7ECA239ADB3B00F23ED0 /* GridHeaderView.swift in Sources */,
 				3B2C7ECB239ADB4F00F23ED0 /* MainView.swift in Sources */,
 				3B2C7EC6239ADA8A00F23ED0 /* ColorChipView.swift in Sources */,
@@ -542,7 +542,7 @@
 				3B53C13F239701270047B8EE /* FixedColorModels.swift in Sources */,
 				3BA9404023AABF5100C9AB43 /* SupportedOSOptions.swift in Sources */,
 				3B53C1462397012D0047B8EE /* ColorChipView.swift in Sources */,
-				3B2C7ED2239B1D2800F23ED0 /* FocusableGridRowView.swift in Sources */,
+				3B2C7ED2239B1D2800F23ED0 /* FocusableRowView.swift in Sources */,
 				3B53C14A2397012D0047B8EE /* GridHeaderView.swift in Sources */,
 				3B53C12B2397002F0047B8EE /* ExtensionDelegate.swift in Sources */,
 				3BA9404223AABF6E00C9AB43 /* SupportedOSTagView.swift in Sources */,
@@ -575,7 +575,7 @@
 				3BB3D5DD2376135B009CE90F /* SceneDelegate.swift in Sources */,
 				3B549E7E2385FDF6004C16DE /* SwatchView.swift in Sources */,
 				3B549E7A2385E511004C16DE /* TextSwatchView.swift in Sources */,
-				3B2C7ED1239B1D1A00F23ED0 /* FocusableGridRowView.swift in Sources */,
+				3B2C7ED1239B1D1A00F23ED0 /* FocusableRowView.swift in Sources */,
 				3B15EDA7237E4275008C54AF /* AdaptableColorModels.swift in Sources */,
 				3BD63F7323B2DEEB00A7DCC8 /* GridModel.swift in Sources */,
 				3B549E762385DE22004C16DE /* TextModels.swift in Sources */,

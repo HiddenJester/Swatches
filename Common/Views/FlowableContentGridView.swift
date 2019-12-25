@@ -26,7 +26,7 @@ struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
             ScrollView(.vertical) {
                 ForEach(self.splitIntoRows(columnCount: self.columnCount(maxWidth: proxy.size.width)),
                                            id: \.self) { (row) in
-                            FocusableGridRowView {
+                            FocusableRowView {
                                 HStack(alignment: .top) {
                                     ForEach(0 ..< row.count) { (index) in
                                         self.contentClosure(row[index])
