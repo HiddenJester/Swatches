@@ -29,20 +29,22 @@ struct SwatchView<Content>: View where Content: View {
     var body: some View {
         VStack() {
             HStack() {
-                content
+                content.padding([.leading, .top])
                 
                 if drawBackground {
                     SupportedOSTagView( value: supportedOS)
                     
                 }
-            }.padding(.horizontal)
+            }
             
             SwatchLabelView(text: label)
+                .padding([.horizontal, .bottom], 3)
             
         }.background(backgroundColor())
             .cornerRadius(cornerRadius)
             .overlay(RoundedRectangle(cornerRadius: cornerRadius)
                 .stroke(drawBackground ? Color.primary : Color.clear, lineWidth: 2))
+            .padding(1) // Give us at least a point around the stroke so we can see it.
     }
     
     /// Create a new Swatch

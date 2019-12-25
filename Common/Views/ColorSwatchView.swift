@@ -22,7 +22,7 @@ struct ColorSwatchView: View {
             if self.model != nil {
                 ColorChipView(color: self.model!.color, drawBackground: true)
             } else {
-                ColorChipView(color: .clear, drawBackground: false)
+                EmptyView()
             }
         }
     }

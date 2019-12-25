@@ -36,7 +36,7 @@ struct TextSwatchSingleColumnGridView: View {
                     
                 }
                 
-            }.padding(.vertical)
+            }
         }
     }
 }
