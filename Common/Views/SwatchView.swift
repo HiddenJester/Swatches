@@ -74,7 +74,7 @@ private extension SwatchView {
         }
         
         #if os(watchOS)
-        return .gray
+        return .fixedDarkGray
         #elseif os(tvOS)
         return .secondary
         #else
