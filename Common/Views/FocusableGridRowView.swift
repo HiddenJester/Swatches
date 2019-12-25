@@ -52,7 +52,11 @@ struct FocusableGridRow_Previews: PreviewProvider {
 
     static var previews: some View {
         FocusableGridRowView() {
-            ColorGridRowView(first: models[0], second: models[1])
+            HStack {
+                ColorSwatchView(model: models[0])
+
+                ColorSwatchView(model: models[1])
+            }
         }
     }
 }
