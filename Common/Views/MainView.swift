@@ -49,16 +49,22 @@ private extension MainView {
     func gridView() -> some View {
         let models = self.gridModels[selectedGridIndex].models
         let modelType = models.count > 0 ? type(of: models[0]) : nil
-        
+        let optimalWidth: CGFloat
+
+        #if os(tvOS)
+        optimalWidth = 400
+        #elseif targetEnvironment(macCatalyst)
+        optimalWidth = 250
+        #else
+        optimalWidth = 150
+        #endif
+
         return Group {
             if modelType == ColorModel.self {
-                #if os(watchOS)
-                // Use a single column grid for watch. Forced unwrap is fine here, we just checked the type above.
-                ColorSwatchSingleColumnGridView(rowModels: models as! [ColorModel])
-                #else
                 // Forced unwrap is fine here, we just checked the type above.
-                ColorSwatchGridView(rowModels: ColorSwatchGridView.mapModelsToRows(models as! [ColorModel]))
-                #endif
+                FlowableContentGridView(models: models as! [ColorModel],
+                                    optimalCellWidth: optimalWidth,
+                                    maxColumns: 5) { (model: ColorModel?) in ColorSwatchView(model: model) }
                 
             } else if modelType == TextModel.self {
                 #if !os(watchOS)
@@ -92,13 +98,14 @@ private extension MainView {
 
 struct MainView_Previews: PreviewProvider {
     static let swiftUI = GridModel(name: "SwiftUI", models: ColorModel.swiftUIColors())
-    
+
     #if os(iOS) || os(tvOS)
     static let textView =  GridModel(name: "Text", models: TextModel.textModels())
-    
+    static let adaptable = GridModel(name: "Adaptable", models: ColorModel.adaptableColors())
+
     static var previews: some View {
         Group {
-            MainView(gridModels: [swiftUI, textView])
+            MainView(gridModels: [adaptable, textView])
 
             MainView(gridModels: [textView, swiftUI])
 
