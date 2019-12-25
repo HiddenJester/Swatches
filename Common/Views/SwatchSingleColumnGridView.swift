@@ -18,7 +18,7 @@ struct SwatchSingleColumnGridView<CellView: View, RowModel: SwatchModel>: View {
 
     var body: some View {
         ForEach(0 ..< rowModels.count) { (index) in
-            FocusableGridRowView {
+            FocusableRowView {
                 self.contentClosure(self.rowModels[index]) }
             }
     }
