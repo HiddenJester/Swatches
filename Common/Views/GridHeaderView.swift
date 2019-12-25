@@ -27,7 +27,6 @@ struct GridHeaderView: View {
         VStack {
             #if !os(watchOS) // watchOS doesn't support dark/light mode.
             Toggle("Dark Mode", isOn: $darkModeSelected)
-                .padding(.horizontal)
             #endif
             
             Picker("Colors:", selection: $gridIndex) {
@@ -39,7 +38,7 @@ struct GridHeaderView: View {
             
             Divider()
 
-        }
+        }.padding([.horizontal, .top])
     }
 }
 
