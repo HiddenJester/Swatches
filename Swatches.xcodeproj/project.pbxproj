@@ -280,17 +280,17 @@
 				3B549E8123860264004C16DE /* ChipBackgroundView.swift */,
 				3BB3D5EE237613CB009CE90F /* ColorChipView.swift */,
 				3BB3D5F02376175A009CE90F /* ColorSwatchView.swift */,
+				3BD63F6F23B2AF7F00A7DCC8 /* FlowableContentGridView.swift */,
 				3B2C7ED0239B1D1A00F23ED0 /* FocusableGridRowView.swift */,
 				3B15EDA4237E035A008C54AF /* GridHeaderView.swift */,
 				3B76A62423765179007292F5 /* MainView.swift */,
-				3B549E7D2385FDF6004C16DE /* SwatchView.swift */,
-				3B549E7B2385E8EE004C16DE /* SwatchLabelView.swift */,
-				3B549E7F2386020B004C16DE /* TextChipView.swift */,
-				3BD63F6F23B2AF7F00A7DCC8 /* FlowableContentGridView.swift */,
-				3B549E792385E511004C16DE /* TextSwatchView.swift */,
-				3B549E712385DCF4004C16DE /* TextSwatchSingleColumnGridView.swift */,
 				3B2A482623A9C353004F2C8C /* SupportedOSTagView.swift */,
+				3B549E7B2385E8EE004C16DE /* SwatchLabelView.swift */,
 				3BFE6A1123B179280040DE53 /* SwatchSingleColumnGridView.swift */,
+				3B549E7D2385FDF6004C16DE /* SwatchView.swift */,
+				3B549E7F2386020B004C16DE /* TextChipView.swift */,
+				3B549E712385DCF4004C16DE /* TextSwatchSingleColumnGridView.swift */,
+				3B549E792385E511004C16DE /* TextSwatchView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -302,10 +302,10 @@
 				3BB3D5F4237617EB009CE90F /* ColorModel.swift */,
 				3BF94AB72387517800223BFE /* FixedColorModels.swift */,
 				3B76A626237651C0007292F5 /* GridModel.swift */,
+				3B2A482823A9C386004F2C8C /* SupportedOSOptions.swift */,
 				3B189382237B624400B097E2 /* SwiftUIColorModels.swift */,
 				3B549E732385DD3C004C16DE /* TextModel.swift */,
 				3B549E752385DE22004C16DE /* TextModels.swift */,
-				3B2A482823A9C386004F2C8C /* SupportedOSOptions.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
