@@ -8,52 +8,47 @@
 
 import SwiftUI
 
-//struct FocusableGridRowView<Content>: View where Content: View {
-//    /// Content passed in to render.
-//    private let content: Content
-//
-//    /// When the content has focus, scale it up by this value in order to see where the focus is.
-//    @State private var scale = CGFloat(1)
-//
-//    var body: some View {
-//        platformSpecificView()
-//
-//    }
-//
-//    init(@ViewBuilder _ content: @escaping () -> Content) {
-//        self.content = content()
-//    }
-//}
-
 struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
     /// The models to display
     let models: [Model]
     
     /// The maximum width we'd like a CellView to occupy
-    let maxCellWidth: CGFloat
+    let optimalCellWidth: CGFloat
+    
+    /// The maximum number of columns to allow
+    let maxColumns: Int
     
     /// A closure that takes an individual model and returns the proper view for that model.
     let contentClosure: (Model?) -> CellView
     
     var body: some View {
         GeometryReader { proxy in
-            ScrollView {
-                ForEach(self.splitIntoRows(columnCount: max(Int(proxy.size.width / self.maxCellWidth), 1)),
-                        id: \.self) { (row) in
+            ScrollView(.vertical) {
+                ForEach(self.splitIntoRows(columnCount: self.columnCount(maxWidth: proxy.size.width)),
+                                           id: \.self) { (row) in
                             FocusableGridRowView {
-                                HStack {
+                                HStack(alignment: .top) {
                                     ForEach(0 ..< row.count) { (index) in
                                         self.contentClosure(row[index])
                                     }
-                                }
+                                    
+                                }.padding(.horizontal)
+                                
                             }
+                            
                 }
+                
             }
+
         }
     }
 }
 
 private extension FlowableContentGridView {
+    func columnCount(maxWidth: CGFloat) -> Int {
+        min(max(Int(maxWidth / self.optimalCellWidth), 1), maxColumns)
+    }
+    
     func splitIntoRows(columnCount: Int) -> [[Model?]] {
         var result = [[Model?]]()
         var modelIndex = 0
@@ -76,6 +71,7 @@ private extension FlowableContentGridView {
 struct FlowableContentGrid_Previews: PreviewProvider {
     static var previews: some View {
         FlowableContentGridView(models: ColorModel.swiftUIColors(),
-                            maxCellWidth: 150) { (model: ColorModel?) in ColorSwatchView(model: model) }
+                            optimalCellWidth: 150,
+                            maxColumns: 5) { (model: ColorModel?) in ColorSwatchView(model: model) }
     }
 }
