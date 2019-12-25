@@ -64,7 +64,9 @@ private extension MainView {
                 // Forced unwrap is fine here, we just checked the type above.
                 FlowableContentGridView(models: models as! [ColorModel],
                                     optimalCellWidth: optimalWidth,
-                                    maxColumns: 5) { (model: ColorModel?) in ColorSwatchView(model: model) }
+                                    maxColumns: 6) { (model: ColorModel?) in
+                                        ColorSwatchView(model: model, maxWidth: optimalWidth)
+                }
                 
             } else if modelType == TextModel.self {
                 #if !os(watchOS)

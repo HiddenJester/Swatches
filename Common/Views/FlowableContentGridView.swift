@@ -12,7 +12,7 @@ struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
     /// The models to display
     let models: [Model]
     
-    /// The maximum width we'd like a CellView to occupy
+    /// The optimal width we'd like a CellView to occupy
     let optimalCellWidth: CGFloat
     
     /// The maximum number of columns to allow
@@ -25,21 +25,28 @@ struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
         GeometryReader { proxy in
             ScrollView(.vertical) {
                 ForEach(self.splitIntoRows(columnCount: self.columnCount(maxWidth: proxy.size.width)),
-                                           id: \.self) { (row) in
+                        id: \.self) { (row) in
                             FocusableRowView {
                                 HStack(alignment: .top) {
                                     ForEach(0 ..< row.count) { (index) in
-                                        self.contentClosure(row[index])
+                                        Group {
+                                            if row[index] != nil {
+                                                self.contentClosure(row[index])
+                                            } else {
+                                                EmptyView()
+                                            }
+                                        }
                                     }
                                     
-                                }.padding(.horizontal)
+                                }
+                                
                                 
                             }
                             
                 }
                 
             }
-
+            
         }
     }
 }
@@ -68,10 +75,14 @@ private extension FlowableContentGridView {
     }
 }
 
-struct FlowableContentGrid_Previews: PreviewProvider {
+struct FlowableContentGridView_Previews: PreviewProvider {
+    static let optimalWidth = CGFloat(150)
+    
     static var previews: some View {
         FlowableContentGridView(models: ColorModel.swiftUIColors(),
-                            optimalCellWidth: 150,
-                            maxColumns: 5) { (model: ColorModel?) in ColorSwatchView(model: model) }
+                                optimalCellWidth: optimalWidth,
+                                maxColumns: 5) { (model: ColorModel?) in
+                                    ColorSwatchView(model: model, maxWidth: optimalWidth)
+        }
     }
 }

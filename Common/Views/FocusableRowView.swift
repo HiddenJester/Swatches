@@ -53,9 +53,9 @@ struct FocusableRowView_Previews: PreviewProvider {
     static var previews: some View {
         FocusableRowView() {
             HStack {
-                ColorSwatchView(model: models[0])
+                ColorSwatchView(model: models[0], maxWidth: 150)
 
-                ColorSwatchView(model: models[1])
+                ColorSwatchView(model: models[1], maxWidth: 150)
             }
         }
     }
