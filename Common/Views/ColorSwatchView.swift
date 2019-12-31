@@ -15,14 +15,18 @@ struct ColorSwatchView: View {
     /// The `ColorModel` that will be rendered in this swatch.
     let model: ColorModel?
     
+    /// The maxWidth to use for the swatch.
+    let maxWidth: CGFloat
+    
     var body: some View {
         SwatchView(drawBackground: model != nil,
                    label: model?.name ?? " ",
-                   supportedOS: model?.supportedOS ?? .all) {
+                   supportedOS: model?.supportedOS ?? .all,
+                   maxWidth: maxWidth) {
             if self.model != nil {
                 ColorChipView(color: self.model!.color, drawBackground: true)
             } else {
-                ColorChipView(color: .clear, drawBackground: false)
+                EmptyView()
             }
         }
     }
@@ -35,18 +39,18 @@ struct ColorSwatch_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             HStack {
-                ColorSwatchView(model: wordy)
+                ColorSwatchView(model: wordy, maxWidth: 150)
 
-                ColorSwatchView(model: nil)
+                ColorSwatchView(model: nil, maxWidth: 0)
 
-                ColorSwatchView(model: secondary)
+                ColorSwatchView(model: secondary, maxWidth: 150)
 
             }
 
             HStack {
-                ColorSwatchView(model: wordy)
+                ColorSwatchView(model: wordy, maxWidth: 150)
 
-                ColorSwatchView(model: secondary)
+                ColorSwatchView(model: secondary, maxWidth: 150)
 
             }.environment(\.colorScheme, .dark)
                 .previewDisplayName("Dark Mode")

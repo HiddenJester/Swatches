@@ -9,11 +9,12 @@
 import SwiftUI
 
 /// A "grid" view that draws `TextSwatch` objects, along with a `TextField` for editing the sample string displayed in the swatches.
-/// The swatches themselves are rendered in a `SwatchSingleColumnGridView`.
-/// - Parameter rowModels: The raw `TextModel` objects that need to be rendered.
-struct TextSwatchSingleColumnGridView: View {
-    let rowModels: [TextModel]
+/// - Parameter models: The raw `TextModel` objects that need to be rendered.
+struct TextSwatchGridView: View {
+    let models: [TextModel]
     
+    let optimalTextWidth: CGFloat
+
     @State private var sample = "The quick brown fox jumps over the lazy dog."
     
     var body: some View {
@@ -30,18 +31,19 @@ struct TextSwatchSingleColumnGridView: View {
             }.overlay(RoundedRectangle.init(cornerRadius: 20.0).stroke())
             .padding()
             
-            ScrollView {
-                SwatchSingleColumnGridView(rowModels: rowModels) { (model) in
-                    TextSwatchView(sample: self.sample, model: model)
-                    
-                }
+            FlowableContentGridView(models: models,
+                                optimalCellWidth: optimalTextWidth,
+                                maxColumns: 4) { (model: TextModel?) in
+                                    TextSwatchView(sample: self.sample, model: model)
                 
-            }.padding(.vertical)
+            }
+            
         }
+        
     }
 }
 
-private extension TextSwatchSingleColumnGridView {
+private extension TextSwatchGridView {
     /// Creates a platform specific `TextFieldStyle` suitable for the sample text field.
     /// - Returns: On iOS or macOS this will return `RoundedBorderTestFieldStyle`. Since other platforms don't support this style
     ///     on other platforms this returns `DefaultTextFieldStyle`.
@@ -53,8 +55,8 @@ private extension TextSwatchSingleColumnGridView {
         #endif
     }
 }
-struct TextSwatchSingleColumnGridView_Previews: PreviewProvider {
+struct TextSwatchGridView_Previews: PreviewProvider {
     static var previews: some View {
-        TextSwatchSingleColumnGridView(rowModels: TextModel.textModels())
+        TextSwatchGridView(models: TextModel.textModels(), optimalTextWidth: 400)
     }
 }

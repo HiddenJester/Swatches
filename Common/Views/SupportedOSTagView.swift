@@ -31,21 +31,20 @@ private extension SupportedOSTagView {
     /// - Parameter forOS: The OS to check. Note that if you pass a set in for this (such as `iOSAndMac`) you will get a tag for the first OS that matches.
     ///     Since this function is private and the calls are hard-coded this is OK, just don't pass anything silly in.
     func tagView(forOS: SupportedOSOptions) -> some View {
+        let font: Font
+        
         #if targetEnvironment(macCatalyst)
         // On the Mac use a larger font …
-        let font = Font.subheadline
-        #elseif os(watchOS)
-        // And on the watch use a *smaller* font …
-        let font = Font.footnote
+        font = Font.subheadline
         #else
-        // But for iOS & tvOS use caption.
-        let font = Font.caption
+        font = Font.footnote
         #endif
         
         return HStack(spacing: 0) {
             textView(forOS: forOS)
             
             imageView(forOS: forOS)
+            
         }.font(font)
     }
     

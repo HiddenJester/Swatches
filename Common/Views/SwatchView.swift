@@ -23,26 +23,32 @@ struct SwatchView<Content>: View where Content: View {
     /// The Supported OSes for this swatch to draw.
     let supportedOS: SupportedOSOptions
     
+    /// If maxWidth is provided then maxWidth will be set on the frame.
+    let maxWidth: CGFloat?
+    
     /// The corner radius to use on the background and outline.
     private let cornerRadius = CGFloat(20.0)
 
     var body: some View {
         VStack() {
             HStack() {
-                content
+                content.padding([.leading, .top])
                 
                 if drawBackground {
                     SupportedOSTagView( value: supportedOS)
                     
                 }
-            }.padding(.horizontal)
+            }
             
             SwatchLabelView(text: label)
+                .padding([.horizontal, .bottom], 5)
             
         }.background(backgroundColor())
             .cornerRadius(cornerRadius)
             .overlay(RoundedRectangle(cornerRadius: cornerRadius)
                 .stroke(drawBackground ? Color.primary : Color.clear, lineWidth: 2))
+            .frame(maxWidth: maxWidth)
+            .padding(1) // Give us at least a point around the stroke so we can see it.
     }
     
     /// Create a new Swatch
@@ -50,14 +56,17 @@ struct SwatchView<Content>: View where Content: View {
     ///   - drawBackground: A Bool that controls both drawing a background and an outline.
     ///   - label: The text to display as the label for for the Swatch
     ///   - supportedOS: The SupportedOSOptions to draw.
+    ///   - maxWidth: If provided, this sets the maxWidth of the swatch frame.
     ///   - content: The actual content of the Swatch. This is a `@ViewBuilder` closure, so practically any SwiftUI view can be placed in a swatch.
     init(drawBackground: Bool,
          label: String,
          supportedOS: SupportedOSOptions,
+         maxWidth: CGFloat? = nil,
          @ViewBuilder _ content: @escaping () -> Content) {
         self.drawBackground = drawBackground
         self.label = label
         self.supportedOS = supportedOS
+        self.maxWidth = maxWidth
         self.content = content()
     }
 }
@@ -72,7 +81,7 @@ private extension SwatchView {
         }
         
         #if os(watchOS)
-        return .gray
+        return .fixedDarkGray
         #elseif os(tvOS)
         return .secondary
         #else
