@@ -20,21 +20,10 @@ struct ColorChipView: View {
     /// Set to true to draw the checkerboard background (and the outline).
     var drawBackground = true
     
-    /// The minimum dimension a chip will accept.
-    private let minChipEdge = CGFloat(50)
-    
-    /// The maxium dimension a chip will accept.
-    private let maxChipEdge = CGFloat(300)
-    
     var body: some View {
         RoundedRectangle(cornerRadius: 20.0)
-            .frame(minWidth: minChipEdge,
-                   maxWidth: maxChipEdge,
-                   minHeight: minChipEdge,
-                   maxHeight: maxChipEdge)
             .aspectRatio(1.0, contentMode: .fit)
             .foregroundColor(color)
-            .scaledToFit()
             .background(ChipBackgroundView(fillColor: drawBackground ? nil : .clear))
     }
 }

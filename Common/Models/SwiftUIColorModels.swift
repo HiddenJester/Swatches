@@ -28,7 +28,7 @@ extension ColorModel {
             ColorModel(color: .primary, name: "Primary", supportedOS: .all),
             ColorModel(color: .secondary, name: "Secondary", supportedOS: .all),
             
-            ColorModel(color: .accentColor, name: "AccentColor", supportedOS: .all),
+            ColorModel(color: .accentColor, name: "Accent Color", supportedOS: .all),
         ]
     }
     

@@ -49,25 +49,41 @@ private extension MainView {
     func gridView() -> some View {
         let models = self.gridModels[selectedGridIndex].models
         let modelType = models.count > 0 ? type(of: models[0]) : nil
-        
+        let optimalColorWidth: CGFloat
+        let colorColumnMax: Int
+        let optimalTextWidth: CGFloat
+
+        #if os(tvOS)
+        optimalColorWidth = 400
+        colorColumnMax = 6
+        optimalTextWidth = 600
+        #elseif targetEnvironment(macCatalyst)
+        optimalColorWidth = 250
+        colorColumnMax = 10
+        optimalTextWidth = 500
+        #else
+        optimalColorWidth = 150
+        colorColumnMax = 8
+        optimalTextWidth = 500
+        #endif
+
         return Group {
             if modelType == ColorModel.self {
-                #if os(watchOS)
-                // Use a single column grid for watch. Forced unwrap is fine here, we just checked the type above.
-                ColorSwatchSingleColumnGridView(rowModels: models as! [ColorModel])
-                #else
                 // Forced unwrap is fine here, we just checked the type above.
-                ColorSwatchGridView(rowModels: ColorSwatchGridView.mapModelsToRows(models as! [ColorModel]))
-                #endif
-                
+                FlowableContentGridView(models: models as! [ColorModel],
+                                    optimalCellWidth: optimalColorWidth,
+                                    maxColumns: colorColumnMax) { (model: ColorModel?) in
+                                        ColorSwatchView(model: model, maxWidth: optimalColorWidth)
+                }
+
             } else if modelType == TextModel.self {
                 #if !os(watchOS)
                 // Forced unwrap is fine here, we just checked the type above.
-                TextSwatchSingleColumnGridView(rowModels: models as! [TextModel])
+                TextSwatchGridView(models: models as! [TextModel], optimalTextWidth: optimalTextWidth)
                 #else
                 Text("Watch doesn't support TextGrid")
                 #endif
-                
+
             } else {
                 Text("Missing Grid Type!")
                 
@@ -92,15 +108,16 @@ private extension MainView {
 
 struct MainView_Previews: PreviewProvider {
     static let swiftUI = GridModel(name: "SwiftUI", models: ColorModel.swiftUIColors())
-    
+
     #if os(iOS) || os(tvOS)
     static let textView =  GridModel(name: "Text", models: TextModel.textModels())
-    
+    static let adaptable = GridModel(name: "Adaptable", models: ColorModel.adaptableColors())
+
     static var previews: some View {
         Group {
-            MainView(gridModels: [swiftUI, textView])
-
             MainView(gridModels: [textView, swiftUI])
+
+            MainView(gridModels: [adaptable, textView])
 
             MainView(gridModels: [swiftUI, textView])
                 .environment(\.colorScheme, .dark)
