@@ -49,33 +49,41 @@ private extension MainView {
     func gridView() -> some View {
         let models = self.gridModels[selectedGridIndex].models
         let modelType = models.count > 0 ? type(of: models[0]) : nil
-        let optimalWidth: CGFloat
+        let optimalColorWidth: CGFloat
+        let colorColumnMax: Int
+        let optimalTextWidth: CGFloat
 
         #if os(tvOS)
-        optimalWidth = 400
+        optimalColorWidth = 400
+        colorColumnMax = 6
+        optimalTextWidth = 600
         #elseif targetEnvironment(macCatalyst)
-        optimalWidth = 250
+        optimalColorWidth = 250
+        colorColumnMax = 10
+        optimalTextWidth = 500
         #else
-        optimalWidth = 150
+        optimalColorWidth = 150
+        colorColumnMax = 8
+        optimalTextWidth = 500
         #endif
 
         return Group {
             if modelType == ColorModel.self {
                 // Forced unwrap is fine here, we just checked the type above.
                 FlowableContentGridView(models: models as! [ColorModel],
-                                    optimalCellWidth: optimalWidth,
-                                    maxColumns: 6) { (model: ColorModel?) in
-                                        ColorSwatchView(model: model, maxWidth: optimalWidth)
+                                    optimalCellWidth: optimalColorWidth,
+                                    maxColumns: colorColumnMax) { (model: ColorModel?) in
+                                        ColorSwatchView(model: model, maxWidth: optimalColorWidth)
                 }
-                
+
             } else if modelType == TextModel.self {
                 #if !os(watchOS)
                 // Forced unwrap is fine here, we just checked the type above.
-                TextSwatchSingleColumnGridView(rowModels: models as! [TextModel])
+                TextSwatchGridView(models: models as! [TextModel], optimalTextWidth: optimalTextWidth)
                 #else
                 Text("Watch doesn't support TextGrid")
                 #endif
-                
+
             } else {
                 Text("Missing Grid Type!")
                 
@@ -107,9 +115,9 @@ struct MainView_Previews: PreviewProvider {
 
     static var previews: some View {
         Group {
-            MainView(gridModels: [adaptable, textView])
-
             MainView(gridModels: [textView, swiftUI])
+
+            MainView(gridModels: [adaptable, textView])
 
             MainView(gridModels: [swiftUI, textView])
                 .environment(\.colorScheme, .dark)
