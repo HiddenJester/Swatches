@@ -32,7 +32,7 @@ struct TextChipView: View {
                 .background(checkerboardBackground())
 
         }.foregroundColor(color)
-            .font(Font.largeTitle.bold())
+            .font(textFont())
         
     }
     
@@ -66,6 +66,16 @@ private extension TextChipView {
                 
             }
         }
+    }
+    
+    /// tvOS looks better with a smaller font for the text chips, so this function returns the proper font for the platform.
+    /// - Returns: on tvOS this is `Font.headline`. On other platforms this is `Font.largeTitle.bold()`
+    func textFont() -> Font {
+        #if os(tvOS)
+        return Font.headline
+        #else
+        return Font.largeTitle.bold()
+        #endif
     }
 }
 
