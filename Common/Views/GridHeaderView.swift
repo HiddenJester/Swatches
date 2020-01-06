@@ -27,7 +27,7 @@ struct GridHeaderView: View {
     
     var body: some View {
         VStack {
-            #if !os(watchOS) // watchOS doesn't support dark/light mode.
+            #if !os(watchOS) // watchOS doesn't support dark/light mode or have the About button present.
             HStack {
                 Button(action: { self.showAbout = true }) {
                     Text("About")
