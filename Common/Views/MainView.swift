@@ -6,8 +6,6 @@
 //  Copyright © 2019 HiddenJester Software. All rights reserved.
 //
 
-import Combine
-
 import SwiftUI
 
 /// This view is the main view for the app. It displays a `GridHeader` at the top, hosts the needed bindings for that view and then displays the selected
