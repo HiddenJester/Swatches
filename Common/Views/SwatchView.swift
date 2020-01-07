@@ -35,7 +35,7 @@ struct SwatchView<Content>: View where Content: View {
                 content.padding([.leading, .top])
                 
                 if drawBackground {
-                    SupportedOSTagView( value: supportedOS)
+                    SupportedOSTagView(value: supportedOS)
                     
                 }
             }
