@@ -40,9 +40,8 @@ struct MainView: View {
 }
 
 private extension MainView {
-    /// Returns the properly typed grid for the selected grid model. this checks the type of SwatchModel stored in the selected grid model. Once it knows
-    /// what type of grid to create it uses that grid's `mapModelsToRows` function to convert the `SwatchModels` into the proper specialization of row
-    /// models. Those row models are then used to construct the final grid.
+    /// Returns the properly typed grid for the selected grid model. This checks the type of SwatchModel stored in the selected grid model. Once it knows
+    /// what type of grid to create it creates a FlowableContentGrid containing the proper `SwatchView` objects for the models.
     /// - Returns: A grid view containing the models for the selected grid. If there's some sort of error it returns a simple `Text` describing the error.
     func gridView() -> some View {
         let models = self.gridModels[selectedGridIndex].models
