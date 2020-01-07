@@ -23,13 +23,8 @@ struct TextSwatchView: View {
         SwatchView(drawBackground: model != nil,
                    label: model?.name ?? " ",
                    supportedOS: model?.supportedOS ?? .all) {
-            HStack {
-                Spacer()
-
                 TextChipView(text: self.sample, color: self.model?.color ?? .clear)
-                
-                Spacer()
-            }
+
         }
     }
 }
