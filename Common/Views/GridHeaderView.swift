@@ -23,21 +23,30 @@ struct GridHeaderView: View {
     /// The strings to use in the grid picker.
     let gridNames: [String]
     
+    @State private var showAbout = false
+    
     var body: some View {
         VStack {
-            #if !os(watchOS) // watchOS doesn't support dark/light mode.
-            Toggle("Dark Mode", isOn: $darkModeSelected)
+            #if !os(watchOS) // watchOS doesn't support dark/light mode or have the About button present.
+            HStack {
+                Button(action: { self.showAbout = true }) {
+                    Text("About")
+                }.sheet(isPresented: self.$showAbout) {
+                    AboutView()
+                }
+                
+                Toggle("Dark Mode", isOn: self.$darkModeSelected)
+                
+            }
             #endif
             
-            Picker("Colors:", selection: $gridIndex) {
-                ForEach(0 ..< gridNames.count) { index in
+            Picker("Colors:", selection: self.$gridIndex) {
+                ForEach(0 ..< self.gridNames.count) { index in
                     Text(self.gridNames[index]).tag(index)
                         .minimumScaleFactor(0.75)
                 }
-            }.pickerStyle(pickerStyle())
+            }.pickerStyle(self.pickerStyle())
             
-            Divider()
-
         }.padding([.horizontal, .top])
     }
 }
@@ -58,7 +67,7 @@ private extension GridHeaderView {
 struct GridHeader_Previews: PreviewProvider {
     static var previews: some View {
         GridHeaderView(darkModeSelected: .constant(false),
-                   gridIndex: .constant(0),
-                   gridNames: ["SwiftUI", "Fixed"])
+                       gridIndex: .constant(0),
+                       gridNames: ["SwiftUI", "Fixed"])
     }
 }

@@ -33,7 +33,7 @@ struct MainView: View {
                        gridNames: gridModels.map { $0.name })
             
             gridView()
-            
+
         }.background(backgroundColor()) // Need an adaptive background or dark mode looks bad.
             .onAppear { self.darkModeSelected = (self.envScheme == .dark) } // Copy the environment value.
             .colorScheme(darkModeSelected ? .dark : .light) // Set the color scheme to the toggle value.
