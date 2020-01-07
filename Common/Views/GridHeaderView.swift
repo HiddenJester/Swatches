@@ -37,17 +37,19 @@ struct GridHeaderView: View {
                 
                 Toggle("Dark Mode", isOn: self.$darkModeSelected)
                 
-            }
+            }.padding([.horizontal, .top])
             #endif
             
-            Picker("Colors:", selection: self.$gridIndex) {
-                ForEach(0 ..< self.gridNames.count) { index in
-                    Text(self.gridNames[index]).tag(index)
-                        .minimumScaleFactor(0.75)
-                }
-            }.pickerStyle(self.pickerStyle())
+            if gridNames.count > 0 {
+                Picker("Colors:", selection: self.$gridIndex) {
+                    ForEach(0 ..< self.gridNames.count) { index in
+                        Text(self.gridNames[index]).tag(index)
+                            .minimumScaleFactor(0.75)
+                    }
+                }.pickerStyle(self.pickerStyle())
+            }
             
-        }.padding([.horizontal, .top])
+        }
     }
 }
 
