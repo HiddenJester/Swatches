@@ -75,7 +75,6 @@
 		3BB846D92398744000E90EA4 /* TextModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B549E732385DD3C004C16DE /* TextModel.swift */; };
 		3BC7A43923C3E49900429E1A /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC7A43823C3E49900429E1A /* SafariView.swift */; };
 		3BC7A43B23C3EB9300429E1A /* CodeSampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC7A43A23C3EB9300429E1A /* CodeSampleView.swift */; };
-		3BC7A43C23C3FBBA00429E1A /* CodeSampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC7A43A23C3EB9300429E1A /* CodeSampleView.swift */; };
 		3BC7A43D23C3FBBB00429E1A /* CodeSampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC7A43A23C3EB9300429E1A /* CodeSampleView.swift */; };
 		3BD63F7023B2AF7F00A7DCC8 /* FlowableContentGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD63F6F23B2AF7F00A7DCC8 /* FlowableContentGridView.swift */; };
 		3BD63F7123B2AF7F00A7DCC8 /* FlowableContentGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD63F6F23B2AF7F00A7DCC8 /* FlowableContentGridView.swift */; };
@@ -562,7 +561,6 @@
 				3B53C142239701270047B8EE /* SwiftUIColorModels.swift in Sources */,
 				3B53C1452397012D0047B8EE /* ChipBackgroundView.swift in Sources */,
 				3B53C1482397012D0047B8EE /* ColorSwatchView.swift in Sources */,
-				3BC7A43C23C3FBBA00429E1A /* CodeSampleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
