@@ -9,8 +9,9 @@
 import SwiftUI
 
 /// This view is the main view for the app. It displays a `GridHeader` at the top, hosts the needed bindings for that view and then displays the selected
-/// grid below. It also sets the dark mode Bool to make the environment when it appears.
+/// grid below. It also sets the dark mode Bool to match the environment when it appears.
 /// - Parameter gridModels: The grid models that can be displayed by this view.
+/// - Note: MainView *works* on tvOS but the UI requirements for tvOS needs a different design. So for tvOS look at the `TVMainView` struct.
 struct MainView: View {
     /// Need to access the environment's color scheme in order to set the initial vlaue of `darkModeSelected`
     @Environment(\.colorScheme) var envScheme: ColorScheme
@@ -44,13 +45,24 @@ private extension MainView {
     /// what type of grid to create it creates a FlowableContentGrid containing the proper `SwatchView` objects for the models.
     /// - Returns: A grid view containing the models for the selected grid. If there's some sort of error it returns a simple `Text` describing the error.
     func gridView() -> some View {
+        /// Convenience accessor to get at the selected grid's models.
         let models = self.gridModels[selectedGridIndex].models
+        
+        /// Determines what type of models are stored in `models`. Used to type the content of the grids.
         let modelType = models.count > 0 ? type(of: models[0]) : nil
+        
+        /// Platform dependent constant that is the ideal color swatch width.
         let optimalColorWidth: CGFloat
+        
+        /// Platform dependent constant that is the maximum number of columns we want in a color grid.
         let colorColumnMax: Int
+        
+        /// Platform dependent constant that is the ideal text swatch width.
         let optimalTextWidth: CGFloat
 
-        #if os(tvOS)
+        // Set the platform constants. Note that *watchOS* shares the same constants as iOS. This is fine because
+        // the watch is so narrow that it's going to constantly decide to have a single column display.
+        #if os(tvOS) // Not currently in use, but these values make a decent view on tvOS.
         optimalColorWidth = 400
         colorColumnMax = 6
         optimalTextWidth = 600
@@ -106,7 +118,7 @@ private extension MainView {
 struct MainView_Previews: PreviewProvider {
     static let swiftUI = GridModel(name: "SwiftUI", models: ColorModel.swiftUIColors())
 
-    #if os(iOS) || os(tvOS)
+    #if os(iOS) || os(tvOS) // watchOS doesn't support text models or adaptable colours.
     static let textView =  GridModel(name: "Text", models: TextModel.textModels())
     static let adaptable = GridModel(name: "Adaptable", models: ColorModel.adaptableColors())
 

@@ -11,8 +11,10 @@ import SwiftUI
 /// A "grid" view that draws `TextSwatch` objects, along with a `TextField` for editing the sample string displayed in the swatches.
 /// - Parameter models: The raw `TextModel` objects that need to be rendered.
 struct TextSwatchGridView: View {
+    /// The models to render in the grid.
     let models: [TextModel]
     
+    /// The optimalCellWidth to pass to the content grid.
     let optimalTextWidth: CGFloat
 
     /// The text to use as the sample for all of the swatches.

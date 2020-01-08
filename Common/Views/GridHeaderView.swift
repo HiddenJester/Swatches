@@ -8,11 +8,14 @@
 
 import SwiftUI
 
-/// The header view to draw at the top of the screen. This displays a switch that that controls whether the app is in dark mode and a picker that lists
-/// the grid names.
+/// The header view to draw at the top of the screen. This displays a switch that that controls whether the app is in dark mode, an about button and a picker that
+/// lists the grid names.
 /// - Parameter darkModeSelected: Binding to a Bool that controls whether the app is displaying in dark mode.
 /// - Parameter gridIndex: Binding to an Int that controls which grid is displayed.
-/// - Parameter gridNames: The strings to display in the grid picker. When a grid is selected `gridIndex` is updated.
+/// - Parameter gridNames: The strings to display in the grid picker. When a grid is selected `gridIndex` is updated. If the array is empty then no
+///     picker is displayed. (tvOS displays multiple arrays in single row horizontal scrollviews, so doesn't need a grid picker, but does want the
+/// - Note: watchOS doesn't display either the about button or the dark mode toggle, and tvOS doesn't display swatches in grids, so there is no grid picker on
+///     tvOS.
 struct GridHeaderView: View {
     /// A bool that controls whether the app is displaying in dark mode or not.
     @Binding var darkModeSelected: Bool
@@ -23,6 +26,7 @@ struct GridHeaderView: View {
     /// The strings to use in the grid picker.
     let gridNames: [String]
     
+    /// Is the about view showing?
     @State private var showAbout = false
     
     var body: some View {
