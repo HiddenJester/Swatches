@@ -19,7 +19,7 @@ struct ColorSwatchView: View {
     let maxWidth: CGFloat
     
     var body: some View {
-        SwatchView(drawBackground: model != nil,
+        SwatchView(drawBackgroundAndOutline: model != nil,
                    label: model?.name ?? " ",
                    supportedOS: model?.supportedOS ?? .all,
                    maxWidth: maxWidth) {

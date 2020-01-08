@@ -8,11 +8,9 @@
 
 import SwiftUI
 
-/// A view that draws a color "chip", potentially with a checkerboard background. The chip will will accept any size between 50 points and 300 points, but
-/// will maintain a square aspect ratio. The color drawn is specified in the `color` argument, and `drawBackground` controls whether the checkerboard
-/// and outline are drawn or not. The color chip is drawn with rounded corners.
-/// - Note: `ColorChip(color: .clear, drawBackground: false)` creates a transparent chip (*not* an `EmptyView()`) that is sized as
-///     described above.
+/// A view that draws a color "chip", potentially with a checkerboard background. The chip maintains a square aspect ratio. The color drawn is specified in the
+/// `color` argument, and `drawBackground` controls whether the checkerboard and outline are drawn or not. The color chip is drawn with rounded corners.
+/// - Note: `ColorChip(color: .clear, drawBackground: false)` creates a transparent chip (*not* an `EmptyView()`).
 struct ColorChipView: View {
     /// The color to draw in the chip.
     let color: Color

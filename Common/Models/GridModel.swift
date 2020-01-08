@@ -15,9 +15,13 @@ protocol SwatchModel {}
 /// The data needed to render a `SwatchGrid` of some ilk. The type of data stored in `models` will be used by `MainView` to determine the type of the
 /// grid that will be displayed.
 struct GridModel {
+    let id = UUID()
+    
     /// The name of the grid.
     let name: String
     
     /// The models that should be rendered when the grid is shown.
     let models: [SwatchModel]
 }
+
+extension GridModel: Identifiable {}

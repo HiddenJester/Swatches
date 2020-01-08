@@ -8,6 +8,8 @@
 
 import SwiftUI
 
+/// A screen that provides the URLs for the Color extension gist, this (Swatches) project on GitHub, as well as the HJS main webpage. If the OS supports
+/// a SFSafariView then the URLs will be clickable buttons.
 struct AboutView: View {
     /// This screen's presentation bool, manipulated by the Dismiss button.
     @Environment (\.presentationMode) var presentationMode

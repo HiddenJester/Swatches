@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+/// A view that displays a `SupportedOSOptions` value. The name of the OS is listed, with a green check if the OS is supported, or a red X if it is not.
 struct SupportedOSTagView: View {
     /// The value to use to display the tags.
     let value: SupportedOSOptions
