@@ -21,8 +21,7 @@ struct TVMainView: View {
     /// Storage for the dark mode Bool.
     @State private var darkModeSelected = false
 
-    /// Storage for the selected Grid index. Note that TVMainView doesn't actually *have* grid selection,  but the `GridHeader` needs this around
-    /// for simplicities sake.
+    /// Storage for the selected Grid index. Note that `TVMainView` doesn't actually *have* grid selection,  but the `GridHeader` a binding for this.
     @State private var selectedGridIndex = 0
 
     /// The text to use as the sample for all of the swatches.
