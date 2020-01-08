@@ -282,23 +282,23 @@
 		3BB3D5F2237617C7009CE90F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3BFBBA6B23BC02D600718837 /* AboutView.swift */,
 				3B549E8123860264004C16DE /* ChipBackgroundView.swift */,
+				3BC7A43A23C3EB9300429E1A /* CodeSampleView.swift */,
 				3BB3D5EE237613CB009CE90F /* ColorChipView.swift */,
 				3BB3D5F02376175A009CE90F /* ColorSwatchView.swift */,
 				3BD63F6F23B2AF7F00A7DCC8 /* FlowableContentGridView.swift */,
 				3B2C7ED0239B1D1A00F23ED0 /* FocusableView.swift */,
 				3B15EDA4237E035A008C54AF /* GridHeaderView.swift */,
 				3B76A62423765179007292F5 /* MainView.swift */,
-				3BC7A43E23C405ED00429E1A /* TVMainView.swift */,
+				3BC7A43823C3E49900429E1A /* SafariView.swift */,
 				3B2A482623A9C353004F2C8C /* SupportedOSTagView.swift */,
 				3B549E7B2385E8EE004C16DE /* SwatchLabelView.swift */,
 				3B549E7D2385FDF6004C16DE /* SwatchView.swift */,
 				3B549E7F2386020B004C16DE /* TextChipView.swift */,
 				3B549E712385DCF4004C16DE /* TextSwatchGridView.swift */,
 				3B549E792385E511004C16DE /* TextSwatchView.swift */,
-				3BFBBA6B23BC02D600718837 /* AboutView.swift */,
-				3BC7A43A23C3EB9300429E1A /* CodeSampleView.swift */,
-				3BC7A43823C3E49900429E1A /* SafariView.swift */,
+				3BC7A43E23C405ED00429E1A /* TVMainView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
