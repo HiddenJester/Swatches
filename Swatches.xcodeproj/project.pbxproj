@@ -336,6 +336,7 @@
 				3B2C7EA3239AD66700F23ED0 /* Sources */,
 				3B2C7EA4239AD66700F23ED0 /* Frameworks */,
 				3B2C7EA5239AD66700F23ED0 /* Resources */,
+				3BCA71B623C6A0C20093EF46 /* Set Version */,
 			);
 			buildRules = (
 			);
@@ -404,6 +405,7 @@
 				3BB3D5D32376135B009CE90F /* Sources */,
 				3BB3D5D42376135B009CE90F /* Frameworks */,
 				3BB3D5D52376135B009CE90F /* Resources */,
+				3BCA71B523C6A01F0093EF46 /* Set Version */,
 			);
 			buildRules = (
 			);
@@ -506,6 +508,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3BCA71B523C6A01F0093EF46 /* Set Version */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Set Version";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Common/setbuildversion.sh\n";
+		};
+		3BCA71B623C6A0C20093EF46 /* Set Version */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Set Version";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Common/setbuildversion.sh\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3B2C7EA3239AD66700F23ED0 /* Sources */ = {
