@@ -8,6 +8,15 @@
 
 import SwiftUI
 
+/// A platform-independent view that supports tvOS's concept of focus. On any platform other than tvOS this just renders the provided content. On tvOS a
+/// `focusScale` can be passed to use when the content has focus and the view will animate to/from that scale when it gains/loses focus. If no value is passed
+/// in then a default scale of `1.15` will be applied. Note that other platforms will accept a `focusScale`, but do not use it for anything.
+/// - Note: iOS does not support the `focusable()` modifier in iOS 13 (contrary to what was demonstrated at WWDC) & we don't need the animation
+///     on macOS or watchOS; so the only platform that actually *does* anything in this view is tvOS.
+/// - Note: SwiftUI on tvOS is still seems a bit janky. It can't separate the "focus" from the "unfocus" animation the way UIKit can. Also, this doesn't seem
+///     interruptible, reversible, or smooth AND it uses a LOT of CPU. 🤷‍♂️ I think the answer is that anything that needs focus in tvOS needs to be written in
+///     UIKit so it can access the deeper animation controls there. But honestly, for Swatches I don't care enough to do that, it's just a simple development utility.
+///     The ability to scroll through views is all that we need here, and see where the focus is.
 struct FocusableView<Content>: View where Content: View {
     /// The amount to scale the view when it has focus
     let focusScale: CGFloat
@@ -23,6 +32,11 @@ struct FocusableView<Content>: View where Content: View {
         
     }
     
+    /// Create a new FocusableView struct.
+    /// - Parameters:
+    ///   - focusScale: The scale to use when `content` has focus. Defaults to `1.15`. `content` will scale to/from this value when it gains/loses
+    ///     focus.
+    ///   - content: A `@ViewBuilder` that renders the actual content.
     init(focusScale: CGFloat = 1.15, @ViewBuilder _ content: @escaping () -> Content) {
         self.focusScale = focusScale
         self.content = content()
@@ -39,17 +53,12 @@ private extension FocusableView {
         return self.content
             .scaleEffect(self.scale)
             .padding()
-            // SwiftUI on tvOS is still a bit janky. You can't separate the "focus" from the "unfocus" animation
-            // the way UIKit can. Also, this doesn't seem interruptible, reversible, or smooth AND it uses a LOT of
-            // CPU. 🤷‍♂️ I think the answer is that anything that needs focus in tvOS needs to be written in UIKit so
-            // it can access the deeper animation controls there. But honestly, for Swatches I don't care enough to
-            // do that, it's just a simple development utility.
             .focusable() { focus in self.scale = focus ? self.focusScale : 1 }
             .animation(.default, value: self.scale)
 
-
         #else
         return content
+        
         #endif
     }
 }
