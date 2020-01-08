@@ -20,7 +20,7 @@ struct TextSwatchView: View {
     let model: TextModel?
 
     var body: some View {
-        SwatchView(drawBackground: model != nil,
+        SwatchView(drawBackgroundAndOutline: model != nil,
                    label: model?.name ?? " ",
                    supportedOS: model?.supportedOS ?? .all) {
                 TextChipView(text: self.sample, color: self.model?.color ?? .clear)
