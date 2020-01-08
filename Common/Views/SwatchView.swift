@@ -12,7 +12,7 @@ import SwiftUI
 /// `SwatchLabel` will be provided and drawn with the provided string. The background (and outline) are drawn with rounded corners.
 struct SwatchView<Content>: View where Content: View {
     /// Should we draw the background and outline?
-    let drawBackground: Bool
+    let drawBackgroundAndOutline: Bool
     
     /// The text to draw in the `SwatchLabel`
     let label: String
@@ -34,8 +34,8 @@ struct SwatchView<Content>: View where Content: View {
             HStack() {
                 content.padding([.leading, .top])
                 
-                if drawBackground {
-                    SupportedOSTagView( value: supportedOS)
+                if drawBackgroundAndOutline {
+                    SupportedOSTagView(value: supportedOS)
                     
                 }
             }
@@ -46,24 +46,24 @@ struct SwatchView<Content>: View where Content: View {
         }.background(backgroundColor())
             .cornerRadius(cornerRadius)
             .overlay(RoundedRectangle(cornerRadius: cornerRadius)
-                .stroke(drawBackground ? Color.primary : Color.clear, lineWidth: 2))
+                .stroke(drawBackgroundAndOutline ? Color.primary : Color.clear, lineWidth: 2))
             .frame(maxWidth: maxWidth)
             .padding(1) // Give us at least a point around the stroke so we can see it.
     }
     
     /// Create a new Swatch
     /// - Parameters:
-    ///   - drawBackground: A Bool that controls both drawing a background and an outline.
+    ///   - drawBackgroundAndOutline: A Bool that controls both drawing a background and an outline.
     ///   - label: The text to display as the label for for the Swatch
     ///   - supportedOS: The SupportedOSOptions to draw.
     ///   - maxWidth: If provided, this sets the maxWidth of the swatch frame.
     ///   - content: The actual content of the Swatch. This is a `@ViewBuilder` closure, so practically any SwiftUI view can be placed in a swatch.
-    init(drawBackground: Bool,
+    init(drawBackgroundAndOutline: Bool,
          label: String,
          supportedOS: SupportedOSOptions,
          maxWidth: CGFloat? = nil,
          @ViewBuilder _ content: @escaping () -> Content) {
-        self.drawBackground = drawBackground
+        self.drawBackgroundAndOutline = drawBackgroundAndOutline
         self.label = label
         self.supportedOS = supportedOS
         self.maxWidth = maxWidth
@@ -76,7 +76,7 @@ private extension SwatchView {
     /// - Returns: A `Color` for the background. For iOS and macOS this will be `systemFill`. watchOS and tvOS don't support that fill so this
     ///     returns `gray` on `watchOS` and `secondary` on tvOS.
     func backgroundColor() -> Color {
-        guard drawBackground else {
+        guard drawBackgroundAndOutline else {
             return .clear
         }
         
@@ -93,11 +93,11 @@ private extension SwatchView {
 struct Swatch_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            SwatchView(drawBackground: true, label: "Wordy Ass Background Test", supportedOS: .iOSAndMac) {
+            SwatchView(drawBackgroundAndOutline: true, label: "Wordy Ass Background Test", supportedOS: .iOSAndMac) {
                 ColorChipView(color: .blue)
             }
             
-            SwatchView(drawBackground: false, label: "Clear Test", supportedOS: .all) {
+            SwatchView(drawBackgroundAndOutline: false, label: "Clear Test", supportedOS: .all) {
                 ColorChipView(color: .clear)
             }
         }

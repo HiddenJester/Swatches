@@ -25,7 +25,7 @@ class TVAppDelegate: UIResponder, UIApplicationDelegate {
             GridModel(name: "Fixed", models: ColorModel.fixedColors()),
         ]
         // Create the `MainView` that renders the grids.
-        let contentView = MainView(gridModels: grids)
+        let contentView = TVMainView(gridModels: grids)
 
         // Use a UIHostingController as window root view controller.
         let window = UIWindow(frame: UIScreen.main.bounds)

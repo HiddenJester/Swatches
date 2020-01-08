@@ -9,7 +9,7 @@
 import SwiftUI
 
 /// Displays provided text in a monospaced font, while allowing a minimum scale of 0.75. By default the text is drawn in `.label` with a background color
-/// of `.systemGray4` (`.systemGray` on tvOS), but both colors may be overwritten.
+/// of `.systemGray4` (`.systemGray` on tvOS), but both colors may be overridden.
 struct CodeSampleView: View {
     /// The text to display in the monospaced font.
     let text: String

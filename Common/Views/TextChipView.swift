@@ -33,7 +33,8 @@ struct TextChipView: View {
 
         }.foregroundColor(color)
             .font(textFont())
-        
+            .multilineTextAlignment(.center)
+
     }
     
 }
