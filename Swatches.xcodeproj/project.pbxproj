@@ -352,6 +352,7 @@
 			buildConfigurationList = 3B53C13C2397002F0047B8EE /* Build configuration list for PBXNativeTarget "Swatches-watchOS" */;
 			buildPhases = (
 				3B53C10D2397002E0047B8EE /* Resources */,
+				3BFF980323C6A84C005E156C /* SetVersion */,
 				3B53C1342397002F0047B8EE /* Embed Watch Content */,
 			);
 			buildRules = (
@@ -369,6 +370,7 @@
 			buildConfigurationList = 3B53C13B2397002F0047B8EE /* Build configuration list for PBXNativeTarget "Swatches-watchOS WatchKit App" */;
 			buildPhases = (
 				3B53C1102397002E0047B8EE /* Resources */,
+				3BFF980123C6A40B005E156C /* Set Version */,
 				3B53C1372397002F0047B8EE /* Embed App Extensions */,
 			);
 			buildRules = (
@@ -388,6 +390,7 @@
 				3B53C11D2397002F0047B8EE /* Sources */,
 				3B53C11E2397002F0047B8EE /* Frameworks */,
 				3B53C11F2397002F0047B8EE /* Resources */,
+				3BFF980223C6A41E005E156C /* Set Version */,
 			);
 			buildRules = (
 			);
@@ -538,6 +541,60 @@
 			inputPaths = (
 			);
 			name = "Set Version";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Common/setbuildversion.sh\n";
+		};
+		3BFF980123C6A40B005E156C /* Set Version */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Set Version";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Common/setbuildversion.sh\n\n";
+		};
+		3BFF980223C6A41E005E156C /* Set Version */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Set Version";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Common/setbuildversion.sh\n";
+		};
+		3BFF980323C6A84C005E156C /* SetVersion */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SetVersion;
 			outputFileListPaths = (
 			);
 			outputPaths = (
