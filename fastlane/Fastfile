@@ -24,7 +24,7 @@ platform :ios do
   lane :icons do
 	  appicon(
 		appicon_devices: [:ipad, :iphone, :ios_marketing, :watch, :watch_marketing],
-	#	appicon_path: "MajorKey/Assets.xcassets"
+		appicon_path: "Common/Assets.xcassets"
 	  )
 	end
 end
