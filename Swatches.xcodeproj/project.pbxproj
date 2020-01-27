@@ -86,6 +86,7 @@
 		3BF94AB82387517800223BFE /* FixedColorModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF94AB72387517800223BFE /* FixedColorModels.swift */; };
 		3BFBBA6C23BC02D600718837 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFBBA6B23BC02D600718837 /* AboutView.swift */; };
 		3BFBBA6D23BC1FF800718837 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFBBA6B23BC02D600718837 /* AboutView.swift */; };
+		3BFC2D1F23DFA75B008F6B35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BB3D5E02376135C009CE90F /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -489,6 +490,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BFC2D1F23DFA75B008F6B35 /* Assets.xcassets in Resources */,
 				3B53C1192397002E0047B8EE /* Interface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
