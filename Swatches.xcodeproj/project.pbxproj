@@ -71,6 +71,8 @@
 		3BB3D5EF237613CB009CE90F /* ColorChipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB3D5EE237613CB009CE90F /* ColorChipView.swift */; };
 		3BB3D5F12376175A009CE90F /* ColorSwatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB3D5F02376175A009CE90F /* ColorSwatchView.swift */; };
 		3BB3D5F5237617EB009CE90F /* ColorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB3D5F4237617EB009CE90F /* ColorModel.swift */; };
+		3BB5C84723E8A7D4004AF637 /* SwatchesiOSScreenshotsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5C84623E8A7D4004AF637 /* SwatchesiOSScreenshotsUITests.swift */; };
+		3BB5C85123E8A92D004AF637 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5C85023E8A92D004AF637 /* SnapshotHelper.swift */; };
 		3BB846D92398744000E90EA4 /* TextModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B549E732385DD3C004C16DE /* TextModel.swift */; };
 		3BC7A43923C3E49900429E1A /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC7A43823C3E49900429E1A /* SafariView.swift */; };
 		3BC7A43B23C3EB9300429E1A /* CodeSampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC7A43A23C3EB9300429E1A /* CodeSampleView.swift */; };
@@ -103,6 +105,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 3B53C1202397002F0047B8EE;
 			remoteInfo = "Swatches-watchOS WatchKit Extension";
+		};
+		3BB5C84923E8A7D4004AF637 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3BB3D5CF2376135B009CE90F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3BB3D5D62376135B009CE90F;
+			remoteInfo = Swatches;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -170,6 +179,17 @@
 		3BB3D5EE237613CB009CE90F /* ColorChipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorChipView.swift; sourceTree = "<group>"; };
 		3BB3D5F02376175A009CE90F /* ColorSwatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSwatchView.swift; sourceTree = "<group>"; };
 		3BB3D5F4237617EB009CE90F /* ColorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorModel.swift; sourceTree = "<group>"; };
+		3BB5C84423E8A7D4004AF637 /* SwatchesiOSScreenshotsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwatchesiOSScreenshotsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3BB5C84623E8A7D4004AF637 /* SwatchesiOSScreenshotsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwatchesiOSScreenshotsUITests.swift; sourceTree = "<group>"; };
+		3BB5C84823E8A7D4004AF637 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3BB5C85023E8A92D004AF637 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
+		3BB5C85323E8AE0C004AF637 /* Pluginfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Pluginfile; sourceTree = "<group>"; };
+		3BB5C85423E8AE0C004AF637 /* Appfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; };
+		3BB5C85523E8AE0C004AF637 /* Fastfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; };
+		3BB5C85623E8AE0C004AF637 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		3BB5C85823E8AE0C004AF637 /* app_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app_icon.png; sourceTree = "<group>"; };
+		3BB5C85923E8AE0C004AF637 /* report.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = report.xml; sourceTree = "<group>"; };
+		3BB5C85A23E8AE0C004AF637 /* Snapfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Snapfile; sourceTree = "<group>"; };
 		3BC7A43823C3E49900429E1A /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		3BC7A43A23C3EB9300429E1A /* CodeSampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeSampleView.swift; sourceTree = "<group>"; };
 		3BC7A43E23C405ED00429E1A /* TVMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVMainView.swift; sourceTree = "<group>"; };
@@ -201,6 +221,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3BB5C84123E8A7D4004AF637 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -212,6 +239,7 @@
 				3BB3D5E82376135C009CE90F /* Info.plist */,
 				3BB3D5DA2376135B009CE90F /* AppDelegate.swift */,
 				3BB3D5DC2376135B009CE90F /* SceneDelegate.swift */,
+				3BB5C84523E8A7D4004AF637 /* SwatchesiOSScreenshotsUITests */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -253,6 +281,7 @@
 				3B53C1162397002E0047B8EE /* watchOS App */,
 				3B53C1252397002F0047B8EE /* watchOS Extension */,
 				3B2C7EA8239AD66700F23ED0 /* tvOS */,
+				3BB5C85223E8AE0C004AF637 /* fastlane */,
 				3BB3D5D82376135B009CE90F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -265,6 +294,7 @@
 				3B53C1122397002E0047B8EE /* Swatches.app */,
 				3B53C1212397002F0047B8EE /* Swatches-watchOS WatchKit Extension.appex */,
 				3B2C7EA7239AD66700F23ED0 /* Swatches.app */,
+				3BB5C84423E8A7D4004AF637 /* SwatchesiOSScreenshotsUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -317,6 +347,38 @@
 				3B549E752385DE22004C16DE /* TextModels.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		3BB5C84523E8A7D4004AF637 /* SwatchesiOSScreenshotsUITests */ = {
+			isa = PBXGroup;
+			children = (
+				3BB5C85023E8A92D004AF637 /* SnapshotHelper.swift */,
+				3BB5C84623E8A7D4004AF637 /* SwatchesiOSScreenshotsUITests.swift */,
+				3BB5C84823E8A7D4004AF637 /* Info.plist */,
+			);
+			path = SwatchesiOSScreenshotsUITests;
+			sourceTree = "<group>";
+		};
+		3BB5C85223E8AE0C004AF637 /* fastlane */ = {
+			isa = PBXGroup;
+			children = (
+				3BB5C85323E8AE0C004AF637 /* Pluginfile */,
+				3BB5C85423E8AE0C004AF637 /* Appfile */,
+				3BB5C85523E8AE0C004AF637 /* Fastfile */,
+				3BB5C85623E8AE0C004AF637 /* README.md */,
+				3BB5C85723E8AE0C004AF637 /* metadata */,
+				3BB5C85923E8AE0C004AF637 /* report.xml */,
+				3BB5C85A23E8AE0C004AF637 /* Snapfile */,
+			);
+			path = fastlane;
+			sourceTree = SOURCE_ROOT;
+		};
+		3BB5C85723E8AE0C004AF637 /* metadata */ = {
+			isa = PBXGroup;
+			children = (
+				3BB5C85823E8AE0C004AF637 /* app_icon.png */,
+			);
+			path = metadata;
 			sourceTree = "<group>";
 		};
 		3BDC325C237F39E300632A08 /* OSExtensions */ = {
@@ -420,13 +482,31 @@
 			productReference = 3BB3D5D72376135B009CE90F /* Swatches.app */;
 			productType = "com.apple.product-type.application";
 		};
+		3BB5C84323E8A7D4004AF637 /* SwatchesiOSScreenshotsUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3BB5C84D23E8A7D4004AF637 /* Build configuration list for PBXNativeTarget "SwatchesiOSScreenshotsUITests" */;
+			buildPhases = (
+				3BB5C84023E8A7D4004AF637 /* Sources */,
+				3BB5C84123E8A7D4004AF637 /* Frameworks */,
+				3BB5C84223E8A7D4004AF637 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3BB5C84A23E8A7D4004AF637 /* PBXTargetDependency */,
+			);
+			name = SwatchesiOSScreenshotsUITests;
+			productName = SwatchesiOSScreenshotsUITests;
+			productReference = 3BB5C84423E8A7D4004AF637 /* SwatchesiOSScreenshotsUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		3BB3D5CF2376135B009CE90F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1120;
+				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 1120;
 				ORGANIZATIONNAME = "HiddenJester Software";
 				TargetAttributes = {
@@ -444,6 +524,10 @@
 					};
 					3BB3D5D62376135B009CE90F = {
 						CreatedOnToolsVersion = 11.2;
+					};
+					3BB5C84323E8A7D4004AF637 = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = 3BB3D5D62376135B009CE90F;
 					};
 				};
 			};
@@ -465,6 +549,7 @@
 				3B53C1112397002E0047B8EE /* Swatches-watchOS WatchKit App */,
 				3B53C1202397002F0047B8EE /* Swatches-watchOS WatchKit Extension */,
 				3B2C7EA6239AD66700F23ED0 /* Swatches-tvOS */,
+				3BB5C84323E8A7D4004AF637 /* SwatchesiOSScreenshotsUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -509,6 +594,13 @@
 			files = (
 				3BB3D5E72376135C009CE90F /* LaunchScreen.storyboard in Resources */,
 				3BB3D5E12376135C009CE90F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3BB5C84223E8A7D4004AF637 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -700,6 +792,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3BB5C84023E8A7D4004AF637 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3BB5C84723E8A7D4004AF637 /* SwatchesiOSScreenshotsUITests.swift in Sources */,
+				3BB5C85123E8A92D004AF637 /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -712,6 +813,11 @@
 			isa = PBXTargetDependency;
 			target = 3B53C1202397002F0047B8EE /* Swatches-watchOS WatchKit Extension */;
 			targetProxy = 3B53C1232397002F0047B8EE /* PBXContainerItemProxy */;
+		};
+		3BB5C84A23E8A7D4004AF637 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3BB3D5D62376135B009CE90F /* Swatches */;
+			targetProxy = 3BB5C84923E8A7D4004AF637 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1059,6 +1165,44 @@
 			};
 			name = Release;
 		};
+		3BB5C84B23E8A7D4004AF637 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6LMYPJV5KV;
+				INFOPLIST_FILE = iOS/SwatchesiOSScreenshotsUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.hiddenjester.SwatchesiOSScreenshotsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Swatches;
+			};
+			name = Debug;
+		};
+		3BB5C84C23E8A7D4004AF637 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6LMYPJV5KV;
+				INFOPLIST_FILE = iOS/SwatchesiOSScreenshotsUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.hiddenjester.SwatchesiOSScreenshotsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Swatches;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1112,6 +1256,15 @@
 			buildConfigurations = (
 				3BB3D5EC2376135C009CE90F /* Debug */,
 				3BB3D5ED2376135C009CE90F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3BB5C84D23E8A7D4004AF637 /* Build configuration list for PBXNativeTarget "SwatchesiOSScreenshotsUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3BB5C84B23E8A7D4004AF637 /* Debug */,
+				3BB5C84C23E8A7D4004AF637 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
