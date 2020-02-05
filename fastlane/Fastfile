@@ -18,9 +18,7 @@ default_platform(:ios)
 platform :ios do
   desc "Build a release build"
   lane :release do
-  	# Note the screenshots are not doing a good job on the text. Sometimes there's extra garbage in the sample
-  	# string. So run that *manually* and scope them out before running release.
-  	# capture_screenshots
+  	capture_screenshots
   	build_app(scheme: "Swatches")
   	upload_to_app_store
   end
