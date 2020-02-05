@@ -1,0 +1,3 @@
+Swatches does not do any network communications or send any data to a server. There are no third party analytics packages installed in HJS apps.
+
+If you have opted-in to sharing diagnostic data with developers on your device then Apple may share a crash report but that crash report will not contain any personal data.

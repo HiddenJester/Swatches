@@ -2,13 +2,11 @@
 
 # A list of devices you want to take the screenshots from
 devices([
-   #"iPhone 8",
-    "iPhone 8 Plus",
-   "iPhone SE",
-   "iPhone 11",
-   "iPad Pro (12.9-inch) (3rd generation)",
-   "iPad Pro (9.7-inch)",
-   # "Apple TV 1080p"
+	"iPhone 8 Plus",
+	"iPhone SE",
+	"iPhone 11 Pro Max",
+	"iPad Pro (12.9-inch) (3rd generation)",
+	"iPad Pro (12.9-inch) (2nd generation)",
  ])
 
 # languages([
@@ -20,6 +18,10 @@ devices([
 
 # The name of the scheme which contains the UI Tests
 scheme("iOS Screenshots")
+
+output_simulator_logs(true)
+
+number_of_retries(3)
 
 # Where should the resulting screenshots be stored?
 # output_directory("./screenshots")
