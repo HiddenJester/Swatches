@@ -34,6 +34,7 @@
 		3B2C7ED1239B1D1A00F23ED0 /* FocusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2C7ED0239B1D1A00F23ED0 /* FocusableView.swift */; };
 		3B2C7ED2239B1D2800F23ED0 /* FocusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2C7ED0239B1D1A00F23ED0 /* FocusableView.swift */; };
 		3B2C7ED3239B1D2900F23ED0 /* FocusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2C7ED0239B1D1A00F23ED0 /* FocusableView.swift */; };
+		3B38FF1E23EA57A500A2E756 /* ReplaceTextXCUIElementExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B38FF1D23EA57A500A2E756 /* ReplaceTextXCUIElementExtension.swift */; };
 		3B53C1132397002E0047B8EE /* Swatches.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 3B53C1122397002E0047B8EE /* Swatches.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3B53C1192397002E0047B8EE /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B53C1172397002E0047B8EE /* Interface.storyboard */; };
 		3B53C1222397002F0047B8EE /* Swatches-watchOS WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3B53C1212397002F0047B8EE /* Swatches-watchOS WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -151,6 +152,7 @@
 		3B2C7EB3239AD66800F23ED0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3B2C7EB5239AD66800F23ED0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3B2C7ED0239B1D1A00F23ED0 /* FocusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusableView.swift; sourceTree = "<group>"; };
+		3B38FF1D23EA57A500A2E756 /* ReplaceTextXCUIElementExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceTextXCUIElementExtension.swift; sourceTree = "<group>"; };
 		3B5018B523A18F2200035A56 /* Swatches.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Swatches.entitlements; sourceTree = "<group>"; };
 		3B53C10F2397002E0047B8EE /* Swatches.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swatches.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B53C1122397002E0047B8EE /* Swatches.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swatches.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -354,6 +356,7 @@
 			children = (
 				3BB5C85023E8A92D004AF637 /* SnapshotHelper.swift */,
 				3BB5C84623E8A7D4004AF637 /* SwatchesiOSScreenshotsUITests.swift */,
+				3B38FF1D23EA57A500A2E756 /* ReplaceTextXCUIElementExtension.swift */,
 				3BB5C84823E8A7D4004AF637 /* Info.plist */,
 			);
 			path = SwatchesiOSScreenshotsUITests;
@@ -798,6 +801,7 @@
 			files = (
 				3BB5C84723E8A7D4004AF637 /* SwatchesiOSScreenshotsUITests.swift in Sources */,
 				3BB5C85123E8A92D004AF637 /* SnapshotHelper.swift in Sources */,
+				3B38FF1E23EA57A500A2E756 /* ReplaceTextXCUIElementExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
