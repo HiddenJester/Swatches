@@ -25,36 +25,35 @@ class SwatchesiOSScreenshotsUITests: XCTestCase {
 
     func testTakeScreenshots() {
         let app = XCUIApplication()
-        let darkModeSwitch = app.switches["Dark Mode"]
-        darkModeSwitch.tap()
-        snapshot("02Dark Mode")
-        
-        darkModeSwitch.tap()
+
+        // Take a shot of the SwiftUI grid.
         snapshot("01SwiftUI")
         
-        let adaptableButton = app/*@START_MENU_TOKEN@*/.buttons["Adaptable"]/*[[".segmentedControls.buttons[\"Adaptable\"]",".buttons[\"Adaptable\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
-        adaptableButton.tap()
+        // Turn on dark mode and take another shot.
+        app.switches["Dark Mode"].tap()
+        snapshot("02Dark Mode")
+        // Don't forget to turn dark mode back off.
+        app.switches["Dark Mode"].tap()
+
+        // Take a screenshot of the adaptable grid.
+        app.buttons["Adaptable"].tap()
         snapshot("03Adaptable")
         
-        let textButton = app/*@START_MENU_TOKEN@*/.buttons["Text"]/*[[".segmentedControls.buttons[\"Text\"]",".buttons[\"Text\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
-        textButton.tap()
-        let sampleTextTextField = app.textFields["Sample Text:"]
-        sampleTextTextField.tap()
-        // Trying to make the text field remove text is way too complicated. So do the stupid thing: hit delete a bunch.
-        let deleteKey = app/*@START_MENU_TOKEN@*/.keys["delete"]/*[[".keyboards.keys[\"delete\"]",".keys[\"delete\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
-        for _ in 0 ..< "The quick brown fox jumps over the lazy dog.".count {
-            deleteKey.tap()
-        }
-        sampleTextTextField.typeText("Custom Text")
-
+        // Take a screenshot of the text grid.
+        app.buttons["Text"].tap()
+        // The whole quick brown fox text is too long for screenshot purposes, replace the text with something shorter.
+        let field = app.textFields["Sample Text:"]
+        field.tap() // Put focus in the field.
+        field.replaceText(newString: "Dev Swatches")
         // Now dismiss the keyboard … 🙄
-        app/*@START_MENU_TOKEN@*/.buttons["Return"]/*[[".keyboards",".buttons[\"return\"]",".buttons[\"Return\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tap()
-
+        app.buttons["Return"].tap()
         snapshot("04Text")
         
-        app/*@START_MENU_TOKEN@*/.buttons["Fixed"]/*[[".segmentedControls.buttons[\"Fixed\"]",".buttons[\"Fixed\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        // Take a screenshot of the fixed grid.
+        app.buttons["Fixed"].tap()
         snapshot("05Fixed")
-        
+
+        // Take a screenshot of the about screen.
         app.buttons["About"].tap()
         snapshot("06About")
     }
