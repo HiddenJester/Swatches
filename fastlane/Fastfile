@@ -16,9 +16,13 @@
 default_platform(:ios)
 
 platform :ios do
-  desc "Description of what the lane does"
-  lane :custom_lane do
-    # add actions here: https://docs.fastlane.tools/actions
+  desc "Build a release build"
+  lane :release do
+  	# Note the screenshots are not doing a good job on the text. Sometimes there's extra garbage in the sample
+  	# string. So run that *manually* and scope them out before running release.
+  	# capture_screenshots
+  	build_app(scheme: "Swatches")
+  	upload_to_app_store
   end
   
   lane :icons do
