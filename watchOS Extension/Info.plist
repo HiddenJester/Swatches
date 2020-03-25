@@ -25,14 +25,12 @@
 		<key>NSExtensionAttributes</key>
 		<dict>
 			<key>WKAppBundleIdentifier</key>
-			<string>com.hiddenjester.Swatches-watchOS.watchkitapp</string>
+			<string>com.hiddenjester.swatches.watchkitapp</string>
 		</dict>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.watchkit</string>
 	</dict>
 	<key>WKExtensionDelegateClassName</key>
 	<string>$(PRODUCT_MODULE_NAME).ExtensionDelegate</string>
-	<key>WKWatchOnly</key>
-	<true/>
 </dict>
 </plist>
