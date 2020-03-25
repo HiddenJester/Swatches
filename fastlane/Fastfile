@@ -15,6 +15,16 @@
 
 default_platform(:ios)
 
+lane :certificates do
+  match(type: "development", app_identifier: ["com.hiddenjester.swatches",
+		"com.hiddenjester.swatches.watchkitapp",
+		"com.hiddenjester.swatches.watchkitapp.watchkitextension"])
+
+  match(type: "appstore", app_identifier: ["com.hiddenjester.swatches",
+		"com.hiddenjester.swatches.watchkitapp",
+		"com.hiddenjester.swatches.watchkitapp.watchkitextension"])
+end
+
 platform :ios do
   desc "Build a release build"
   lane :release do
