@@ -28,9 +28,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3B53C10E2397002E0047B8EE"
+               BlueprintIdentifier = "3BB3D5D62376135B009CE90F"
                BuildableName = "Swatches.app"
-               BlueprintName = "Swatches-watchOS"
+               BlueprintName = "Swatches"
                ReferencedContainer = "container:Swatches.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
