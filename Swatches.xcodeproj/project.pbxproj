@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -35,7 +35,6 @@
 		3B2C7ED2239B1D2800F23ED0 /* FocusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2C7ED0239B1D1A00F23ED0 /* FocusableView.swift */; };
 		3B2C7ED3239B1D2900F23ED0 /* FocusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2C7ED0239B1D1A00F23ED0 /* FocusableView.swift */; };
 		3B38FF1E23EA57A500A2E756 /* ReplaceTextXCUIElementExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B38FF1D23EA57A500A2E756 /* ReplaceTextXCUIElementExtension.swift */; };
-		3B53C1132397002E0047B8EE /* Swatches.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 3B53C1122397002E0047B8EE /* Swatches.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3B53C1192397002E0047B8EE /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B53C1172397002E0047B8EE /* Interface.storyboard */; };
 		3B53C1222397002F0047B8EE /* Swatches-watchOS WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3B53C1212397002F0047B8EE /* Swatches-watchOS WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3B53C1292397002F0047B8EE /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B53C1282397002F0047B8EE /* HostingController.swift */; };
@@ -86,6 +85,7 @@
 		3BD63F7423B2DEED00A7DCC8 /* GridModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B76A626237651C0007292F5 /* GridModel.swift */; };
 		3BD63F7523B2DEEE00A7DCC8 /* GridModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B76A626237651C0007292F5 /* GridModel.swift */; };
 		3BDC325E237F3A2900632A08 /* Color+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BDC325D237F3A2900632A08 /* Color+UIColor.swift */; };
+		3BF6CE61242C0FA2008501C7 /* Swatches.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 3B53C1122397002E0047B8EE /* Swatches.app */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3BF94AB82387517800223BFE /* FixedColorModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF94AB72387517800223BFE /* FixedColorModels.swift */; };
 		3BFBBA6C23BC02D600718837 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFBBA6B23BC02D600718837 /* AboutView.swift */; };
 		3BFBBA6D23BC1FF800718837 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFBBA6B23BC02D600718837 /* AboutView.swift */; };
@@ -93,13 +93,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3B53C1142397002E0047B8EE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3BB3D5CF2376135B009CE90F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3B53C1112397002E0047B8EE;
-			remoteInfo = "Swatches-watchOS WatchKit App";
-		};
 		3B53C1232397002F0047B8EE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3BB3D5CF2376135B009CE90F /* Project object */;
@@ -114,20 +107,16 @@
 			remoteGlobalIDString = 3BB3D5D62376135B009CE90F;
 			remoteInfo = Swatches;
 		};
+		3BF6CE5E242C0F32008501C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3BB3D5CF2376135B009CE90F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3B53C1112397002E0047B8EE;
+			remoteInfo = "Swatches-watchOS WatchKit App";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		3B53C1342397002F0047B8EE /* Embed Watch Content */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
-			dstSubfolderSpec = 16;
-			files = (
-				3B53C1132397002E0047B8EE /* Swatches.app in Embed Watch Content */,
-			);
-			name = "Embed Watch Content";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3B53C1372397002F0047B8EE /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -137,6 +126,17 @@
 				3B53C1222397002F0047B8EE /* Swatches-watchOS WatchKit Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3BF6CE60242C0F64008501C7 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				3BF6CE61242C0FA2008501C7 /* Swatches.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -154,7 +154,6 @@
 		3B2C7ED0239B1D1A00F23ED0 /* FocusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusableView.swift; sourceTree = "<group>"; };
 		3B38FF1D23EA57A500A2E756 /* ReplaceTextXCUIElementExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceTextXCUIElementExtension.swift; sourceTree = "<group>"; };
 		3B5018B523A18F2200035A56 /* Swatches.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Swatches.entitlements; sourceTree = "<group>"; };
-		3B53C10F2397002E0047B8EE /* Swatches.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swatches.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B53C1122397002E0047B8EE /* Swatches.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swatches.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B53C1182397002E0047B8EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		3B53C11C2397002F0047B8EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -197,6 +196,7 @@
 		3BC7A43E23C405ED00429E1A /* TVMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVMainView.swift; sourceTree = "<group>"; };
 		3BD63F6F23B2AF7F00A7DCC8 /* FlowableContentGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowableContentGridView.swift; sourceTree = "<group>"; };
 		3BDC325D237F3A2900632A08 /* Color+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+UIColor.swift"; sourceTree = "<group>"; };
+		3BF6CEB1242C16D2008501C7 /* setbuildversion.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = setbuildversion.sh; sourceTree = "<group>"; };
 		3BF94AB72387517800223BFE /* FixedColorModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedColorModels.swift; sourceTree = "<group>"; };
 		3BFBBA6B23BC02D600718837 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -292,7 +292,6 @@
 			isa = PBXGroup;
 			children = (
 				3BB3D5D72376135B009CE90F /* Swatches.app */,
-				3B53C10F2397002E0047B8EE /* Swatches.app */,
 				3B53C1122397002E0047B8EE /* Swatches.app */,
 				3B53C1212397002F0047B8EE /* Swatches-watchOS WatchKit Extension.appex */,
 				3B2C7EA7239AD66700F23ED0 /* Swatches.app */,
@@ -304,6 +303,7 @@
 		3BB3D5D92376135B009CE90F /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				3BF6CEB1242C16D2008501C7 /* setbuildversion.sh */,
 				3BDC325C237F39E300632A08 /* OSExtensions */,
 				3BB3D5F3237617D4009CE90F /* Models */,
 				3BB3D5F2237617C7009CE90F /* Views */,
@@ -413,31 +413,13 @@
 			productReference = 3B2C7EA7239AD66700F23ED0 /* Swatches.app */;
 			productType = "com.apple.product-type.application";
 		};
-		3B53C10E2397002E0047B8EE /* Swatches-watchOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3B53C13C2397002F0047B8EE /* Build configuration list for PBXNativeTarget "Swatches-watchOS" */;
-			buildPhases = (
-				3B53C10D2397002E0047B8EE /* Resources */,
-				3BFF980323C6A84C005E156C /* SetVersion */,
-				3B53C1342397002F0047B8EE /* Embed Watch Content */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				3B53C1152397002E0047B8EE /* PBXTargetDependency */,
-			);
-			name = "Swatches-watchOS";
-			productName = "Swatches-watchOS";
-			productReference = 3B53C10F2397002E0047B8EE /* Swatches.app */;
-			productType = "com.apple.product-type.application.watchapp2-container";
-		};
 		3B53C1112397002E0047B8EE /* Swatches-watchOS WatchKit App */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3B53C13B2397002F0047B8EE /* Build configuration list for PBXNativeTarget "Swatches-watchOS WatchKit App" */;
 			buildPhases = (
 				3B53C1102397002E0047B8EE /* Resources */,
-				3BFF980123C6A40B005E156C /* Set Version */,
 				3B53C1372397002F0047B8EE /* Embed App Extensions */,
+				3BFF980123C6A40B005E156C /* Set Version */,
 			);
 			buildRules = (
 			);
@@ -475,10 +457,12 @@
 				3BB3D5D42376135B009CE90F /* Frameworks */,
 				3BB3D5D52376135B009CE90F /* Resources */,
 				3BCA71B523C6A01F0093EF46 /* Set Version */,
+				3BF6CE60242C0F64008501C7 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				3BF6CE5F242C0F32008501C7 /* PBXTargetDependency */,
 			);
 			name = Swatches;
 			productName = Swatches;
@@ -516,9 +500,6 @@
 					3B2C7EA6239AD66700F23ED0 = {
 						CreatedOnToolsVersion = 11.2.1;
 					};
-					3B53C10E2397002E0047B8EE = {
-						CreatedOnToolsVersion = 11.2.1;
-					};
 					3B53C1112397002E0047B8EE = {
 						CreatedOnToolsVersion = 11.2.1;
 					};
@@ -548,7 +529,6 @@
 			projectRoot = "";
 			targets = (
 				3BB3D5D62376135B009CE90F /* Swatches */,
-				3B53C10E2397002E0047B8EE /* Swatches-watchOS */,
 				3B53C1112397002E0047B8EE /* Swatches-watchOS WatchKit App */,
 				3B53C1202397002F0047B8EE /* Swatches-watchOS WatchKit Extension */,
 				3B2C7EA6239AD66700F23ED0 /* Swatches-tvOS */,
@@ -564,13 +544,6 @@
 			files = (
 				3B2C7EB9239AD81E00F23ED0 /* Assets.xcassets in Resources */,
 				3B2C7EB4239AD66800F23ED0 /* LaunchScreen.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3B53C10D2397002E0047B8EE /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -674,24 +647,6 @@
 			inputPaths = (
 			);
 			name = "Set Version";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./Common/setbuildversion.sh\n";
-		};
-		3BFF980323C6A84C005E156C /* SetVersion */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SetVersion;
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -808,11 +763,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3B53C1152397002E0047B8EE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3B53C1112397002E0047B8EE /* Swatches-watchOS WatchKit App */;
-			targetProxy = 3B53C1142397002E0047B8EE /* PBXContainerItemProxy */;
-		};
 		3B53C1242397002F0047B8EE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 3B53C1202397002F0047B8EE /* Swatches-watchOS WatchKit Extension */;
@@ -822,6 +772,12 @@
 			isa = PBXTargetDependency;
 			target = 3BB3D5D62376135B009CE90F /* Swatches */;
 			targetProxy = 3BB5C84923E8A7D4004AF637 /* PBXContainerItemProxy */;
+		};
+		3BF6CE5F242C0F32008501C7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = 3B53C1112397002E0047B8EE /* Swatches-watchOS WatchKit App */;
+			targetProxy = 3BF6CE5E242C0F32008501C7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -865,7 +821,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hiddenjester.Swatches-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hiddenjester.swatches;
 				PRODUCT_NAME = Swatches;
 				SDKROOT = appletvos;
 				SWIFT_VERSION = 5.0;
@@ -886,7 +842,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hiddenjester.Swatches-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hiddenjester.swatches;
 				PRODUCT_NAME = Swatches;
 				SDKROOT = appletvos;
 				SWIFT_VERSION = 5.0;
@@ -895,45 +851,19 @@
 			};
 			name = Release;
 		};
-		3B53C1322397002F0047B8EE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6LMYPJV5KV;
-				INFOPLIST_FILE = "watchOS App/Info.plist";
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hiddenjester.Swatches-watchOS";
-				PRODUCT_NAME = Swatches;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		3B53C1332397002F0047B8EE /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6LMYPJV5KV;
-				INFOPLIST_FILE = "watchOS App/Info.plist";
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hiddenjester.Swatches-watchOS";
-				PRODUCT_NAME = Swatches;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
 		3B53C1352397002F0047B8EE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 6LMYPJV5KV;
 				IBSC_MODULE = Swatches_watchOS_WatchKit_Extension;
 				INFOPLIST_FILE = "watchOS App/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hiddenjester.Swatches-watchOS.watchkitapp";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hiddenjester.swatches.watchkitapp;
 				PRODUCT_NAME = Swatches;
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.hiddenjester.swatches.watchkitapp";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -947,12 +877,14 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 6LMYPJV5KV;
 				IBSC_MODULE = Swatches_watchOS_WatchKit_Extension;
 				INFOPLIST_FILE = "watchOS App/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hiddenjester.Swatches-watchOS.watchkitapp";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hiddenjester.swatches.watchkitapp;
 				PRODUCT_NAME = Swatches;
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.hiddenjester.swatches.watchkitapp";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -964,7 +896,8 @@
 		3B53C1382397002F0047B8EE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 6LMYPJV5KV;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "watchOS Extension/Info.plist";
@@ -973,8 +906,9 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hiddenjester.Swatches-watchOS.watchkitapp.watchkitextension";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hiddenjester.swatches.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "Swatches-watchOS WatchKit Extension";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.hiddenjester.swatches.watchkitapp.watchkitextension";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -986,7 +920,8 @@
 		3B53C1392397002F0047B8EE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 6LMYPJV5KV;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "watchOS Extension/Info.plist";
@@ -995,8 +930,9 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hiddenjester.Swatches-watchOS.watchkitapp.watchkitextension";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hiddenjester.swatches.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "Swatches-watchOS WatchKit Extension";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.hiddenjester.swatches.watchkitapp.watchkitextension";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -1239,15 +1175,6 @@
 			buildConfigurations = (
 				3B53C1352397002F0047B8EE /* Debug */,
 				3B53C1362397002F0047B8EE /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3B53C13C2397002F0047B8EE /* Build configuration list for PBXNativeTarget "Swatches-watchOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3B53C1322397002F0047B8EE /* Debug */,
-				3B53C1332397002F0047B8EE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
