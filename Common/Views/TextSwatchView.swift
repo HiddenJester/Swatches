@@ -40,5 +40,6 @@ struct TextSwatch_Previews: PreviewProvider {
                 .environment(\.colorScheme, .dark)
                 .previewDisplayName("Dark Mode")
         }
+        .previewLayout(PreviewLayout.sizeThatFits)
     }
 }

@@ -33,5 +33,6 @@ struct ColorChip_Previews: PreviewProvider {
             ColorChipView(color: .clear)
             ColorChipView(color: .clear, drawBackground: false)
         }
+        .previewLayout(PreviewLayout.sizeThatFits)
     }
 }

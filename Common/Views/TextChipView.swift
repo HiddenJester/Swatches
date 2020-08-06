@@ -93,6 +93,7 @@ struct TextChip_Previews: PreviewProvider {
             
             TextChipView(text: text, color: .clear)
         }
+        .previewLayout(PreviewLayout.sizeThatFits)
         
     }
 }

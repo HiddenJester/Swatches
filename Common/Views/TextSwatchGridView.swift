@@ -62,5 +62,7 @@ private extension TextSwatchGridView {
 struct TextSwatchGridView_Previews: PreviewProvider {
     static var previews: some View {
         TextSwatchGridView(models: TextModel.textModels(), optimalTextWidth: 400)
+            .previewLayout(PreviewLayout.sizeThatFits)
+
     }
 }
