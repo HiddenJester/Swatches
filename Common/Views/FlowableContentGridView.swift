@@ -37,6 +37,7 @@ struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
                                         Group {
                                             if row[index] != nil {
                                                 self.contentClosure(row[index])
+                                                    .frame(maxWidth: .infinity) // Make all cells equal width.
                                             } else {
                                                 EmptyView()
                                             }

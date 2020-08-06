@@ -23,6 +23,7 @@ struct ColorChipView: View {
             .aspectRatio(1.0, contentMode: .fit)
             .foregroundColor(color)
             .background(ChipBackgroundView(fillColor: drawBackground ? nil : .clear))
+            .frame(maxWidth: 400) // Arbitrary value designed to not take up a ridiculous amount of space.
     }
 }
 
