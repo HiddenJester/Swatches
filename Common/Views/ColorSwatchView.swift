@@ -33,8 +33,13 @@ struct ColorSwatchView: View {
 }
 
 struct ColorSwatch_Previews: PreviewProvider {
-    static let wordy = ColorModel(color: .blue, name: "Wordy Blue Label", supportedOS: .all)
-    static let secondary = ColorModel(color: .secondary, name: "Secondary", supportedOS: .iOSAndMac)
+    static let wordy = ColorModel(color: .green,
+                                  name: "Tertiary System Background",
+                                  supportedOS: .iOSAndMac)
+
+    static let secondary = ColorModel(color: .secondary,
+                                      name: "Secondary",
+                                      supportedOS: .iOSAndMac)
     
     static var previews: some View {
         Group {
@@ -52,9 +57,11 @@ struct ColorSwatch_Previews: PreviewProvider {
 
                 ColorSwatchView(model: secondary, maxWidth: 150)
 
-            }.environment(\.colorScheme, .dark)
-                .previewDisplayName("Dark Mode")
+            }
+            .environment(\.colorScheme, .dark)
+            .previewDisplayName("Dark Mode")
 
         }
+        .previewLayout(PreviewLayout.sizeThatFits)
     }
 }

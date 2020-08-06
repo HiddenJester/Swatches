@@ -37,6 +37,12 @@ private extension SwatchLabelView {
 
 struct SwatchLabel_Previews: PreviewProvider {
     static var previews: some View {
-        SwatchLabelView(text: "Testing Label")
+        VStack {
+            SwatchLabelView(text: "Testing Label")
+
+            SwatchLabelView(text: "Super Wordy Ass Multiline Label That is Really Quite Unreasonable")
+
+        }
+        .previewLayout(PreviewLayout.sizeThatFits)
     }
 }

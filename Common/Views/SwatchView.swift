@@ -101,5 +101,6 @@ struct Swatch_Previews: PreviewProvider {
                 ColorChipView(color: .clear)
             }
         }
+        .previewLayout(PreviewLayout.sizeThatFits)
     }
 }

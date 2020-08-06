@@ -131,13 +131,13 @@ struct MainView_Previews: PreviewProvider {
             MainView(gridModels: [swiftUI, textView])
                 .environment(\.colorScheme, .dark)
                 .previewDisplayName("Dark Mode")
-            
         }
+        .previewLayout(PreviewLayout.sizeThatFits)
     }
     #elseif os(watchOS)
     static var previews: some View {
         MainView(gridModels: [swiftUI])
-        
+            .previewLayout(PreviewLayout.sizeThatFits)
     }
     #endif
 }
