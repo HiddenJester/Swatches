@@ -69,12 +69,12 @@ struct FocusableView_Previews: PreviewProvider {
     static var previews: some View {
         HStack {
             FocusableView() {
-                ColorSwatchView(model: models[0], maxWidth: 350)
+                ColorSwatchView(model: models[0])
                 
             }
             
             FocusableView() {
-                ColorSwatchView(model: models[1], maxWidth: 350)
+                ColorSwatchView(model: models[1])
                 
             }
             

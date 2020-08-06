@@ -104,7 +104,7 @@ struct FlowableContentGridView_Previews: PreviewProvider {
         FlowableContentGridView(models: ColorModel.adaptableColors(),
                                 optimalCellWidth: optimalWidth,
                                 maxColumns: 5) { (model: ColorModel?) in
-                                    ColorSwatchView(model: model, maxWidth: optimalWidth)
+                                    ColorSwatchView(model: model)
                                         .previewLayout(PreviewLayout.sizeThatFits)
         }
         .previewLayout(PreviewLayout.sizeThatFits)

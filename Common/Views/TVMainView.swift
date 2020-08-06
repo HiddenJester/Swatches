@@ -79,14 +79,11 @@ private extension TVMainView {
     /// - Parameter models: The models to render.
     /// - Returns: a horizontally oriented `ScrollView` containing all of the `ColorSwatchViews`.
     func colorRow(models: [ColorModel]) -> some View {
-        /// The optimal width to use for color swatches.
-        let maxColorSwatchWidth = CGFloat(300)
-
         return ScrollView(.horizontal) {
             HStack {
                 ForEach(models,id: \.self) { model in
                     FocusableView() {
-                        ColorSwatchView(model: model, maxWidth: maxColorSwatchWidth)
+                        ColorSwatchView(model: model)
                     }
                 }
             }.padding()

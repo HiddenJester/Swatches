@@ -82,7 +82,7 @@ private extension MainView {
                 FlowableContentGridView(models: models as! [ColorModel],
                                     optimalCellWidth: optimalColorWidth,
                                     maxColumns: colorColumnMax) { (model: ColorModel?) in
-                                        ColorSwatchView(model: model, maxWidth: optimalColorWidth)
+                                        ColorSwatchView(model: model)
                 }
 
             } else if modelType == TextModel.self {

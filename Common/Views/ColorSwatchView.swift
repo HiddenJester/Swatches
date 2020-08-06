@@ -15,14 +15,10 @@ struct ColorSwatchView: View {
     /// The `ColorModel` that will be rendered in this swatch.
     let model: ColorModel?
     
-    /// The maxWidth to use for the swatch.
-    let maxWidth: CGFloat
-    
     var body: some View {
         SwatchView(drawBackgroundAndOutline: model != nil,
                    label: model?.name ?? " ",
-                   supportedOS: model?.supportedOS ?? .all,
-                   maxWidth: maxWidth) {
+                   supportedOS: model?.supportedOS ?? .all) {
             if self.model != nil {
                 ColorChipView(color: self.model!.color, drawBackground: true)
             } else {
@@ -44,18 +40,18 @@ struct ColorSwatch_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             HStack {
-                ColorSwatchView(model: wordy, maxWidth: 150)
+                ColorSwatchView(model: wordy)
 
-                ColorSwatchView(model: nil, maxWidth: 0)
+                ColorSwatchView(model: nil)
 
-                ColorSwatchView(model: secondary, maxWidth: 150)
+                ColorSwatchView(model: secondary)
 
             }
 
             HStack {
-                ColorSwatchView(model: wordy, maxWidth: 150)
+                ColorSwatchView(model: wordy)
 
-                ColorSwatchView(model: secondary, maxWidth: 150)
+                ColorSwatchView(model: secondary)
 
             }
             .environment(\.colorScheme, .dark)

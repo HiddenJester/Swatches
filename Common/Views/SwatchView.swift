@@ -23,9 +23,6 @@ struct SwatchView<Content>: View where Content: View {
     /// The Supported OSes for this swatch to draw.
     let supportedOS: SupportedOSOptions
     
-    /// If maxWidth is provided then maxWidth will be set on the frame.
-    let maxWidth: CGFloat?
-    
     /// The corner radius to use on the background and outline.
     private let cornerRadius = CGFloat(20.0)
 
@@ -47,7 +44,6 @@ struct SwatchView<Content>: View where Content: View {
             .cornerRadius(cornerRadius)
             .overlay(RoundedRectangle(cornerRadius: cornerRadius)
                 .stroke(drawBackgroundAndOutline ? Color.primary : Color.clear, lineWidth: 2))
-            .frame(maxWidth: maxWidth)
             .padding(1) // Give us at least a point around the stroke so we can see it.
     }
     
@@ -56,17 +52,14 @@ struct SwatchView<Content>: View where Content: View {
     ///   - drawBackgroundAndOutline: A Bool that controls both drawing a background and an outline.
     ///   - label: The text to display as the label for for the Swatch
     ///   - supportedOS: The SupportedOSOptions to draw.
-    ///   - maxWidth: If provided, this sets the maxWidth of the swatch frame.
     ///   - content: The actual content of the Swatch. This is a `@ViewBuilder` closure, so practically any SwiftUI view can be placed in a swatch.
     init(drawBackgroundAndOutline: Bool,
          label: String,
          supportedOS: SupportedOSOptions,
-         maxWidth: CGFloat? = nil,
          @ViewBuilder _ content: @escaping () -> Content) {
         self.drawBackgroundAndOutline = drawBackgroundAndOutline
         self.label = label
         self.supportedOS = supportedOS
-        self.maxWidth = maxWidth
         self.content = content()
     }
 }
