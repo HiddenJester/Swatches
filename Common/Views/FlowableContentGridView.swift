@@ -101,10 +101,12 @@ struct FlowableContentGridView_Previews: PreviewProvider {
     static let optimalWidth = CGFloat(150)
     
     static var previews: some View {
-        FlowableContentGridView(models: ColorModel.swiftUIColors(),
+        FlowableContentGridView(models: ColorModel.adaptableColors(),
                                 optimalCellWidth: optimalWidth,
                                 maxColumns: 5) { (model: ColorModel?) in
                                     ColorSwatchView(model: model, maxWidth: optimalWidth)
+                                        .previewLayout(PreviewLayout.sizeThatFits)
         }
+        .previewLayout(PreviewLayout.sizeThatFits)
     }
 }

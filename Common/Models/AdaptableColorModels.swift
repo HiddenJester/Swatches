@@ -15,7 +15,9 @@ extension ColorModel {
     /// `.label` and so on are placed in `textModels()` so they can be rendered in text swatches, not color ones.
     /// - Returns: An array of `ColorModel` that represents all of the adaptable colors.
     static func adaptableColors() -> [ColorModel] {
-        #if os(tvOS) // tvOS only supports a subset of the adaptable colors.
+        #if os(watchOS)
+        return [] // watchOS doesn't support the adaptable colors.
+        #elseif os(tvOS) // tvOS only supports a subset of the adaptable colors.
         return [
             ColorModel(color: .systemRed, name: "System Red", supportedOS: .notWatch),
             ColorModel(color: .systemGreen, name: "System Green", supportedOS: .notWatch),
