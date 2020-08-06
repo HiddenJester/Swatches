@@ -35,6 +35,9 @@
 		3B2C7ED2239B1D2800F23ED0 /* FocusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2C7ED0239B1D1A00F23ED0 /* FocusableView.swift */; };
 		3B2C7ED3239B1D2900F23ED0 /* FocusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2C7ED0239B1D1A00F23ED0 /* FocusableView.swift */; };
 		3B38FF1E23EA57A500A2E756 /* ReplaceTextXCUIElementExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B38FF1D23EA57A500A2E756 /* ReplaceTextXCUIElementExtension.swift */; };
+		3B42B82E24DB8A1500C634C3 /* CloserLabelToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B42B82D24DB8A1500C634C3 /* CloserLabelToggle.swift */; };
+		3B42B82F24DB8A1500C634C3 /* CloserLabelToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B42B82D24DB8A1500C634C3 /* CloserLabelToggle.swift */; };
+		3B42B83024DB8A1500C634C3 /* CloserLabelToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B42B82D24DB8A1500C634C3 /* CloserLabelToggle.swift */; };
 		3B53C1192397002E0047B8EE /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B53C1172397002E0047B8EE /* Interface.storyboard */; };
 		3B53C1222397002F0047B8EE /* Swatches-watchOS WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3B53C1212397002F0047B8EE /* Swatches-watchOS WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3B53C1292397002F0047B8EE /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B53C1282397002F0047B8EE /* HostingController.swift */; };
@@ -153,6 +156,7 @@
 		3B2C7EB5239AD66800F23ED0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3B2C7ED0239B1D1A00F23ED0 /* FocusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusableView.swift; sourceTree = "<group>"; };
 		3B38FF1D23EA57A500A2E756 /* ReplaceTextXCUIElementExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceTextXCUIElementExtension.swift; sourceTree = "<group>"; };
+		3B42B82D24DB8A1500C634C3 /* CloserLabelToggle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloserLabelToggle.swift; sourceTree = "<group>"; };
 		3B5018B523A18F2200035A56 /* Swatches.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Swatches.entitlements; sourceTree = "<group>"; };
 		3B53C1122397002E0047B8EE /* Swatches.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swatches.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B53C1182397002E0047B8EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -320,6 +324,7 @@
 				3BC7A43A23C3EB9300429E1A /* CodeSampleView.swift */,
 				3BB3D5EE237613CB009CE90F /* ColorChipView.swift */,
 				3BB3D5F02376175A009CE90F /* ColorSwatchView.swift */,
+				3B42B82D24DB8A1500C634C3 /* CloserLabelToggle.swift */,
 				3BD63F6F23B2AF7F00A7DCC8 /* FlowableContentGridView.swift */,
 				3B2C7ED0239B1D1A00F23ED0 /* FocusableView.swift */,
 				3B15EDA4237E035A008C54AF /* GridHeaderView.swift */,
@@ -674,6 +679,7 @@
 				3B2C7EBF239AD9B400F23ED0 /* FixedColorModels.swift in Sources */,
 				3B2C7EC4239AD9B400F23ED0 /* TextModels.swift in Sources */,
 				3BC7A44023C4067A00429E1A /* TVMainView.swift in Sources */,
+				3B42B83024DB8A1500C634C3 /* CloserLabelToggle.swift in Sources */,
 				3B2C7EBA239AD91D00F23ED0 /* Color+UIColor.swift in Sources */,
 				3B2C7EBD239AD9B400F23ED0 /* AdaptableColorModels.swift in Sources */,
 				3B2C7EBC239AD99100F23ED0 /* SwatchView.swift in Sources */,
@@ -702,6 +708,7 @@
 				3BA9404023AABF5100C9AB43 /* SupportedOSOptions.swift in Sources */,
 				3B53C1462397012D0047B8EE /* ColorChipView.swift in Sources */,
 				3B2C7ED2239B1D2800F23ED0 /* FocusableView.swift in Sources */,
+				3B42B82F24DB8A1500C634C3 /* CloserLabelToggle.swift in Sources */,
 				3B53C14A2397012D0047B8EE /* GridHeaderView.swift in Sources */,
 				3B53C12B2397002F0047B8EE /* ExtensionDelegate.swift in Sources */,
 				3BA9404223AABF6E00C9AB43 /* SupportedOSTagView.swift in Sources */,
@@ -728,6 +735,7 @@
 				3B549E722385DCF4004C16DE /* TextSwatchGridView.swift in Sources */,
 				3B2A482723A9C353004F2C8C /* SupportedOSTagView.swift in Sources */,
 				3BB3D5EF237613CB009CE90F /* ColorChipView.swift in Sources */,
+				3B42B82E24DB8A1500C634C3 /* CloserLabelToggle.swift in Sources */,
 				3BB3D5DB2376135B009CE90F /* AppDelegate.swift in Sources */,
 				3BDC325E237F3A2900632A08 /* Color+UIColor.swift in Sources */,
 				3BB3D5DD2376135B009CE90F /* SceneDelegate.swift in Sources */,
