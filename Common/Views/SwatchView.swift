@@ -29,7 +29,7 @@ struct SwatchView<Content>: View where Content: View {
     var body: some View {
         VStack() {
             HStack() {
-                content.padding([.leading, .top])
+                content
                 
                 if drawBackgroundAndOutline {
                     SupportedOSTagView(value: supportedOS)
@@ -38,13 +38,14 @@ struct SwatchView<Content>: View where Content: View {
             }
             
             SwatchLabelView(text: label)
-                .padding([.horizontal, .bottom], 5)
-            
-        }.background(backgroundColor())
-            .cornerRadius(cornerRadius)
-            .overlay(RoundedRectangle(cornerRadius: cornerRadius)
-                .stroke(drawBackgroundAndOutline ? Color.primary : Color.clear, lineWidth: 2))
-            .padding(1) // Give us at least a point around the stroke so we can see it.
+
+        }
+        .padding()
+        .background(backgroundColor())
+        .cornerRadius(cornerRadius)
+        .overlay(RoundedRectangle(cornerRadius: cornerRadius)
+                    .stroke(drawBackgroundAndOutline ? Color.primary : Color.clear, lineWidth: 2))
+        .padding(1) // Give us a point around the stroke so we can see it.
     }
     
     /// Create a new Swatch
