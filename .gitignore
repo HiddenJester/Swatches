@@ -62,10 +62,7 @@ Carthage/Build
 # For more information about the recommended setup visit:
 # https://docs.fastlane.tools/best-practices/source-control/#source-control
 
-fastlane/report.xml
-fastlane/Preview.html
-fastlane/screenshots
-fastlane/test_output
-
+# The Swatches repo is open source and a lot of the fastlane files ended up needing developer credentials, device UUIDs and the like. So see the private SwatchesFastlane repo to get fastlane configured and ignore the whole tree in the main repo.
+fastlane/
 
 .DS_Store
