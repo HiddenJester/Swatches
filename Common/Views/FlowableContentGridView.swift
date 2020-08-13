@@ -8,73 +8,147 @@
 
 import SwiftUI
 
-/// A generic container view that can arrange "cell" views into a grid. It takes a an "optimal" width for a cell, as well as a maximum count of columns to allow,
-/// as well as a closure that maps a `Model` object into a `CellView`. Given the optimal width of the cell and the available width it determines how many
-/// columns to flow the cells into.
-/// - Note: The "grid" is a loose one, notably cells can be different heights in a row. Also if the last row doesn't have a full list of cells then those cells will
-///     larger and not aligned into the same columns as the bulk of the view.
+/// (sigh) The previews don't dynamically run the `GeometryReaders` and update the column values. So jam some slight better defaults in if this is `true`.
+/// (The live preview *does* come up with better defaults, but that's not great for testing small layout tweaks.)
+//private let usePreviewDefaults = true
+private let usePreviewDefaults = false
+
+/// A generic container view that can arrange "cell" views into a grid. It takes a closure that maps a `Model` object into a `CellView` as well a
+/// a sample `Model` that can generate an cell with a desired width of the cell. The Grid renders a hidden `CellView` using `widthSampleModel` and
+/// uses the resulting width to calculate how many columns can be supported.
+/// - Note: The "grid" is a loose one, notably cells can be different heights in a row.
+/// - Note: on macOS & iPadOS the grid doesn't draw until the window is resized.
 struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
-    /// The models to display
+    /// The models to display.
     let models: [Model]
-    
-    /// The optimal width we'd like a CellView to occupy
-    let optimalCellWidth: CGFloat
-    
-    /// The maximum number of columns to allow
-    let maxColumns: Int
-    
+
+    /// A model that will generate the sample cell used to determine width. Primarily this is done so that dynamic type can be used and we still get a usable
+    /// number of columns. Note that if `CellView` can support multiline text then you don't want to provide the *longest* string you want, but it's
+    /// better to provide what you'd like a *single* line to represent. I'm currently using the word "Tertiary" as a label, meaning strings such as
+    /// "Tertiary System Background" will become three lines.
+    let widthSampleModel: Model
+
     /// A closure that takes an individual model and returns the proper view for that model.
     let contentClosure: (Model?) -> CellView
-    
+
+    /// Once `widthSampleModel` is rendered, the width of it is stored here in `columnWidth`.
+    @State private var columnWidth = CGFloat(usePreviewDefaults ? 150 : 0)
+
+    /// Once `columnWidth` is determined, we can divide the window width by that and generate the number of columns we want to use in the grid.
+    @State private var columnCount = Int((usePreviewDefaults ? 2 : 1))
+
     var body: some View {
-        GeometryReader { proxy in
-            ScrollView(.vertical) {
-                ForEach(self.splitIntoRows(columnCount: self.columnCount(gridWidth: proxy.size.width)),
-                        id: \.self) { (row) in
+        GeometryReader { geometry in
+            ZStack {
+                ColumnWidthFindingView(fullWidth: geometry.size.width,
+                                       columnWidth: $columnWidth,
+                                       columnCount: $columnCount) {
+                    self.contentClosure(widthSampleModel)
+                }
+                .hidden()
+
+                HStack {
+                    Spacer()
+
+                    ScrollView(.vertical) {
+                        ForEach(splitIntoRows(columnCount: columnCount), id: \.self) { (row) in
                             FocusableView() {
                                 HStack(alignment: .top) {
                                     ForEach(0 ..< row.count) { (index) in
-                                        Group {
-                                            if row[index] != nil {
-                                                self.contentClosure(row[index])
-                                                    .frame(maxWidth: .infinity) // Make all cells equal width.
-                                            } else {
-                                                EmptyView()
-                                            }
+                                        if row[index] != nil {
+                                            self.contentClosure(row[index])
+                                                .frame(width: columnWidth)
+                                        } else {
+                                            self.contentClosure(nil)
+                                                .frame(width: columnWidth)
                                         }
                                     }
-                                    
                                 }
-                                
-                                
                             }
-                            
+                        }
+                    }
+
+                    Spacer()
                 }
-                
             }
-            
         }
     }
 }
 
-private extension FlowableContentGridView {
-    /// Simple helper function that determine how many columns to display. This takes into account the width of the grid itself, the provided optimal cell width,
-    /// as well as the maximum number of columns allowed.
-    /// - Parameter gridWidth: The width of the overall grid. Acquired from a `GeometryReader` proxy.
-    /// - Returns: The number of columns the grid should render.
-    /// - Note: If `gridWidth` is less than `optimalCellWidth` this will return a minimum of 1 column, unless `maxColumns` is set to something
-    ///     dumb like 0 or a negative number. Do don't that.
-    func columnCount(gridWidth: CGFloat) -> Int {
-        min(max(Int(gridWidth / self.optimalCellWidth), 1), maxColumns)
+/// A view that takes a view, a full width value, and bindings for the desired column width and column count.
+private struct ColumnWidthFindingView<Content: View>: View {
+    /// The full width of the parent view to break into columns.
+    private let fullWidth: CGFloat
+
+    /// The final columnWidth will be stored in this binding.
+    private let columnWidth: Binding<CGFloat>
+
+    /// The final columanCount will be stored in this binding.
+    private let columnCount: Binding<Int>
+
+    /// A sample view to render and extract the width from.
+    private let content: Content
+
+    init(fullWidth: CGFloat,
+         columnWidth: Binding<CGFloat>,
+         columnCount: Binding<Int>,
+         @ViewBuilder content: () -> Content) {
+
+        self.columnWidth = columnWidth
+        self.fullWidth = fullWidth
+        self.columnCount = columnCount
+        self.content = content()
     }
-    
+
+    var body: some View {
+        content
+            .background(GeometryReader { geometry in
+                widthUpdatingView(width: geometry.size.width)
+            })
+    }
+}
+
+private extension ColumnWidthFindingView {
+    /// Returns a clear view that takes up the specfied width. This is used to calculate the changes we need for the binding.
+    /// - Parameter width: the width we want for a single cell.
+    /// - Returns: A dummy view that can be stuffed in a GeometryReader so the calculation gets made properly.
+    func widthUpdatingView(width: CGFloat) -> some View {
+        // Decrease the geometry width a hair so we don't shove RIGHT up to the margins in the event
+        // that the width is an exact multiple of sampleWidth and also leave some room for column spacing.
+        let scaledFullWidth = fullWidth * 0.95
+
+        // Boundscheck the input.
+        let boundedWidth = max(width, 1)
+
+        // This will change the views, so delay it slightly.
+        DispatchQueue.main.async {
+            // Animate the change so the screen doesn't flicker.
+            withAnimation(.linear(duration: 0.01)) {
+                // If the sample is wider than the full width, then just return full width and set column count to 1
+                if boundedWidth > scaledFullWidth {
+                    self.columnWidth.wrappedValue = scaledFullWidth
+                    self.columnCount.wrappedValue = 1
+                } else {
+                    self.columnWidth.wrappedValue = boundedWidth
+                    self.columnCount.wrappedValue = Int(scaledFullWidth / boundedWidth)
+                }
+            }
+        }
+
+        return Color.clear
+            .frame(width: width)
+    }
+}
+
+private extension FlowableContentGridView {
     /// A helper function that splits the model array into a two dimensional array with the given column count. This is suitable for iteration to generate rows
     /// of the final grid.
     /// - Parameter columnCount: The number of columns to break `models` into.
     /// - Returns: An array of `[Model?]` objects. Each individual array contains the models to render a single row of the grid.
     /// - Note: Because the last row may not have a full count for the column, the last row may contain some `nil` entries. There is no attempt to
     ///     "center" the remaining models, all of the `nils` will be at the end of the final row.
-    func splitIntoRows(columnCount: Int) -> [[Model?]] {
+    func splitIntoRows(columnCount unboundedColumnCount: Int) -> [[Model?]] {
+        let columnCount = max(unboundedColumnCount, 1)
         /// The accumulated final result.
         var result = [[Model?]]()
         
@@ -99,14 +173,10 @@ private extension FlowableContentGridView {
 }
 
 struct FlowableContentGridView_Previews: PreviewProvider {
-    static let optimalWidth = CGFloat(150)
-    
     static var previews: some View {
         FlowableContentGridView(models: ColorModel.adaptableColors(),
-                                optimalCellWidth: optimalWidth,
-                                maxColumns: 5) { (model: ColorModel?) in
-                                    ColorSwatchView(model: model)
-                                        .previewLayout(PreviewLayout.sizeThatFits)
+                                widthSampleModel: ColorModel.widthSample) { model in
+            ColorSwatchView(model: model)
         }
         .previewLayout(PreviewLayout.sizeThatFits)
     }

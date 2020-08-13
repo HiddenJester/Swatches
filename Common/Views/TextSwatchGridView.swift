@@ -14,9 +14,6 @@ struct TextSwatchGridView: View {
     /// The models to render in the grid.
     let models: [TextModel]
     
-    /// The optimalCellWidth to pass to the content grid.
-    let optimalTextWidth: CGFloat
-
     /// The text to use as the sample for all of the swatches.
     @State private var sample = "The quick brown fox jumps over the lazy dog."
     
@@ -31,18 +28,15 @@ struct TextSwatchGridView: View {
                     .disableAutocorrection(true)
                     .padding()
 
-            }.overlay(RoundedRectangle.init(cornerRadius: 20.0).stroke())
+            }
+            .overlay(RoundedRectangle.init(cornerRadius: 20.0).stroke())
             .padding()
             
             FlowableContentGridView(models: models,
-                                optimalCellWidth: optimalTextWidth,
-                                maxColumns: 4) { (model: TextModel?) in
-                                    TextSwatchView(sample: self.sample, model: model)
-                
+                                    widthSampleModel: TextModel.widthSample) { model in
+                TextSwatchView(sample: self.sample, model: model)
             }
-            
         }
-        
     }
 }
 
@@ -61,7 +55,7 @@ private extension TextSwatchGridView {
 
 struct TextSwatchGridView_Previews: PreviewProvider {
     static var previews: some View {
-        TextSwatchGridView(models: TextModel.textModels(), optimalTextWidth: 400)
+        TextSwatchGridView(models: TextModel.textModels())
             .previewLayout(PreviewLayout.sizeThatFits)
 
     }
