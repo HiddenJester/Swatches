@@ -24,7 +24,7 @@ struct SwatchView<Content>: View where Content: View {
     let supportedOS: SupportedOSOptions
     
     /// The corner radius to use on the background and outline.
-    private let cornerRadius = CGFloat(20.0)
+    private let cornerRadius = CGFloat(5.0)
 
     var body: some View {
         VStack() {

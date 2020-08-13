@@ -18,7 +18,7 @@ struct ChipBackgroundView: View {
     var fillColor: Color? = nil
     
     /// When the checkerboard is drawn, this is the `cornerRadius` used by the image.
-    private let cornerRadius = CGFloat(20)
+    private let cornerRadius = CGFloat(5)
 
     var body: some View {
         view()
@@ -54,5 +54,6 @@ struct ChipBackground_Previews: PreviewProvider {
 
             ChipBackgroundView(fillColor: .clear)
         }
+        .previewLayout(PreviewLayout.sizeThatFits)
     }
 }

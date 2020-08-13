@@ -17,13 +17,20 @@ struct ColorChipView: View {
     
     /// Set to true to draw the checkerboard background (and the outline).
     var drawBackground = true
+
+    // Arbitrary value designed to not take up a ridiculous amount of space.
+    #if os(tvOS)
+    let maxWidth = CGFloat(100)
+    #else
+    let maxWidth = CGFloat(50)
+    #endif
     
     var body: some View {
-        RoundedRectangle(cornerRadius: 20.0)
+        RoundedRectangle(cornerRadius: 5.0)
             .aspectRatio(1.0, contentMode: .fit)
             .foregroundColor(color)
             .background(ChipBackgroundView(fillColor: drawBackground ? nil : .clear))
-            .frame(maxWidth: 400) // Arbitrary value designed to not take up a ridiculous amount of space.
+            .frame(maxWidth: maxWidth)
     }
 }
 
