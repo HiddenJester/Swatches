@@ -62,3 +62,7 @@ Carthage/Build
 # The Swatches repo is open source and a lot of the fastlane files ended up needing developer credentials, device UUIDs and the like. So see the private SwatchesFastlane repo to get fastlane configured and ignore the whole tree in the main repo.
 fastlane/
 
+#Also, fastlane updates Gemfile & Gemfile.lock all the time and it mucks up setting up a new system
+Gemfile
+Gemfile.lock
+
