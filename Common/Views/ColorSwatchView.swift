@@ -14,11 +14,15 @@ import SwiftUI
 struct ColorSwatchView: View {
     /// The `ColorModel` that will be rendered in this swatch.
     let model: ColorModel?
+
+    /// Set a width to force the `CikirSwatchView` to that width. If 0 or nil is set for the width then the swatch will determine a normal intrinsic size.
+    let width: CGFloat?
     
     var body: some View {
         SwatchView(drawBackgroundAndOutline: model != nil,
                    label: model?.name ?? " ",
-                   supportedOS: model?.supportedOS ?? .all) {
+                   supportedOS: model?.supportedOS ?? .all,
+                   width: width) {
             if self.model != nil {
                 ColorChipView(color: self.model!.color, drawBackground: true)
             } else {
@@ -40,18 +44,18 @@ struct ColorSwatch_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             HStack {
-                ColorSwatchView(model: wordy)
+                ColorSwatchView(model: wordy, width: nil)
 
-                ColorSwatchView(model: nil)
+                ColorSwatchView(model: nil, width: nil)
 
-                ColorSwatchView(model: secondary)
+                ColorSwatchView(model: secondary, width: nil)
 
             }
 
             HStack {
-                ColorSwatchView(model: wordy)
+                ColorSwatchView(model: wordy, width: nil)
 
-                ColorSwatchView(model: secondary)
+                ColorSwatchView(model: secondary, width: nil)
 
             }
             .environment(\.colorScheme, .dark)

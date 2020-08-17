@@ -32,9 +32,8 @@ struct TextSwatchGridView: View {
             .overlay(RoundedRectangle.init(cornerRadius: 20.0).stroke())
             .padding()
             
-            FlowableContentGridView(models: models,
-                                    widthSampleModel: TextModel.widthSample) { model in
-                TextSwatchView(sample: self.sample, model: model)
+            FlowableContentGridView(models: models, widthSampleModel: TextModel.widthSample) {
+                TextSwatchView(sample: sample, model: $0, width: $1)
             }
         }
     }

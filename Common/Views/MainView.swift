@@ -55,9 +55,7 @@ private extension MainView {
         if modelType == ColorModel.self {
             // Forced unwrap is fine here, we just checked the type above.
             FlowableContentGridView(models: models as! [ColorModel],
-                                    widthSampleModel: ColorModel.widthSample) { (model: ColorModel?) in
-                ColorSwatchView(model: model)
-            }
+                                    widthSampleModel: ColorModel.widthSample) { ColorSwatchView(model: $0, width: $1) }
 
         } else if modelType == TextModel.self {
             #if !os(watchOS)

@@ -26,6 +26,10 @@ struct SwatchView<Content>: View where Content: View {
     /// The corner radius to use on the background and outline.
     private let cornerRadius = CGFloat(5.0)
 
+    /// If a width greater than zero is provided then the `SwatchView` will render with that width in the frame. If nil or 0 are passed in then the view
+    /// renders without a specified frame.
+    let width: CGFloat?
+
     var body: some View {
         VStack() {
             HStack() {
@@ -33,12 +37,10 @@ struct SwatchView<Content>: View where Content: View {
                 
                 if drawBackgroundAndOutline {
                     SupportedOSTagView(value: supportedOS)
-                    
                 }
             }
             
             SwatchLabelView(text: label)
-
         }
         .padding()
         .background(backgroundColor())
@@ -46,6 +48,7 @@ struct SwatchView<Content>: View where Content: View {
         .overlay(RoundedRectangle(cornerRadius: cornerRadius)
                     .stroke(drawBackgroundAndOutline ? Color.primary : Color.clear, lineWidth: 2))
         .padding(1) // Give us a point around the stroke so we can see it.
+        .frame(width: width)
     }
     
     /// Create a new Swatch
@@ -57,10 +60,16 @@ struct SwatchView<Content>: View where Content: View {
     init(drawBackgroundAndOutline: Bool,
          label: String,
          supportedOS: SupportedOSOptions,
+         width: CGFloat? = nil,
          @ViewBuilder _ content: @escaping () -> Content) {
         self.drawBackgroundAndOutline = drawBackgroundAndOutline
         self.label = label
         self.supportedOS = supportedOS
+        if let width = width, width > 0 {
+            self.width = width
+        } else {
+            self.width = nil
+        }
         self.content = content()
     }
 }

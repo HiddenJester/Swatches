@@ -8,11 +8,6 @@
 
 import SwiftUI
 
-/// (sigh) The previews don't dynamically run the `GeometryReaders` and update the column values. So jam some slight better defaults in if this is `true`.
-/// (The live preview *does* come up with better defaults, but that's not great for testing small layout tweaks.)
-//private let usePreviewDefaults = true
-private let usePreviewDefaults = false
-
 /// A generic container view that can arrange "cell" views into a grid. It takes a closure that maps a `Model` object into a `CellView` as well a
 /// a sample `Model` that can generate an cell with a desired width of the cell. The Grid renders a hidden `CellView` using `widthSampleModel` and
 /// uses the resulting width to calculate how many columns can be supported.
@@ -29,13 +24,13 @@ struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
     let widthSampleModel: Model
 
     /// A closure that takes an individual model and returns the proper view for that model.
-    let contentClosure: (Model?) -> CellView
+    let contentClosure: (Model?, CGFloat?) -> CellView
 
     /// Once `widthSampleModel` is rendered, the width of it is stored here in `columnWidth`.
-    @State private var columnWidth = CGFloat(usePreviewDefaults ? 150 : 0)
+    @State private var columnWidth = CGFloat(0)
 
     /// Once `columnWidth` is determined, we can divide the window width by that and generate the number of columns we want to use in the grid.
-    @State private var columnCount = Int((usePreviewDefaults ? 2 : 1))
+    @State private var columnCount = Int(0)
 
     var body: some View {
         GeometryReader { geometry in
@@ -43,7 +38,7 @@ struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
                 ColumnWidthFindingView(fullWidth: geometry.size.width,
                                        columnWidth: $columnWidth,
                                        columnCount: $columnCount) {
-                    self.contentClosure(widthSampleModel)
+                    self.contentClosure(widthSampleModel, nil)
                 }
                 .hidden()
 
@@ -56,20 +51,29 @@ struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
                                 HStack(alignment: .top) {
                                     ForEach(0 ..< row.count) { (index) in
                                         if row[index] != nil {
-                                            self.contentClosure(row[index])
-                                                .frame(width: columnWidth)
+                                            self.contentClosure(row[index], columnWidth)
                                         } else {
-                                            self.contentClosure(nil)
-                                                .frame(width: columnWidth)
+                                            self.contentClosure(nil, columnWidth)
                                         }
                                     }
                                 }
                             }
                         }
                     }
+                    .frame(minWidth: CGFloat(columnCount) * columnWidth)
 
                     Spacer()
                 }
+
+                // Old school debugging aid 😜
+//                VStack {
+//                    Text("Column Width: \(columnWidth)")
+//
+//                    Text("Column Count: \(columnCount)")
+//                }
+//                .foregroundColor(.red)
+//                .font(.title)
+//                .background(Color.gray)
             }
         }
     }
@@ -122,16 +126,13 @@ private extension ColumnWidthFindingView {
 
         // This will change the views, so delay it slightly.
         DispatchQueue.main.async {
-            // Animate the change so the screen doesn't flicker.
-            withAnimation(.linear(duration: 0.01)) {
-                // If the sample is wider than the full width, then just return full width and set column count to 1
-                if boundedWidth > scaledFullWidth {
-                    self.columnWidth.wrappedValue = scaledFullWidth
-                    self.columnCount.wrappedValue = 1
-                } else {
-                    self.columnWidth.wrappedValue = boundedWidth
-                    self.columnCount.wrappedValue = Int(scaledFullWidth / boundedWidth)
-                }
+            // If the sample is wider than the full width, then just return full width and set column count to 1
+            if boundedWidth > scaledFullWidth {
+                self.columnWidth.wrappedValue = scaledFullWidth
+                self.columnCount.wrappedValue = 1
+            } else {
+                self.columnWidth.wrappedValue = boundedWidth
+                self.columnCount.wrappedValue = Int(scaledFullWidth / boundedWidth)
             }
         }
 
@@ -175,9 +176,7 @@ private extension FlowableContentGridView {
 struct FlowableContentGridView_Previews: PreviewProvider {
     static var previews: some View {
         FlowableContentGridView(models: ColorModel.adaptableColors(),
-                                widthSampleModel: ColorModel.widthSample) { model in
-            ColorSwatchView(model: model)
-        }
-        .previewLayout(PreviewLayout.sizeThatFits)
+                                widthSampleModel: ColorModel.widthSample) { ColorSwatchView(model: $0, width: $1) }
+            .previewLayout(PreviewLayout.sizeThatFits)
     }
 }

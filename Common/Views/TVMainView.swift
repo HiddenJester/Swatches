@@ -83,7 +83,7 @@ private extension TVMainView {
             HStack {
                 ForEach(models,id: \.self) { model in
                     FocusableView() {
-                        ColorSwatchView(model: model)
+                        ColorSwatchView(model: model, width: nil)
                     }
                 }
             }.padding()
@@ -114,10 +114,8 @@ private extension TVMainView {
                     
                     ForEach(models,id: \.self) { model in
                         FocusableView(focusScale: 1.1) {
-                            TextSwatchView(sample: self.textSample, model: model)
-                            
+                            TextSwatchView(sample: self.textSample, model: model, width: nil)
                         }
-                        
                     }
                     
                     Spacer()
@@ -142,7 +140,6 @@ struct TVMainView_Previews: PreviewProvider {
             TVMainView(gridModels: [swiftUI, textView])
                 .environment(\.colorScheme, .dark)
                 .previewDisplayName("Dark Mode")
-            
         }
     }
 }
