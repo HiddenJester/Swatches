@@ -96,7 +96,10 @@ private extension SwatchView {
 struct Swatch_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            SwatchView(drawBackgroundAndOutline: true, label: "Wordy Ass Background Test", supportedOS: .iOSAndMac) {
+            SwatchView(drawBackgroundAndOutline: true,
+                       label: "Super Duper Wordy Ass Background Test",
+                       supportedOS: .iOSAndMac,
+                       width: 300) {
                 ColorChipView(color: .blue)
             }
             
