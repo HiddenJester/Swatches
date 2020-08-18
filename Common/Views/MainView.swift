@@ -30,8 +30,8 @@ struct MainView: View {
             GridHeaderView(darkModeSelected: $darkModeSelected,
                        gridIndex: $selectedGridIndex,
                        gridNames: gridModels.map { $0.name })
-            
-            gridView()
+            // Animate changing the selected grid
+            withAnimation { gridView(models: gridModels[selectedGridIndex].models) }
         }
         .background(backgroundColor()) // Need an adaptive background or dark mode looks bad.
         .onAppear { self.darkModeSelected = (self.envScheme == .dark) } // Copy the environment value.
@@ -42,13 +42,12 @@ struct MainView: View {
 
 private extension MainView {
     /// Returns the properly typed grid for the selected grid model. This checks the type of SwatchModel stored in the selected grid model. Once it knows
-    /// what type of grid to create it creates a FlowableContentGrid containing the proper `SwatchView` objects for the models.
+    /// what type of grid to create it creates a FlowableContentGrid containing the proper `SwatchView` objects for the models
+    /// - Parameter models: The models to render in the returned grid view.
     /// - Returns: A grid view containing the models for the selected grid. If there's some sort of error it returns a simple `Text` describing the error.
     @ViewBuilder
-    func gridView() -> some View {
-        /// Convenience accessor to get at the selected grid's models.
-        let models = self.gridModels[selectedGridIndex].models
-        
+    func gridView(models: [SwatchModel]) -> some View {
+
         /// Determines what type of models are stored in `models`. Used to type the content of the grids.
         let modelType = models.count > 0 ? type(of: models[0]) : nil
         
