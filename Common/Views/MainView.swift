@@ -33,7 +33,9 @@ struct MainView: View {
             // Animate changing the selected grid
             withAnimation { gridView(models: gridModels[selectedGridIndex].models) }
         }
-        .background(backgroundColor()) // Need an adaptive background or dark mode looks bad.
+        .background(backgroundColor()
+                        .edgesIgnoringSafeArea(.all) // Background is full screen, all the time.
+        ) // Need an adaptive background or dark mode looks bad.
         .onAppear { self.darkModeSelected = (self.envScheme == .dark) } // Copy the environment value.
         .colorScheme(darkModeSelected ? .dark : .light) // Set the color scheme to the toggle value.
         .animation(.default, value: darkModeSelected) // Animate the color scheme toggling.
@@ -72,12 +74,10 @@ private extension MainView {
     
     /// Returns a `Color` suitable for the background color of the `MainView`.
     /// - Returns: A `Color` for the background. On iOS or macOS this will always be `.systemBackground`. watchOS doesn't support adaptive
-    ///     colors, so on watchOS this is always `.black`. tvOS supports adaptive colors, but not the system background 🤷‍♂️, so it returns `.clear`.
+    ///     colors, so on watchOS this is always `.black`. (tvOS doesn't use include `MainView`, see `TVMainView` instead.
     func backgroundColor() -> Color {
         #if os(watchOS)
         return .black
-        #elseif os(tvOS)
-        return .clear
         #else
         return .systemBackground
         #endif
