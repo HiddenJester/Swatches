@@ -34,10 +34,8 @@ struct SwatchView<Content>: View where Content: View {
         VStack() {
             HStack() {
                 content
-                
-                if drawBackgroundAndOutline {
-                    SupportedOSTagView(value: supportedOS)
-                }
+
+                SupportedOSTagView(value: supportedOS, opacity: drawBackgroundAndOutline ? 1 : 0)
             }
             
             SwatchLabelView(text: label)

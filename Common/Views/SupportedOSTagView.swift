@@ -12,7 +12,10 @@ import SwiftUI
 struct SupportedOSTagView: View {
     /// The value to use to display the tags.
     let value: SupportedOSOptions
-    
+
+    /// The opacity to draw the tag at.
+    let opacity: Double
+
     var body: some View {
         VStack(alignment: .trailing, spacing: 0) {
             tagView(forOS: .iOS)
@@ -22,8 +25,8 @@ struct SupportedOSTagView: View {
             tagView(forOS: .tvOS)
             
             tagView(forOS: .watchOS)
-
-        }.layoutPriority(1)
+        }
+        .opacity(opacity)
     }
 }
 
@@ -92,9 +95,13 @@ private extension SupportedOSTagView {
 struct SupportedOSTagView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            SupportedOSTagView(value: .all)
-            
-            SupportedOSTagView(value: .iOSAndMac)
+            SupportedOSTagView(value: .all, opacity: 1)
+
+            SupportedOSTagView(value: .iOSAndMac, opacity: 1)
+
+            SupportedOSTagView(value: .all, opacity: 0)
+                .previewDisplayName("Opacity: 0")
         }
+        .previewLayout(PreviewLayout.sizeThatFits)
     }
 }

@@ -12,7 +12,6 @@ import SwiftUI
 /// a sample `Model` that can generate an cell with a desired width of the cell. The Grid renders a hidden `CellView` using `widthSampleModel` and
 /// uses the resulting width to calculate how many columns can be supported.
 /// - Note: The "grid" is a loose one, notably cells can be different heights in a row.
-/// - Note: on macOS & iPadOS the grid doesn't draw until the window is resized.
 struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
     /// The models to display.
     let models: [Model]
@@ -47,15 +46,9 @@ struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
 
                     ScrollView(.vertical) {
                         ForEach(splitIntoRows(columnCount: columnCount), id: \.self) { (row) in
-                            FocusableView() {
-                                HStack(alignment: .top) {
-                                    ForEach(0 ..< row.count) { (index) in
-                                        if row[index] != nil {
-                                            self.contentClosure(row[index], columnWidth)
-                                        } else {
-                                            self.contentClosure(nil, columnWidth)
-                                        }
-                                    }
+                            HeightSyncedRow {
+                                ForEach(row, id: \.self) { model in
+                                    contentClosure(model, columnWidth)
                                 }
                             }
                         }
@@ -75,6 +68,53 @@ struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
 //                .font(.title)
 //                .background(Color.gray)
             }
+        }
+    }
+}
+
+// TODO: This is temp testing scaffolding. Refactor before using.
+private struct HeightSyncedRow<Content: View>: View {
+    private let content: Content
+    @State private var childHeight: CGFloat?
+
+    init(@ViewBuilder content: () -> Content) {
+        self.content = content()
+    }
+
+    var body: some View {
+        HStack {
+            content
+                .syncingHeightIfLarger(than: $childHeight)
+                .frame(height: childHeight)
+        }
+    }
+}
+
+// TODO: This is temp testing scaffolding. Refactor before using.
+private struct HeightPreferenceKey: PreferenceKey {
+    static let defaultValue: CGFloat = 0
+
+    static func reduce(value: inout CGFloat,
+                       nextValue: () -> CGFloat) {
+        value = nextValue()
+    }
+}
+
+// TODO: This is temp testing scaffolding. Refactor before using.
+extension View {
+    func syncingHeightIfLarger(than height: Binding<CGFloat?>) -> some View {
+        background(GeometryReader { proxy in
+            // We have to attach our preference assignment to
+            // some form of view, so we just use a clear color
+            // here to make that view completely transparent:
+            Color.clear.preference(
+                key: HeightPreferenceKey.self,
+                value: proxy.size.height
+            )
+        })
+        .onPreferenceChange(HeightPreferenceKey.self) {
+            print("New height: \($0)")
+            height.wrappedValue = max(height.wrappedValue ?? 0, $0)
         }
     }
 }
