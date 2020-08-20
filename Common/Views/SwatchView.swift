@@ -26,27 +26,32 @@ struct SwatchView<Content>: View where Content: View {
     /// The corner radius to use on the background and outline.
     private let cornerRadius = CGFloat(5.0)
 
-    /// If a width greater than zero is provided then the `SwatchView` will render with that width in the frame. If nil or 0 are passed in then the view
+    /// If a size not equal to `.zero` is provided then the `SwatchView` will render with that size in the frame. If nil or 0 are passed in then the view
     /// renders without a specified frame.
-    let width: CGFloat?
+    let size: CGSize?
 
     var body: some View {
-        VStack() {
+        VStack(spacing: 0) {
             HStack() {
                 content
 
                 SupportedOSTagView(value: supportedOS, opacity: drawBackgroundAndOutline ? 1 : 0)
             }
-            
+            .padding(.horizontal)
+
+            Spacer()
+
             SwatchLabelView(text: label)
+                .padding(.horizontal, 2) /// *Tiny* bit of horizontal padding so the text doesn't drive up against the border.
         }
-        .padding()
+        .padding(.vertical)
+        .frame(width: size?.width, height: size?.height)
+        .overlay(RoundedRectangle(cornerRadius: cornerRadius)
+                    .inset(by: 1)
+                    .stroke(drawBackgroundAndOutline ? Color.primary : Color.clear, lineWidth: 2)
+        )
         .background(backgroundColor())
         .cornerRadius(cornerRadius)
-        .overlay(RoundedRectangle(cornerRadius: cornerRadius)
-                    .stroke(drawBackgroundAndOutline ? Color.primary : Color.clear, lineWidth: 2))
-        .padding(1) // Give us a point around the stroke so we can see it.
-        .frame(width: width)
     }
     
     /// Create a new Swatch
@@ -58,15 +63,15 @@ struct SwatchView<Content>: View where Content: View {
     init(drawBackgroundAndOutline: Bool,
          label: String,
          supportedOS: SupportedOSOptions,
-         width: CGFloat? = nil,
+         size: CGSize? = nil,
          @ViewBuilder _ content: @escaping () -> Content) {
         self.drawBackgroundAndOutline = drawBackgroundAndOutline
         self.label = label
         self.supportedOS = supportedOS
-        if let width = width, width > 0 {
-            self.width = width
+        if let size = size, size != .zero {
+            self.size = size
         } else {
-            self.width = nil
+            self.size = nil
         }
         self.content = content()
     }
@@ -92,16 +97,18 @@ private extension SwatchView {
 }
 
 struct Swatch_Previews: PreviewProvider {
+    static let size = CGSize(width: 200, height: 100)
+
     static var previews: some View {
         Group {
             SwatchView(drawBackgroundAndOutline: true,
-                       label: "Super Duper Wordy Ass Background Test",
+                       label: "Super Duper Wordy Ass Label Test",
                        supportedOS: .iOSAndMac,
-                       width: 300) {
+                       size: nil) {
                 ColorChipView(color: .blue)
             }
             
-            SwatchView(drawBackgroundAndOutline: false, label: "Clear Test", supportedOS: .all) {
+            SwatchView(drawBackgroundAndOutline: true, label: "Clear Test", supportedOS: .all, size: size) {
                 ColorChipView(color: .clear)
             }
         }

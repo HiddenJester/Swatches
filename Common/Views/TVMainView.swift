@@ -83,7 +83,7 @@ private extension TVMainView {
             HStack {
                 ForEach(models,id: \.self) { model in
                     FocusableView() {
-                        ColorSwatchView(model: model, width: nil)
+                        ColorSwatchView(model: model, size: nil)
                     }
                 }
             }.padding()
@@ -114,7 +114,7 @@ private extension TVMainView {
                     
                     ForEach(models,id: \.self) { model in
                         FocusableView(focusScale: 1.1) {
-                            TextSwatchView(sample: self.textSample, model: model, width: nil)
+                            TextSwatchView(sample: self.textSample, model: model, size: nil)
                         }
                     }
                     

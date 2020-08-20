@@ -16,6 +16,7 @@ struct SwatchLabelView: View {
     
     var body: some View {
         Text(text)
+            .font(.headline)
             .fixedSize(horizontal: false, vertical: true) // Make the text word-wrap into multi-line, not truncate
             .foregroundColor(color())
             .truncationMode(.middle)

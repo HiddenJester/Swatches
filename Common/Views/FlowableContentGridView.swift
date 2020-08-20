@@ -23,10 +23,14 @@ struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
     let widthSampleModel: Model
 
     /// A closure that takes an individual model and returns the proper view for that model.
-    let contentClosure: (Model?, CGFloat?) -> CellView
+    let contentClosure: (Model?, CGSize?) -> CellView
 
     /// Once `widthSampleModel` is rendered, the width of it is stored here in `columnWidth`.
-    @State private var columnWidth = CGFloat(0)
+    @State private var cellWidth = CGFloat(0)
+
+    /// This value is set by calling `syncingHeightIfLarger(than:)` in order to find the tallest cell in the whole grid and use it as a frame height
+    /// for all 
+    @State private var cellHeight = CGFloat(0)
 
     /// Once `columnWidth` is determined, we can divide the window width by that and generate the number of columns we want to use in the grid.
     @State private var columnCount = Int(0)
@@ -35,7 +39,7 @@ struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
         GeometryReader { geometry in
             ZStack {
                 ColumnWidthFindingView(fullWidth: geometry.size.width,
-                                       columnWidth: $columnWidth,
+                                       columnWidth: $cellWidth,
                                        columnCount: $columnCount) {
                     self.contentClosure(widthSampleModel, nil)
                 }
@@ -46,14 +50,15 @@ struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
 
                     ScrollView(.vertical) {
                         ForEach(splitIntoRows(columnCount: columnCount), id: \.self) { (row) in
-                            HeightSyncedRow {
+                            HStack {
                                 ForEach(row, id: \.self) { model in
-                                    contentClosure(model, columnWidth)
+                                    contentClosure(model, CGSize(width: cellWidth, height: cellHeight))
+                                        .syncingHeightIfLarger(than: $cellHeight)
                                 }
                             }
                         }
                     }
-                    .frame(minWidth: CGFloat(columnCount) * columnWidth)
+                    .frame(minWidth: CGFloat(columnCount) * cellWidth)
 
                     Spacer()
                 }
@@ -73,26 +78,8 @@ struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
 }
 
 // TODO: This is temp testing scaffolding. Refactor before using.
-private struct HeightSyncedRow<Content: View>: View {
-    private let content: Content
-    @State private var childHeight: CGFloat?
-
-    init(@ViewBuilder content: () -> Content) {
-        self.content = content()
-    }
-
-    var body: some View {
-        HStack {
-            content
-                .syncingHeightIfLarger(than: $childHeight)
-                .frame(height: childHeight)
-        }
-    }
-}
-
-// TODO: This is temp testing scaffolding. Refactor before using.
 private struct HeightPreferenceKey: PreferenceKey {
-    static let defaultValue: CGFloat = 0
+    static let defaultValue = CGFloat(0)
 
     static func reduce(value: inout CGFloat,
                        nextValue: () -> CGFloat) {
@@ -101,9 +88,9 @@ private struct HeightPreferenceKey: PreferenceKey {
 }
 
 // TODO: This is temp testing scaffolding. Refactor before using.
-extension View {
-    func syncingHeightIfLarger(than height: Binding<CGFloat?>) -> some View {
-        background(GeometryReader { proxy in
+private extension View {
+    func syncingHeightIfLarger(than height: Binding<CGFloat>) -> some View {
+        return background(GeometryReader { proxy in
             // We have to attach our preference assignment to
             // some form of view, so we just use a clear color
             // here to make that view completely transparent:
@@ -113,8 +100,7 @@ extension View {
             )
         })
         .onPreferenceChange(HeightPreferenceKey.self) {
-            print("New height: \($0)")
-            height.wrappedValue = max(height.wrappedValue ?? 0, $0)
+            height.wrappedValue = max(height.wrappedValue, $0 * 1.02)
         }
     }
 }
@@ -168,12 +154,12 @@ private extension ColumnWidthFindingView {
         DispatchQueue.main.async {
             // If the sample is wider than the full width, then just return full width and set column count to 1
             if boundedWidth > scaledFullWidth {
-                self.columnWidth.wrappedValue = scaledFullWidth
                 self.columnCount.wrappedValue = 1
             } else {
-                self.columnWidth.wrappedValue = boundedWidth
                 self.columnCount.wrappedValue = Int(scaledFullWidth / boundedWidth)
             }
+            // Now, let the columns take up as much space as possible.
+            self.columnWidth.wrappedValue = scaledFullWidth / CGFloat(self.columnCount.wrappedValue)
         }
 
         return Color.clear
@@ -216,7 +202,7 @@ private extension FlowableContentGridView {
 struct FlowableContentGridView_Previews: PreviewProvider {
     static var previews: some View {
         FlowableContentGridView(models: ColorModel.adaptableColors(),
-                                widthSampleModel: ColorModel.widthSample) { ColorSwatchView(model: $0, width: $1) }
+                                widthSampleModel: ColorModel.widthSample) { ColorSwatchView(model: $0, size: $1) }
             .previewLayout(PreviewLayout.sizeThatFits)
     }
 }

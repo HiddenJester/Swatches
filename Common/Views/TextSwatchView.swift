@@ -17,14 +17,14 @@ struct TextSwatchView: View {
     /// The text model to render in this swatch.
     let model: TextModel?
 
-    /// Set a width to force the `TextSwatchView` to that width. If 0 or nil is set for the width then the swatch will determine a normal intrinsic size.
-    let width: CGFloat?
+    /// Set a size to force the `TextSwatchView` to that size. If `.zero` or nil is set for the width then the swatch will determine a normal intrinsic size.
+    let size: CGSize?
 
     var body: some View {
         SwatchView(drawBackgroundAndOutline: model != nil,
                    label: model?.name ?? " ",
                    supportedOS: model?.supportedOS ?? .all,
-                   width: width) { TextChipView(text: self.sample, color: self.model?.color ?? .clear) }
+                   size: size) { TextChipView(text: self.sample, color: self.model?.color ?? .clear) }
     }
 }
 
@@ -33,9 +33,9 @@ struct TextSwatch_Previews: PreviewProvider {
     static let model = TextModel(color: .link, name: "Link", supportedOS: [.iOS, .macOS, .tvOS])
     static var previews: some View {
         Group {
-            TextSwatchView(sample: sample, model: model, width: nil)
+            TextSwatchView(sample: sample, model: model, size: nil)
 
-            TextSwatchView(sample: sample, model: model, width: nil)
+            TextSwatchView(sample: sample, model: model, size: nil)
                 .environment(\.colorScheme, .dark)
                 .previewDisplayName("Dark Mode")
         }

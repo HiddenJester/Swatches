@@ -21,9 +21,7 @@ struct ChipBackgroundView: View {
     private let cornerRadius = CGFloat(5)
 
     var body: some View {
-        view()
-            .overlay(RoundedRectangle(cornerRadius: cornerRadius)
-                .stroke(fillColor != .clear ? Color.black : Color.clear, lineWidth: 2))
+        backgroundView()
     }
 }
 
@@ -31,15 +29,24 @@ private extension ChipBackgroundView {
     /// Helper function that checks `drawCheckerboard` and returns a single view. This makes appying the `overlay` modifier for the outline cleaner.
     /// - Returns: If `drawCheckerboard` is true it returns a tiled checkerboard `Image` with rounded corners. If it is false then it returns just
     ///     `Color.clear`.
-    func view() -> some View {
-        if fillColor == nil {
-            return RoundedRectangle(cornerRadius: cornerRadius)
-                .foregroundColor(.clear)
-                .background(Image("Checkerboard").resizable(resizingMode: .tile).opacity(1))
+    func backgroundView() -> some View {
+        /// Can't use if let here, the test is *specifically* if fillColor == Color.clear
+        if let fillColor = fillColor {
+            return Image("Checkerboard")
+                .resizable(resizingMode: .tile)
+                .cornerRadius(cornerRadius)
+                .opacity(0)
+                .background(fillColor
+                                .cornerRadius(cornerRadius)
+                )
         } else {
-            return RoundedRectangle(cornerRadius: cornerRadius)
-                .foregroundColor(fillColor)
-                .background(Image("Checkerboard").resizable(resizingMode: .tile).opacity(0))
+            return Image("Checkerboard")
+                .resizable(resizingMode: .tile)
+                .cornerRadius(cornerRadius)
+                .opacity(1)
+                .background(Color.clear
+                                .cornerRadius(cornerRadius)
+                )
         }
     }
 }
@@ -49,10 +56,17 @@ struct ChipBackground_Previews: PreviewProvider {
         Group {
             ChipBackgroundView()
 
+            #if os(iOS)
+            ChipBackgroundView(fillColor: .tertiarySystemGroupedBackground)
+            #endif
             ChipBackgroundView(fillColor: .gray)
 
             ChipBackgroundView(fillColor: .clear)
+
+            ChipBackgroundView(fillColor: .blue)
+                .environment(\.colorScheme, .dark)
         }
-        .previewLayout(PreviewLayout.sizeThatFits)
+        .background(Color.green)
+        .previewLayout(PreviewLayout.fixed(width: 50, height: 50))
     }
 }

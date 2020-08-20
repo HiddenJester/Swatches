@@ -56,8 +56,9 @@ private extension MainView {
         if modelType == ColorModel.self {
             // Forced unwrap is fine here, we just checked the type above.
             FlowableContentGridView(models: models as! [ColorModel],
-                                    widthSampleModel: ColorModel.widthSample) { ColorSwatchView(model: $0, width: $1) }
-
+                                    widthSampleModel: ColorModel.widthSample) {
+                ColorSwatchView(model: $0, size: $1)
+            }
         } else if modelType == TextModel.self {
             #if !os(watchOS)
             // Forced unwrap is fine here, we just checked the type above.
@@ -65,10 +66,8 @@ private extension MainView {
             #else
             Text("Watch doesn't support TextGrid")
             #endif
-
         } else {
             Text("Missing Grid Type!")
-
         }
     }
     

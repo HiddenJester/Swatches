@@ -31,16 +31,35 @@ struct ColorChipView: View {
             .foregroundColor(color)
             .background(ChipBackgroundView(fillColor: drawBackground ? nil : .clear))
             .frame(maxWidth: maxWidth)
+            .overlay(RoundedRectangle(cornerRadius: 5.0)
+                        .inset(by: 1)
+                        .stroke(strokeColor(), lineWidth: 2)
+            )
+    }
+}
+
+private extension ColorChipView {
+    func strokeColor() -> Color {
+        if !drawBackground {
+            return .clear
+        } else {
+            #if os(watchOS)
+            return .black
+            #else
+            return .opaqueSeparator
+            #endif
+        }
     }
 }
 
 struct ColorChip_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ColorChipView(color: .green)
+            ColorChipView(color: .blue)
             ColorChipView(color: .clear)
             ColorChipView(color: .clear, drawBackground: false)
         }
+        .background(Color.green)
         .previewLayout(PreviewLayout.sizeThatFits)
     }
 }

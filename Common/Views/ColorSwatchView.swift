@@ -15,14 +15,22 @@ struct ColorSwatchView: View {
     /// The `ColorModel` that will be rendered in this swatch.
     let model: ColorModel?
 
-    /// Set a width to force the `CikirSwatchView` to that width. If 0 or nil is set for the width then the swatch will determine a normal intrinsic size.
-    let width: CGFloat?
+    /// Set a size to force the `SwatchView` to that size. If `.zero` or nil is set for the width then the swatch will determine a normal intrinsic size.
+    let size: CGSize?
     
     var body: some View {
         SwatchView(drawBackgroundAndOutline: model != nil,
                    label: model?.name ?? " ",
                    supportedOS: model?.supportedOS ?? .all,
-                   width: width) { chipView(forColor: model?.color) }
+                   size: size) {
+            chipView(forColor: model?.color)
+            // This doesn't work, see the HeaderDoc for chipView below.
+//            if let color = model?.color {
+//                ColorChipView(color: color, drawBackground: true)
+//            } else {
+//                ColorChipView(color: .clear, drawBackground: false)
+//            }
+        }
     }
 }
 
@@ -49,25 +57,27 @@ struct ColorSwatch_Previews: PreviewProvider {
     static let secondary = ColorModel(color: .secondary,
                                       name: "Secondary",
                                       supportedOS: .iOSAndMac)
-    
+
+    static let size = CGSize(width: 200, height: 200)
+
     static var previews: some View {
         Group {
             HStack {
-                ColorSwatchView(model: wordy, width: nil)
+                ColorSwatchView(model: wordy, size: size)
 
-                ColorSwatchView(model: nil, width: nil)
+                ColorSwatchView(model: nil, size: size)
 
-                ColorSwatchView(model: secondary, width: nil)
-
+                ColorSwatchView(model: secondary, size: size)
             }
 
             HStack {
-                ColorSwatchView(model: wordy, width: nil)
+                ColorSwatchView(model: wordy, size: size)
 
-                ColorSwatchView(model: secondary, width: nil)
+                ColorSwatchView(model: secondary, size: size)
 
             }
             .environment(\.colorScheme, .dark)
+            .background(Color.black)
             .previewDisplayName("Dark Mode")
 
         }
