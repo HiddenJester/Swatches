@@ -25,7 +25,7 @@ struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
     /// A closure that takes an individual model and returns the proper view for that model.
     let contentClosure: (Model?, CGSize?) -> CellView
 
-    /// Once `widthSampleModel` is rendered, the width of it is stored here in `columnWidth`.
+    /// Once `widthSampleModel` is rendered, the width of it is stored here.
     @State private var cellWidth = CGFloat(0)
 
     /// This value is set by calling `syncingHeightIfLarger(than:)` in order to find the tallest cell in the whole grid and use it as a frame height
@@ -53,7 +53,7 @@ struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
                             HStack {
                                 ForEach(row, id: \.self) { model in
                                     contentClosure(model, CGSize(width: cellWidth, height: cellHeight))
-                                        .syncingHeightIfLarger(than: $cellHeight)
+                                        .updatingCachedHeightIfTaller(than: $cellHeight)
                                 }
                             }
                         }
@@ -77,31 +77,61 @@ struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
     }
 }
 
-// TODO: This is temp testing scaffolding. Refactor before using.
-private struct HeightPreferenceKey: PreferenceKey {
+private extension FlowableContentGridView {
+    /// A helper function that splits the model array into a two dimensional array with the given column count. This is suitable for iteration to generate rows
+    /// of the final grid.
+    /// - Parameter columnCount: The number of columns to break `models` into.
+    /// - Returns: An array of `[Model?]` objects. Each individual array contains the models to render a single row of the grid.
+    /// - Note: Because the last row may not have a full count for the column, the last row may contain some `nil` entries. There is no attempt to
+    ///     "center" the remaining models, all of the `nils` will be at the end of the final row.
+    func splitIntoRows(columnCount unboundedColumnCount: Int) -> [[Model?]] {
+        let columnCount = max(unboundedColumnCount, 1)
+        /// The accumulated final result.
+        var result = [[Model?]]()
+
+        /// The index that walks the original `models` array.
+        var modelIndex = 0
+
+        /// How many rows we'll need, given `columnCount` and the number of models provided. Note that this rounds *UP* if
+        /// `models.count % columnCount` is not zero. In that case, the final row will have some empty values..
+        let rowCount = Int(ceil(Float(models.count) / Float(columnCount)))
+
+        (0 ..< rowCount).forEach { (rowIndex) in
+            var row = [Model?]()
+            (0 ..< columnCount).forEach { _ in
+                row.append(modelIndex < models.count ? models[modelIndex] : nil)
+                modelIndex += 1
+            }
+            result.append(row)
+        }
+
+        return result
+    }
+}
+
+/// A PreferenceKey we use to store the height of the tallest cell we have.
+private struct CellHeightPreferenceKey: PreferenceKey {
     static let defaultValue = CGFloat(0)
 
-    static func reduce(value: inout CGFloat,
-                       nextValue: () -> CGFloat) {
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
         value = nextValue()
     }
 }
 
-// TODO: This is temp testing scaffolding. Refactor before using.
 private extension View {
-    func syncingHeightIfLarger(than height: Binding<CGFloat>) -> some View {
-        return background(GeometryReader { proxy in
-            // We have to attach our preference assignment to
-            // some form of view, so we just use a clear color
-            // here to make that view completely transparent:
-            Color.clear.preference(
-                key: HeightPreferenceKey.self,
-                value: proxy.size.height
-            )
+    /// Creates the needed geometry reader to extract the height.
+    /// - Parameter than: A `Binding<CGFloat>` where the height will be stored.
+    /// - Returns: a clear background view and as a side effect can update `than`.
+    func updatingCachedHeightIfTaller(than height: Binding<CGFloat>) -> some View {
+        background(GeometryReader { geometry in
+            Color.clear
+                .hidden()
+                .preference( key: CellHeightPreferenceKey.self, value: geometry.size.height)
         })
-        .onPreferenceChange(HeightPreferenceKey.self) {
-            height.wrappedValue = max(height.wrappedValue, $0 * 1.02)
-        }
+        // Note: You can't call .hidden() on the background or the PreferenceKey will not update.
+        // The 1.02 pads the returned height a tiny bit. This primarily pushes the edge a bit away from any
+        // descenders in the label text.
+        .onPreferenceChange(CellHeightPreferenceKey.self) { height.wrappedValue = max(height.wrappedValue, $0 * 1.02) }
     }
 }
 
@@ -164,38 +194,6 @@ private extension ColumnWidthFindingView {
 
         return Color.clear
             .frame(width: width)
-    }
-}
-
-private extension FlowableContentGridView {
-    /// A helper function that splits the model array into a two dimensional array with the given column count. This is suitable for iteration to generate rows
-    /// of the final grid.
-    /// - Parameter columnCount: The number of columns to break `models` into.
-    /// - Returns: An array of `[Model?]` objects. Each individual array contains the models to render a single row of the grid.
-    /// - Note: Because the last row may not have a full count for the column, the last row may contain some `nil` entries. There is no attempt to
-    ///     "center" the remaining models, all of the `nils` will be at the end of the final row.
-    func splitIntoRows(columnCount unboundedColumnCount: Int) -> [[Model?]] {
-        let columnCount = max(unboundedColumnCount, 1)
-        /// The accumulated final result.
-        var result = [[Model?]]()
-        
-        /// The index that walks the original `models` array.
-        var modelIndex = 0
-        
-        /// How many rows we'll need, given `columnCount` and the number of models provided. Note that this rounds *UP* if
-        /// `models.count % columnCount` is not zero. In that case, the final row will have some empty values..
-        let rowCount = Int(ceil(Float(models.count) / Float(columnCount)))
-        
-        (0 ..< rowCount).forEach { (rowIndex) in
-            var row = [Model?]()
-            (0 ..< columnCount).forEach { _ in
-                row.append(modelIndex < models.count ? models[modelIndex] : nil)
-                modelIndex += 1
-            }
-            result.append(row)
-        }
-        
-        return result
     }
 }
 
