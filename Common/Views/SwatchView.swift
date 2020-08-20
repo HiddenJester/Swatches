@@ -36,6 +36,7 @@ struct SwatchView<Content>: View where Content: View {
                 content
 
                 SupportedOSTagView(value: supportedOS, opacity: drawBackgroundAndOutline ? 1 : 0)
+                    .layoutPriority(1) // Make sure "watchOS:" doesn't get truncated.
             }
             .padding(.horizontal)
 
