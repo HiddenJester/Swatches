@@ -17,11 +17,11 @@ extension TextModel {
     static func textModels() -> [TextModel] {
         [
             TextModel(color: .label, name: "Label", supportedOS: .notWatch),
-            TextModel(color: .secondaryLabel, name: "Sec.Label", supportedOS: .notWatch),
-            TextModel(color: .tertiaryLabel, name: "Tert.Label", supportedOS: .notWatch),
-            TextModel(color: .quaternaryLabel, name: "Quat.Label", supportedOS: .notWatch),
+            TextModel(color: .secondaryLabel, name: "Secondary Label", supportedOS: .notWatch),
+            TextModel(color: .tertiaryLabel, name: "Tertiary Label", supportedOS: .notWatch),
+            TextModel(color: .quaternaryLabel, name: "Quaternary Label", supportedOS: .notWatch),
             TextModel(color: .link, name: "Link", supportedOS: .notWatch),
-            TextModel(color: .placeholderText, name: "PlaceholderText", supportedOS: .notWatch),
+            TextModel(color: .placeholderText, name: "Placeholder Text", supportedOS: .notWatch),
         ]
     }
 }
