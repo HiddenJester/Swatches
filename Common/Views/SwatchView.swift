@@ -36,7 +36,8 @@ struct SwatchView<Content>: View where Content: View {
                 content
 
                 SupportedOSTagView(value: supportedOS, opacity: drawBackgroundAndOutline ? 1 : 0)
-                    .layoutPriority(1) // Make sure "watchOS:" doesn't get truncated.
+                /// Setting a layoutPriority here breaks the macOS version. 🤷‍♂️ The specific problem was fixed
+                /// by altering the content of `SupportedOSTagView`.
             }
             .padding(.horizontal)
 

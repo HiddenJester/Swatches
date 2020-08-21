@@ -22,21 +22,27 @@ struct TextChipView: View {
     let color: Color
     
     var body: some View {
-        VStack {
+        VStack(spacing:10) {
             Text(text)
                 .padding()
                 .background(ChipBackgroundView(fillColor: chipFillColor()))
+                .overlay(RoundedRectangle(cornerRadius: 5.0)
+                            .inset(by: 1)
+                            .stroke(strokeColor(), lineWidth: 2)
+                )
 
             Text(text)
                 .padding()
                 .background(checkerboardBackground())
-
-        }.foregroundColor(color)
-            .font(textFont())
-            .multilineTextAlignment(.center)
-
+                .overlay(RoundedRectangle(cornerRadius: 5.0)
+                            .inset(by: 1)
+                            .stroke(strokeColor(), lineWidth: 2)
+                )
+        }
+        .foregroundColor(color)
+        .font(textFont())
+        .multilineTextAlignment(.center)
     }
-    
 }
 
 private extension TextChipView {
@@ -58,14 +64,10 @@ private extension TextChipView {
     /// `Color.clear` for the background *OR* create the normal `ChipBackgroundView`. This helper function just type-erases that into something
     /// that can be passed into `.background()` regardless.
     func checkerboardBackground() -> some View {
-        Group {
-            if color == .clear {
-                Color.clear
-                
-            } else {
-                ChipBackgroundView()
-                
-            }
+        if color == .clear {
+            return ChipBackgroundView(fillColor: .clear)
+        } else {
+            return ChipBackgroundView()
         }
     }
     
@@ -77,6 +79,20 @@ private extension TextChipView {
         #else
         return Font.largeTitle.bold()
         #endif
+    }
+
+    /// Determine the proper color to use for the outline.
+    /// - Returns: The color to pass when stroking the outline.
+    func strokeColor() -> Color {
+        if color == .clear {
+            return .clear
+        } else {
+            #if os(watchOS)
+            return .black
+            #else
+            return .opaqueSeparator
+            #endif
+        }
     }
 }
 
@@ -92,6 +108,7 @@ struct TextChip_Previews: PreviewProvider {
                 .previewDisplayName("Dark Mode")
             
             TextChipView(text: text, color: .clear)
+                .previewDisplayName("Clear color")
         }
         .previewLayout(PreviewLayout.sizeThatFits)
         

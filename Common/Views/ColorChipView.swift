@@ -39,6 +39,8 @@ struct ColorChipView: View {
 }
 
 private extension ColorChipView {
+    /// Determine the proper color to use for the outline.
+    /// - Returns: The color to pass when stroking the outline.
     func strokeColor() -> Color {
         if !drawBackground {
             return .clear

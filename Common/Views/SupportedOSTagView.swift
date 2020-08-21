@@ -48,8 +48,8 @@ private extension SupportedOSTagView {
             textView(forOS: forOS)
             
             imageView(forOS: forOS)
-            
-        }.font(font)
+        }
+        .font(font)
     }
     
     /// Returns an erased `Text` with the proper label for the provided OS.
@@ -74,7 +74,7 @@ private extension SupportedOSTagView {
             label = "?"
         }
         
-        return Text("\(label):")
+        return Text("\(label): ")
             .lineLimit(1)
     }
     
