@@ -23,21 +23,9 @@ struct TextChipView: View {
     
     var body: some View {
         VStack(spacing:10) {
-            Text(text)
-                .padding()
-                .background(ChipBackgroundView(fillColor: chipFillColor()))
-                .overlay(RoundedRectangle(cornerRadius: 5.0)
-                            .inset(by: 1)
-                            .stroke(strokeColor(), lineWidth: 2)
-                )
+            textSampleView { ChipBackgroundView(fillColor: chipFillColor()) }
 
-            Text(text)
-                .padding()
-                .background(checkerboardBackground())
-                .overlay(RoundedRectangle(cornerRadius: 5.0)
-                            .inset(by: 1)
-                            .stroke(strokeColor(), lineWidth: 2)
-                )
+            textSampleView { checkerboardBackground() }
         }
         .foregroundColor(color)
         .font(textFont())
@@ -46,6 +34,22 @@ struct TextChipView: View {
 }
 
 private extension TextChipView {
+    /// Creates a textSampleView that displayes the text, forces a multiline sizing over truncation, draws the provided background, and draws a rounded
+    /// outline around the entire sample.
+    /// - Parameter background: A `ViewBuilder` that returns a single `ChipBackgroundView` to use as the background.
+    /// - Returns: The sample view with the provided background.
+    func textSampleView(@ViewBuilder background: @escaping () -> ChipBackgroundView) -> some View {
+        Text(text)
+            .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/) // Force multiline over truncation.
+            .padding()
+            .background(background())
+            .overlay(RoundedRectangle(cornerRadius: 5.0)
+                        .inset(by: 1)
+                        .stroke(strokeColor(), lineWidth: 2)
+            )
+
+    }
+
     /// On platforms that support it, we want to use `.tertiarySystemBackground`. But only iOS and Mac(Catalyst) support that, while we still have
     /// text on tvOS. So on that platform just use `.systemGray`.
     func chipFillColor() -> Color {
@@ -63,7 +67,7 @@ private extension TextChipView {
     /// We only want to use a checkerboard for the second view if the color passed in wasn't `.clear`. But that means that we either want to use
     /// `Color.clear` for the background *OR* create the normal `ChipBackgroundView`. This helper function just type-erases that into something
     /// that can be passed into `.background()` regardless.
-    func checkerboardBackground() -> some View {
+    func checkerboardBackground() -> ChipBackgroundView{
         if color == .clear {
             return ChipBackgroundView(fillColor: .clear)
         } else {
