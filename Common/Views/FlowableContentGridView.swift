@@ -24,8 +24,8 @@ struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
 
     @State private var layout = FlowableContentGridLayout()
 
-    /// A closure that takes an individual model and returns the proper view for that model.
-    let contentClosure: (Model?, CGSize?) -> CellView
+    /// A closure that takes an individual model and an optional width value and returns the proper view for that model.
+    let contentClosure: (Model?, CGFloat?) -> CellView
 
     var body: some View {
         GeometryReader { geometry in
@@ -42,9 +42,8 @@ struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
                         ForEach(splitIntoRows(columnCount: layout.getColumnCount()), id: \.self) { (row) in
                             HStack {
                                 ForEach(row, id: \.self) { model in
-                                    contentClosure(model,
-                                                   CGSize(width: layout.cellWidth ?? geometry.size.width,
-                                                          height: 0))
+                                    // If we have a cellWidth use it, otherwise just use the full geometry width.
+                                    contentClosure(model, layout.cellWidth ?? geometry.size.width)
                                         .updatingLayoutHeight()
                                         .frame(width: layout.getWidth(), height: layout.getHeight())
                                 }
@@ -109,6 +108,7 @@ private extension FlowableContentGridLayout {
         if let newWidth = newValue.cellWidth, newWidth != cellWidth {
             cellWidth = newWidth
             // Changing cell width needs to reset the height value.
+//            print ("Resetting height due to width change.")
             cellHeight = nil
         }
 
@@ -117,6 +117,7 @@ private extension FlowableContentGridLayout {
         }
 
         if let newHeight = newValue.cellHeight, newHeight > getHeight() {
+//            print ("Increasing height from \(String(describing: cellHeight)) to \(newHeight)")
             cellHeight = newHeight
         }
     }
@@ -238,7 +239,7 @@ private extension FlowableContentGridView {
 struct FlowableContentGridView_Previews: PreviewProvider {
     static var previews: some View {
         FlowableContentGridView(models: ColorModel.adaptableColors(),
-                                widthSampleModel: ColorModel.widthSample) { ColorSwatchView(model: $0, size: $1) }
+                                widthSampleModel: ColorModel.widthSample) { ColorSwatchView(model: $0, width: $1) }
             .previewLayout(PreviewLayout.sizeThatFits)
     }
 }

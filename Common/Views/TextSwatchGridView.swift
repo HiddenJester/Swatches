@@ -33,7 +33,7 @@ struct TextSwatchGridView: View {
             .padding()
             
             FlowableContentGridView(models: models, widthSampleModel: TextModel.widthSample) {
-                TextSwatchView(sample: sample, model: $0, size: $1)
+                TextSwatchView(sample: sample, model: $0, width: $1)
             }
         }
     }
@@ -56,6 +56,5 @@ struct TextSwatchGridView_Previews: PreviewProvider {
     static var previews: some View {
         TextSwatchGridView(models: TextModel.textModels())
             .previewLayout(PreviewLayout.sizeThatFits)
-
     }
 }

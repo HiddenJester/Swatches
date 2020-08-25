@@ -15,14 +15,14 @@ struct ColorSwatchView: View {
     /// The `ColorModel` that will be rendered in this swatch.
     let model: ColorModel?
 
-    /// Set a size to force the `SwatchView` to that size. If `.zero` or nil is set for the width then the swatch will determine a normal intrinsic size.
-    let size: CGSize?
+    /// If a width is provided than the frame is locked to that value. A width of 0 or less is discarded by the `SwatchView`.
+    let width: CGFloat?
     
     var body: some View {
         SwatchView(drawBackgroundAndOutline: model != nil,
                    label: model?.name ?? " ",
                    supportedOS: model?.supportedOS ?? .all,
-                   size: size) {
+                   width: width) {
             chipView(forColor: model?.color)
             // This doesn't work, see the HeaderDoc for chipView below.
 //            if let color = model?.color {
@@ -58,22 +58,22 @@ struct ColorSwatch_Previews: PreviewProvider {
                                       name: "Secondary",
                                       supportedOS: .iOSAndMac)
 
-    static let size = CGSize(width: 200, height: 200)
+    static let width: CGFloat = 200
 
     static var previews: some View {
         Group {
             HStack {
-                ColorSwatchView(model: wordy, size: size)
+                ColorSwatchView(model: wordy, width: width)
 
-                ColorSwatchView(model: nil, size: size)
+                ColorSwatchView(model: nil, width: width)
 
-                ColorSwatchView(model: secondary, size: size)
+                ColorSwatchView(model: secondary, width: width)
             }
 
             HStack {
-                ColorSwatchView(model: wordy, size: size)
+                ColorSwatchView(model: wordy, width: width)
 
-                ColorSwatchView(model: secondary, size: size)
+                ColorSwatchView(model: secondary, width: width)
 
             }
             .environment(\.colorScheme, .dark)

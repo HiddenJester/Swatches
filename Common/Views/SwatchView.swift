@@ -26,9 +26,8 @@ struct SwatchView<Content>: View where Content: View {
     /// The corner radius to use on the background and outline.
     private let cornerRadius = CGFloat(5.0)
 
-    /// If a size not equal to `.zero` is provided then the `SwatchView` will render with that size in the frame. If nil or 0 are passed in then the view
-    /// renders without a specified frame.
-    let size: CGSize?
+    /// If a width is provided than the frame is locked to that value. A width of 0 or less is discarded in `init`.
+    let width: CGFloat?
 
     var body: some View {
         VStack(spacing: 0) {
@@ -36,8 +35,7 @@ struct SwatchView<Content>: View where Content: View {
                 content
 
                 SupportedOSTagView(value: supportedOS, opacity: drawBackgroundAndOutline ? 1 : 0)
-                /// Setting a layoutPriority here breaks the macOS version. 🤷‍♂️ The specific problem was fixed
-                /// by altering the content of `SupportedOSTagView`.
+                    .layoutPriority(1) // Shrink the chip before the tags.
             }
             .padding(.horizontal)
 
@@ -47,7 +45,7 @@ struct SwatchView<Content>: View where Content: View {
                 .padding(.horizontal, 2) /// *Tiny* bit of horizontal padding so the text doesn't drive up against the border.
         }
         .padding(.vertical)
-        .frame(width: size?.width)
+        .frame(width: width)
         .overlay(RoundedRectangle(cornerRadius: cornerRadius)
                     .inset(by: 1)
                     .stroke(drawBackgroundAndOutline ? Color.primary : Color.clear, lineWidth: 2)
@@ -61,19 +59,20 @@ struct SwatchView<Content>: View where Content: View {
     ///   - drawBackgroundAndOutline: A Bool that controls both drawing a background and an outline.
     ///   - label: The text to display as the label for for the Swatch
     ///   - supportedOS: The SupportedOSOptions to draw.
+    ///   - width: pass a non-zero `CGFloat` here to fix the width of the view. Passing 0 or nil will let the view dynamically set the width.
     ///   - content: The actual content of the Swatch. This is a `@ViewBuilder` closure, so practically any SwiftUI view can be placed in a swatch.
     init(drawBackgroundAndOutline: Bool,
          label: String,
          supportedOS: SupportedOSOptions,
-         size: CGSize? = nil,
+         width: CGFloat? = nil,
          @ViewBuilder _ content: @escaping () -> Content) {
         self.drawBackgroundAndOutline = drawBackgroundAndOutline
         self.label = label
         self.supportedOS = supportedOS
-        if let size = size, size != .zero {
-            self.size = size
+        if let width = width, width > 0 {
+            self.width = width
         } else {
-            self.size = nil
+            self.width = nil
         }
         self.content = content()
     }
@@ -99,18 +98,18 @@ private extension SwatchView {
 }
 
 struct Swatch_Previews: PreviewProvider {
-    static let size = CGSize(width: 200, height: 100)
+    static let width: CGFloat = 200
 
     static var previews: some View {
         Group {
             SwatchView(drawBackgroundAndOutline: true,
                        label: "Super Duper Wordy Ass Label Test",
                        supportedOS: .iOSAndMac,
-                       size: nil) {
+                       width: width) {
                 ColorChipView(color: .blue)
             }
             
-            SwatchView(drawBackgroundAndOutline: true, label: "Clear Test", supportedOS: .all, size: size) {
+            SwatchView(drawBackgroundAndOutline: true, label: "Clear Test", supportedOS: .all, width: width) {
                 ColorChipView(color: .clear)
             }
 
