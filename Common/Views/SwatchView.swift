@@ -47,7 +47,7 @@ struct SwatchView<Content>: View where Content: View {
                 .padding(.horizontal, 2) /// *Tiny* bit of horizontal padding so the text doesn't drive up against the border.
         }
         .padding(.vertical)
-        .frame(width: size?.width, height: size?.height)
+        .frame(width: size?.width)
         .overlay(RoundedRectangle(cornerRadius: cornerRadius)
                     .inset(by: 1)
                     .stroke(drawBackgroundAndOutline ? Color.primary : Color.clear, lineWidth: 2)
@@ -113,6 +113,12 @@ struct Swatch_Previews: PreviewProvider {
             SwatchView(drawBackgroundAndOutline: true, label: "Clear Test", supportedOS: .all, size: size) {
                 ColorChipView(color: .clear)
             }
+
+            #if os(macOS) || os(iOS)
+            SwatchView(drawBackgroundAndOutline: true, label: "Text Text", supportedOS: .all) {
+                TextChipView(text: "Sample", color: .black)
+            }
+            #endif
         }
         .previewLayout(PreviewLayout.sizeThatFits)
     }

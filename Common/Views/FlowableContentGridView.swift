@@ -22,25 +22,15 @@ struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
     /// "Tertiary System Background" will become three lines.
     let widthSampleModel: Model
 
+    @State private var layout = FlowableContentGridLayout()
+
     /// A closure that takes an individual model and returns the proper view for that model.
     let contentClosure: (Model?, CGSize?) -> CellView
-
-    /// Once `widthSampleModel` is rendered, the width of it is stored here.
-    @State private var cellWidth = CGFloat(0)
-
-    /// This value is set by calling `syncingHeightIfLarger(than:)` in order to find the tallest cell in the whole grid and use it as a frame height
-    /// for all 
-    @State private var cellHeight = CGFloat(0)
-
-    /// Once `columnWidth` is determined, we can divide the window width by that and generate the number of columns we want to use in the grid.
-    @State private var columnCount = Int(0)
 
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                ColumnWidthFindingView(fullWidth: geometry.size.width,
-                                       columnWidth: $cellWidth,
-                                       columnCount: $columnCount) {
+                ColumnWidthFindingView(fullWidth: geometry.size.width) {
                     self.contentClosure(widthSampleModel, nil)
                 }
                 .hidden()
@@ -49,34 +39,170 @@ struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
                     Spacer()
 
                     ScrollView(.vertical) {
-                        ForEach(splitIntoRows(columnCount: columnCount), id: \.self) { (row) in
+                        ForEach(splitIntoRows(columnCount: layout.getColumnCount()), id: \.self) { (row) in
                             HStack {
                                 ForEach(row, id: \.self) { model in
-                                    contentClosure(model, CGSize(width: cellWidth, height: cellHeight))
-                                        .updatingCachedHeightIfTaller(than: $cellHeight)
+                                    contentClosure(model,
+                                                   CGSize(width: layout.cellWidth ?? geometry.size.width,
+                                                          height: 0))
+                                        .updatingLayoutHeight()
+                                        .frame(width: layout.getWidth(), height: layout.getHeight())
                                 }
                             }
                         }
                     }
-                    .frame(minWidth: CGFloat(columnCount) * cellWidth)
+                    .frame(minWidth: CGFloat(layout.getColumnCount()) * layout.getWidth())
 
                     Spacer()
                 }
 
                 // Old school debugging aid 😜
 //                VStack {
-//                    Text("Column Width: \(columnWidth)")
+//                    Text("Cell Width: \(layout.getWidth())")
 //
-//                    Text("Column Count: \(columnCount)")
+//                    Text("Cell Height: \(layout.getHeight())")
+//
+//                    Text("Column Count: \(layout.getColumnCount())")
 //                }
 //                .foregroundColor(.red)
 //                .font(.title)
 //                .background(Color.gray)
             }
         }
+        .onPreferenceChange(LayoutPreferenceKey.self) { layout in
+            DispatchQueue.main.async { self.layout.reduce(newValue: layout) }
+        }
     }
 }
 
+// MARK: - FlowableContentGridLayout
+private struct FlowableContentGridLayout {
+    /// The width to apply to a single cell.
+    var cellWidth: CGFloat? = nil
+
+    /// The height to apply to a single cell.
+    var cellHeight: CGFloat? = nil
+
+    /// The number of columns to render into the grid.
+    var columnCount: Int? = nil
+}
+
+private extension FlowableContentGridLayout {
+    /// Unwraps with into a definite `CGFloat`. Returns 0 if no value is available.
+    /// - Returns: a valid `CGFloat` for `cellWidth`.
+    func getWidth() -> CGFloat { cellWidth ?? 0 }
+
+    /// Unwraps with into a definite `CGFloat`. Returns 0 if no value is available.
+    /// - Returns: a valid `CGFloat` for `cellHeight`.
+    func getHeight() -> CGFloat { cellHeight ?? 0 }
+
+    /// Unwraps with into a definite `Int`. Returns 1 if no value is available.
+    /// - Returns: a valid `Int` for `columnCount`.
+    func getColumnCount() -> Int { columnCount ?? 1 }
+
+    /// Takes a new `FlowableGridContentLayout` and reduces it into this one. This combines partial layouts (if this layout has a width and the new
+    /// one has a height, the final value will contain both, for example.) Also, setting the width resets the height value (since we need to recalculate height when
+    /// the width changes). Lastly, height is only ever *increased* during a reduce operation (except for when width is changed), a shorter height than is currently
+    /// present is simply discarded.
+    /// - Parameter newValue: The value to reduce in this one.
+    mutating func reduce(newValue: FlowableContentGridLayout) {
+        if let newWidth = newValue.cellWidth, newWidth != cellWidth {
+            cellWidth = newWidth
+            // Changing cell width needs to reset the height value.
+            cellHeight = nil
+        }
+
+        if let newCount = newValue.columnCount, newCount != columnCount {
+            columnCount = newCount
+        }
+
+        if let newHeight = newValue.cellHeight, newHeight > getHeight() {
+            cellHeight = newHeight
+        }
+    }
+}
+
+extension FlowableContentGridLayout: Equatable {}
+
+// MARK: - LayoutPreferenceKey
+/// A PreferenceKey we use to update the layout properties.
+private struct LayoutPreferenceKey: PreferenceKey {
+    static let defaultValue = FlowableContentGridLayout()
+
+    static func reduce(value: inout FlowableContentGridLayout, nextValue: () -> FlowableContentGridLayout) {
+        value.reduce(newValue: nextValue())
+    }
+}
+
+private extension View {
+    /// Creates the needed geometry reader to extract the height.
+    /// - Parameter than: A `Binding<CGFloat>` where the height will be stored.
+    /// - Returns: a clear background view and as a side effect can update `than`.
+    func updatingLayoutHeight() -> some View {
+        background(GeometryReader { geometry in
+            // Note: You can't call .hidden() on the background or the PreferenceKey will not update.
+            Color.clear
+                .hidden() // But you can hide the contents of the GeometryReader … 🤷‍♂️
+                .preference(key: LayoutPreferenceKey.self,
+                            value: FlowableContentGridLayout(cellHeight: geometry.size.height))
+        })
+    }
+}
+
+/// A view that takes a view, a full width value, and bindings for the desired column width and column count.
+private struct ColumnWidthFindingView<Content: View>: View {
+    /// The full width of the parent view to break into columns.
+    private let fullWidth: CGFloat
+
+    /// A sample view to render and extract layout information from.
+    private let content: Content
+
+    init(fullWidth: CGFloat, @ViewBuilder content: () -> Content) {
+        self.fullWidth = fullWidth
+        self.content = content()
+    }
+
+    var body: some View {
+        content
+            .background(GeometryReader { geometry in
+                widthUpdatingView(sampleWidth: geometry.size.width)
+            })
+    }
+}
+
+private extension ColumnWidthFindingView {
+    /// Returns a clear view that takes up the specfied width. This is used to calculate the changes we need for the binding.
+    /// - Parameter width: the width we want for a single cell.
+    /// - Returns: A dummy view that can be stuffed in a GeometryReader so the calculation gets made properly.
+    func widthUpdatingView(sampleWidth: CGFloat) -> some View {
+        // Decrease the geometry width a hair so we don't shove RIGHT up to the margins in the event
+        // that the width is an exact multiple of sampleWidth and also leave some room for column spacing.
+        let scaledFullWidth = fullWidth * 0.95
+
+        // Boundscheck the input.
+        let boundedCellWidth = max(sampleWidth, 1)
+
+        let columnCount: Int
+
+        // If the sample is wider than the full width, then just set the column count to 1
+        if boundedCellWidth > scaledFullWidth {
+            columnCount = 1
+        } else {
+            columnCount = Int(scaledFullWidth / boundedCellWidth)
+        }
+
+        return Color.clear
+            .frame(width: sampleWidth)
+            .preference(key: LayoutPreferenceKey.self,
+                        // Let the new cell width be as wide as possible, inside scaled FullWidth.
+                        value: FlowableContentGridLayout(cellWidth: scaledFullWidth / CGFloat(columnCount),
+                                                         cellHeight: nil,
+                                                         columnCount: columnCount)
+            )
+    }
+}
+
+// MARK: - FlowableContentGridView private funcs
 private extension FlowableContentGridView {
     /// A helper function that splits the model array into a two dimensional array with the given column count. This is suitable for iteration to generate rows
     /// of the final grid.
@@ -106,94 +232,6 @@ private extension FlowableContentGridView {
         }
 
         return result
-    }
-}
-
-/// A PreferenceKey we use to store the height of the tallest cell we have.
-private struct CellHeightPreferenceKey: PreferenceKey {
-    static let defaultValue = CGFloat(0)
-
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        value = nextValue()
-    }
-}
-
-private extension View {
-    /// Creates the needed geometry reader to extract the height.
-    /// - Parameter than: A `Binding<CGFloat>` where the height will be stored.
-    /// - Returns: a clear background view and as a side effect can update `than`.
-    func updatingCachedHeightIfTaller(than height: Binding<CGFloat>) -> some View {
-        background(GeometryReader { geometry in
-            Color.clear
-                .hidden()
-                .preference( key: CellHeightPreferenceKey.self, value: geometry.size.height)
-        })
-        // Note: You can't call .hidden() on the background or the PreferenceKey will not update.
-        // The 1.02 pads the returned height a tiny bit. This primarily pushes the edge a bit away from any
-        // descenders in the label text.
-        .onPreferenceChange(CellHeightPreferenceKey.self) { height.wrappedValue = max(height.wrappedValue, $0 * 1.02) }
-    }
-}
-
-/// A view that takes a view, a full width value, and bindings for the desired column width and column count.
-private struct ColumnWidthFindingView<Content: View>: View {
-    /// The full width of the parent view to break into columns.
-    private let fullWidth: CGFloat
-
-    /// The final columnWidth will be stored in this binding.
-    private let columnWidth: Binding<CGFloat>
-
-    /// The final columanCount will be stored in this binding.
-    private let columnCount: Binding<Int>
-
-    /// A sample view to render and extract the width from.
-    private let content: Content
-
-    init(fullWidth: CGFloat,
-         columnWidth: Binding<CGFloat>,
-         columnCount: Binding<Int>,
-         @ViewBuilder content: () -> Content) {
-
-        self.columnWidth = columnWidth
-        self.fullWidth = fullWidth
-        self.columnCount = columnCount
-        self.content = content()
-    }
-
-    var body: some View {
-        content
-            .background(GeometryReader { geometry in
-                widthUpdatingView(width: geometry.size.width)
-            })
-    }
-}
-
-private extension ColumnWidthFindingView {
-    /// Returns a clear view that takes up the specfied width. This is used to calculate the changes we need for the binding.
-    /// - Parameter width: the width we want for a single cell.
-    /// - Returns: A dummy view that can be stuffed in a GeometryReader so the calculation gets made properly.
-    func widthUpdatingView(width: CGFloat) -> some View {
-        // Decrease the geometry width a hair so we don't shove RIGHT up to the margins in the event
-        // that the width is an exact multiple of sampleWidth and also leave some room for column spacing.
-        let scaledFullWidth = fullWidth * 0.95
-
-        // Boundscheck the input.
-        let boundedWidth = max(width, 1)
-
-        // This will change the views, so delay it slightly.
-        DispatchQueue.main.async {
-            // If the sample is wider than the full width, then just return full width and set column count to 1
-            if boundedWidth > scaledFullWidth {
-                self.columnCount.wrappedValue = 1
-            } else {
-                self.columnCount.wrappedValue = Int(scaledFullWidth / boundedWidth)
-            }
-            // Now, let the columns take up as much space as possible.
-            self.columnWidth.wrappedValue = scaledFullWidth / CGFloat(self.columnCount.wrappedValue)
-        }
-
-        return Color.clear
-            .frame(width: width)
     }
 }
 
