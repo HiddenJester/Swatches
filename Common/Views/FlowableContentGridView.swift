@@ -22,7 +22,12 @@ struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
     /// "Tertiary System Background" will become three lines.
     let widthSampleModel: Model
 
+    /// Our layout to use for the cells. This updated from the `PreferenceKey`, but handled asynch so that A ) all of the changes are coalesced and B )
+    /// we can animate opacity on layout changes.
     @State private var layout = FlowableContentGridLayout()
+
+    /// The opacity value used for the entire view. This can be animated by layout changes.
+    @State private var opacity: Double = 1
 
     /// A closure that takes an individual model and an optional width value and returns the proper view for that model.
     let contentClosure: (Model?, CGFloat?) -> CellView
@@ -67,8 +72,65 @@ struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
 //                .background(Color.gray)
             }
         }
+        .opacity(opacity)
         .onPreferenceChange(LayoutPreferenceKey.self) { layout in
-            DispatchQueue.main.async { self.layout.reduce(newValue: layout) }
+            DispatchQueue.main.async { self.update(fromLayout: layout)
+            }
+        }
+    }
+}
+
+// MARK: - FlowableContentGridView private funcs
+private extension FlowableContentGridView {
+    /// A helper function that splits the model array into a two dimensional array with the given column count. This is suitable for iteration to generate rows
+    /// of the final grid.
+    /// - Parameter columnCount: The number of columns to break `models` into.
+    /// - Returns: An array of `[Model?]` objects. Each individual array contains the models to render a single row of the grid.
+    /// - Note: Because the last row may not have a full count for the column, the last row may contain some `nil` entries. There is no attempt to
+    ///     "center" the remaining models, all of the `nils` will be at the end of the final row.
+    func splitIntoRows(columnCount unboundedColumnCount: Int) -> [[Model?]] {
+        let columnCount = max(unboundedColumnCount, 1)
+        /// The accumulated final result.
+        var result = [[Model?]]()
+
+        /// The index that walks the original `models` array.
+        var modelIndex = 0
+
+        /// How many rows we'll need, given `columnCount` and the number of models provided. Note that this rounds *UP* if
+        /// `models.count % columnCount` is not zero. In that case, the final row will have some empty values..
+        let rowCount = Int(ceil(Float(models.count) / Float(columnCount)))
+
+        (0 ..< rowCount).forEach { (rowIndex) in
+            var row = [Model?]()
+            (0 ..< columnCount).forEach { _ in
+                row.append(modelIndex < models.count ? models[modelIndex] : nil)
+                modelIndex += 1
+            }
+            result.append(row)
+        }
+
+        return result
+    }
+
+    /// Reduces `self.layout` with a new value. on iOS & watchOS this will animate `.opacity`. on macOS (Catalyst) this only animates `.opacity`
+    /// if the column count changes during the reduction.
+    /// - Parameter fromLayout: The new layout value to reduce into `self.layout`.
+    func update(fromLayout newLayout: FlowableContentGridLayout) {
+        let animateUpdate: Bool
+
+        let oldColumnCount = self.layout.getColumnCount()
+
+        layout.reduce(newValue: newLayout)
+
+        #if targetEnvironment(macCatalyst)
+        animateUpdate = oldColumnCount != self.layout.getColumnCount()
+        #else
+        animateUpdate = true
+        #endif
+
+        if animateUpdate {
+            self.opacity = 0
+            withAnimation { self.opacity = 1 }
         }
     }
 }
@@ -118,6 +180,8 @@ private extension FlowableContentGridLayout {
         if let newHeight = newValue.cellHeight, newHeight > getHeight() {
 //            print ("Increasing height from \(String(describing: cellHeight)) to \(newHeight)")
             cellHeight = newHeight
+//        } else if let newHeight = newValue.cellHeight {
+//            print ("Discarding height value \(newHeight)")
         }
     }
 }
@@ -183,39 +247,6 @@ private extension View {
         return FlowableContentGridLayout(cellWidth: scaledFullWidth / CGFloat(columnCount),
                                          cellHeight: nil,
                                          columnCount: columnCount)
-    }
-}
-
-// MARK: - FlowableContentGridView private funcs
-private extension FlowableContentGridView {
-    /// A helper function that splits the model array into a two dimensional array with the given column count. This is suitable for iteration to generate rows
-    /// of the final grid.
-    /// - Parameter columnCount: The number of columns to break `models` into.
-    /// - Returns: An array of `[Model?]` objects. Each individual array contains the models to render a single row of the grid.
-    /// - Note: Because the last row may not have a full count for the column, the last row may contain some `nil` entries. There is no attempt to
-    ///     "center" the remaining models, all of the `nils` will be at the end of the final row.
-    func splitIntoRows(columnCount unboundedColumnCount: Int) -> [[Model?]] {
-        let columnCount = max(unboundedColumnCount, 1)
-        /// The accumulated final result.
-        var result = [[Model?]]()
-
-        /// The index that walks the original `models` array.
-        var modelIndex = 0
-
-        /// How many rows we'll need, given `columnCount` and the number of models provided. Note that this rounds *UP* if
-        /// `models.count % columnCount` is not zero. In that case, the final row will have some empty values..
-        let rowCount = Int(ceil(Float(models.count) / Float(columnCount)))
-
-        (0 ..< rowCount).forEach { (rowIndex) in
-            var row = [Model?]()
-            (0 ..< columnCount).forEach { _ in
-                row.append(modelIndex < models.count ? models[modelIndex] : nil)
-                modelIndex += 1
-            }
-            result.append(row)
-        }
-
-        return result
     }
 }
 
