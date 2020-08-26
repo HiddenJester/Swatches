@@ -30,10 +30,9 @@ struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                ColumnWidthFindingView(fullWidth: geometry.size.width) {
-                    self.contentClosure(widthSampleModel, nil)
-                }
-                .hidden()
+                self.contentClosure(widthSampleModel, nil)
+                    .updatingLayoutWidthAndColumnCount(forFullWidth: geometry.size.width)
+                    .hidden()
 
                 HStack {
                     Spacer()
@@ -137,8 +136,7 @@ private struct LayoutPreferenceKey: PreferenceKey {
 
 private extension View {
     /// Creates the needed geometry reader to extract the height.
-    /// - Parameter than: A `Binding<CGFloat>` where the height will be stored.
-    /// - Returns: a clear background view and as a side effect can update `than`.
+    /// - Returns: a clear background view that set the height into the `LayoutPreferenceKey`.
     func updatingLayoutHeight() -> some View {
         background(GeometryReader { geometry in
             // Note: You can't call .hidden() on the background or the PreferenceKey will not update.
@@ -148,40 +146,29 @@ private extension View {
                             value: FlowableContentGridLayout(cellHeight: geometry.size.height))
         })
     }
-}
 
-/// A view that takes a view, a full width value, and bindings for the desired column width and column count.
-private struct ColumnWidthFindingView<Content: View>: View {
-    /// The full width of the parent view to break into columns.
-    private let fullWidth: CGFloat
-
-    /// A sample view to render and extract layout information from.
-    private let content: Content
-
-    init(fullWidth: CGFloat, @ViewBuilder content: () -> Content) {
-        self.fullWidth = fullWidth
-        self.content = content()
+    /// Creates the needed geometry reader to extract the width.
+    /// - Parameter viewFullWidth: the width of the full view that should be split into columns
+    /// - Returns: a clear background view that set the width and the column count into the `LayoutPreferenceKey`.
+    func updatingLayoutWidthAndColumnCount(forFullWidth: CGFloat) -> some View {
+        background(GeometryReader { geometry in
+            // Note: You can't call .hidden() on the background or the PreferenceKey will not update.
+            Color.clear
+                .hidden() // But you can hide the contents of the GeometryReader … 🤷‍♂️
+                .frame(width: geometry.size.width)
+                .preference(key: LayoutPreferenceKey.self,
+                            value: createWidthUpdatingLayout(columnWidth: geometry.size.width,
+                                                             viewFullWidth: forFullWidth))
+        })
     }
 
-    var body: some View {
-        content
-            .background(GeometryReader { geometry in
-                widthUpdatingView(sampleWidth: geometry.size.width)
-            })
-    }
-}
-
-private extension ColumnWidthFindingView {
-    /// Returns a clear view that takes up the specfied width. This is used to calculate the changes we need for the binding.
-    /// - Parameter width: the width we want for a single cell.
-    /// - Returns: A dummy view that can be stuffed in a GeometryReader so the calculation gets made properly.
-    func widthUpdatingView(sampleWidth: CGFloat) -> some View {
+    func createWidthUpdatingLayout(columnWidth: CGFloat, viewFullWidth: CGFloat) -> FlowableContentGridLayout {
         // Decrease the geometry width a hair so we don't shove RIGHT up to the margins in the event
         // that the width is an exact multiple of sampleWidth and also leave some room for column spacing.
-        let scaledFullWidth = fullWidth * 0.95
+        let scaledFullWidth = viewFullWidth * 0.95
 
         // Boundscheck the input.
-        let boundedCellWidth = max(sampleWidth, 1)
+        let boundedCellWidth = max(columnWidth, 1)
 
         let columnCount: Int
 
@@ -192,14 +179,10 @@ private extension ColumnWidthFindingView {
             columnCount = Int(scaledFullWidth / boundedCellWidth)
         }
 
-        return Color.clear
-            .frame(width: sampleWidth)
-            .preference(key: LayoutPreferenceKey.self,
-                        // Let the new cell width be as wide as possible, inside scaled FullWidth.
-                        value: FlowableContentGridLayout(cellWidth: scaledFullWidth / CGFloat(columnCount),
-                                                         cellHeight: nil,
-                                                         columnCount: columnCount)
-            )
+        // Let the new cell width be as wide as possible, inside scaled FullWidth.
+        return FlowableContentGridLayout(cellWidth: scaledFullWidth / CGFloat(columnCount),
+                                         cellHeight: nil,
+                                         columnCount: columnCount)
     }
 }
 
