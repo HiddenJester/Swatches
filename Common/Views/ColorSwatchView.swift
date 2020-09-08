@@ -23,7 +23,7 @@ struct ColorSwatchView: View {
                    label: model?.name ?? " ",
                    supportedOS: model?.supportedOS ?? .all,
                    width: width) {
-            chipView(forColor: model?.color)
+                    self.chipView(forColor: self.model?.color)
             // This doesn't work, see the HeaderDoc for chipView below.
 //            if let color = model?.color {
 //                ColorChipView(color: color, drawBackground: true)

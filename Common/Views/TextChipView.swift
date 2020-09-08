@@ -23,9 +23,9 @@ struct TextChipView: View {
     
     var body: some View {
         VStack(spacing:10) {
-            textSampleView { ChipBackgroundView(fillColor: chipFillColor()) }
+            textSampleView { ChipBackgroundView(fillColor: self.chipFillColor()) }
 
-            textSampleView { checkerboardBackground() }
+            textSampleView { self.checkerboardBackground() }
         }
         .foregroundColor(color)
         .font(textFont())

@@ -35,7 +35,7 @@ struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                self.contentClosure(widthSampleModel, nil)
+                self.contentClosure(self.widthSampleModel, nil)
                     .updatingLayoutWidthAndColumnCount(forFullWidth: geometry.size.width)
                     .hidden()
 
@@ -43,18 +43,18 @@ struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
                     Spacer()
 
                     ScrollView(.vertical) {
-                        ForEach(splitIntoRows(columnCount: layout.getColumnCount()), id: \.self) { (row) in
+                        ForEach(self.splitIntoRows(columnCount: self.layout.getColumnCount()), id: \.self) { (row) in
                             HStack {
                                 ForEach(row, id: \.self) { model in
                                     // If we have a cellWidth use it, otherwise just use the full geometry width.
-                                    contentClosure(model, layout.cellWidth ?? geometry.size.width)
+                                    self.contentClosure(model, self.layout.cellWidth ?? geometry.size.width)
                                         .updatingLayoutHeight()
-                                        .frame(width: layout.getWidth(), height: layout.getHeight())
+                                        .frame(width: self.layout.getWidth(), height: self.layout.getHeight())
                                 }
                             }
                         }
                     }
-                    .frame(minWidth: CGFloat(layout.getColumnCount()) * layout.getWidth())
+                    .frame(minWidth: CGFloat(self.layout.getColumnCount()) * self.layout.getWidth())
 
                     Spacer()
                 }
@@ -221,7 +221,7 @@ private extension View {
                 .hidden() // But you can hide the contents of the GeometryReader … 🤷‍♂️
                 .frame(width: geometry.size.width)
                 .preference(key: LayoutPreferenceKey.self,
-                            value: createWidthUpdatingLayout(columnWidth: geometry.size.width,
+                            value: self.createWidthUpdatingLayout(columnWidth: geometry.size.width,
                                                              viewFullWidth: forFullWidth))
         })
     }
