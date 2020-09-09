@@ -30,6 +30,7 @@ struct MainView: View {
             GridHeaderView(darkModeSelected: $darkModeSelected,
                        gridIndex: $selectedGridIndex,
                        gridNames: gridModels.map { $0.name })
+
             // Animate changing the selected grid
             withAnimation { gridView(models: gridModels[selectedGridIndex].models) }
         }
@@ -47,27 +48,25 @@ private extension MainView {
     /// what type of grid to create it creates a FlowableContentGrid containing the proper `SwatchView` objects for the models
     /// - Parameter models: The models to render in the returned grid view.
     /// - Returns: A grid view containing the models for the selected grid. If there's some sort of error it returns a simple `Text` describing the error.
-    @ViewBuilder
     func gridView(models: [SwatchModel]) -> some View {
-
         /// Determines what type of models are stored in `models`. Used to type the content of the grids.
         let modelType = models.count > 0 ? type(of: models[0]) : nil
-        
+
         if modelType == ColorModel.self {
             // Forced unwrap is fine here, we just checked the type above.
-            FlowableContentGridView(models: models as! [ColorModel],
-                                    widthSampleModel: ColorModel.widthSample) {
-                ColorSwatchView(model: $0, width: $1)
-            }
+            return AnyView(FlowableContentGridView(models: models as! [ColorModel],
+                                                   widthSampleModel: ColorModel.widthSample) {
+                                                    ColorSwatchView(model: $0, width: $1)
+            })
         } else if modelType == TextModel.self {
             #if !os(watchOS)
             // Forced unwrap is fine here, we just checked the type above.
-            TextSwatchGridView(models: models as! [TextModel])
+            return AnyView(TextSwatchGridView(models: models as! [TextModel]))
             #else
-            Text("Watch doesn't support TextGrid")
+            return AnyView(Text("Watch doesn't support TextGrid"))
             #endif
         } else {
-            Text("Missing Grid Type!")
+            return AnyView(Text("Missing Grid Type!"))
         }
     }
     
