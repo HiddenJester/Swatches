@@ -130,7 +130,7 @@ private extension FlowableContentGridView {
 
         if animateUpdate {
             self.opacity = 0
-            withAnimation { self.opacity = 1 }
+            withAnimation(.easeInOut(duration: 0.5)) { self.opacity = 1 }
         }
     }
 }

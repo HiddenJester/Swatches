@@ -31,8 +31,7 @@ struct MainView: View {
                        gridIndex: $selectedGridIndex,
                        gridNames: gridModels.map { $0.name })
 
-            // Animate changing the selected grid
-            withAnimation { gridView(models: gridModels[selectedGridIndex].models) }
+            gridView(models: gridModels[selectedGridIndex].models)
         }
         .background(backgroundColor().edgesIgnoringSafeArea(.all)) // Background is full screen, all the time.
         .onAppear { self.darkModeSelected = (self.envScheme == .dark) } // Copy the environment value.
