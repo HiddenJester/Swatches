@@ -39,37 +39,21 @@ struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
                     .updatingLayoutWidthAndColumnCount(forFullWidth: geometry.size.width)
                     .hidden()
 
-                HStack {
-                    Spacer()
-
-                    ScrollView(.vertical) {
-                        ForEach(self.splitIntoRows(columnCount: self.layout.getColumnCount()), id: \.self) { (row) in
-                            HStack {
-                                ForEach(row, id: \.self) { model in
-                                    // If we have a cellWidth use it, otherwise just use the full geometry width.
-                                    self.contentClosure(model, self.layout.cellWidth ?? geometry.size.width)
-                                        .updatingLayoutHeight()
-                                        .frame(width: self.layout.getWidth(), height: self.layout.getHeight())
-                                }
+                ScrollView() {
+                    ForEach(self.splitIntoRows(columnCount: self.layout.getColumnCount()), id: \.self) { (row) in
+                        HStack {
+                            ForEach(row, id: \.self) { model in
+                                // If we have a cellWidth use it, otherwise just use the full geometry width.
+                                self.contentClosure(model, self.layout.cellWidth ?? geometry.size.width)
+                                    .updatingLayoutHeight()
                             }
+                            .frame(height: self.layout.getHeight())
                         }
                     }
-                    .frame(minWidth: CGFloat(self.layout.getColumnCount()) * self.layout.getWidth())
-
-                    Spacer()
                 }
+                .frame(width: self.layout.gridWidth ?? geometry.size.width)
 
-                // Old school debugging aid 😜
-//                VStack {
-//                    Text("Cell Width: \(self.layout.getWidth())")
-//
-//                    Text("Cell Height: \(self.layout.getHeight())")
-//
-//                    Text("Column Count: \(self.layout.getColumnCount())")
-//                }
-//                .foregroundColor(.red)
-//                .font(.title)
-//                .background(Color.gray)
+//                self.debugView()
             }
         }
         .opacity(opacity)
@@ -77,6 +61,22 @@ struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
             DispatchQueue.main.async { self.update(fromLayout: layout)
             }
         }
+    }
+
+    func debugView() -> some View {
+        // Old school debugging aid 😜
+        VStack {
+            Text("Cell Width: \(self.layout.getWidth())")
+
+            Text("Cell Height: \(self.layout.getHeight())")
+
+            Text("Grid Width: \(self.layout.gridWidth ?? 0)")
+
+            Text("Column Count: \(self.layout.getColumnCount())")
+        }
+        .foregroundColor(.red)
+        .font(.headline)
+        .background(Color.gray)
     }
 }
 
@@ -143,6 +143,8 @@ private struct FlowableContentGridLayout {
     /// The height to apply to a single cell.
     var cellHeight: CGFloat? = nil
 
+    var gridWidth: CGFloat? = nil
+
     /// The number of columns to render into the grid.
     var columnCount: Int? = nil
 }
@@ -166,6 +168,13 @@ private extension FlowableContentGridLayout {
     /// present is simply discarded.
     /// - Parameter newValue: The value to reduce in this one.
     mutating func reduce(newValue: FlowableContentGridLayout) {
+        if let newGridWidth = newValue.gridWidth, newGridWidth != gridWidth {
+            gridWidth = newGridWidth
+            cellHeight = nil
+            cellWidth = nil
+            columnCount = nil
+        }
+
         if let newWidth = newValue.cellWidth, newWidth != cellWidth {
             cellWidth = newWidth
             // Changing cell width needs to reset the height value.
@@ -229,7 +238,7 @@ private extension View {
     func createWidthUpdatingLayout(columnWidth: CGFloat, viewFullWidth: CGFloat) -> FlowableContentGridLayout {
         // Decrease the geometry width a hair so we don't shove RIGHT up to the margins in the event
         // that the width is an exact multiple of sampleWidth and also leave some room for column spacing.
-        let scaledFullWidth = viewFullWidth * 0.95
+        let scaledFullWidth = viewFullWidth * 0.9
 
         // Boundscheck the input.
         let boundedCellWidth = max(columnWidth, 1)
@@ -246,6 +255,7 @@ private extension View {
         // Let the new cell width be as wide as possible, inside scaled FullWidth.
         return FlowableContentGridLayout(cellWidth: scaledFullWidth / CGFloat(columnCount),
                                          cellHeight: nil,
+                                         gridWidth: viewFullWidth,
                                          columnCount: columnCount)
     }
 }

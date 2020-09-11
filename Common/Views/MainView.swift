@@ -34,9 +34,7 @@ struct MainView: View {
             // Animate changing the selected grid
             withAnimation { gridView(models: gridModels[selectedGridIndex].models) }
         }
-        .background(backgroundColor()
-                        .edgesIgnoringSafeArea(.all) // Background is full screen, all the time.
-        ) // Need an adaptive background or dark mode looks bad.
+        .background(backgroundColor().edgesIgnoringSafeArea(.all)) // Background is full screen, all the time.
         .onAppear { self.darkModeSelected = (self.envScheme == .dark) } // Copy the environment value.
         .colorScheme(darkModeSelected ? .dark : .light) // Set the color scheme to the toggle value.
         .animation(.default, value: darkModeSelected) // Animate the color scheme toggling.

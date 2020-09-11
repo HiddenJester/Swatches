@@ -18,23 +18,27 @@ struct ColorChipView: View {
     /// Set to true to draw the checkerboard background (and the outline).
     var drawBackground = true
 
-    // Arbitrary value designed to not take up a ridiculous amount of space.
+    // Arbitrary values designed to not take up a ridiculous amount of space.
     #if os(tvOS)
-    let maxWidth = CGFloat(100)
+    let minLength = CGFloat(100)
+    let maxLength = CGFloat(300)
+    #elseif os(watchOS)
+    let minLength = CGFloat(20)
+    let maxLength = CGFloat(150)
     #else
-    let maxWidth = CGFloat(50)
+    let minLength = CGFloat(50)
+    let maxLength = CGFloat(100)
     #endif
     
     var body: some View {
         RoundedRectangle(cornerRadius: 5.0)
-            .aspectRatio(1.0, contentMode: .fit)
             .foregroundColor(color)
             .background(ChipBackgroundView(fillColor: drawBackground ? nil : .clear))
-            .frame(maxWidth: maxWidth)
             .overlay(RoundedRectangle(cornerRadius: 5.0)
                         .inset(by: 1)
                         .stroke(strokeColor(), lineWidth: 2)
             )
+            .frame(minWidth: minLength, maxWidth: maxLength, minHeight: minLength, maxHeight: maxLength)
     }
 }
 

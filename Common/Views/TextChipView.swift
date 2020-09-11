@@ -20,7 +20,7 @@ struct TextChipView: View {
     
     /// The color to display the text in. If this is `.clear` then no background is drawn.
     let color: Color
-    
+
     var body: some View {
         VStack(spacing:10) {
             textSampleView { ChipBackgroundView(fillColor: self.chipFillColor()) }
@@ -40,14 +40,13 @@ private extension TextChipView {
     /// - Returns: The sample view with the provided background.
     func textSampleView(@ViewBuilder background: @escaping () -> ChipBackgroundView) -> some View {
         Text(text)
-            .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/) // Force multiline over truncation.
-            .padding()
+            .padding(.horizontal)
             .background(background())
             .overlay(RoundedRectangle(cornerRadius: 5.0)
                         .inset(by: 1)
                         .stroke(strokeColor(), lineWidth: 2)
             )
-
+            .fixedSize(horizontal: false, vertical: true) // Force multi-line over truncation.
     }
 
     /// On platforms that support it, we want to use `.tertiarySystemBackground`. But only iOS and Mac(Catalyst) support that, while we still have
@@ -76,12 +75,12 @@ private extension TextChipView {
     }
     
     /// tvOS looks better with a smaller font for the text chips, so this function returns the proper font for the platform.
-    /// - Returns: on tvOS this is `Font.headline`. On other platforms this is `Font.largeTitle.bold()`
+    /// - Returns: the proper font to use for the text chips themselves.
     func textFont() -> Font {
         #if os(tvOS)
-        return Font.headline
+        return .headline
         #else
-        return Font.largeTitle.bold()
+        return .title
         #endif
     }
 

@@ -13,14 +13,14 @@ import SwiftUI
 struct SwatchLabelView: View {
     /// The text to display.
     let text: String
-    
+
     var body: some View {
         Text(text)
             .font(.headline)
-            .fixedSize(horizontal: false, vertical: true) // Make the text word-wrap into multi-line, not truncate
             .foregroundColor(color())
             .truncationMode(.middle)
             .multilineTextAlignment(.center)
+            .fixedSize(horizontal: false, vertical: true) // Force multiline, not truncation.
     }
 }
 

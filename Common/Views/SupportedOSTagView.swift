@@ -17,14 +17,18 @@ struct SupportedOSTagView: View {
     let opacity: Double
 
     var body: some View {
-        VStack(alignment: .trailing, spacing: 0) {
-            tagView(forOS: .iOS)
+        HStack() {
+            VStack(alignment: .trailing, spacing: 0) {
+                tagView(forOS: .iOS)
 
-            tagView(forOS: .macOS)
-            
-            tagView(forOS: .tvOS)
-            
-            tagView(forOS: .watchOS)
+                tagView(forOS: .macOS)
+            }
+
+            VStack(alignment: .trailing, spacing: 0) {
+                tagView(forOS: .watchOS)
+
+                tagView(forOS: .tvOS)
+            }
         }
         .opacity(opacity)
     }
@@ -41,7 +45,7 @@ private extension SupportedOSTagView {
         // On the Mac use a larger font …
         font = Font.subheadline
         #else
-        font = Font.footnote
+        font = Font.caption
         #endif
         
         return HStack(spacing: 0) {

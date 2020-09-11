@@ -30,26 +30,20 @@ struct SwatchView<Content>: View where Content: View {
     let width: CGFloat?
 
     var body: some View {
-        VStack(spacing: 0) {
-            HStack() {
-                content
+        VStack() {
+            content
 
-                SupportedOSTagView(value: supportedOS, opacity: drawBackgroundAndOutline ? 1 : 0)
-                    .layoutPriority(1) // Shrink the chip before the tags.
-            }
-            .padding(.horizontal)
-
-            Spacer()
+            SupportedOSTagView(value: supportedOS, opacity: drawBackgroundAndOutline ? 1 : 0)
 
             SwatchLabelView(text: label)
-                .padding(.horizontal, 2) /// *Tiny* bit of horizontal padding so the text doesn't drive up against the border.
+                .padding(.bottom)
         }
+        .padding(.horizontal, cornerRadius)
         .padding(.vertical)
         .frame(width: width)
         .overlay(RoundedRectangle(cornerRadius: cornerRadius)
                     .inset(by: 1)
-                    .stroke(drawBackgroundAndOutline ? Color.primary : Color.clear, lineWidth: 2)
-        )
+                    .stroke(drawBackgroundAndOutline ? Color.primary : Color.clear, lineWidth: 2))
         .background(backgroundColor())
         .cornerRadius(cornerRadius)
     }

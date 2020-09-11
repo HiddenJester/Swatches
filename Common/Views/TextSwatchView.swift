@@ -25,6 +25,7 @@ struct TextSwatchView: View {
                    label: model?.name ?? " ",
                    supportedOS: model?.supportedOS ?? .all,
                    width: width) { TextChipView(text: self.sample, color: self.model?.color ?? .clear) }
+            .padding(.vertical)
     }
 }
 
