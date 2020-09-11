@@ -61,11 +61,11 @@ struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
 
                 // Old school debugging aid 😜
 //                VStack {
-//                    Text("Cell Width: \(layout.getWidth())")
+//                    Text("Cell Width: \(self.layout.getWidth())")
 //
-//                    Text("Cell Height: \(layout.getHeight())")
+//                    Text("Cell Height: \(self.layout.getHeight())")
 //
-//                    Text("Column Count: \(layout.getColumnCount())")
+//                    Text("Column Count: \(self.layout.getColumnCount())")
 //                }
 //                .foregroundColor(.red)
 //                .font(.title)
