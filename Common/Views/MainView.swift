@@ -52,7 +52,8 @@ private extension MainView {
         if modelType == ColorModel.self {
             // Forced unwrap is fine here, we just checked the type above.
             return AnyView(FlowableContentGridView(models: models as! [ColorModel],
-                                                   widthSampleModel: ColorModel.widthSample) {
+                                                   widthSampleModel: ColorModel.widthSample,
+                                                   header: { EmptyView() }) {
                                                     ColorSwatchView(model: $0, width: $1)
             })
         } else if modelType == TextModel.self {

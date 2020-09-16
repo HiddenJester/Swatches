@@ -12,7 +12,10 @@ import SwiftUI
 /// a sample `Model` that can generate an cell with a desired width of the cell. The Grid renders a hidden `CellView` using `widthSampleModel` and
 /// uses the resulting width to calculate how many columns can be supported.
 /// - Note: The "grid" is a loose one, notably cells can be different heights in a row.
-struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
+struct FlowableContentGridView<Header: View, CellView: View, Model: Hashable>: View {
+    /// A view to draw at the top of the scrolling area.
+    let headerView: Header
+
     /// The models to display.
     let models: [Model]
 
@@ -40,6 +43,8 @@ struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
                     .hidden()
 
                 ScrollView() {
+                    self.headerView
+
                     ForEach(self.splitIntoRows(columnCount: self.layout.getColumnCount()), id: \.self) { (row) in
                         HStack {
                             ForEach(row, id: \.self) { model in
@@ -51,9 +56,9 @@ struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
                         }
                     }
                 }
-                .frame(width: self.layout.gridWidth ?? geometry.size.width)
+                .frame(width: self.layout.gridWidth ?? geometry.size.width, height: geometry.size.height)
 
-//                self.debugView()
+//                self.debugLayoutView()
             }
         }
         .opacity(opacity)
@@ -61,9 +66,20 @@ struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
             DispatchQueue.main.async { self.update(fromLayout: layout)
             }
         }
+    public init(models: [Model], widthSampleModel: Model, @ViewBuilder header: () -> Header, contentClosure: @escaping (Model?, CGFloat?) -> CellView) {
+        self.headerView = header()
+        self.models = models
+        self.widthSampleModel = widthSampleModel
+        self.contentClosure = contentClosure
     }
+}
 
-    func debugView() -> some View {
+// MARK: - FlowableContentGridView private funcs
+private extension FlowableContentGridView {
+    /// An old school debugging aid. This simply displays some of the value from the layout.
+    /// - Returns: A view with the values displayed, suitable for sticking in the `ZStack` for run-time debugging.
+    #if DEBUG
+    func debugLayoutView() -> some View {
         // Old school debugging aid 😜
         VStack {
             Text("Cell Width: \(self.layout.getWidth())")
@@ -78,10 +94,8 @@ struct FlowableContentGridView<CellView: View, Model: Hashable>: View {
         .font(.headline)
         .background(Color.gray)
     }
-}
+    #endif
 
-// MARK: - FlowableContentGridView private funcs
-private extension FlowableContentGridView {
     /// A helper function that splits the model array into a two dimensional array with the given column count. This is suitable for iteration to generate rows
     /// of the final grid.
     /// - Parameter columnCount: The number of columns to break `models` into.
@@ -150,15 +164,15 @@ private struct FlowableContentGridLayout {
 }
 
 private extension FlowableContentGridLayout {
-    /// Unwraps with into a definite `CGFloat`. Returns 0 if no value is available.
+    /// Unwraps width into a definite `CGFloat`. Returns 0 if no value is available.
     /// - Returns: a valid `CGFloat` for `cellWidth`.
     func getWidth() -> CGFloat { cellWidth ?? 0 }
 
-    /// Unwraps with into a definite `CGFloat`. Returns 0 if no value is available.
+    /// Unwraps height into a definite `CGFloat`. Returns 0 if no value is available.
     /// - Returns: a valid `CGFloat` for `cellHeight`.
     func getHeight() -> CGFloat { cellHeight ?? 0 }
 
-    /// Unwraps with into a definite `Int`. Returns 1 if no value is available.
+    /// Unwraps columnCount into a definite `Int`. Returns 1 if no value is available.
     /// - Returns: a valid `Int` for `columnCount`.
     func getColumnCount() -> Int { columnCount ?? 1 }
 
@@ -263,7 +277,8 @@ private extension View {
 struct FlowableContentGridView_Previews: PreviewProvider {
     static var previews: some View {
         FlowableContentGridView(models: ColorModel.adaptableColors(),
-                                widthSampleModel: ColorModel.widthSample) { ColorSwatchView(model: $0, width: $1) }
+                                widthSampleModel: ColorModel.widthSample,
+                                header: { EmptyView() }) { ColorSwatchView(model: $0, width: $1) }
             .previewLayout(PreviewLayout.sizeThatFits)
     }
 }

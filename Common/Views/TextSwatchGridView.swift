@@ -16,30 +16,34 @@ struct TextSwatchGridView: View {
     
     /// The text to use as the sample for all of the swatches.
     @State private var sample = "The quick brown fox jumps over the lazy dog."
-    
+
     var body: some View {
-        VStack {
-            VStack(spacing: CGFloat(0)) {
-                Text("Sample:")
-                    .font(.title)
-
-                TextField("Sample Text:", text: $sample)
-                    .textFieldStyle(fieldStyle())
-                    .disableAutocorrection(true)
-                    .padding()
-
-            }
-            .overlay(RoundedRectangle.init(cornerRadius: 20.0).stroke())
-            .padding()
-            
-            FlowableContentGridView(models: models, widthSampleModel: TextModel.widthSample) {
-                TextSwatchView(sample: self.sample, model: $0, width: $1)
-            }
+        FlowableContentGridView(models: models,
+                                widthSampleModel: TextModel.widthSample,
+                                header: { self.headerView() }) {
+                                    TextSwatchView(sample: self.sample, model: $0, width: $1)
         }
     }
 }
 
 private extension TextSwatchGridView {
+    /// Creates the "header" view that contains the TextField for editing the sample text. This can be passed to the grid as a header view,
+    /// allowing it to be placed inside the scroll view, which is handy for landscape on phones.
+    /// - Returns: The header view with the bound `TextField`.
+    func headerView() -> some View {
+        VStack(spacing: 0) {
+            Text("Sample:")
+                .font(.title)
+
+            TextField("Sample Text:", text: $sample)
+                .textFieldStyle(fieldStyle())
+                .disableAutocorrection(true)
+                .padding()
+        }
+        .overlay(RoundedRectangle.init(cornerRadius: 20.0).stroke())
+        .padding()
+    }
+
     /// Creates a platform specific `TextFieldStyle` suitable for the sample text field.
     /// - Returns: On iOS or macOS this will return `RoundedBorderTestFieldStyle`. Since other platforms don't support this style
     ///     on other platforms this returns `DefaultTextFieldStyle`.
