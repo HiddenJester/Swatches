@@ -27,9 +27,6 @@ struct TextChipView: View {
 
             textSampleView { self.checkerboardBackground() }
         }
-        .foregroundColor(color)
-        .font(textFont())
-        .multilineTextAlignment(.center)
     }
 }
 
@@ -40,7 +37,9 @@ private extension TextChipView {
     /// - Returns: The sample view with the provided background.
     func textSampleView(@ViewBuilder background: @escaping () -> ChipBackgroundView) -> some View {
         Text(text)
-            .padding(.horizontal)
+            .foregroundColor(color)
+            .font(textFont())
+            .multilineTextAlignment(.center)
             .background(background())
             .overlay(RoundedRectangle(cornerRadius: 5.0)
                         .inset(by: 1)

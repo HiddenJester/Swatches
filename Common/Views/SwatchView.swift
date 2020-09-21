@@ -36,11 +36,9 @@ struct SwatchView<Content>: View where Content: View {
             SupportedOSTagView(value: supportedOS, opacity: drawBackgroundAndOutline ? 1 : 0)
 
             SwatchLabelView(text: label)
-                .padding(.bottom)
         }
-        .padding(.horizontal, cornerRadius)
-        .padding(.vertical)
-        .frame(width: width)
+        .padding(cornerRadius)
+        .frame(minWidth: width)
         .overlay(RoundedRectangle(cornerRadius: cornerRadius)
                     .inset(by: 1)
                     .stroke(drawBackgroundAndOutline ? Color.primary : Color.clear, lineWidth: 2))
@@ -92,12 +90,12 @@ private extension SwatchView {
 }
 
 struct Swatch_Previews: PreviewProvider {
-    static let width: CGFloat = 200
+    static let width: CGFloat = 150
 
     static var previews: some View {
         Group {
             SwatchView(drawBackgroundAndOutline: true,
-                       label: "Super Duper Wordy Ass Label Test",
+                       label: "Here's a Little Story I'd Like to Tell, About Three Bad Brothers That You Know So Well.",
                        supportedOS: .iOSAndMac,
                        width: width) {
                 ColorChipView(color: .blue)
@@ -108,8 +106,8 @@ struct Swatch_Previews: PreviewProvider {
             }
 
             #if os(macOS) || os(iOS)
-            SwatchView(drawBackgroundAndOutline: true, label: "Text Text", supportedOS: .all) {
-                TextChipView(text: "Sample", color: .black)
+            SwatchView(drawBackgroundAndOutline: true, label: "Text Test", supportedOS: .all) {
+                TextChipView(text: "Here's some longer text", color: .black)
             }
             #endif
         }
