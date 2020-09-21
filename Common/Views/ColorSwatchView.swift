@@ -23,28 +23,11 @@ struct ColorSwatchView: View {
                    label: model?.name ?? " ",
                    supportedOS: model?.supportedOS ?? .all,
                    width: width) {
-                    self.chipView(forColor: self.model?.color)
-            // This doesn't work, see the HeaderDoc for chipView below.
-//            if let color = model?.color {
-//                ColorChipView(color: color, drawBackground: true)
-//            } else {
-//                ColorChipView(color: .clear, drawBackground: false)
-//            }
-        }
-    }
-}
-
-private extension ColorSwatchView {
-    /// In order to use a PreferenceKey every instance of `ColorSwatchView` must have the *exact same signature*. If this code is present inline in
-    /// main function it affects the signature. So instead this is a separate function with a single signature. If a color is passed in, the regular
-    /// `ColorChipView` is returned. If nil is passed in a clear chip with no background is returned.
-    /// - Parameter color: A `Color?` to draw in the chip view. Pass `nil` to get a clear chip with no background.
-    /// - Returns: An appropriate `ColorChipView`.
-    func chipView(forColor color: Color?) -> ColorChipView {
-        if let color = color {
-            return ColorChipView(color: color, drawBackground: true)
-        } else {
-            return ColorChipView(color: .clear, drawBackground: false)
+            if let color = model?.color {
+                ColorChipView(color: color, drawBackground: true)
+            } else {
+                ColorChipView(color: .clear, drawBackground: false)
+            }
         }
     }
 }
