@@ -25,5 +25,5 @@ extension ColorModel: Hashable {}
 
 extension ColorModel {
     /// A model used to create a sample swatch with a reasonably long single line name.
-    static let widthSample: ColorModel = { ColorModel(color: .clear, name: "Tertiary", supportedOS: .all) }()
+    static let widthSample: ColorModel = { ColorModel(color: .clear, name: "Secondary System", supportedOS: .all) }()
 }
