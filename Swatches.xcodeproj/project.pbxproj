@@ -31,8 +31,6 @@
 		3B2C7ECC239B07F400F23ED0 /* TextChipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B549E7F2386020B004C16DE /* TextChipView.swift */; };
 		3B2C7ECD239B08F000F23ED0 /* TextSwatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B549E792385E511004C16DE /* TextSwatchView.swift */; };
 		3B2C7ECF239B094000F23ED0 /* TextSwatchGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B549E712385DCF4004C16DE /* TextSwatchGridView.swift */; };
-		3B2C7ED1239B1D1A00F23ED0 /* FocusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2C7ED0239B1D1A00F23ED0 /* FocusableView.swift */; };
-		3B2C7ED2239B1D2800F23ED0 /* FocusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2C7ED0239B1D1A00F23ED0 /* FocusableView.swift */; };
 		3B2C7ED3239B1D2900F23ED0 /* FocusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2C7ED0239B1D1A00F23ED0 /* FocusableView.swift */; };
 		3B38FF1E23EA57A500A2E756 /* ReplaceTextXCUIElementExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B38FF1D23EA57A500A2E756 /* ReplaceTextXCUIElementExtension.swift */; };
 		3B42B82E24DB8A1500C634C3 /* CloserLabelToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B42B82D24DB8A1500C634C3 /* CloserLabelToggle.swift */; };
@@ -254,6 +252,8 @@
 		3B2C7EA8239AD66700F23ED0 /* tvOS */ = {
 			isa = PBXGroup;
 			children = (
+				3B2C7ED0239B1D1A00F23ED0 /* FocusableView.swift */,
+				3BC7A43E23C405ED00429E1A /* TVMainView.swift */,
 				3B2C7EA9239AD66700F23ED0 /* TVAppDelegate.swift */,
 				3B2C7EB2239AD66800F23ED0 /* LaunchScreen.storyboard */,
 				3B2C7EB5239AD66800F23ED0 /* Info.plist */,
@@ -327,7 +327,6 @@
 				3BB3D5F02376175A009CE90F /* ColorSwatchView.swift */,
 				3B42B82D24DB8A1500C634C3 /* CloserLabelToggle.swift */,
 				3BD63F6F23B2AF7F00A7DCC8 /* FlowableContentGridView.swift */,
-				3B2C7ED0239B1D1A00F23ED0 /* FocusableView.swift */,
 				3B15EDA4237E035A008C54AF /* GridHeaderView.swift */,
 				3B76A62423765179007292F5 /* MainView.swift */,
 				3BC7A43823C3E49900429E1A /* SafariView.swift */,
@@ -337,7 +336,6 @@
 				3B549E7F2386020B004C16DE /* TextChipView.swift */,
 				3B549E712385DCF4004C16DE /* TextSwatchGridView.swift */,
 				3B549E792385E511004C16DE /* TextSwatchView.swift */,
-				3BC7A43E23C405ED00429E1A /* TVMainView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -709,7 +707,6 @@
 				3B53C13F239701270047B8EE /* FixedColorModels.swift in Sources */,
 				3BA9404023AABF5100C9AB43 /* SupportedOSOptions.swift in Sources */,
 				3B53C1462397012D0047B8EE /* ColorChipView.swift in Sources */,
-				3B2C7ED2239B1D2800F23ED0 /* FocusableView.swift in Sources */,
 				3B42B82F24DB8A1500C634C3 /* CloserLabelToggle.swift in Sources */,
 				3B53C14A2397012D0047B8EE /* GridHeaderView.swift in Sources */,
 				3B53C12B2397002F0047B8EE /* ExtensionDelegate.swift in Sources */,
@@ -743,7 +740,6 @@
 				3BB3D5DD2376135B009CE90F /* SceneDelegate.swift in Sources */,
 				3B549E7E2385FDF6004C16DE /* SwatchView.swift in Sources */,
 				3B549E7A2385E511004C16DE /* TextSwatchView.swift in Sources */,
-				3B2C7ED1239B1D1A00F23ED0 /* FocusableView.swift in Sources */,
 				3B15EDA7237E4275008C54AF /* AdaptableColorModels.swift in Sources */,
 				3BD63F7323B2DEEB00A7DCC8 /* GridModel.swift in Sources */,
 				3B549E762385DE22004C16DE /* TextModels.swift in Sources */,
