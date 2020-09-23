@@ -9,9 +9,9 @@
 import SwiftUI
 
 /// A generic container view that can arrange "cell" views into a grid. It takes a closure that maps a `Model` object into a `CellView` as well a
-/// a sample `Model` that can generate an cell with a desired width of the cell. The Grid renders a hidden `CellView` using `widthSampleModel` and
-/// uses the resulting width to calculate how many columns can be supported.
-/// - Note: The "grid" is a loose one, notably cells can be different heights in a row.
+/// a sample `Model` that can generate an cell that would provide a reasonable desired cell width. The grid renders a hidden `CellView` using
+/// `widthSampleModel` and uses the resulting width to calculate how many columns can be supported, as well as whether we can render the os tags in
+/// the wide 4-column mode or the narrower 2-column mode. (See `SupportedOSTagView.swift` for more on that.)
 struct FlowableContentGridView<Header: View, CellView: View, Model: Hashable>: View {
     /// A view to draw at the top of the scrolling area.
     let headerView: Header
@@ -25,15 +25,15 @@ struct FlowableContentGridView<Header: View, CellView: View, Model: Hashable>: V
     /// "Tertiary System Background" will become two lines.
     let widthSampleModel: Model
 
+    /// A closure that takes an individual model and an optional width value and returns the proper view for that model.
+    let contentClosure: (Model?, CGFloat?) -> CellView
+
     /// Our layout to use for the cells. This updated from the `PreferenceKey`, but handled asynch so that A ) all of the changes are coalesced and B )
     /// we can animate opacity on layout changes.
     @State private var layout = FlowableContentGridLayout()
 
     /// The opacity value used for the entire view. This can be animated by layout changes.
     @State private var opacity: Double = 1
-
-    /// A closure that takes an individual model and an optional width value and returns the proper view for that model.
-    let contentClosure: (Model?, CGFloat?) -> CellView
 
     var body: some View {
         GeometryReader { geometry in
@@ -53,8 +53,8 @@ struct FlowableContentGridView<Header: View, CellView: View, Model: Hashable>: V
                                                     (layout.cellWidth > 0) ? layout.cellWidth : geometry.size.width)
                             }
                         }
-                        // Force each row to *precisely* be the width we want. Otherwise the cells get … creative when
-                        // there is a large gap between this row width and the grid's full width.
+                        /// Force each row to *precisely* be the width we want. Otherwise the cells get … creative when
+                        /// there is a large gap between this row width and the grid's full width.
                         .frame(width: layout.rowWidth() ?? geometry.size.width)
                     }
                 }
@@ -63,6 +63,8 @@ struct FlowableContentGridView<Header: View, CellView: View, Model: Hashable>: V
 
 //                layout.debugView()
             }
+            /// Set the tagFormat into the environment so `SupportedOSTagView` can pick it up and use it.
+            .environment(\.supportedOSTagFormat, layout.tagFormat)
             .onPreferenceChange(LayoutPreferenceKey.self) { update(fromLayout: $0) }
         }
         .opacity(opacity)
@@ -143,6 +145,9 @@ private struct FlowableContentGridLayout {
 
     /// The number of columns to render into the grid.
     var columnCount: Int = 1
+
+    /// The tag format to pass in the environment to control tag formatting.
+    var tagFormat: SupportedOSTagView.TagFormat = .twoColumn
 }
 
 extension FlowableContentGridLayout: Equatable {}
@@ -160,6 +165,14 @@ private extension FlowableContentGridLayout {
             Text("Column Count: \(columnCount)")
 
             Text("Column Gap: \(columnGap)")
+
+            switch tagFormat {
+            case .twoColumn:
+                Text("Tag: 2 Column")
+
+            case .fourColumn:
+                Text("Tag: 4 Column")
+            }
         }
         .foregroundColor(.red)
         .font(.headline)
@@ -183,21 +196,38 @@ private struct LayoutPreferenceKey: PreferenceKey {
 }
 
 private extension View {
-    /// Creates the needed geometry reader to extract the width.
+    /// Creates the needed geometry readers to extract the width and select a tag format..
     /// - Parameter viewFullWidth: the width of the full view that should be split into columns
-    /// - Returns: a clear background view that set the width and the column count into the `LayoutPreferenceKey`.
-    func updatingLayout(forFullWidth: CGFloat) -> some View {
-        background(GeometryReader { geometry in
-            // Note: You can't call .hidden() on the background or the PreferenceKey will not update.
-            Color.clear
-                .hidden() // But you can hide the contents of the GeometryReader … 🤷‍♂️
-                .preference(key: LayoutPreferenceKey.self,
-                            value: createWidthUpdatingLayout(columnWidth: geometry.size.width,
-                                                             viewFullWidth: forFullWidth))
+    /// - Returns: a clear background view that sets a new `FlowableContentGridLayout` into the `LayoutPreferenceKey`.
+    func updatingLayout(forFullWidth viewWidth: CGFloat) -> some View {
+        background(GeometryReader { widthSampleGeometry in
+            /// widthSampleGeometry describes the widthSample. Specifically, the width should be our desired column width.
+            /// Now draw a four column OS tag view.
+            SupportedOSTagView(value: .all, opacity: 1, overrideTagFormat: .fourColumn)
+                // Force it to use it's true horizontal size, so it can be wider than the parent sample.
+                .fixedSize()
+                .background(GeometryReader { tagGeometry in
+                    /// now tagGeometry represents what a 4-column tag needs.
+                    Color.clear
+                        /// And with *both* `widthSampleGeometry` & `tagGeometry`, as well as `viewWidth` we can finally calculate the
+                        /// the desired `FlowableContentGridLayout`.
+                        .preference(key: LayoutPreferenceKey.self,
+                                    value: createWidthUpdatingLayout(columnWidth: widthSampleGeometry.size.width,
+                                                                     viewFullWidth: viewWidth,
+                                                                     fourColumnTagGeometry: tagGeometry))
+                })
         })
     }
 
-    func createWidthUpdatingLayout(columnWidth: CGFloat, viewFullWidth: CGFloat) -> FlowableContentGridLayout {
+    /// The secret sauce at the core of the beast. This builds a `FlowableContentGridLayout` that can be used to flow the rest of the content.
+    /// - Parameters:
+    ///   - columnWidth: The ideal width for a column of cells.
+    ///   - viewFullWidth: The width of the entire grid.
+    ///   - fourColumnTagGeometry: a `GeometryProxy` that represents the size of a four-Column `SupportedOSTagView`.
+    /// - Returns: The final `FlowableContentGridLayout` that makes everything else sing.
+    func createWidthUpdatingLayout(columnWidth: CGFloat,
+                                   viewFullWidth: CGFloat,
+                                   fourColumnTagGeometry: GeometryProxy) -> FlowableContentGridLayout {
         let desiredColumnGap: CGFloat = 10
         let columnGap: CGFloat = (viewFullWidth > columnWidth + desiredColumnGap) ? desiredColumnGap : 0
         // Boundscheck the input so columnWidth is positive and < viewFullWidth.
@@ -212,11 +242,19 @@ private extension View {
             columnCount = Int(viewFullWidth / (boundedCellWidth + desiredColumnGap))
         }
 
+        let tagFormat: SupportedOSTagView.TagFormat
+        if fourColumnTagGeometry.size.width > boundedCellWidth {
+            tagFormat = .twoColumn
+        } else {
+            tagFormat = .fourColumn
+        }
+
         // Let the new cell width be as wide as possible, inside scaled FullWidth.
         return FlowableContentGridLayout(cellWidth: boundedCellWidth,
                                          gridWidth: viewFullWidth,
                                          columnGap: columnGap,
-                                         columnCount: columnCount)
+                                         columnCount: columnCount,
+                                         tagFormat: tagFormat)
     }
 }
 
