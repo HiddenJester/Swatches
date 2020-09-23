@@ -35,17 +35,18 @@ struct TVMainView: View {
             
             ScrollView {
                 ForEach(gridModels) { gridModel in
-                    Text(gridModel.name)
-                        .font(.title)
-                    
-                    self.row(models: gridModel.models)
+                    VStack(spacing: 0) {
+                        Text(gridModel.name)
+                            .font(.title)
+
+                        self.row(models: gridModel.models)
+                    }
                 }
             }
-            
-        }.onAppear { self.darkModeSelected = (self.envScheme == .dark) } // Copy the environment value.
-            .colorScheme(darkModeSelected ? .dark : .light) // Set the color scheme to the toggle value.
-            .animation(.default, value: darkModeSelected) // Animate the color scheme toggling.
-        
+        }
+        .onAppear { self.darkModeSelected = (self.envScheme == .dark) } // Copy the environment value.
+        .colorScheme(darkModeSelected ? .dark : .light) // Set the color scheme to the toggle value.
+        .animation(.default, value: darkModeSelected) // Animate the color scheme toggling.
     }
 }
 
@@ -63,15 +64,12 @@ private extension TVMainView {
 
         if modelType == ColorModel.self {
             // Forced unwrap is fine here, we just checked the type above.
-            return AnyView( colorRow(models: models as! [ColorModel]))
-            
+            return AnyView(colorRow(models: models as! [ColorModel]))
         } else if modelType == TextModel.self {
             // Forced unwrap is fine here, we just checked the type above.
             return AnyView(textRow(models: models as! [TextModel]))
-            
         } else {
             return AnyView(FocusableView() { Text("Missing Row Type!") })
-            
         }
     }
     
@@ -80,14 +78,13 @@ private extension TVMainView {
     /// - Returns: a horizontally oriented `ScrollView` containing all of the `ColorSwatchViews`.
     func colorRow(models: [ColorModel]) -> some View {
         return ScrollView(.horizontal) {
-            HStack {
+            HStack(spacing:0) {
                 ForEach(models,id: \.self) { model in
                     FocusableView() {
                         ColorSwatchView(model: model, width: nil)
                     }
                 }
-            }.padding()
-            
+            }
         }
     }
     
@@ -95,36 +92,32 @@ private extension TVMainView {
     /// - Parameter models: The models to render.
     /// - Returns: a horizontally oriented `ScrollView` containing all of the `TextSwatchViews`.
     func textRow(models: [TextModel]) -> some View {
-        VStack {
-            HStack {
+        VStack(spacing:0) {
+            HStack() {
                 Text("Sample:")
                     .font(.headline)
-                    .padding()
-                
+                    .padding(.leading)
+
                 TextField("Sample Text:", text: self.$textSample)
                     .disableAutocorrection(true)
-                    .padding()
-                
-            }.overlay(RoundedRectangle.init(cornerRadius: 20.0).stroke())
-                .padding()
-            
+                    .padding(.trailing)
+
+                Spacer()
+            }
+            .padding(.vertical) // Leave some space for the TextField to grow vertically inside the stroke.
+            .overlay(RoundedRectangle.init(cornerRadius: 20.0).inset(by:1).stroke())
+
             ScrollView(.horizontal) {
-                HStack {
-                    Spacer()
-                    
+                HStack(spacing:0) {
                     ForEach(models,id: \.self) { model in
                         FocusableView(focusScale: 1.1) {
                             TextSwatchView(sample: self.textSample, model: model, width: nil)
                         }
                     }
-                    
-                    Spacer()
                 }
-                
             }
-            
-        }.padding()
-
+        }
+        .environment(\.supportedOSTagFormat, .fourColumn)
     }
 }
 

@@ -34,8 +34,8 @@ struct FocusableView<Content>: View where Content: View {
     
     /// Create a new FocusableView struct.
     /// - Parameters:
-    ///   - focusScale: The scale to use when `content` has focus. Defaults to `1.15`. `content` will scale to/from this value when it gains/loses
-    ///     focus.
+    ///   - focusScale: The scale to use when `content` has focus. Defaults to `1.15`. `content` will scale to/from this value when
+    ///         it gains/loses focus.
     ///   - content: A `@ViewBuilder` that renders the actual content.
     init(focusScale: CGFloat = 1.15, @ViewBuilder _ content: @escaping () -> Content) {
         self.focusScale = focusScale
@@ -50,15 +50,17 @@ private extension FocusableView {
     /// - Returns: `self.content`. If needed by the platform it is wrapped in the needed modifiers to implement focusable support & display.
     func platformSpecificView() -> some View {
         #if os(tvOS)
-        return self.content
-            .scaleEffect(self.scale)
+        return content
+            .scaleEffect(scale)
+            .padding() // Leave some space for the focus scale effect to grow into
+            // Sigh. One padding isn't enough, and specifying a custom value becomes a world of hurt across
+            // divergent cell sizes. Truthfully really long text samples get sketchy even with 2 padding calls.
+            // So 2 stacked system-value padding calls works good in most scenarios.
             .padding()
-            .focusable() { focus in self.scale = focus ? self.focusScale : 1 }
-            .animation(.default, value: self.scale)
-
+            .focusable() { focus in scale = (focus ? self.focusScale : 1) }
+            .animation(.default, value: scale)
         #else
         return content
-        
         #endif
     }
 }
