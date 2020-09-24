@@ -10,14 +10,20 @@ import WatchKit
 import Foundation
 import SwiftUI
 
-class HostingController: WKHostingController<MainView> {
-    override var body: MainView {
-        // Create the GridModels we want to render.
-        let grids = [
-            GridModel(name: "SwiftUI", models: ColorModel.swiftUIColors()),
-            GridModel(name: "Fixed", models: ColorModel.fixedColors()),
-        ]
-        // Create the `MainView` that renders the grids.
-        return MainView(gridModels: grids)
+class HostingController: WKHostingController<AnyView> {
+    override var body: AnyView {
+        AnyView(List {
+            NavigationLink("SwiftUI", destination: ColorListView(models: ColorModel.swiftUIColors()))
+            NavigationLink("Fixed", destination: ColorListView(models: ColorModel.fixedColors()))
+        })
+    }
+
+    func ColorListView(models: [ColorModel]) -> some View {
+        ScrollView {
+            ForEach(models, id: \.self) { (model) in
+                ColorSwatchView(model: model, width: nil)
+            }
+        }
     }
 }
+
