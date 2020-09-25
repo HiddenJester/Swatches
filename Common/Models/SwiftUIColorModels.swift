@@ -14,6 +14,7 @@ extension ColorModel {
     /// - Returns: An array of `ColorModel` that represents all of the available colors.
     static func swiftUIColors() -> [ColorModel] {
         [
+//            ColorModel(color: .red, name: "An unreasonably long name because I'm dumb and causing trouble so nahhh hahha", supportedOS: .all),
             ColorModel(color: .clear, name: "Clear", supportedOS: .all),
             ColorModel(color: .black, name: "Black", supportedOS: .all),
             ColorModel(color: .white, name: "White", supportedOS: .all),

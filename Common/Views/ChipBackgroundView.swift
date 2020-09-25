@@ -18,12 +18,10 @@ struct ChipBackgroundView: View {
     var fillColor: Color? = nil
     
     /// When the checkerboard is drawn, this is the `cornerRadius` used by the image.
-    private let cornerRadius = CGFloat(20)
+    private let cornerRadius = CGFloat(5)
 
     var body: some View {
-        view()
-            .overlay(RoundedRectangle(cornerRadius: cornerRadius)
-                .stroke(fillColor != .clear ? Color.black : Color.clear, lineWidth: 2))
+        backgroundView()
     }
 }
 
@@ -31,16 +29,24 @@ private extension ChipBackgroundView {
     /// Helper function that checks `drawCheckerboard` and returns a single view. This makes appying the `overlay` modifier for the outline cleaner.
     /// - Returns: If `drawCheckerboard` is true it returns a tiled checkerboard `Image` with rounded corners. If it is false then it returns just
     ///     `Color.clear`.
-    func view() -> some View {
-        Group {
-            if fillColor == nil {
-                Image("Checkerboard")
-                    .resizable(resizingMode: .tile)
-                    .cornerRadius(cornerRadius)
-            } else {
-                RoundedRectangle(cornerRadius: cornerRadius)
-                    .foregroundColor(fillColor)
-            }
+    func backgroundView() -> some View {
+        /// Can't use if let here, the test is *specifically* if fillColor == Color.clear
+        if let fillColor = fillColor {
+            return Image("Checkerboard")
+                .resizable(resizingMode: .tile)
+                .cornerRadius(cornerRadius)
+                .opacity(0)
+                .background(fillColor
+                                .cornerRadius(cornerRadius)
+                )
+        } else {
+            return Image("Checkerboard")
+                .resizable(resizingMode: .tile)
+                .cornerRadius(cornerRadius)
+                .opacity(1)
+                .background(Color.clear
+                                .cornerRadius(cornerRadius)
+                )
         }
     }
 }
@@ -50,9 +56,17 @@ struct ChipBackground_Previews: PreviewProvider {
         Group {
             ChipBackgroundView()
 
+            #if os(iOS)
+            ChipBackgroundView(fillColor: .tertiarySystemGroupedBackground)
+            #endif
             ChipBackgroundView(fillColor: .gray)
 
             ChipBackgroundView(fillColor: .clear)
+
+            ChipBackgroundView(fillColor: .blue)
+                .environment(\.colorScheme, .dark)
         }
+        .background(Color.green)
+        .previewLayout(PreviewLayout.fixed(width: 50, height: 50))
     }
 }

@@ -17,21 +17,55 @@ struct ColorChipView: View {
     
     /// Set to true to draw the checkerboard background (and the outline).
     var drawBackground = true
+
+    // Arbitrary values designed to not take up a ridiculous amount of space.
+    #if os(tvOS)
+    let minLength = CGFloat(100)
+    let maxLength = CGFloat(300)
+    #elseif os(watchOS)
+    let minLength = CGFloat(20)
+    let maxLength = CGFloat(150)
+    #else
+    let minLength = CGFloat(50)
+    let maxLength = CGFloat(100)
+    #endif
     
     var body: some View {
-        RoundedRectangle(cornerRadius: 20.0)
-            .aspectRatio(1.0, contentMode: .fit)
+        RoundedRectangle(cornerRadius: 5.0)
             .foregroundColor(color)
             .background(ChipBackgroundView(fillColor: drawBackground ? nil : .clear))
+            .overlay(RoundedRectangle(cornerRadius: 5.0)
+                        .inset(by: 1)
+                        .stroke(strokeColor(), lineWidth: 2)
+            )
+            .frame(minWidth: minLength, maxWidth: maxLength, minHeight: minLength, maxHeight: maxLength)
+    }
+}
+
+private extension ColorChipView {
+    /// Determine the proper color to use for the outline.
+    /// - Returns: The color to pass when stroking the outline.
+    func strokeColor() -> Color {
+        if !drawBackground {
+            return .clear
+        } else {
+            #if os(watchOS)
+            return .black
+            #else
+            return .opaqueSeparator
+            #endif
+        }
     }
 }
 
 struct ColorChip_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ColorChipView(color: .green)
+            ColorChipView(color: .blue)
             ColorChipView(color: .clear)
             ColorChipView(color: .clear, drawBackground: false)
         }
+        .background(Color.green)
+        .previewLayout(PreviewLayout.sizeThatFits)
     }
 }

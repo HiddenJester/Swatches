@@ -23,32 +23,27 @@ struct SwatchView<Content>: View where Content: View {
     /// The Supported OSes for this swatch to draw.
     let supportedOS: SupportedOSOptions
     
-    /// If maxWidth is provided then maxWidth will be set on the frame.
-    let maxWidth: CGFloat?
-    
     /// The corner radius to use on the background and outline.
-    private let cornerRadius = CGFloat(20.0)
+    private let cornerRadius = CGFloat(5.0)
+
+    /// If a width is provided than the frame is locked to that value. A width of 0 or less is discarded in `init`.
+    let width: CGFloat?
 
     var body: some View {
         VStack() {
-            HStack() {
-                content.padding([.leading, .top])
-                
-                if drawBackgroundAndOutline {
-                    SupportedOSTagView(value: supportedOS)
-                    
-                }
-            }
-            
+            content
+
+            SupportedOSTagView(value: supportedOS, opacity: drawBackgroundAndOutline ? 1 : 0)
+
             SwatchLabelView(text: label)
-                .padding([.horizontal, .bottom], 5)
-            
-        }.background(backgroundColor())
-            .cornerRadius(cornerRadius)
-            .overlay(RoundedRectangle(cornerRadius: cornerRadius)
-                .stroke(drawBackgroundAndOutline ? Color.primary : Color.clear, lineWidth: 2))
-            .frame(maxWidth: maxWidth)
-            .padding(1) // Give us at least a point around the stroke so we can see it.
+        }
+        .padding(cornerRadius)
+        .frame(minWidth: width)
+        .overlay(RoundedRectangle(cornerRadius: cornerRadius)
+                    .inset(by: 1)
+                    .stroke(drawBackgroundAndOutline ? Color.primary : Color.clear, lineWidth: 2))
+        .background(backgroundColor())
+        .cornerRadius(cornerRadius)
     }
     
     /// Create a new Swatch
@@ -56,17 +51,21 @@ struct SwatchView<Content>: View where Content: View {
     ///   - drawBackgroundAndOutline: A Bool that controls both drawing a background and an outline.
     ///   - label: The text to display as the label for for the Swatch
     ///   - supportedOS: The SupportedOSOptions to draw.
-    ///   - maxWidth: If provided, this sets the maxWidth of the swatch frame.
+    ///   - width: pass a non-zero `CGFloat` here to fix the width of the view. Passing 0 or nil will let the view dynamically set the width.
     ///   - content: The actual content of the Swatch. This is a `@ViewBuilder` closure, so practically any SwiftUI view can be placed in a swatch.
     init(drawBackgroundAndOutline: Bool,
          label: String,
          supportedOS: SupportedOSOptions,
-         maxWidth: CGFloat? = nil,
+         width: CGFloat? = nil,
          @ViewBuilder _ content: @escaping () -> Content) {
         self.drawBackgroundAndOutline = drawBackgroundAndOutline
         self.label = label
         self.supportedOS = supportedOS
-        self.maxWidth = maxWidth
+        if let width = width, width > 0 {
+            self.width = width
+        } else {
+            self.width = nil
+        }
         self.content = content()
     }
 }
@@ -91,15 +90,27 @@ private extension SwatchView {
 }
 
 struct Swatch_Previews: PreviewProvider {
+    static let width: CGFloat = 150
+
     static var previews: some View {
         Group {
-            SwatchView(drawBackgroundAndOutline: true, label: "Wordy Ass Background Test", supportedOS: .iOSAndMac) {
+            SwatchView(drawBackgroundAndOutline: true,
+                       label: "Here's a Little Story I'd Like to Tell, About Three Bad Brothers That You Know So Well.",
+                       supportedOS: .iOSAndMac,
+                       width: width) {
                 ColorChipView(color: .blue)
             }
             
-            SwatchView(drawBackgroundAndOutline: false, label: "Clear Test", supportedOS: .all) {
+            SwatchView(drawBackgroundAndOutline: true, label: "Clear Test", supportedOS: .all, width: width) {
                 ColorChipView(color: .clear)
             }
+
+            #if os(macOS) || os(iOS)
+            SwatchView(drawBackgroundAndOutline: true, label: "Text Test", supportedOS: .all) {
+                TextChipView(text: "Here's some longer text", color: .black)
+            }
+            #endif
         }
+        .previewLayout(PreviewLayout.sizeThatFits)
     }
 }

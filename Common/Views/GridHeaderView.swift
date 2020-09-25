@@ -38,9 +38,11 @@ struct GridHeaderView: View {
                 }.sheet(isPresented: self.$showAbout) {
                     AboutView()
                 }
+
+                Spacer()
                 
-                Toggle("Dark Mode", isOn: self.$darkModeSelected)
-                
+                CloserLabelToggle("Dark Mode", isOn: self.$darkModeSelected)
+
             }.padding([.horizontal, .top])
             #endif
             

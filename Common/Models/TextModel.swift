@@ -22,3 +22,9 @@ struct TextModel: SwatchModel {
 }
 
 extension TextModel: Hashable {}
+
+extension TextModel {
+    /// A model used to create a sample swatch with a reasonably long single line name.
+    static let widthSample: TextModel = { TextModel(color: .black, name: "Tertiary", supportedOS: .all) }()
+}
+

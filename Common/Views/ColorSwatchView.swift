@@ -14,47 +14,56 @@ import SwiftUI
 struct ColorSwatchView: View {
     /// The `ColorModel` that will be rendered in this swatch.
     let model: ColorModel?
-    
-    /// The maxWidth to use for the swatch.
-    let maxWidth: CGFloat
+
+    /// If a width is provided than the frame is locked to that value. A width of 0 or less is discarded by the `SwatchView`.
+    let width: CGFloat?
     
     var body: some View {
         SwatchView(drawBackgroundAndOutline: model != nil,
                    label: model?.name ?? " ",
                    supportedOS: model?.supportedOS ?? .all,
-                   maxWidth: maxWidth) {
-            if self.model != nil {
-                ColorChipView(color: self.model!.color, drawBackground: true)
+                   width: width) {
+            if let color = model?.color {
+                ColorChipView(color: color, drawBackground: true)
             } else {
-                EmptyView()
+                ColorChipView(color: .clear, drawBackground: false)
             }
         }
     }
 }
 
 struct ColorSwatch_Previews: PreviewProvider {
-    static let wordy = ColorModel(color: .blue, name: "Wordy Blue Label", supportedOS: .all)
-    static let secondary = ColorModel(color: .secondary, name: "Secondary", supportedOS: .iOSAndMac)
-    
+    static let wordy = ColorModel(color: .green,
+                                  name: "Tertiary System Background",
+                                  supportedOS: .iOSAndMac)
+
+    static let secondary = ColorModel(color: .secondary,
+                                      name: "Secondary",
+                                      supportedOS: .iOSAndMac)
+
+    static let width: CGFloat = 200
+
     static var previews: some View {
         Group {
             HStack {
-                ColorSwatchView(model: wordy, maxWidth: 150)
+                ColorSwatchView(model: wordy, width: width)
 
-                ColorSwatchView(model: nil, maxWidth: 0)
+                ColorSwatchView(model: nil, width: width)
 
-                ColorSwatchView(model: secondary, maxWidth: 150)
-
+                ColorSwatchView(model: secondary, width: width)
             }
 
             HStack {
-                ColorSwatchView(model: wordy, maxWidth: 150)
+                ColorSwatchView(model: wordy, width: width)
 
-                ColorSwatchView(model: secondary, maxWidth: 150)
+                ColorSwatchView(model: secondary, width: width)
 
-            }.environment(\.colorScheme, .dark)
-                .previewDisplayName("Dark Mode")
+            }
+            .environment(\.colorScheme, .dark)
+            .background(Color.black)
+            .previewDisplayName("Dark Mode")
 
         }
+        .previewLayout(PreviewLayout.sizeThatFits)
     }
 }
