@@ -23,7 +23,7 @@ struct ColorChipView: View {
     let minLength = CGFloat(100)
     let maxLength = CGFloat(300)
     #elseif os(watchOS)
-    let minLength = CGFloat(20)
+    let minLength = CGFloat(30)
     let maxLength = CGFloat(150)
     #else
     let minLength = CGFloat(50)
