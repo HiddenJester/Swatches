@@ -35,7 +35,8 @@ struct GridHeaderView: View {
             HStack {
                 Button(action: { self.showAbout = true }) {
                     Text("About")
-                }.sheet(isPresented: self.$showAbout) {
+                }
+                .sheet(isPresented: self.$showAbout) {
                     AboutView()
                 }
 
@@ -43,18 +44,24 @@ struct GridHeaderView: View {
                 
                 CloserLabelToggle("Dark Mode", isOn: self.$darkModeSelected)
 
-            }.padding([.horizontal, .top])
+            }
+            .padding([.horizontal, .top])
             #endif
             
             if gridNames.count > 0 {
-                Picker("Colors:", selection: self.$gridIndex) {
-                    ForEach(0 ..< self.gridNames.count) { index in
-                        Text(self.gridNames[index]).tag(index)
+                Picker("Colors:", selection: $gridIndex) {
+                    ForEach(0 ..< gridNames.count) { index in
+                        Text(gridNames[index])
+                            .tag(index)
                             .minimumScaleFactor(0.75)
+                            // VoiceOver only reads these labels IFF the user has double-tapped on this screen to
+                            // activate a control previously. Either the Dark Mode toggle, or the picker itself will
+                            // work. But that seems like an Apple bug.
+                            .accessibility(labelString: "Show the \(gridNames[index]) colors)")
                     }
-                }.pickerStyle(self.pickerStyle())
+                }
+                .pickerStyle(pickerStyle())
             }
-            
         }
     }
 }

@@ -31,68 +31,117 @@ struct AboutView: View {
     
     /// the URL for the main HJS webpage.
     private let hjsURL = URL(string: "https://www.hiddenjester.com")!
-    
+
+    private let urlFont = Font.system(.footnote, design: .monospaced)
+
     var body: some View {
         VStack {
+            Text("About Swatches")
+                .font(Font.title)
+                .padding()
+
             ScrollView {
-                Text("About Swatches")
-                    .font(Font.title)
-                
-                Text("Swatches displays all of the colors defined in both SwiftUI and UIKit. There is an extension for SwiftUI.Color that maps all of the UIKit colors into SwiftUI, allowing you to write code like:")
+                descriptionView()
                     .padding()
-                
-                CodeSampleView(text: "RoundedRectangle.backgroundColor(.systemGray4)")
 
-                #if os(tvOS) // No web view for tvOS, just show the url in the link color.
-                CodeSampleView(text: gistURL.absoluteString, foregroundColor: .link, backgroundColor: .clear)
+                gistView()
                     .padding()
-                #else // Provide a button that opens the gist in a SafariView.
-                Button(action: { self.showGist.toggle() }) {
-                    CodeSampleView(text: gistURL.absoluteString, foregroundColor: .link, backgroundColor: .clear)
-                }.padding(.vertical)
-                    .sheet(isPresented: self.$showGist) {
-                        SafariView(url: self.gistURL)
-                }
-                #endif
-                
-                Text("The entire Swatches project is open source and the code is available on GitHub.")
-                
-                #if os(tvOS) // No web view for tvOS, just show the url in the link color.
-                CodeSampleView(text: gitHubURL.absoluteString, foregroundColor: .link, backgroundColor: .clear)
-                    .padding()
-                #else // Provide a button that opens GitHub in a SafariView.
-                Button(action: { self.showGitHub.toggle() }) {
-                    CodeSampleView(text: gitHubURL.absoluteString, foregroundColor: .link, backgroundColor: .clear)
-                }.padding(.vertical)
-                    .sheet(isPresented: self.$showGitHub) {
-                        SafariView(url: self.gitHubURL)
-                }
-                #endif
 
-                Text("If you find this app useful, visit my site to see my occasional notes on development and check out my other applications!")
-                
-                #if os(tvOS) // No web view for tvOS, just show the url in the link color.
-                CodeSampleView(text: hjsURL.absoluteString, foregroundColor: .link, backgroundColor: .clear)
+                githubView()
                     .padding()
-                #else // Provide a button that opens HJS in a SafariView.
-                Button(action: { self.showHJS.toggle() }) {
-                    CodeSampleView(text: hjsURL.absoluteString, foregroundColor: .link, backgroundColor: .clear)
-                }.padding(.vertical)
-                    .sheet(isPresented: self.$showHJS) {
-                        SafariView(url: self.hjsURL)
-                }
-                #endif
 
+                hjsSiteView()
+                    .padding()
             }
 
             Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
                 Text("Dismiss")
-            }.padding()
-            
+            }
+
         }
     }
 }
 
+// MARK: Helper subviews
+private extension AboutView {
+    /// Decomposed subview that displays the description text at the top of the view.
+    /// - Returns: the description subview.
+    func descriptionView() -> some View {
+        VStack {
+            Text("Swatches displays all of the colors defined in both SwiftUI and UIKit. There is an extension for SwiftUI.Color that maps all of the UIKit colors into SwiftUI, allowing you to write code like:\n")
+
+            CodeSampleView(text:
+                            """
+RoundedRectangle
+    .backgroundColor(.systemGray4)
+""")
+        }
+    }
+
+    /// Decomposed subview that displays information about the gist, the URL, and a button to open the URL directly.
+    /// - Returns: the gist subview.
+    func gistView() -> some View {
+        VStack {
+            #if os(tvOS) // No web view for tvOS, just show the url in the link color.
+            CodeSampleView(text: gistURL.absoluteString, foregroundColor: .link, backgroundColor: .clear)
+                .padding()
+            #else // Provide a button that opens the gist in a SafariView.
+            Button(action: { self.showGist.toggle() }) {
+                Text("View the Color extension gist")
+                    .foregroundColor(.link)
+            }
+            .sheet(isPresented: self.$showGist) { SafariView(url: self.gistURL) }
+
+            Text(gistURL.absoluteString)
+                .font(urlFont)
+            #endif
+        }
+    }
+
+    /// Decomposed subview that displays information about the GitHub repo, the URL, and a button to open the URL directly.
+    /// - Returns: the GitHub subview.
+    func githubView() -> some View {
+        VStack {
+            Text("The entire Swatches project is open source and the code is available on GitHub.\n")
+
+            #if os(tvOS) // No web view for tvOS, just show the url in the link color.
+            CodeSampleView(text: gitHubURL.absoluteString, foregroundColor: .link, backgroundColor: .clear)
+                .padding()
+            #else // Provide a button that opens GitHub in a SafariView.
+            Button(action: { self.showGitHub.toggle() }) {
+                Text("View the Swatches GitHub")
+            }
+            .sheet(isPresented: self.$showGitHub) { SafariView(url: self.gitHubURL) }
+
+            Text(gitHubURL.absoluteString)
+                .font(urlFont)
+            #endif
+        }
+    }
+
+    /// Decomposed subview that displays information about the HJS site, the URL, and a button to open the URL directly.
+    /// - Returns: the HJS site subview.
+    func hjsSiteView() -> some View {
+        VStack {
+            Text("If you find this app useful, visit my site to see my occasional notes on development and check out my other applications!\n")
+
+            #if os(tvOS) // No web view for tvOS, just show the url in the link color.
+            CodeSampleView(text: hjsURL.absoluteString, foregroundColor: .link, backgroundColor: .clear)
+                .padding()
+            #else // Provide a button that opens HJS in a SafariView.
+            Button(action: { self.showHJS.toggle() }) {
+                Text("View the HiddenJester Software site")
+            }
+            .sheet(isPresented: self.$showHJS) {
+                SafariView(url: self.hjsURL)
+            }
+
+            Text(hjsURL.absoluteString)
+                .font(urlFont)
+            #endif
+        }
+    }
+}
 
 
 struct AboutView_Previews: PreviewProvider {

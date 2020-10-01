@@ -14,7 +14,10 @@ import SwiftUI
 struct ColorChipView: View {
     /// The color to draw in the chip.
     let color: Color
-    
+
+    /// The name of the color, which will be used in the accessbility label.
+    let name: String?
+
     /// Set to true to draw the checkerboard background (and the outline).
     var drawBackground = true
 
@@ -23,7 +26,7 @@ struct ColorChipView: View {
     let minLength = CGFloat(100)
     let maxLength = CGFloat(300)
     #elseif os(watchOS)
-    let minLength = CGFloat(20)
+    let minLength = CGFloat(30)
     let maxLength = CGFloat(150)
     #else
     let minLength = CGFloat(50)
@@ -32,6 +35,7 @@ struct ColorChipView: View {
     
     var body: some View {
         RoundedRectangle(cornerRadius: 5.0)
+            .add(colorAccessibilityLabelString: name)
             .foregroundColor(color)
             .background(ChipBackgroundView(fillColor: drawBackground ? nil : .clear))
             .overlay(RoundedRectangle(cornerRadius: 5.0)
@@ -58,12 +62,26 @@ private extension ColorChipView {
     }
 }
 
+private extension View {
+    /// Takes an optional `String`. If a string is provided then the accessbility label is set to "<String> Color". If `nil` is passed then
+    /// the returned view is hidden from Accessibility. (The intention is to use this when drawing an entirely blank view that shouldn't have any interactions.
+    /// - Parameter colorAccessibilityLabelString: A `String?` that if provided, is used to build the view's accessibility label.
+    /// - Returns: Either the view with the specified accessibility label, or the view hidden from accessbility.
+    func add(colorAccessibilityLabelString: String?) -> some View {
+        if let label = colorAccessibilityLabelString {
+            return self.accessibility(labelString: "\(label) Color")
+        } else {
+            return self.accessibilityHide(hideStatus: true)
+        }
+    }
+}
+
 struct ColorChip_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ColorChipView(color: .blue)
-            ColorChipView(color: .clear)
-            ColorChipView(color: .clear, drawBackground: false)
+            ColorChipView(color: .blue, name: "Blue")
+            ColorChipView(color: .clear, name: "Clear")
+            ColorChipView(color: .clear, name: nil, drawBackground: false)
         }
         .background(Color.green)
         .previewLayout(PreviewLayout.sizeThatFits)

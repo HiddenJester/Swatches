@@ -21,12 +21,17 @@ struct TextChipView: View {
     /// The color to display the text in. If this is `.clear` then no background is drawn.
     let color: Color
 
+    /// The color name to add to the accessibility label. If this is `nil` then the whole view is hidden from accessibility.
+    let colorName: String?
+
     var body: some View {
         VStack(spacing:10) {
-            textSampleView { ChipBackgroundView(fillColor: self.chipFillColor()) }
+            textSampleView { ChipBackgroundView(fillColor: chipFillColor()) }
 
-            textSampleView { self.checkerboardBackground() }
+            textSampleView { checkerboardBackground() }
         }
+        .accessibilityElement(children: .ignore)
+        .add(textColorAccessibilityLabelString: colorName)
     }
 }
 
@@ -98,18 +103,32 @@ private extension TextChipView {
     }
 }
 
+private extension View {
+    /// Takes an optional `String`. If a string is provided then the accessbility label is set to "<String> Color". If `nil` is passed then
+    /// the returned view is hidden from Accessibility. (The intention is to use this when drawing an entirely blank view that shouldn't have any interactions.
+    /// - Parameter colorAccessibilityLabelString: A `String?` that if provided, is used to build the view's accessibility label.
+    /// - Returns: Either the view with the specified accessibility label, or the view hidden from accessbility.
+    func add(textColorAccessibilityLabelString: String?) -> some View {
+        if let label = textColorAccessibilityLabelString {
+            return self.accessibility(labelString: "Sample Text in \(label) Color")
+        } else {
+            return self.accessibilityHide(hideStatus: true)
+        }
+    }
+}
+
 struct TextChip_Previews: PreviewProvider {
     static let text = "The quick brown fox jumps over the lazy dog."
     
     static var previews: some View {
         Group {
-            TextChipView(text: text, color: .quaternaryLabel)
+            TextChipView(text: text, color: .quaternaryLabel, colorName: "Quaternary Label")
             
-            TextChipView(text: text, color: .quaternaryLabel)
+            TextChipView(text: text, color: .quaternaryLabel, colorName: "Quaternary Label")
                 .environment(\.colorScheme, .dark)
                 .previewDisplayName("Dark Mode")
             
-            TextChipView(text: text, color: .clear)
+            TextChipView(text: text, color: .clear, colorName: nil)
                 .previewDisplayName("Clear color")
         }
         .previewLayout(PreviewLayout.sizeThatFits)

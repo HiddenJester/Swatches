@@ -24,7 +24,9 @@ struct TextSwatchView: View {
         SwatchView(drawBackgroundAndOutline: model != nil,
                    label: model?.name ?? " ",
                    supportedOS: model?.supportedOS ?? .all,
-                   width: width) { TextChipView(text: self.sample, color: self.model?.color ?? .clear) }
+                   width: width) {
+            TextChipView(text: sample, color: model?.color ?? .clear, colorName: model?.name ?? nil)
+        }
     }
 }
 

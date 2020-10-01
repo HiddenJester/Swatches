@@ -54,8 +54,10 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.Carousel"
+         RemotePath = "/$(PRODUCT_NAME)">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3B53C1112397002E0047B8EE"
@@ -63,7 +65,7 @@
             BlueprintName = "Swatches-watchOS WatchKit App"
             ReferencedContainer = "container:Swatches.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </RemoteRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -71,8 +73,10 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.Carousel"
+         RemotePath = "/$(PRODUCT_NAME)">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3B53C1112397002E0047B8EE"
@@ -80,7 +84,16 @@
             BlueprintName = "Swatches-watchOS WatchKit App"
             ReferencedContainer = "container:Swatches.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </RemoteRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "3B53C1112397002E0047B8EE"
+            BuildableName = "Swatches.app"
+            BlueprintName = "Swatches-watchOS WatchKit App"
+            ReferencedContainer = "container:Swatches.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

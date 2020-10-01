@@ -14,9 +14,9 @@ struct SwatchView<Content>: View where Content: View {
     /// Should we draw the background and outline?
     let drawBackgroundAndOutline: Bool
     
-    /// The text to draw in the `SwatchLabel`
+    /// The text to draw in the `SwatchLabel`.
     let label: String
-    
+
     /// The content of ths swatch, passed in as a `@ViewBuilder`.
     private let content: Content
 
@@ -32,10 +32,13 @@ struct SwatchView<Content>: View where Content: View {
     var body: some View {
         VStack() {
             content
+                .accessibilitySort(priority: 2)
 
             SupportedOSTagView(value: supportedOS, opacity: drawBackgroundAndOutline ? 1 : 0)
+                .accessibilitySort(priority: 0)
 
             SwatchLabelView(text: label)
+                .accessibilitySort(priority: -1)
         }
         .padding(cornerRadius)
         .frame(minWidth: width)
@@ -44,6 +47,7 @@ struct SwatchView<Content>: View where Content: View {
                     .stroke(drawBackgroundAndOutline ? Color.primary : Color.clear, lineWidth: 2))
         .background(backgroundColor())
         .cornerRadius(cornerRadius)
+        .accessibilityElement(children: .combine)
     }
     
     /// Create a new Swatch
@@ -98,16 +102,16 @@ struct Swatch_Previews: PreviewProvider {
                        label: "Here's a Little Story I'd Like to Tell, About Three Bad Brothers That You Know So Well.",
                        supportedOS: .iOSAndMac,
                        width: width) {
-                ColorChipView(color: .blue)
+                ColorChipView(color: .blue, name: "Blue")
             }
             
             SwatchView(drawBackgroundAndOutline: true, label: "Clear Test", supportedOS: .all, width: width) {
-                ColorChipView(color: .clear)
+                ColorChipView(color: .clear, name: "Clear")
             }
 
             #if os(macOS) || os(iOS)
             SwatchView(drawBackgroundAndOutline: true, label: "Text Test", supportedOS: .all) {
-                TextChipView(text: "Here's some longer text", color: .black)
+                TextChipView(text: "Here's some longer text", color: .black, colorName: "Black")
             }
             #endif
         }
