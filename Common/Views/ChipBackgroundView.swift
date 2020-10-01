@@ -30,19 +30,19 @@ private extension ChipBackgroundView {
     /// - Returns: If `drawCheckerboard` is true it returns a tiled checkerboard `Image` with rounded corners. If it is false then it returns just
     ///     `Color.clear`.
     func backgroundView() -> some View {
+        let image = Image(decorative: "Checkerboard")
+            .resizable(resizingMode: .tile)
+            .cornerRadius(cornerRadius)
+
         /// Can't use if let here, the test is *specifically* if fillColor == Color.clear
         if let fillColor = fillColor {
-            return Image("Checkerboard")
-                .resizable(resizingMode: .tile)
-                .cornerRadius(cornerRadius)
+            return image
                 .opacity(0)
                 .background(fillColor
                                 .cornerRadius(cornerRadius)
                 )
         } else {
-            return Image("Checkerboard")
-                .resizable(resizingMode: .tile)
-                .cornerRadius(cornerRadius)
+            return image
                 .opacity(1)
                 .background(Color.clear
                                 .cornerRadius(cornerRadius)
