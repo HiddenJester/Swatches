@@ -10,7 +10,7 @@ import SwiftUI
 
 /// Provides iOS 13/14 (and matching watchOS or tvOS where appropriate) version independence for accessibility modifiers.
 extension View {
-    /// Wraps iOS 13 `accessibilityLabel` & iOS 14 `accessibility(label:)` into a single function that takes a string and applies the proper
+    /// Wraps iOS 14 `accessibilityLabel` & iOS 13 `accessibility(label:)` into a single function that takes a string and applies the proper
     /// modifier.
     /// - Parameter labelString: Something that conforms to `StringProtocol` that will be applies as the accessbility label.
     /// - Returns: The modified view.
@@ -22,7 +22,7 @@ extension View {
         }
     }
 
-    /// Wraps iOS 13 `accessibilityHint` & iOS 14 `accessibility(hint:)` into a single function that takes a string and applies the proper
+    /// Wraps iOS 14 `accessibilityHint` & iOS 13 `accessibility(hint:)` into a single function that takes a string and applies the proper
     /// modifier.
     /// - Parameter labelString: Something that conforms to `StringProtocol` that will be applies as the accessbility hint.
     /// - Returns: The modified view.
@@ -31,6 +31,18 @@ extension View {
             return self.accessibilityHint(hintString)
         } else {
             return self.accessibility(hint: Text(hintString))
+        }
+    }
+
+    /// Wraps iOS 14 `accessibilitySortPriority` & iOS 13 `accessibility(sortPriority:)` into a single function that takes a string and
+    /// applies the proper modifier.
+    /// - Parameter sortPriority: Something that conforms to `StringProtocol` that will be applies as the accessbility hint.
+    /// - Returns: The modified view.
+    func accessibilitySort(priority: Double) -> ModifiedContent<Self, AccessibilityAttachmentModifier> {
+        if #available(iOS 14, watchOS 7, tvOS 14, *) {
+            return self.accessibilitySortPriority(priority)
+        } else {
+            return self.accessibility(sortPriority: priority)
         }
     }
 }
