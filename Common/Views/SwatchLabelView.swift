@@ -16,6 +16,7 @@ struct SwatchLabelView: View {
 
     var body: some View {
         Text(text)
+            .accessibility(labelString: "\(text) Color")
             .font(.headline)
             .foregroundColor(color())
             .truncationMode(.middle)
