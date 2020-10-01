@@ -71,7 +71,7 @@ private extension View {
         if let label = colorAccessibilityLabelString {
             return self.accessibility(labelString: "\(label) Color")
         } else {
-            return self.accessibility(hidden: true)
+            return self.accessibilityHide(hideStatus: true)
         }
     }
 }

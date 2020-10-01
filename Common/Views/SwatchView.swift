@@ -111,7 +111,7 @@ struct Swatch_Previews: PreviewProvider {
 
             #if os(macOS) || os(iOS)
             SwatchView(drawBackgroundAndOutline: true, label: "Text Test", supportedOS: .all) {
-                TextChipView(text: "Here's some longer text", color: .black)
+                TextChipView(text: "Here's some longer text", color: .black, colorName: "Black")
             }
             #endif
         }
