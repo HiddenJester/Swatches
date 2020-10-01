@@ -80,13 +80,16 @@ private extension SupportedOSTagView {
 
                 tagView(forOS: .macOS)
             }
+            .accessibilityElement(children: .combine)
 
             VStack(alignment: .trailing, spacing: 0) {
                 tagView(forOS: .watchOS)
 
                 tagView(forOS: .tvOS)
             }
+            .accessibilityElement(children: .combine)
         }
+        .accessibilityElement(children: .combine)
     }
 
     /// Creates the 1x4 grid view of tags
@@ -101,6 +104,7 @@ private extension SupportedOSTagView {
 
             tagView(forOS: .tvOS)
         }
+        .accessibilityElement(children: .combine)
     }
 
     /// Returns a tag for the specified OS. The proper label will be looked up (see `textView()`), and either a green checkmark or a red X will be drawn.
@@ -122,31 +126,48 @@ private extension SupportedOSTagView {
             imageView(forOS: forOS)
         }
         .font(font)
+        .accessibilityElement(children: .ignore)
+        .accessibility(labelString: accessibilityLabel(forOS: forOS))
     }
-    
-    /// Returns an erased `Text` with the proper label for the provided OS.
-    /// - Parameter forOS: The OS to check. See the note above on `tagView` for a discussion about sending sets to this parameter.
-    func textView(forOS: SupportedOSOptions) -> some View {
+
+    /// Returns the text to use as a label for the provided `SupportedOSOptions`
+    /// - Parameter forOS: the OS to provide the label for. As discussed above passing a set in is legal, but will yield silly/unexpected results.
+    /// - Returns: a string suitable for text display or accessibility reading.
+    func tagLabel(forOS: SupportedOSOptions) -> String {
         let label: String
-        
+
         switch forOS {
         case let x where x.contains(.iOS):
             label = "iOS"
-            
+
         case let x where x.contains(.macOS):
             label = "macOS"
-            
+
         case let x where x.contains(.tvOS):
             label = "tvOS"
-            
+
         case let x where x.contains(.watchOS):
             label = "watchOS"
-            
+
         default:
             label = "?"
         }
-        
-        return Text("\(label): ")
+
+        return label
+    }
+
+    func accessibilityLabel(forOS: SupportedOSOptions) -> String {
+        if value.contains(forOS) {
+            return "\(tagLabel(forOS: forOS)) Yes"
+        } else {
+            return "\(tagLabel(forOS: forOS)) No"
+        }
+    }
+
+    /// Returns an erased `Text` with the proper label for the provided OS.
+    /// - Parameter forOS: The OS to check. See the note above on `tagView` for a discussion about sending sets to this parameter.
+    func textView(forOS: SupportedOSOptions) -> some View {
+        Text("\(tagLabel(forOS: forOS)): ")
             .lineLimit(1)
     }
     
