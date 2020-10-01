@@ -22,6 +22,7 @@ struct CloserLabelToggle<Label>: View where Label : View {
             Toggle(isOn: isOn) { label }
                 .labelsHidden()
         }
+        .accessibilityElement(children: .combine)
     }
     
     public init(isOn: Binding<Bool>, @ViewBuilder label: () -> Label) {
