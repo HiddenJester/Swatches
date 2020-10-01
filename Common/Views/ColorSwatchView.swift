@@ -23,10 +23,10 @@ struct ColorSwatchView: View {
                    label: model?.name ?? " ",
                    supportedOS: model?.supportedOS ?? .all,
                    width: width) {
-            if let color = model?.color {
-                ColorChipView(color: color, drawBackground: true)
+            if let model = model {
+                ColorChipView(color: model.color, name: model.name,  drawBackground: true)
             } else {
-                ColorChipView(color: .clear, drawBackground: false)
+                ColorChipView(color: .clear, name: nil, drawBackground: false)
             }
         }
     }

@@ -14,9 +14,9 @@ struct SwatchView<Content>: View where Content: View {
     /// Should we draw the background and outline?
     let drawBackgroundAndOutline: Bool
     
-    /// The text to draw in the `SwatchLabel`
+    /// The text to draw in the `SwatchLabel`.
     let label: String
-    
+
     /// The content of ths swatch, passed in as a `@ViewBuilder`.
     private let content: Content
 
@@ -98,11 +98,11 @@ struct Swatch_Previews: PreviewProvider {
                        label: "Here's a Little Story I'd Like to Tell, About Three Bad Brothers That You Know So Well.",
                        supportedOS: .iOSAndMac,
                        width: width) {
-                ColorChipView(color: .blue)
+                ColorChipView(color: .blue, name: "Blue")
             }
             
             SwatchView(drawBackgroundAndOutline: true, label: "Clear Test", supportedOS: .all, width: width) {
-                ColorChipView(color: .clear)
+                ColorChipView(color: .clear, name: "Clear")
             }
 
             #if os(macOS) || os(iOS)
