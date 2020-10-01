@@ -32,10 +32,13 @@ struct SwatchView<Content>: View where Content: View {
     var body: some View {
         VStack() {
             content
+                .accessibilitySort(priority: 2)
 
             SupportedOSTagView(value: supportedOS, opacity: drawBackgroundAndOutline ? 1 : 0)
+                .accessibilitySort(priority: 0)
 
             SwatchLabelView(text: label)
+                .accessibilitySort(priority: -1)
         }
         .padding(cornerRadius)
         .frame(minWidth: width)
@@ -44,6 +47,7 @@ struct SwatchView<Content>: View where Content: View {
                     .stroke(drawBackgroundAndOutline ? Color.primary : Color.clear, lineWidth: 2))
         .background(backgroundColor())
         .cornerRadius(cornerRadius)
+        .accessibilityElement(children: .combine)
     }
     
     /// Create a new Swatch
