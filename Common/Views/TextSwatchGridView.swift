@@ -36,6 +36,7 @@ private extension TextSwatchGridView {
                 .font(.title)
 
             TextField("Sample Text:", text: $sample)
+                .accessibility(hintString: "Enter text to display in samples.")
                 .textFieldStyle(fieldStyle())
                 .disableAutocorrection(true)
                 .padding()
