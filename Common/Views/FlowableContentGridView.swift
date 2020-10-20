@@ -230,16 +230,17 @@ private extension View {
                                    fourColumnTagGeometry: GeometryProxy) -> FlowableContentGridLayout {
         let desiredColumnGap: CGFloat = 10
         let columnGap: CGFloat = (viewFullWidth > columnWidth + desiredColumnGap) ? desiredColumnGap : 0
-        // Boundscheck the input so columnWidth is positive and < viewFullWidth.
+        // Bounds-check the input so columnWidth is positive and < viewFullWidth.
         let boundedCellWidth = min(viewFullWidth, max(columnWidth, 1))
 
         let columnCount: Int
 
         // If the sample is wider than the full width, then just set the column count to 1
-        if boundedCellWidth > viewFullWidth {
+        if boundedCellWidth >= viewFullWidth {
             columnCount = 1
         } else {
-            columnCount = Int(viewFullWidth / (boundedCellWidth + desiredColumnGap))
+            // Make sure that columnCount is at *least* 1 at all times.
+            columnCount = max(Int(viewFullWidth / (boundedCellWidth + desiredColumnGap)), 1)
         }
 
         let tagFormat: SupportedOSTagView.TagFormat
