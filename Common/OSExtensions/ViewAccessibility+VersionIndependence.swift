@@ -80,4 +80,17 @@ extension View {
         }
         #endif
     }
+
+    func accessibilityID(idString: String) -> ModifiedContent<Self, AccessibilityAttachmentModifier> {
+        #if targetEnvironment(macCatalyst)
+        // See comment at top of extension for justifying this.
+        return self.accessibility(identifier: idString)
+        #else
+        if #available(iOS 14, watchOS 7, tvOS 14, *) {
+            return self.accessibilityIdentifier(idString)
+        } else {
+            return self.accessibility(identifier: idString)
+        }
+        #endif
+    }
 }
