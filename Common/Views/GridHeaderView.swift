@@ -56,8 +56,9 @@ struct GridHeaderView: View {
                             .minimumScaleFactor(0.75)
                             // VoiceOver only reads these labels IFF the user has double-tapped on this screen to
                             // activate a control previously. Either the Dark Mode toggle, or the picker itself will
-                            // work. But that seems like an Apple bug.
-                            .accessibility(labelString: "Show the \(gridNames[index]) colors)")
+                            // work. But that seems like an Apple bug. But since we can't reliably use these,
+                            // turn them off completely for now.
+//                            .accessibility(labelString: "Show the \(gridNames[index]) colors)")
                     }
                 }
                 .pickerStyle(pickerStyle())
@@ -67,7 +68,7 @@ struct GridHeaderView: View {
 }
 
 private extension GridHeaderView {
-    /// Returns a `PickerStyle` suitable for styling the grid picker. watchOS doesn't suport `SegmentedPickerStyle` so we need a different style
+    /// Returns a `PickerStyle` suitable for styling the grid picker. watchOS doesn't support `SegmentedPickerStyle` so we need a different style
     /// on that platform.
     /// - Returns: A `PickerStyle` that is correct for the the grid picker and the target platform.
     func pickerStyle() -> some PickerStyle {
