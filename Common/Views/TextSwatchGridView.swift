@@ -16,6 +16,8 @@ struct TextSwatchGridView: View {
     
     /// The text to use as the sample for all of the swatches.
     @State private var sample = "The quick brown fox jumps over the lazy dog."
+    // Screenshot variant
+//    @State private var sample = "Dev Swatches"
 
     var body: some View {
         FlowableContentGridView(models: models,
